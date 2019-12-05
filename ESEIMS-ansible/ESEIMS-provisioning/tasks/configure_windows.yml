@@ -1,0 +1,40 @@
+---
+- hosts: windows-vm
+  become_user: root
+  become_method: sudo
+  become: true
+  tasks:
+
+# -- Telegraf --
+
+    - name: Create base directory
+      win_file:
+        path: "{{item}}"
+        state: directory
+      with_items:
+        - "{{ telegraf_dir_win }}"
+        - "{{ telegraf_agent_dir_win }}"
+
+    - name: Check if telegraf package exists
+      win_stat:
+        path: "{{ telegraf_package_win }}"
+      register: file_info
+
+    - name: Download Telegraf package
+      win_get_url:
+        url: "{{ telegraf_repo_win }}"
+        dest: "{{ telegraf_package_dir_win }}"
+      when:
+        - not file_info.stat.exists
+
+    - name: Unzip Telegraf package
+      win_unzip:
+        src: "{{ telegraf_package_dir_win }}"
+        dest: "{{ telegraf_dir_win }}"
+        creates: '{{ telegraf_dir_win }}\telegraf\telegraf.exe'
+
+    - name: Configure Telegraf
+      copy:
+        src: "{{ telegraf_local_config_win }}"
+        dest: "{{ telegraf_remote_config_win }}"
+      notify: "Restart Telegraf service"

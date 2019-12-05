@@ -1,0 +1,43 @@
+---
+- hosts: ubuntu-vm
+  become_user: root
+  become_method: sudo
+  become: true
+  tasks:
+
+# -- Telegraf --
+
+    - name: Import InfluxDB GPG signing key
+      apt_key:
+        url: "{{ influxdb_gpg_repo }}"
+        state: present
+      become: true
+
+    - name: Add InfluxDB repository
+      apt_repository:
+        repo: "{{ influxdb_source_repo }}"
+        state: present
+
+    - name: Update and install telegraf
+      apt:
+        update-cache: yes
+        name: telegraf
+        state: present
+        force_apt_get: yes
+
+    - name: Replace default telegraf configuration file
+      copy:
+        src: "{{ telegraf_local_config }}"
+        dest: "{{ telegraf_remote_config }}"
+
+    - name: Ensure telegraf is running
+      service:
+        name: telegraf
+        state: started
+
+# -- Filebeat --
+    - name: Ensure filebeat is running
+      service:
+        name: filebeat
+        state: absent
+        purge: yes

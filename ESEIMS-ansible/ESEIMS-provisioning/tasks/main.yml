@@ -1,0 +1,16 @@
+---
+# tasks file for ESEIMS-provisioning
+
+- name: "Configure Ubuntu Server"
+  include_tasks: "configure_server.yml"
+  when:
+
+- name: "Configure Ubuntu"
+  include_tasks: "configure_ubuntu.yml"
+  when:
+    - ansible_os_family == "Ubuntu"
+
+- name: "Configure Windows"
+  include_tasks: "configure_windows.yml"
+  when:
+    - ansible_os_family == "Windows"
