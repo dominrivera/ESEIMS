@@ -1,0 +1,31 @@
+---
+# defaults file for ESEIMS-provisioning
+
+# Tasks variables
+
+influxdb_gpg_repo: 'https://repos.influxdata.com/influxdb.key'
+influxdb_source_repo: 'deb https://repos.influxdata.com/ubuntu trusty stable'
+
+grafana_gpg_repo: 'https://packages.grafana.com/gpg.key'
+grafana_source_repo: 'deb https://packages.grafana.com/oss/deb stable main'
+
+telegraf_local_config: 'files/telegraf/telegraf.conf'
+telegraf_remote_config: '/etc/telegraf/telegraf.conf'
+
+influxdb_local_config: 'files/influxdb/influxdb.conf'
+influxdb_remote_config: '/etc/influxdb/influxdb.conf'
+
+grafana_local_config: 'files/grafana/grafana.ini'
+grafana_remote_config: '/etc/grafana/grafana.ini'
+
+
+telegraf_dir_win: 'C:\Telegraf'
+telegraf_agent_dir_win: '{{ telegraf_dir_win }}/telegraf_agent.d'
+
+telegraf_version_win: '1.12.6'
+telegraf_package_win: 'telegraf-{{ telegraf_version_win }}_windows_amd64.zip'
+telegraf_package_dir_win: '{{ telegraf_dir_win }}\{{ telegraf_package_win }}'
+telegraf_repo_win: 'https://dl.influxdata.com/telegraf/releases/{{ telegraf_package_win }}'
+
+telegraf_local_config_win: 'files/telegraf/telegraf_win.conf'
+telegraf_remote_config_win: '{{ telegraf_dir_win }}\telegraf\telegraf.conf'

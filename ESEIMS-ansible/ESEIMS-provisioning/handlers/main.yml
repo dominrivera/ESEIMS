@@ -1,0 +1,29 @@
+---
+# handlers file for ESEIMS-provisioning
+
+- name: "Restart Telegraf"
+  service:
+    name: telegraf
+    state: restarted
+    enabled: yes
+  become: yes
+
+- name: "Restart Telegraf Windows"
+  win_service:
+    name: Telegraf
+    start_mode: auto
+    state: restarted
+
+- name: "Restart InfluxDB"
+  service:
+    name: influxdb
+    state: restarted
+    enabled: yes
+  become: yes
+
+- name: "Restart Grafana"
+  service:
+    name: grafana
+    state: restarted
+    enabled: yes
+  become: yes
