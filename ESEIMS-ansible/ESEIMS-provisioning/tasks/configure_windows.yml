@@ -37,4 +37,5 @@
       copy:
         src: "{{ telegraf_local_config_win }}"
         dest: "{{ telegraf_remote_config_win }}"
-      notify: "Restart Telegraf service"
+      notify:
+        - Restart Telegraf Windows

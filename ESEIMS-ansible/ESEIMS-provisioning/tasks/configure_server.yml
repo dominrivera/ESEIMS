@@ -27,10 +27,12 @@
         state: present
         force_apt_get: yes
 
-#    - name: Replace default Telegraf configuration file
-#      copy:
-#        src: "{{ telegraf_local_config }}"
-#        dest: "{{ telegraf_remote_config }}"
+    - name: Replace default Telegraf configuration file
+      copy:
+        src: "{{ telegraf_local_config }}"
+        dest: "{{ telegraf_remote_config }}"
+      notify:
+        - Restart Telegraf
 
     - name: Ensure Telegraf is running
       service:
@@ -46,10 +48,12 @@
         state: present
         force_apt_get: yes
 
-#    - name: Replace default InfluxDB configuration file
-#      copy:
-#        src: "{{ influxdb_local_config }}"
-#        dest: "{{ influxdb_remote_config }}"
+    - name: Replace default InfluxDB configuration file
+      copy:
+        src: "{{ influxdb_local_config }}"
+        dest: "{{ influxdb_remote_config }}"
+      notify:
+        - Restart InfluxDB
 
     - name: Ensure InfluxDB is running
       service:
@@ -76,10 +80,12 @@
         state: present
         force_apt_get: yes
 
-#    - name: Replace default Grafana configuration file
-#      copy:
-#        src: "{{ grafana_local_config }}"
-#        dest: "{{ grafana_remote_config }}"
+    - name: Replace default Grafana configuration file
+      copy:
+        src: "{{ grafana_local_config }}"
+        dest: "{{ grafana_remote_config }}"
+      notify:
+        - Restart Grafana
 
     - name: Ensure Grafana is running
       service:

@@ -29,6 +29,8 @@
       copy:
         src: "{{ telegraf_local_config }}"
         dest: "{{ telegraf_remote_config }}"
+      notify:
+        - Restart Telegraf
 
     - name: Ensure telegraf is running
       service:
