@@ -1,11 +1,12 @@
 ---
+
 # -- Telegraf --
 
     - name: Import InfluxDB GPG signing key
       apt_key:
         url: "{{ influxdb_gpg_repo }}"
         state: present
-      become: true
+      become: yes
 
     - name: Add InfluxDB repository
       apt_repository:
@@ -18,7 +19,7 @@
         name: telegraf
         state: present
         force_apt_get: yes
-      become: true
+      become: yes
 
     - name: Replace default telegraf configuration file
       copy:
