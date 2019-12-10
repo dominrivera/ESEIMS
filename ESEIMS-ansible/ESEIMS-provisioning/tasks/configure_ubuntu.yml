@@ -1,10 +1,4 @@
 ---
-- hosts: ubuntu-vm
-  become_user: root
-  become_method: sudo
-  become: true
-  tasks:
-
 # -- Telegraf --
 
     - name: Import InfluxDB GPG signing key
@@ -24,6 +18,7 @@
         name: telegraf
         state: present
         force_apt_get: yes
+      become: true
 
     - name: Replace default telegraf configuration file
       copy:
@@ -36,10 +31,3 @@
       service:
         name: telegraf
         state: started
-
-# -- Filebeat --
-    - name: Ensure filebeat is running
-      service:
-        name: filebeat
-        state: absent
-        purge: yes

@@ -1,2 +1,4 @@
 ---
-- hosts:
+- hosts: ubuntu-vm-test
+  roles:
+    - ESEIMS-provisioning

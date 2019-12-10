@@ -1,9 +1,4 @@
 ---
-- hosts: windows-vm
-  become_user: root
-  become_method: sudo
-  become: true
-  tasks:
 
 # -- Telegraf --
 
