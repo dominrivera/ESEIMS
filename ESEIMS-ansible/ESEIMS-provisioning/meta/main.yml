@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: ESEIMS-provisioning
   author: Domingo Rivera Barros
   description: Ansible role for provisioning virtual machines which will take part of the project ESEIMS
   company: your company (optional)

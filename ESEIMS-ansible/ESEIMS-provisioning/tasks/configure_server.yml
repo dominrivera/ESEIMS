@@ -1,9 +1,4 @@
 ---
-- hosts: ubuntu-server
-  become_user: root
-  become_method: sudo
-  become: yes
-  tasks:
 
 # -- Influxdata --
 
@@ -17,6 +12,7 @@
       apt_repository:
         repo: "{{ influxdb_source_repo }}"
         state: present
+      become: yes
 
 # -- Telegraf --
 
@@ -26,11 +22,15 @@
         name: telegraf
         state: present
         force_apt_get: yes
+      become: yes
 
-#    - name: Replace default Telegraf configuration file
-#      copy:
-#        src: "{{ telegraf_local_config }}"
-#        dest: "{{ telegraf_remote_config }}"
+    - name: Replace default Telegraf configuration file
+      copy:
+        src: "{{ telegraf_local_config }}"
+        dest: "{{ telegraf_remote_config }}"
+      become: yes
+      notify:
+        - Restart Telegraf
 
     - name: Ensure Telegraf is running
       service:
@@ -45,16 +45,27 @@
         name: influxdb
         state: present
         force_apt_get: yes
+      become: yes
 
-#    - name: Replace default InfluxDB configuration file
-#      copy:
-#        src: "{{ influxdb_local_config }}"
-#        dest: "{{ influxdb_remote_config }}"
+    - name: Replace default InfluxDB configuration file
+      copy:
+        src: "{{ influxdb_local_config }}"
+        dest: "{{ influxdb_remote_config }}"
+      become: yes
+      notify:
+        - Restart InfluxDB
 
-    - name: Ensure InfluxDB is running
-      service:
-        name: influxdb
-        state: started
+# influx requires authentication to be running
+#
+# sudo systemctl unmask influxdb.service
+# sudo systemctl start influxdb
+#
+#
+
+#    - name: Ensure InfluxDB is running
+#      service:
+#        name: influxdb
+#        state: started
 
 # -- Grafana --
 
@@ -68,6 +79,7 @@
       apt_repository:
         repo: "{{ grafana_source_repo }}"
         state: present
+      become: yes
 
     - name: Install Grafana
       apt:
@@ -75,13 +87,22 @@
         name: grafana
         state: present
         force_apt_get: yes
+      become: yes
 
-#    - name: Replace default Grafana configuration file
-#      copy:
-#        src: "{{ grafana_local_config }}"
-#        dest: "{{ grafana_remote_config }}"
+    - name: Replace default Grafana configuration file
+      copy:
+        src: "{{ grafana_local_config }}"
+        dest: "{{ grafana_remote_config }}"
+      become: yes
+      notify:
+        - restart Grafana
 
+# Grafana starts with the following commands
+# sudo systemctl daemon-reload
+# sudo systemctl start grafana-server
+#
+#
     - name: Ensure Grafana is running
       service:
-        name: grafana
+        name: grafana-server
         state: started

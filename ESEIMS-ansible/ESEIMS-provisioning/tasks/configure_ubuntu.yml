@@ -1,9 +1,4 @@
 ---
-- hosts: ubuntu-vm
-  become_user: root
-  become_method: sudo
-  become: true
-  tasks:
 
 # -- Telegraf --
 
@@ -11,7 +6,7 @@
       apt_key:
         url: "{{ influxdb_gpg_repo }}"
         state: present
-      become: true
+      become: yes
 
     - name: Add InfluxDB repository
       apt_repository:
@@ -24,20 +19,16 @@
         name: telegraf
         state: present
         force_apt_get: yes
+      become: yes
 
     - name: Replace default telegraf configuration file
       copy:
         src: "{{ telegraf_local_config }}"
         dest: "{{ telegraf_remote_config }}"
+      notify:
+        - Restart Telegraf
 
     - name: Ensure telegraf is running
       service:
         name: telegraf
         state: started
-
-# -- Filebeat --
-    - name: Ensure filebeat is running
-      service:
-        name: filebeat
-        state: absent
-        purge: yes
