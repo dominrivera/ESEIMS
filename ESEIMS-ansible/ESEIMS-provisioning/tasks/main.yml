@@ -13,7 +13,7 @@
   when:
     - ansible_os_family == "Debian" and ansible_fqdn != "ubuntu-server"
 
-#- name: "Configure Windows"
-#  include_tasks: "configure_windows.yml"
-#  when:
-#    - ansible_os_family == "Windows"
+- name: "Configure Windows"
+  include_tasks: "configure_windows.yml"
+  when:
+    - ansible_os_family == "Windows"
