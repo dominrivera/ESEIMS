@@ -12,7 +12,7 @@
 
     - name: Check if telegraf package exists
       win_stat:
-        path: "{{ telegraf_package_win }}"
+        path: "{{ telegraf_package_dir_win }}"
       register: file_info
 
     - name: Download Telegraf package
@@ -26,7 +26,7 @@
       win_unzip:
         src: "{{ telegraf_package_dir_win }}"
         dest: "{{ telegraf_dir_win }}"
-        creates: '{{ telegraf_dir_win }}\telegraf\telegraf.exe'
+        creates: "{{ telegraf_exe_win }}"
 
     - name: Configure Telegraf
       copy:
@@ -34,3 +34,22 @@
         dest: "{{ telegraf_remote_config_win }}"
       notify:
         - Restart Telegraf Windows
+
+    - name: Register Service
+      win_command: '{{ telegraf_exe_win }} {{ telegraf_params_win | join(" ") }}'
+      register: telegraf_win_installed
+      args:
+        creates: '{{ telegraf_dir_win }}\.installed'
+
+    - name: Create file to avoid register the service again when it is already installed
+      win_file:
+        path: '{{ telegraf_dir_win }}\.installed'
+        state: touch
+      when:
+        - telegraf_win_installed is changed
+
+    - name: Ensure telegraf is started and set start mode to auto
+      win_service:
+        name: Telegraf
+        start_mode: auto
+        state: started
