@@ -1,0 +1,84 @@
+---
+- hosts: ubuntu-vm-test
+  tasks:
+
+    - name: Check if service exists
+      stat:
+        path: /etc/init.d/telegraf
+      register: service_status
+
+    - name: Stop Telegraf
+      service:
+        name: telegraf
+        state: stopped
+      become: yes
+      when:
+        - service_status.stat.exists
+      register: service_stopped
+
+    - name: Remove Telegraf
+      apt:
+        name: telegraf
+        state: absent
+        purge: yes
+        autoremove: yes
+      become: yes
+
+- hosts: windows-vm
+  tasks:
+
+    - name: Stop Telegraf
+      win_service:
+        name: Telegraf
+        state: stopped
+
+    - name: Remove Telegraf
+      win_service:
+        name: Telegraf
+        state: absent
+        dependency_action: remove
+
+- hosts: ubuntu-server
+  tasks:
+
+    - name: Stop Telegraf
+      service:
+        name: telegraf
+        state: stopped
+      become: yes
+
+    - name: Remove Telegraf
+      apt:
+        name: telegraf
+        state: absent
+        purge: yes
+        autoremove: yes
+      become: yes
+
+    - name: Stop InfluxDB
+      service:
+        name: influxdb
+        state: stopped
+      become: yes
+
+    - name: Remove InfluxDB
+      apt:
+        name: influxdb
+        state: absent
+        purge: yes
+        autoremove: yes
+      become: yes
+
+    - name: Stop Grafana
+      service:
+        name: grafana
+        state: stopped
+      become: yes
+
+    - name: Remove Grafana
+      apt:
+        name: grafana
+        state: absent
+        purge: yes
+        autoremove: yes
+      become: yes
