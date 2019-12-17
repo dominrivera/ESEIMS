@@ -1,4 +1,4 @@
 ---
-- hosts: windows-vm
+- hosts: all
   roles:
     - ESEIMS-provisioning
