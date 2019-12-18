@@ -4,8 +4,8 @@
 
     - name: Check if service telegraf exists
       stat:
-        path: /etc/init.d/telegraf
-      register: service_status
+        path: /lib/systemd/system/telegraf.service
+      register: service_status_telegraf
 
     - name: Stop Telegraf
       service:
@@ -13,7 +13,7 @@
         state: stopped
       become: yes
       when:
-        - service_status.stat.exists
+        - service_status_telegraf.stat.exists
 
     - name: Remove Telegraf
       apt:
@@ -23,7 +23,7 @@
         autoremove: yes
       become: yes
       when:
-        - service_status.stat.exists
+        - service_status_telegraf.stat.exists
 
 - hosts: windows-vm
   tasks:
@@ -74,8 +74,8 @@
 
     - name: Check if service telegraf exists
       stat:
-        path: /etc/init.d/telegraf
-      register: service_status
+        path: /lib/systemd/system/telegraf.service
+      register: service_status_telegraf
 
     - name: Stop Telegraf
       service:
@@ -83,7 +83,7 @@
         state: stopped
       become: yes
       when:
-        - service_status.stat.exists
+        - service_status_telegraf.stat.exists
 
     - name: Remove Telegraf
       apt:
@@ -93,11 +93,11 @@
         autoremove: yes
       become: yes
       when:
-        - service_status.stat.exists
+        - service_status_telegraf.stat.exists
 
     - name: Check if service influxdb exists
       stat:
-        path: /etc/init.d/influxdb
+        path: /lib/systemd/system/influxdb.service
       register: service_status_influxdb
 
     - name: Stop InfluxDB
@@ -120,7 +120,7 @@
 
     - name: Check if service grafana exists
       stat:
-        path: /etc/init.d/grafana
+        path: /usr/lib/systemd/system/grafana-server.service
       register: service_status_grafana
 
     - name: Stop Grafana
