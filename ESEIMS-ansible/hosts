@@ -1,5 +1,18 @@
 [ubuntu-server]
 
-[ubuntu]
 
-[windows]
+[ubuntu-vm-test]
+
+[windows-vm]
+
+[ubuntu-server:vars]
+ansible_user=ubuntu
+
+[ubuntu-vm-test:vars]
+ansible_user=ubuntu
+
+[windows-vm:vars]
+ansible_user=windows
+ansible_password=
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore

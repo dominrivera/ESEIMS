@@ -20,7 +20,8 @@ grafana_remote_config: '/etc/grafana/grafana.ini'
 
 
 telegraf_dir_win: 'C:\Telegraf'
-telegraf_agent_dir_win: '{{ telegraf_dir_win }}/telegraf_agent.d'
+telegraf_agent_dir_win: '{{ telegraf_dir_win }}\telegraf.d'
+telegraf_exe_win: '{{ telegraf_dir_win }}\telegraf\telegraf.exe'
 
 telegraf_version_win: '1.12.6'
 telegraf_package_win: 'telegraf-{{ telegraf_version_win }}_windows_amd64.zip'
@@ -29,3 +30,8 @@ telegraf_repo_win: 'https://dl.influxdata.com/telegraf/releases/{{ telegraf_pack
 
 telegraf_local_config_win: 'files/telegraf/telegraf_win.conf'
 telegraf_remote_config_win: '{{ telegraf_dir_win }}\telegraf\telegraf.conf'
+
+telegraf_params_win:
+  - --service install
+  - --config {{ telegraf_remote_config_win }}
+  - --config-directory {{ telegraf_agent_dir_win }}

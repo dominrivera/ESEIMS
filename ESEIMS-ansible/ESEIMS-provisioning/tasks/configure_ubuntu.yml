@@ -27,6 +27,7 @@
         dest: "{{ telegraf_remote_config }}"
       notify:
         - Restart Telegraf
+      become: yes
 
     - name: Ensure telegraf is running
       service:
