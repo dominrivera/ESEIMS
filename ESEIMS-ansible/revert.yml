@@ -2,7 +2,7 @@
 - hosts: ubuntu-vm-test
   tasks:
 
-    - name: Check if service exists
+    - name: Check if service telegraf exists
       stat:
         path: /etc/init.d/telegraf
       register: service_status
@@ -14,7 +14,6 @@
       become: yes
       when:
         - service_status.stat.exists
-      register: service_stopped
 
     - name: Remove Telegraf
       apt:
@@ -23,29 +22,68 @@
         purge: yes
         autoremove: yes
       become: yes
+      when:
+        - service_status.stat.exists
 
 - hosts: windows-vm
   tasks:
+
+    - name: Check if service telegraf exists
+      win_service:
+        name: Telegraf
+      register: service_status_telegraf
 
     - name: Stop Telegraf
       win_service:
         name: Telegraf
         state: stopped
+      when:
+        - service_status_telegraf.exists
+
+    - name: Uninstall Telegraf service
+      win_command: telegraf.exe --service uninstall
+      args:
+        chdir: C:\Telegraf\telegraf\
+      when:
+        - service_status_telegraf.exists
 
     - name: Remove Telegraf
       win_service:
         name: Telegraf
         state: absent
         dependency_action: remove
+      when:
+        - service_status_telegraf.exists
+
+    - name: Remove telegraf directory
+      win_file:
+        path: C:\Telegraf
+        state: absent
+      when:
+        - service_status_telegraf.exists
+
+# This taks will fix the error 'registry key already exists'
+#    - name: Remove registy key
+#      win_regedit:
+#        path: HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Application\telegraf
+#        state: absent
+#        delete_key: yes
 
 - hosts: ubuntu-server
   tasks:
+
+    - name: Check if service telegraf exists
+      stat:
+        path: /etc/init.d/telegraf
+      register: service_status
 
     - name: Stop Telegraf
       service:
         name: telegraf
         state: stopped
       become: yes
+      when:
+        - service_status.stat.exists
 
     - name: Remove Telegraf
       apt:
@@ -54,12 +92,21 @@
         purge: yes
         autoremove: yes
       become: yes
+      when:
+        - service_status.stat.exists
+
+    - name: Check if service influxdb exists
+      stat:
+        path: /etc/init.d/influxdb
+      register: service_status_influxdb
 
     - name: Stop InfluxDB
       service:
         name: influxdb
         state: stopped
       become: yes
+      when:
+        - service_status_influxdb.stat.exists
 
     - name: Remove InfluxDB
       apt:
@@ -68,12 +115,21 @@
         purge: yes
         autoremove: yes
       become: yes
+      when:
+        - service_status_influxdb.stat.exists
+
+    - name: Check if service grafana exists
+      stat:
+        path: /etc/init.d/grafana
+      register: service_status_grafana
 
     - name: Stop Grafana
       service:
         name: grafana
         state: stopped
       become: yes
+      when:
+        - service_status_grafana.stat.exists
 
     - name: Remove Grafana
       apt:
@@ -82,3 +138,5 @@
         purge: yes
         autoremove: yes
       become: yes
+      when:
+        - service_status_grafana.stat.exists

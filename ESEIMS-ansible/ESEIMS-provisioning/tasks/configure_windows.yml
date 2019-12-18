@@ -50,6 +50,6 @@
 
     - name: Ensure telegraf is started and set start mode to auto
       win_service:
-        name: Telegraf
+        name: telegraf
         start_mode: auto
         state: started
