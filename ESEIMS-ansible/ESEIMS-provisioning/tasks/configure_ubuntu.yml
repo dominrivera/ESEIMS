@@ -22,7 +22,7 @@
       become: yes
 
     - name: Replace default telegraf configuration file
-      copy:
+      template:
         src: "{{ telegraf_local_config }}"
         dest: "{{ telegraf_remote_config }}"
       notify:
