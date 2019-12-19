@@ -25,17 +25,18 @@
       become: yes
 
     - name: Replace default Telegraf configuration file
-      copy:
+      template:
         src: "{{ telegraf_local_config }}"
         dest: "{{ telegraf_remote_config }}"
-      become: yes
       notify:
         - Restart Telegraf
+      become: yes
 
     - name: Ensure Telegraf is running
       service:
         name: telegraf
         state: started
+      become: yes
 
 # -- InfluxDB --
 
@@ -48,12 +49,12 @@
       become: yes
 
     - name: Replace default InfluxDB configuration file
-      copy:
+      template:
         src: "{{ influxdb_local_config }}"
         dest: "{{ influxdb_remote_config }}"
-      become: yes
       notify:
         - Restart InfluxDB
+      become: yes
 
 # influx requires authentication to be running
 #
@@ -90,12 +91,12 @@
       become: yes
 
     - name: Replace default Grafana configuration file
-      copy:
+      template:
         src: "{{ grafana_local_config }}"
         dest: "{{ grafana_remote_config }}"
-      become: yes
       notify:
         - restart Grafana
+      become: yes
 
 # Grafana starts with the following commands
 # sudo systemctl daemon-reload
