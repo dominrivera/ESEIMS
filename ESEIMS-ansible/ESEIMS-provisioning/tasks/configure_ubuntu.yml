@@ -33,3 +33,4 @@
       service:
         name: telegraf
         state: started
+      become: yes

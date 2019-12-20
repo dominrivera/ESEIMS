@@ -38,4 +38,14 @@ telegraf_params_win:
   - --config {{ telegraf_remote_config_win }}
   - --config-directory {{ telegraf_agent_dir_win }}
 
+influxdb_telegraf_user: 'telegraf'
+influxdb_telegraf_password: 'password'
+
 ### Template variables ###
+
+### Telegraf ###
+
+influxdb_address: 'http://40.89.174.174:8086'
+
+telegraf_username: 'telegraf'
+telegraf_password: 'password'
