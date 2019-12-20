@@ -7,6 +7,48 @@
         state: present
       become: yes
 
+    - name: Install dependencies
+      pip:
+        name: '{{ item }}'
+        state: forcereinstall
+      with_items:
+        - requests
+        - influxdb
+        - pyOpenSSL
+      become: yes
+
+    - name: Create directory for InfluxDB SSL cert
+      file:
+        path: /etc/ssl/influxdb
+        state: directory
+        mode: '0755'
+        owner: influxdb
+        group: influxdb
+      become: yes
+
+    - name: Generate an OpenSSL private key with the default values (4096 bits, RSA)
+      openssl_privatekey:
+        path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.pem'
+        owner: influxdb
+      become: yes
+
+    - name: Generate an OpenSSL Certificate Signing Request
+      openssl_csr:
+        path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.csr'
+        privatekey_path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.pem'
+        common_name: '{{ ansible_fqdn }}'
+        owner: influxdb
+      become: yes
+
+    - name: Create OpenSSL certificate for https
+      openssl_certificate:
+        path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.crt'
+        privatekey_path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.pem'
+        csr_path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.csr'
+        provider: selfsigned
+        owner: influxdb
+      become: yes
+
 # -- Influxdata --
 
     - name: Import InfluxDB GPG signing key
@@ -63,13 +105,6 @@
         - Restart InfluxDB
       become: yes
 
-    - name: Install dependencies
-      pip:
-        name: '{{ item }}'
-      with_items:
-        - requests
-        - influxdb
-
     - name: Ensure InfluxDB is running
       service:
         name: influxdb
@@ -83,6 +118,8 @@
         admin: yes
         login_username: "{{ influxdb_telegraf_user }}"
         login_password: "{{ influxdb_telegraf_password }}"
+        ssl: yes
+        validate_certs: no
 
 # -- Grafana --
 

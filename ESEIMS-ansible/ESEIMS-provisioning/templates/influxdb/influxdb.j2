@@ -302,13 +302,13 @@
   # ping-auth-enabled = false
 
   # Determines whether HTTPS is enabled.
-  # https-enabled = false
+  https-enabled = true
 
   # The SSL certificate to use when HTTPS is enabled.
-  # https-certificate = "/etc/ssl/influxdb.pem"
+  https-certificate = "/etc/ssl/influxdb/{{ ansible_fqdn }}.crt"
 
   # Use a separate private key location.
-  # https-private-key = ""
+  https-private-key = "/etc/ssl/influxdb/{{ ansible_fqdn}}.pem"
 
   # The JWT auth shared secret to validate requests using JSON web tokens.
   # shared-secret = ""
