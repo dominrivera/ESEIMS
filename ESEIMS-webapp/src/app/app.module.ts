@@ -7,11 +7,13 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { TicketComponent } from './ticket/ticket.component';
+import { AlarmComponent } from './alarm/alarm.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
   ],
   imports: [
     BrowserModule,

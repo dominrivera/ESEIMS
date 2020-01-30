@@ -1,7 +1,5 @@
-
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/">ESEIMS</a>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="#">Sign out</a>
@@ -15,40 +13,27 @@
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#">
-              <span class="bi wifi"></span>
-              Dashboard <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" routerLink="/alarms" routerLinkActive="active">
               <span data-feather="file"></span>
-              Orders
+              Alarms
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Products
+            <a class="nav-link" routerLink="/dashboards" routerLinkActive="active">
+              <span data-feather="file"></span>
+              Dashboards
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers"></span>
-              Integrations
+            <a class="nav-link" routerLink="/tickets" routerLinkActive="active">
+              <span data-feather="file"></span>
+              Tickets
             </a>
           </li>
         </ul>
-<router-outlet></router-outlet>>
+      </div>
+    </nav>
+  </div>
+</div>
+  
+<router-outlet></router-outlet>
