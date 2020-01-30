@@ -1,5 +1,7 @@
 ---
 
+# Look for a way to add firewall rules. Currently firewall is manually disabled.
+
 # -- Telegraf --
 
     - name: Create base directory

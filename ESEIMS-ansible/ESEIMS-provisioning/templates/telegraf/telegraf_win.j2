@@ -25,7 +25,7 @@
 # Configuration for telegraf agent
 [agent]
   ## Default data collection interval for all inputs
-  interval = "300s"
+  interval = "60s"
   ## Rounds collection interval to 'interval'
   ## ie, if interval="10s" then always collect on :00, :10, :20, etc.
   round_interval = true
@@ -321,15 +321,15 @@
     # Set to true to include _Total instance when querying for all (*).
     #IncludeTotal=false
 
-  [[inputs.win_perf_counters.object]]
+#  [[inputs.win_perf_counters.object]]
     # Example query where the Instance portion must be removed to get data back,
     # such as from the Paging File object.
-    ObjectName = "Paging File"
-    Counters = [
-      "% Usage",
-    ]
-    Instances = ["_Total"]
-    Measurement = "win_swap"
+#    ObjectName = "Paging File"
+#    Counters = [
+#      "% Usage",
+#    ]
+#    Instances = ["_Total"]
+#    Measurement = "win_swap"
 
 
 # Windows system plugins using WMI (disabled by default, using
@@ -386,7 +386,7 @@
 
 
 # # Read metrics about memory usage
-# [[inputs.mem]]
+ [[inputs.mem]]
 #   # no configuration
 
 

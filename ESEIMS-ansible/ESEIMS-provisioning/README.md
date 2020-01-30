@@ -1,7 +1,9 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+#A brief description of the role goes here.
+
+This custom ansible role named ESEIMS-provisioning is in charge of provisioning the server and hosts which take part of our infrastructure
 
 Requirements
 ------------
