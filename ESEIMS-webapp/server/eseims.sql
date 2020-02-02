@@ -4,7 +4,7 @@ CREATE DATABASE eseims;
 
 /*CREATE USER 'eseimsuser'@'localhost' IDENTIFIED BY 'eseimspass';*/
 
-GRANT ALL PRIVILEGES ON eseims.* TO eseimsuser@'localhost' IDENTIFIED BY 'eseimspass';
+GRANT ALL PRIVILEGES ON eseims.* TO 'admin' IDENTIFIED BY 'admin';
 
 USE eseims;
 
