@@ -15,12 +15,12 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE IF NOT EXISTS `users` (
     `id` INT NOT NULL AUTO_INCREMENT ,
-    `username` VARCHAR(50) NOT NULL,
     `name` VARCHAR(50) NOT NULL,
     `surname` VARCHAR(50) NOT NULL,
+    `username` VARCHAR(50) NOT NULL,
+    `password` VARCHAR(50) NOT NULL,
     `dni` VARCHAR(12) NOT NULL,
     `email` VARCHAR(50) NOT NULL,
-    `password` VARCHAR(50) NOT NULL,
     `role` ENUM ('admin', 'user') NOT NULL,
     `created` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `modified` DATETIME DEFAULT CURRENT_TIMESTAMP,

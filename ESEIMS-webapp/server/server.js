@@ -1,8 +1,9 @@
-const mysql = require('mysql');
 const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
+const morgan = require('morgan');
 
+var mysqlConnection = require('./databaseConnection');
 var config = require('./config');
 var app = express();
 /*var session = require('express-session');
@@ -18,33 +19,20 @@ session = session({
 
 
 app.use(session);*/
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
-var mysqlConnection = mysql.createConnection({
-    host: config.db_config.host,
-    //port: config.db_config.port,
-    user: config.db_config.user,
-    password: config.db_config.password,
-    database: config.db_config.database
-});
-
-mysqlConnection.connect((err)=>{
-    if (!err)
-    console.log('connection succeded');
-    else
-    console.log('connection failed \n Error: ' + JSON.stringify(err, undefined, 2));
-});
+// Routes
+app.use('/api', require('./routes'));
 
 
-app.listen(3000,()=>console.log("Server is running at port 3000"));
+app.get('/', function (req, res) {
+    res.send('Hello world');
+})
 
 
-//app.get('/', function (req, res) {
-  //  if (!req.session.)
-  //})
-
+/*********************** ROUTES **********************/
 
 // Get list of users
 app.get('/users',(req,res)=>{
@@ -103,5 +91,5 @@ app.get('/tickets/:id',(req,res)=>{
 
 // Starting server
 
-//const server = http.createServer(app);
-//server.listen(config.port, () => console.log(`Server running on localhost:${config.port}`));
+const server = http.createServer(app);
+server.listen(config.port, () => console.log(`Server running on localhost:${config.port}`));
