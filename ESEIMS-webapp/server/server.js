@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const app = express();
 
 var config = require('./config');
-//var routes = require('./routes')(app);
+var routes = require('./routes');
 /*var session = require('express-session');
 var Filestore = require('session-file-store')(session);
 
@@ -24,8 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes
-//app.use('/api', routes);
-require('./routes/userRoutes')(app);
+app.use('/api', routes);
 
 //app.get('/', function (req, res) {
 //    res.send('Hello world');
