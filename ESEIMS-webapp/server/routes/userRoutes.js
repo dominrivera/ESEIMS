@@ -36,7 +36,7 @@ module.exports = app => {
     });
 
     // Get user
-    app.get('/users/:id', (req, res) => {
+ /*   app.get('/users/:id', (req, res) => {
         mysqlConnection.query('SELECT * FROM users WHERE id = ?', [req.params.id], (err, data) => {
             if (!err)
                 res.send(data);
@@ -55,5 +55,5 @@ module.exports = app => {
                 console.log(err);
         });
     });
-
+*/
 }
