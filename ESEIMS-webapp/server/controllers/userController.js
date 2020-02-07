@@ -35,17 +35,17 @@ userCtrl.createUser = function (req, res) {
     }
 };
 
-// TO DO
-/*
+
 userCtrl.editUser = function (req, res) {
-    User.updateUser(req.params.id, new User(req.body), function(err, user) {
+    var user_edit = new User(req.body);
+    User.updateUser(req.params.id, user_edit, function(err, user) {
         if(err)
             res.send(err);
         console.log('res', user);
         res.json(user);
     });
 };
-*/
+
 
 userCtrl.removeUser = function (req, res) {
     User.deleteUser(req.params.id, function(err, user) {
