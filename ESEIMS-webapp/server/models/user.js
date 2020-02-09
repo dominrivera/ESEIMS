@@ -7,6 +7,7 @@ var User = function (user) {
     this.password = user.password;
     this.email = user.email;
     this.role = user.role;
+    this.created = user.created;
 };
 
 module.exports = User;

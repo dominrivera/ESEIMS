@@ -7,7 +7,7 @@ module.exports = {
 
     select_tickets: `SELECT * FROM tickets`,
     select_ticket: `SELECT * FROM tickets WHERE id = ?`,
-    insert_ticket: `INSERT INTO tickets(id, short_description, description, status, assignment, created, modified) VALUES(?, ?, ?, ?, ?, ?, ?)`,
-    update_ticket: `UPDATE tickets SET ticket.short_description = ?, ticket.description = ?, ticket.status = ?, ticket.assignment = ?, ticket.created = ?, ticket.modified = ? WHERE ticket.id = ?`,
-    delete_ticket: `DELETE FROM tickets WHERE ticket.id = ?`
+    insert_ticket: `INSERT INTO tickets set ?`,
+    update_ticket: `UPDATE tickets SET comment = ?, status = ?, assignment = ?, creator = ?, modified = ? WHERE id = ?`,
+    delete_ticket: `DELETE FROM tickets WHERE id = ?`
 }

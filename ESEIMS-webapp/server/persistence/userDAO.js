@@ -38,10 +38,10 @@ User.addUser = function(user, result){
         }
     });
 };
-// TO DO
-/*
-User.updateUser = function(user, id, result){
-    dbConnection.query(queries.update_user, [user, id], function(err, res) {
+
+
+User.updateUser = function(id, user, result){
+    dbConnection.query(queries.update_user, [user.name, user.surname, user.dni, user.username, user.password, user.email, user.role, id], function(err, res) {
         if(err){
             console.log("error: ", err);
             result(err, null);
@@ -52,7 +52,6 @@ User.updateUser = function(user, id, result){
         }
     });
 };
-*/
 
 User.deleteUser = function(id, result){
     dbConnection.query(queries.delete_user, [id], function(err, res) {

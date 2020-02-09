@@ -1,4 +1,4 @@
-var Ticket = require('../persistence/ticketDao');
+var Ticket = require('../persistence/ticketDAO');
 var ticketCtrl = {};
 
 ticketCtrl.listTickets = function (req, res) {
@@ -22,7 +22,7 @@ ticketCtrl.listTicket = function (req, res) {
 
 ticketCtrl.createTicket = function (req, res) {
     var ticket = new Ticket(req.body);
-    if (!ticket.id) {
+    if (!ticket.short_description) {
         res.status(400).send({ error: true, message: 'Error creating ticket' });
     }
     else {
@@ -35,17 +35,15 @@ ticketCtrl.createTicket = function (req, res) {
     }
 };
 
-// TO DO
-/*
 ticketCtrl.editTicket = function (req, res) {
-    Ticket.updateTicket(req.params.id, new Ticket(req.body), function(err, ticket) {
+    var ticket_edit = new Ticket(req.body);
+    Ticket.updateTicket(req.params.id, ticket_edit, function(err, ticket) {
         if(err)
             res.send(err);
         console.log('res', ticket);
         res.json(ticket);
     });
 };
-*/
 
 ticketCtrl.removeTicket = function (req, res) {
     Ticket.deleteTicket(req.params.id, function(err, ticket) {
