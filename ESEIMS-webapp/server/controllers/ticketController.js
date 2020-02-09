@@ -35,7 +35,6 @@ ticketCtrl.createTicket = function (req, res) {
     }
 };
 
-
 ticketCtrl.editTicket = function (req, res) {
     var ticket_edit = new Ticket(req.body);
     Ticket.updateTicket(req.params.id, ticket_edit, function(err, ticket) {
@@ -45,7 +44,6 @@ ticketCtrl.editTicket = function (req, res) {
         res.json(ticket);
     });
 };
-
 
 ticketCtrl.removeTicket = function (req, res) {
     Ticket.deleteTicket(req.params.id, function(err, ticket) {
