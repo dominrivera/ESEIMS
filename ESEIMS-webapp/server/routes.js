@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('./controllers/authController');
 var user = require('./controllers/userController');
 var ticket = require('./controllers/ticketController');
 
+router.post('/register', auth.createUser);
+router.post('/login', auth.loginUser);
+
 router.get('/users', user.listUsers);
-router.get('/users/:id', user.listUser);
-router.post('/users', user.createUser);
+//router.get('/users/:id', user.listUser);
 router.put('/users/:id', user.editUser);
 router.delete('/users/:id', user.removeUser);
 

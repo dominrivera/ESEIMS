@@ -10,7 +10,7 @@ userCtrl.listUsers = function (req, res) {
         res.send(users);
     });
 };
-
+/*
 userCtrl.listUser = function (req, res) {
     User.getUser(req.params.id, function (err, user) {
         if (err)
@@ -22,7 +22,7 @@ userCtrl.listUser = function (req, res) {
 
 userCtrl.createUser = function (req, res) {
     var user = new User(req.body);
-    if (!user.username) {
+    if (!user.email) {
         res.status(400).send({ error: true, message: 'Error creating user' });
     }
     else {
@@ -34,7 +34,7 @@ userCtrl.createUser = function (req, res) {
         });
     }
 };
-
+*/
 
 userCtrl.editUser = function (req, res) {
     var user_edit = new User(req.body);

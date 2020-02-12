@@ -6,14 +6,14 @@ User.getUsers = function (result) {
     dbConnection.query(queries.select_users, function (err, res) {
         if (err) {
             console.log("error: ", err);
-            result(null, err);
+            result(err, null);
         }
         else {
             result(null, res);
         }
     });
 };
-
+/*
 User.getUser = function(id, result) {
     dbConnection.query(queries.select_user, id, function(err, res) {
         if(err) {
@@ -37,11 +37,11 @@ User.addUser = function(user, result){
             result(null, res.insertId);
         }
     });
-};
+};*/
 
 
 User.updateUser = function(id, user, result){
-    dbConnection.query(queries.update_user, [user.name, user.surname, user.dni, user.username, user.password, user.email, user.role, id], function(err, res) {
+    dbConnection.query(queries.update_user, [user.name, user.surname, user.dni, user.password, user.email, user.role, id], function(err, res) {
         if(err){
             console.log("error: ", err);
             result(err, null);
