@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,12 +10,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { TicketComponent } from './components/ticket/ticket.component';
+import { UserComponent } from './components/user/user.component';
 import { AlarmComponent } from './components/alarm/alarm.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 import { UserService } from './services/user.service';
 import { TicketService } from './services/ticket.service';
-import { UserComponent } from './components/user/user.component';
+import { AuthService } from './services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -24,9 +27,10 @@ import { UserComponent } from './components/user/user.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [UserService, TicketService],
+  providers: [UserService, TicketService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

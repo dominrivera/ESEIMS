@@ -14,14 +14,14 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers()
-      .subscribe(
-        (data) => {
-          this.users = data;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    .subscribe(
+      (data) => {
+        this.users = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }
