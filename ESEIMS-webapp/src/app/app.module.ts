@@ -1,15 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { TicketComponent } from './ticket/ticket.component';
-import { AlarmComponent } from './alarm/alarm.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { UserComponent } from './components/user/user.component';
+import { AlarmComponent } from './components/alarm/alarm.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+
+import { UserService } from './services/user.service';
+import { TicketService } from './services/ticket.service';
+import { AuthService } from './services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -18,9 +26,11 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [UserService, TicketService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -37,8 +37,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
   `dni` varchar(9) NOT NULL,
-  `username` varchar(15) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `email` varchar(32) NOT NULL,
   `role` enum('user','admin') NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
@@ -49,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `surname`, `dni`, `username`, `password`, `email`, `role`, `created`) VALUES
-(1, 'Juan', 'Blanco Garcia', '87654321A', 'jbgarcia', '345623445ASFghtrBvV4344344', 'jbgarcia@esei.uvigo.es', 'admin', '2020-02-06 21:00:57'),
-(2, 'David', 'Perez Rodriguez', '12345678A', 'dprodriguez', '1243513245FGETRGeferg43', 'dprodriguez@esei.uvigo.es', 'user', '2020-02-06 21:00:57');
+INSERT INTO `users` (`id`, `name`, `surname`, `dni`, `password`, `email`, `role`, `created`) VALUES
+(1, 'Juan', 'Blanco Garcia', '87654321A', '345623445ASFghtrBvV4344344', 'jbgarcia@esei.uvigo.es', 'admin', '2020-02-06 21:00:57'),
+(2, 'David', 'Perez Rodriguez', '12345678A', '1243513245FGETRGeferg43', 'dprodriguez@esei.uvigo.es', 'user', '2020-02-06 21:00:57');
 
 -- --------------------------------------------------------
 
