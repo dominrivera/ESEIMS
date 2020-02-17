@@ -13,4 +13,8 @@
             </button>
         </div>
     </div>
-</div> 
+    <div *ngFor="let ticket of tickets">
+        <h3>{{ ticket.short_description }}</h3>
+        <p>{{ ticket.description }}</p>
+    </div>
+</div>

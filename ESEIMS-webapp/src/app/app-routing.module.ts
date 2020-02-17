@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AlarmComponent } from './alarm/alarm.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TicketComponent } from './ticket/ticket.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { HomeComponent } from './components/home/home.component';
+import { AlarmComponent } from './components/alarm/alarm.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TicketComponent } from './components/ticket/ticket.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 
 
