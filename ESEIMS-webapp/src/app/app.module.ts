@@ -14,6 +14,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 
 import { UserService } from './services/user.service';
 import { TicketService } from './services/ticket.service';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [

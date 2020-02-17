@@ -1,0 +1,9 @@
+[role="user"] {
+    padding-top: 133px; /* Space for fixed navbar */
+  }
+  
+  @media (min-width: 768px) {
+    [role="user"] {
+      padding-top: 60px; /* Space for fixed navbar */
+    }
+  }
