@@ -39,7 +39,7 @@ authCtrl.loginUser = function (req, res) {
         if(err) {
           console.log(err);
         } else if(user==null) {
-            res.send({message: "error: user not found"});
+            res.status(401).send("error: user not found");
         } else {
             console.log("checking password");
             var user = user[0];
@@ -57,10 +57,28 @@ authCtrl.loginUser = function (req, res) {
                 }
                 res.json(responseData);
             } else {
-                res.send({message: "error password"});
+                res.status(401).send('error');
             }
         }
     });
+};
+
+authCtrl.verifyToken = function (req, res, next) {
+    if(!req.headers.authorization) {
+        return res.status(401).send('Unauthorized');
+    }
+    var token = req.headers.authorization.split(' ')[1];
+    console.log('tokenL ', token);
+    if(token == 'null' | token == 'undefined') {
+        return res.status(401).send('Unauthorized');
+    }
+    var verification = jwt.verify(token, SECRET_KEY);
+    if(!verification) {
+        return res.status(401).send('Unauthorized');
+    }
+    console.log('id ', verification);
+    //req.user.id = verification.id;
+    next();
 };
 
 module.exports = authCtrl;

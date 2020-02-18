@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,13 +20,19 @@ export class LoginComponent implements OnInit {
   loginUser() {
     console.log(this.loginData);
     this.auth.loginUser(this.loginData)
-    .subscribe(
-      res => {
-        console.log(res)
-        localStorage.setItem('token', res['accessToken'])
-        this.router.navigate(['/dashboards'])
-      },
-      err => console.log(err)
+      .subscribe(
+        res => {
+          console.log(res)
+          localStorage.setItem('token', res['accessToken'])
+          this.router.navigate(['/dashboards'])
+        },
+        err => { 
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401) {
+            this.router.navigate(['login'])
+          }
+        }
+      }
     )
   }
 

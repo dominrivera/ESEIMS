@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TicketService } from 'src/app/services/ticket.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket',
@@ -10,16 +12,22 @@ export class TicketComponent implements OnInit {
 
   tickets: any = [];
 
-  constructor(protected ticketService: TicketService) { }
+  constructor(protected ticketService: TicketService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  showTickets() {
     this.ticketService.getTickets()
     .subscribe(
-      (data) => {
-        this.tickets = data;
+      res => {
+        this.tickets = res;
       },
-      (error) => {
-        console.log(error);
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401){
+            this.router.navigate(['login'])
+          }
+        }
       }
     );
   }

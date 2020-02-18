@@ -19,14 +19,9 @@ const routes: Routes = [
   { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
-  //{ path: 'admin/list-books', component: ListBooksComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
-  { path: '**', component: PagenotfoundComponent },
-  //{ path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  //{ path: '**', component: Page404Component }
-  // https://www.youtube.com/watch?v=jYcAO49PaCI
-  // ejemplo -> { path: 'dashboard:/id', component: DetailsDashboardComponent}
+  { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({
@@ -45,4 +40,4 @@ export const routingComponents = [
   LoginComponent,
   RegisterComponent,
   PagenotfoundComponent
-]
+];
