@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { UserService } from './services/user.service';
 import { TicketService } from './services/ticket.service';
 import { AuthService } from './services/auth.service';
+import { TokenInterceptorService } from './services/token-interceptor.service'
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -32,7 +34,7 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService, TicketService, AuthService, AuthGuard],
+  providers: [UserService, TicketService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
