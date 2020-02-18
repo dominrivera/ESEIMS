@@ -18,6 +18,8 @@ import { UserService } from './services/user.service';
 import { TicketService } from './services/ticket.service';
 import { AuthService } from './services/auth.service';
 
+import { AuthGuard } from './guards/auth.guard';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { AuthService } from './services/auth.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService, TicketService, AuthService],
+  providers: [UserService, TicketService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

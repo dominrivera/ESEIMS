@@ -15,4 +15,8 @@ export class AuthService {
     return this.http.post('http://localhost:3000/api/login', user)
   }
 
+  loggedIn() {
+    return !!localStorage.getItem('token')
+  }
+
 }
