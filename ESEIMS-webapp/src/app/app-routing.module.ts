@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { UserComponent } from './components/user/user.component';
+import { TicketDetailsComponent } from './components/ticket/ticket-details/ticket-details.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard] },
   { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
+  { path: 'ticket/details', component: TicketDetailsComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'user/profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   { path: '**', component: PagenotfoundComponent }
@@ -36,7 +40,9 @@ export const routingComponents = [
   AlarmComponent,
   DashboardComponent,
   TicketComponent,
+  TicketDetailsComponent,
   UserComponent,
+  UserProfileComponent,
   LoginComponent,
   RegisterComponent,
   PagenotfoundComponent

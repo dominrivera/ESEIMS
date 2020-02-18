@@ -14,22 +14,20 @@ export class TicketComponent implements OnInit {
 
   constructor(protected ticketService: TicketService, private router: Router) { }
 
-  ngOnInit() {}
-
-  showTickets() {
+  ngOnInit() {
     this.ticketService.getTickets()
-    .subscribe(
-      res => {
-        this.tickets = res;
-      },
-      err => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401){
-            this.router.navigate(['login'])
+      .subscribe(
+        res => {
+          this.tickets = res;
+        },
+        err => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['login'])
+            }
           }
         }
-      }
-    );
+      );
   }
 
 }

@@ -52,6 +52,7 @@ authCtrl.loginUser = function (req, res) {
                     //no debemos devolver la password al frontend
                    // password: user.password,
                     email: user.email,
+                    role: user.role,
                     accessToken: accessToken,
                     expiresIn: expiresIn
                 }

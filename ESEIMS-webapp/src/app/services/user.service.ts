@@ -8,6 +8,10 @@ export class UserService {
 
   constructor(protected http: HttpClient) { }
 
+  getUser(userId) {
+    return this.http.get('http://localhost:3000/api/users:id', userId)
+  }
+
   getUsers() {
     return this.http.get('http://localhost:3000/api/users');
   }

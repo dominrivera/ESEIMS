@@ -14,6 +14,8 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { UserComponent } from './components/user/user.component';
 import { AlarmComponent } from './components/alarm/alarm.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { TicketDetailsComponent } from './components/ticket/ticket-details/ticket-details.component';
 
 import { UserService } from './services/user.service';
 import { TicketService } from './services/ticket.service';
@@ -21,6 +23,7 @@ import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service'
 
 import { AuthGuard } from './guards/auth.guard';
+
 
 
 @NgModule({

@@ -1,20 +1,38 @@
-<div role="user" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<div role="user" class="col-md-12 ml-sm-auto col-lg-20 px-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Users</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
+            <button type="button" class="btn btn-info btn-md" routerLink="/register">New User</button>
         </div>
     </div>
-    <div *ngFor="let user of users">
-        <h3>{{ user.name }}</h3>
-        <p>{{ user.email }}</p>
+    <div>
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Creation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.surname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.dni }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.created }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" (click)="showUser(user.id)"><span class="glyphicon glyphicon-edit"></span>view</button>
+                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i>edit</button>
+                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">delete</i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

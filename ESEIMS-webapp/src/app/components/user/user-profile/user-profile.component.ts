@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-user-profile',
+  templateUrl: './user-profile.component.html',
+  styleUrls: ['./user-profile.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
 
-  users: any = [];
+  user: any;
 
   constructor(protected userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.userService.getUsers()
+    this.userService.getUser(this.user)
       .subscribe(
         (data) => {
-          this.users = data;
+          this.user = data;
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
