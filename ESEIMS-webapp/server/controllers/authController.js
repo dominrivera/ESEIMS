@@ -65,6 +65,7 @@ authCtrl.loginUser = function (req, res) {
 };
 
 authCtrl.verifyToken = function (req, res, next) {
+    console.log('token verification');
     if(!req.headers.authorization) {
         return res.status(401).send('Unauthorized');
     }

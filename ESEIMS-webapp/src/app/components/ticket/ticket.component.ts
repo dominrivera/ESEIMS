@@ -30,4 +30,20 @@ export class TicketComponent implements OnInit {
       );
   }
 
+  deleteTicket(ticketId) {
+    this.ticketService.deleteTicket(ticketId)
+    .subscribe(
+      (data) => {
+        console.log(data)
+      },
+      (err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401) {
+            this.router.navigate(['/tickets'])
+          }
+        }
+      }
+    )
+  }
+
 }

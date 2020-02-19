@@ -23,11 +23,31 @@ export class UserComponent implements OnInit {
         (err) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status == 401) {
-              this.router.navigate(['login'])
+              this.router.navigate(['/login'])
             }
           }
         }
       )
+  }
+
+  selectUser(userId) {
+    console.log(userId);
+  }
+
+  deleteUser(userId) {
+    this.userService.deleteUser(userId)
+    .subscribe(
+      (data) => {
+        console.log(data)
+      },
+      (err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401) {
+            this.router.navigate(['/users'])
+          }
+        }
+      }
+    )
   }
 
 }
