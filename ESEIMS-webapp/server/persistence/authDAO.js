@@ -24,7 +24,6 @@ Auth.logUser = function(email, result) {
             result(err, null);
         }
         else{
-            console.log('resdao: ', res);
             result(null, JSON.parse(JSON.stringify(res)));
         }
     });

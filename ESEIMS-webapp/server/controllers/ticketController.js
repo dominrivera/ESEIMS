@@ -7,7 +7,7 @@ ticketCtrl.listTickets = function (req, res) {
         if (err)
             res.send(err);
         console.log('res', tickets);
-        res.send(tickets);
+        res.json(tickets);
     });
 };
 

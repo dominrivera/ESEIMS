@@ -20,9 +20,9 @@ const routes: Routes = [
   { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard] },
   { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
-  { path: 'ticket/details', component: TicketDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
-  { path: 'user/profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
   { path: '**', component: PagenotfoundComponent }

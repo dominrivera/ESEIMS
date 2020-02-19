@@ -8,6 +8,7 @@ router.post('/login', auth.loginUser);
 router.post('/register', auth.verifyToken, auth.createUser);
 
 router.get('/users', auth.verifyToken, user.listUsers);
+router.get('/users/:id', auth.verifyToken, user.listUser);
 router.put('/users/:id', auth.verifyToken, user.editUser);
 router.delete('/users/:id', auth.verifyToken, user.removeUser);
 

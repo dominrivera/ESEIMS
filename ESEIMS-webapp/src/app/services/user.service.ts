@@ -14,7 +14,8 @@ export class UserService {
   }
 
   getUser(userId) {
-    return this.http.get('http://localhost:3000/api/users/:id', userId)
+    const url = `http://localhost:3000/api/users/${userId}`;
+    return this.http.get(url)
   }
 
   editUser(user) {
@@ -32,6 +33,10 @@ export class UserService {
     };
     
     return this.http.delete(url, httpOptions)
+  }
+
+  getCurrentUser() {
+    
   }
 
 }

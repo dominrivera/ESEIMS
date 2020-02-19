@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
 
   selectUser(userId) {
     console.log(userId);
+    this.router.navigate(['/users', userId])
   }
 
   deleteUser(userId) {

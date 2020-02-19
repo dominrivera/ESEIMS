@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -10,15 +10,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: any;
+  userId: number;
+  user: any = {};
+  currentUserId: any;
 
-  constructor(protected userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.userService.getUser(this.user)
+    const id = parseInt(this.route.snapshot.paramMap.get('id'));
+    console.log(id)
+    this.userService.getUser(id)
       .subscribe(
         (data) => {
-          this.user = data;
+          console.log(data)
+          this.user = data[0];
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
@@ -28,6 +33,9 @@ export class UserProfileComponent implements OnInit {
           }
         }
       )
+
+    const val = this.userService.getCurrentUser()
+
   }
 
 }
