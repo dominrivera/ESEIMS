@@ -23,8 +23,7 @@ import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service'
 
 import { AuthGuard } from './guards/auth.guard';
-
-
+import { AdminGuard } from './guards/admin.guard';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,7 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService, TicketService, AuthService, AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
+  providers: [UserService, TicketService, AuthService, AuthGuard, AdminGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

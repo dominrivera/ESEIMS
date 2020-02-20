@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/alarms">Alarms</a>
+        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/alarms">Alarms</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/dashboards">Dashboards</a>
@@ -16,7 +16,7 @@
         <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/tickets">Tickets</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/users">Users</a>
+        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/users">Users</a>
       </li>
     </ul>
     <button *ngIf="!auth.isAuthenticated()" class="btn btn-outline-info my-2 my-sm-0" type="submit" routerLink="/login">Log In</button>

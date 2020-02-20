@@ -47,12 +47,10 @@ authCtrl.loginUser = function (req, res) {
             if (checkPassword) {
                 console.log(userData);
                 var expiresIn = 24 * 60 * 60;
-                var accessToken = jwt.sign({id: user.id}, SECRET_KEY, {expiresIn: expiresIn});
+                var accessToken = jwt.sign({id: user.id, role: user.role}, SECRET_KEY, {expiresIn: expiresIn});
                 var responseData = {
                     //no debemos devolver la password al frontend
                    // password: user.password,
-                    email: user.email,
-                    role: user.role,
                     accessToken: accessToken,
                     expiresIn: expiresIn
                 }

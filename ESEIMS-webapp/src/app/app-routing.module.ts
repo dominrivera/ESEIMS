@@ -13,18 +13,19 @@ import { TicketDetailsComponent } from './components/ticket/ticket-details/ticke
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard] },
+  { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
   { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'users', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard]},
+  { path: 'register', component: RegisterComponent },
   { path: '**', component: PagenotfoundComponent }
 ];
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +27,20 @@ export class AuthService {
 
   isAuthenticated() {
     return !!localStorage.getItem('token')
+  }
+
+  getCurrentUser() {
+    var token = this.getToken()
+    var decoded = jwt_decode(token);
+    return decoded
+  }
+
+  isAdmin() {
+    var currentUser = this.getCurrentUser();
+    if (currentUser.role=='user') {
+      return false;
+    }
+    return true;
   }
 
 }
