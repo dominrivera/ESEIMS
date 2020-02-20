@@ -4,8 +4,8 @@
         <h1 class="h2">Tickets</h1>
     </div>
     <div>
-        <table class="table table-hover">
-            <thead class="thead-dark">
+        <table class="table table-hover table-dark">
+            <thead>
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
@@ -27,10 +27,17 @@
                     <td>{{ ticket.created }}</td>
                     <td>{{ ticket.modified }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary"><span
-                                class="glyphicon glyphicon-edit"></span>view</button>
-                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i>edit</button>
-                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">delete</i></button>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Options
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button *ngIf="ticket.status=='open'" class="dropdown-item" type="button" (click)="takeTicket(ticket)">Take progress</button>
+                                <button class="dropdown-item" type="button" (click)="selectTicket(ticket.id)">View</button>
+                                <button class="dropdown-item" type="button" (click)="deleteTicket(ticket.id)">Close</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>

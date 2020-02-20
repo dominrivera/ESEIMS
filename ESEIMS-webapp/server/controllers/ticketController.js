@@ -37,6 +37,7 @@ ticketCtrl.createTicket = function (req, res) {
 
 ticketCtrl.editTicket = function (req, res) {
     var ticket_edit = new Ticket(req.body);
+    ticket_edit.modified = new Date();
     Ticket.updateTicket(req.params.id, ticket_edit, function(err, ticket) {
         if(err)
             res.send(err);

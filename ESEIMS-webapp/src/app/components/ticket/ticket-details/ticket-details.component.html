@@ -1,1 +1,75 @@
-<p>ticket-details works!</p>
+<div role="ticketDetails" class="container">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Personal data of: {{ user.name }} {{ user.surname }}</h1>
+            <div *ngIf="user.role=='user'" class="btn-toolbar mb-2 mb-md-0">
+                <button type="button" class="btn btn-warning btn-md" routerLink="/register">Edit User</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <form class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name">First name</label>
+                            <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name"
+                                placeholder="" value="" disabled>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="surname">Last name</label>
+                            <input [(ngModel)]="user.surname" name="surname" type="text" class="form-control" id="surname"
+                                placeholder="" value="" disabled>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email">Email</label>
+                            <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email"
+                                placeholder="" value="" disabled>
+                        </div>
+    
+    
+                        <div class="col-md-6 mb-3">
+                            <label for="password">Password</label>
+                            <input name="password" type="password" class="form-control" id="password" placeholder=""
+                                value="fakepass" disabled>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="dni">ID card</label>
+                            <input [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
+                                placeholder="" value="" disabled>
+                        </div>
+    
+                        <div class="col-md-6 mb-3">
+                            <label>Role</label>
+                            <div class="form-control">
+                                <label class="radio-inline">
+                                    <input type="radio" value="user" name="role" [checked]="user.role=='user'" disabled>
+                                    user
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" value="admin" name="role" [checked]="user.role=='admin'" disabled>
+                                    admin
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <hr class="mb-4">
+                </form>
+            </div>
+        </div>
+    
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2020 ESEIMS</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
+    </div>

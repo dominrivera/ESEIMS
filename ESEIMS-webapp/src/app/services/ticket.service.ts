@@ -18,7 +18,15 @@ export class TicketService {
   }
 
   editTicket(ticket) {
-    return this.http.put('http://localhost:3000/api/tickets', ticket)
+    const url = `http://localhost:3000/api/tickets/${ticket.id}`;
+    const token = this.auth.getToken()
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.put(url, ticket, httpOptions)
   }
 
   deleteTicket(ticketId) {
