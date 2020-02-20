@@ -1,18 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
-
-  registerUser(user) {
-    return this.http.post('http://localhost:3000/api/register', user);
-  }
+  constructor(private http: HttpClient, private router: Router) { }
 
   loginUser(user) {
-    console.log(user);
     return this.http.post('http://localhost:3000/api/login', user)
+  }
+
+  logoutUser() {
+    localStorage.removeItem('token')
+    this.router.navigate(['/'])
+  }
+
+  registerUser(user) {
+    return this.http.post('http://localhost:3000/api/register', user)
+  }
+
+  getToken() {
+    return localStorage.getItem('token')
+  }
+
+  isAuthenticated() {
+    return !!localStorage.getItem('token')
+  }
+
+  getCurrentUser() {
+    var token = this.getToken()
+    var decoded = jwt_decode(token);
+    return decoded
+  }
+
+  isAdmin() {
+    var currentUser = this.getCurrentUser();
+    if (currentUser.role=='user') {
+      return false;
+    }
+    return true;
   }
 
 }

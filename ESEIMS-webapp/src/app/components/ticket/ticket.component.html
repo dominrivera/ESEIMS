@@ -1,20 +1,39 @@
-<div role="ticket" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+<div role="ticket" class="col-md-12 ml-sm-auto col-lg-20 px-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Tickets</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
-        </div>
     </div>
-    <div *ngFor="let ticket of tickets">
-        <h3>{{ ticket.short_description }}</h3>
-        <p>{{ ticket.description }}</p>
+    <div>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assignment</th>
+                    <th scope="col">Creator</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Modified</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ticket of tickets">
+                    <td>{{ ticket.short_description }}</td>
+                    <td>{{ ticket.description }}</td>
+                    <td>{{ ticket.status }}</td>
+                    <td>{{ ticket.assignment }}</td>
+                    <td>{{ ticket.creator }}</td>
+                    <td>{{ ticket.created }}</td>
+                    <td>{{ ticket.modified }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary"><span
+                                class="glyphicon glyphicon-edit"></span>view</button>
+                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i>edit</button>
+                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt">delete</i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

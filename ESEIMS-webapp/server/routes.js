@@ -4,18 +4,18 @@ var auth = require('./controllers/authController');
 var user = require('./controllers/userController');
 var ticket = require('./controllers/ticketController');
 
-router.post('/register', auth.createUser);
 router.post('/login', auth.loginUser);
+router.post('/register', auth.verifyToken, auth.createUser);
 
-router.get('/users', user.listUsers);
-//router.get('/users/:id', user.listUser);
-router.put('/users/:id', user.editUser);
-router.delete('/users/:id', user.removeUser);
+router.get('/users', auth.verifyToken, user.listUsers);
+router.get('/users/:id', auth.verifyToken, user.listUser);
+router.put('/users/:id', auth.verifyToken, user.editUser);
+router.delete('/users/:id', auth.verifyToken, user.removeUser);
 
-router.get('/tickets', ticket.listTickets);
-router.get('/tickets/:id', ticket.listTicket);
-router.post('/tickets', ticket.createTicket);
-router.put('/tickets/:id', ticket.editTicket);
-router.delete('/tickets/:id', ticket.removeTicket);
+router.get('/tickets', auth.verifyToken, ticket.listTickets);
+router.get('/tickets/:id', auth.verifyToken, ticket.listTicket);
+router.post('/tickets', auth.verifyToken, ticket.createTicket);
+router.put('/tickets/:id', auth.verifyToken, ticket.editTicket);
+router.delete('/tickets/:id', auth.verifyToken, ticket.removeTicket);
 
 module.exports = router;

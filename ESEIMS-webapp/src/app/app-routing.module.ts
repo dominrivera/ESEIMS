@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { HomeComponent } from './components/home/home.component';
 import { AlarmComponent } from './components/alarm/alarm.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -8,23 +9,24 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { UserComponent } from './components/user/user.component';
+import { TicketDetailsComponent } from './components/ticket/ticket-details/ticket-details.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'alarms', component: AlarmComponent },
-  { path: 'dashboards', component: DashboardComponent },
-  { path: 'tickets', component: TicketComponent },
-  { path: 'users', component: UserComponent },
-  //{ path: 'admin/list-books', component: ListBooksComponent, canActivate: [AuthGuard] },
+  { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
+  { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent},
-  { path: '**', component: PagenotfoundComponent },
-  //{ path: 'user/profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  //{ path: '**', component: Page404Component }
-  // https://www.youtube.com/watch?v=jYcAO49PaCI
-  // ejemplo -> { path: 'dashboard:/id', component: DetailsDashboardComponent}
+  { path: 'register', component: RegisterComponent },
+  { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({
@@ -39,8 +41,10 @@ export const routingComponents = [
   AlarmComponent,
   DashboardComponent,
   TicketComponent,
+  TicketDetailsComponent,
   UserComponent,
+  UserProfileComponent,
   LoginComponent,
   RegisterComponent,
   PagenotfoundComponent
-]
+];
