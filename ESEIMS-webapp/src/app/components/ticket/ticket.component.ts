@@ -13,10 +13,15 @@ export class TicketComponent implements OnInit {
 
   tickets: any = [];
   ticket: any = {};
+  selectedStatus: string = 'all';
+  currentUser: any = {};
+  currentUserName: string;
 
   constructor(protected ticketService: TicketService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.currentUser = this.auth.getCurrentUser()
+    this.currentUserName = this.currentUser.name + ' ' + this.currentUser.surname;
     this.ticketService.getTickets()
       .subscribe(
         res => {
@@ -32,9 +37,12 @@ export class TicketComponent implements OnInit {
       );
   }
 
+  createTicket() {
+    this.router.navigate(['/tickets'])
+  }
+
   takeTicket(ticket) {
-    var currentUser = this.auth.getCurrentUser()
-    ticket.assignment = currentUser.name + ' ' + currentUser.surname;
+    ticket.assignment = this.currentUserName;
     ticket.status = 'In progress';
     this.ticketService.editTicket(ticket)
     .subscribe(
@@ -48,6 +56,10 @@ export class TicketComponent implements OnInit {
         }
       }
     )
+  }
+
+  filterTicket(status) {
+    this.selectedStatus = status;
   }
   
   selectTicket(ticketId) {

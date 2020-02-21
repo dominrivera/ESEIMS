@@ -14,7 +14,8 @@ export class TicketService {
   }
 
   getTicket(ticketId) {
-    return this.http.get('http://localhost:3000/api/tickets/:id', ticketId)
+    const url = `http://localhost:3000/api/tickets/${ticketId}`;
+    return this.http.get(url)
   }
 
   editTicket(ticket) {
@@ -26,7 +27,7 @@ export class TicketService {
         'Authorization': token
       })
     };
-    return this.http.put(url, ticket, httpOptions)
+    return this.http.put(url, ticket, httpOptions);
   }
 
   deleteTicket(ticketId) {
@@ -41,4 +42,14 @@ export class TicketService {
     
     return this.http.delete(url, httpOptions)
   }
+
+  getComments(ticketId) {
+    const url = `http://localhost:3000/api/comments/${ticketId}`;
+    return this.http.get(url)
+  }
+
+  addComment(comment) {
+    return this.http.post('http://localhost:3000/api/comments', comment);
+  }
+
 }

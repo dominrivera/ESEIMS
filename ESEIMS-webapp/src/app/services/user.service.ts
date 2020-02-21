@@ -19,7 +19,15 @@ export class UserService {
   }
 
   editUser(user) {
-    return this.http.put('http://localhost:3000/api/users', user)
+    const url = `http://localhost:3000/api/users/${user.id}`;
+    const token = this.auth.getToken()
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.put(url, user, httpOptions)
   }
 
   deleteUser(userId) {

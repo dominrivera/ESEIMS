@@ -22,7 +22,7 @@ ticketCtrl.listTicket = function (req, res) {
 
 ticketCtrl.createTicket = function (req, res) {
     var ticket = new Ticket(req.body);
-    if (!ticket.short_description) {
+    if (!ticket.title) {
         res.status(400).send({ error: true, message: 'Error creating ticket' });
     }
     else {

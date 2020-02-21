@@ -11,5 +11,8 @@ module.exports = {
     update_ticket: `UPDATE tickets SET comment = ?, status = ?, assignment = ?, creator = ?, modified = ? WHERE id = ?`,
     delete_ticket: `DELETE FROM tickets WHERE id = ?`,
 
+    select_comments: `SELECT * FROM comments WHERE ticket_id = ? ORDER BY created DESC`,
+    insert_comments: `INSERT INTO comments set ?`,
+
     select_login: `SELECT * FROM users WHERE email = ?`
 }

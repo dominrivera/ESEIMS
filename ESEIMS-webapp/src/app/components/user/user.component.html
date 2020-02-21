@@ -36,3 +36,37 @@
         </table>
     </div>
 </div>
+
+<!--
+<tr *ngFor="let user of users">
+    <td *ngIf="user.id == editUserId">{{ user.name }}</td>
+    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.name" name="name" type="text" class="form-control"
+            id="name" placeholder="" value=""></td>
+    <td *ngIf="!edit">{{ user.surname }}</td>
+    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.surname" name="surname" type="text" class="form-control"
+            id="surname" placeholder="" value=""></td>
+    <td *ngIf="!edit">{{ user.email }}</td>
+    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.email" name="email" type="email" class="form-control"
+            id="email" placeholder="" value=""></td>
+    <td *ngIf="!edit">********</td>
+    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="newPassword" name="pasword" type="password"
+            class="form-control" id="password" placeholder="" value=""></td>
+    <td *ngIf="!edit">{{ user.dni }}</td>
+    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
+            placeholder="" value=""></td>
+    <td *ngIf="!edit">{{ user.role }}</td>
+    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.role" name="role" type="text" class="form-control"
+            id="role" placeholder="" value=""></td>
+    <td>{{ user.created }}</td>
+    <td>
+        <button type="button" class="btn btn-primary" (click)="selectUser(user.id)"><span
+                class="glyphicon glyphicon-edit"></span>view</button>
+        <button *ngIf="!edit" type="button" class="btn btn-warning" (click)="editUser(user.id)"><i
+                class="fas fa-edit"></i>edit</button>
+        <button *ngIf="edit" type="button" class="btn btn-warning btn-md"
+            (click)="saveUser(user)">Save</button>
+        <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)"><i
+                class="far fa-trash-alt">delete</i></button>
+    </td>
+</tr>
+-->
