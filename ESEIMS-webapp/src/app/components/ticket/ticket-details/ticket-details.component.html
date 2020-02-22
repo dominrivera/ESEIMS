@@ -1,1 +1,56 @@
-<p>ticket-details works!</p>
+<div role="ticketDetails" class="container">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">{{ ticket.title }}</h1>
+        <div *ngIf="currentUserRole=='admin'" class="btn-toolbar mb-2 mb-md-0">
+            <button type="button" class="btn btn-warning btn-md" (click)="addComment(ticket.id)">Save</button>
+            <button type="button" class="btn btn-warning btn-md">Close</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label for="title">Title</label>
+            <input [(ngModel)]="ticket.title" name="title" type="text" class="form-control" id="title" placeholder=""
+                value="" disabled>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="creator">Creator</label>
+            <input [(ngModel)]="ticket.creator" name="creator" type="text" class="form-control" id="creator" placeholder=""
+                value="" disabled>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="created">Created</label>
+            <input [(ngModel)]="ticket.created" name="created" type="text" class="form-control" id="created" placeholder="" value="" disabled>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+            <form class="needs-validation" novalidate>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Comment</label>
+                    <textarea [(ngModel)]="newComment.message" class="form-control" name="message"
+                        id="exampleFormControlTextarea1" rows="5"></textarea>
+                </div>
+                <div *ngFor="let comment of comments">
+                    <hr>
+                    <span>{{ comment.creator }} --- {{ comment.created }}</span>
+                    <br>
+                    <span>{{ comment.message }}</span>
+                </div>
+                <hr class="mb-4">
+            </form>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020 ESEIMS</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+</div>

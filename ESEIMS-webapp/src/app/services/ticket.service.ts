@@ -14,11 +14,20 @@ export class TicketService {
   }
 
   getTicket(ticketId) {
-    return this.http.get('http://localhost:3000/api/tickets/:id', ticketId)
+    const url = `http://localhost:3000/api/tickets/${ticketId}`;
+    return this.http.get(url)
   }
 
   editTicket(ticket) {
-    return this.http.put('http://localhost:3000/api/tickets', ticket)
+    const url = `http://localhost:3000/api/tickets/${ticket.id}`;
+    const token = this.auth.getToken()
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.put(url, ticket, httpOptions);
   }
 
   deleteTicket(ticketId) {
@@ -33,4 +42,14 @@ export class TicketService {
     
     return this.http.delete(url, httpOptions)
   }
+
+  getComments(ticketId) {
+    const url = `http://localhost:3000/api/comments/${ticketId}`;
+    return this.http.get(url)
+  }
+
+  addComment(comment) {
+    return this.http.post('http://localhost:3000/api/comments', comment);
+  }
+
 }

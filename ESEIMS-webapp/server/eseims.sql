@@ -7,10 +7,6 @@
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
-DROP DATABASE IF EXISTS eseims;
-
-CREATE DATABASE eseims;
-
 GRANT ALL PRIVILEGES ON eseims.* TO 'admin' IDENTIFIED BY 'admin';
 
 USE eseims;
@@ -62,9 +58,7 @@ DROP TABLE IF EXISTS `tickets`;
 
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `short_description` varchar(40) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `comment` varchar(255),
+  `title` varchar(40) NOT NULL,
   `status` enum('open','in progress','closed') NOT NULL,
   `assignment` varchar(40),
   `creator` varchar(100) NOT NULL,
@@ -77,7 +71,34 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Volcado de datos para la tabla `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `short_description`, `description`, `comment`, `status`, `assignment`, `creator`, `created`, `modified`) VALUES
-(1, 'PC bloqueado', 'el PC numero 2 del aula 31 esta bloqueado en la pantaall de inicio', '', 'open', '', 'test creator', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
-(2, 'PC poco brillo de pantalla', 'la pantalla del pc 3 del aula 33 parece que esta apagada y el boton para subir el brillo no funciona', '', 'in progress', 'jperez', 'test creator', '2020-02-06 21:00:23', '2020-02-06 21:00:23'),
-(3, 'PC no responde', 'el PC numero 6 del aula 12 no enciende', '', 'closed', '', 'test creator', '2020-02-06 21:00:57', '2020-02-06 21:00:57');
+INSERT INTO `tickets` (`id`, `title`, `status`, `assignment`, `creator`, `created`, `modified`) VALUES
+(1, 'PC bloqueado', 'open', '', 'test creator', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(2, 'PC poco brillo de pantalla', 'in progress', 'jperez', 'test creator', '2020-02-06 21:00:23', '2020-02-06 21:00:23'),
+(3, 'PC no responde', 'closed', '', 'test creator', '2020-02-06 21:00:57', '2020-02-06 21:00:57');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `ticket_id` int NOT NULL,
+  `message` varchar(400) NOT NULL,
+  `creator` varchar(100) NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY (`ticket_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table COMMENTS';
+
+--
+-- Volcado de datos para la tabla `comments`
+--
+
+INSERT INTO `comments` (`id`, `ticket_id`, `message`, `creator`, `created`) VALUES
+(1, 1, 'el PC numero 2 del aula 31 esta bloqueado en la pantaall de inicio', 'Javier Garcia', '2020-02-06 20:59:10'),
+(2, 2, 'la pantalla del pc 3 del aula 33 parece que esta apagada y el boton para subir el brillo no funciona', 'Juan Martinez', '2020-02-06 21:00:23'),
+(3, 2, 'Hola juan, voy a revisarlo', 'Pedro Perez', '2020-02-06 22:00:57');

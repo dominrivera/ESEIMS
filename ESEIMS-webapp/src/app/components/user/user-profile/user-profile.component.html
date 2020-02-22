@@ -2,8 +2,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Personal data of: {{ user.name }} {{ user.surname }}</h1>
-        <div *ngIf="user.role=='user'" class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-warning btn-md" routerLink="/register">Edit User</button>
+        <div *ngIf="currentUserRole=='admin'" class="btn-toolbar mb-2 mb-md-0">
+            <button *ngIf="!edit" button type="button" class="btn btn-warning btn-md" (click)="editUser()">Edit User</button>
+            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser(user)">Save</button>
         </div>
     </div>
     <div class="row">
@@ -12,47 +13,59 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="name">First name</label>
-                        <input [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name"
+                        <input *ngIf="!edit" [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name"
                             placeholder="" value="" disabled>
+                        <input *ngIf="edit" [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name"
+                            placeholder="" value="">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="surname">Last name</label>
-                        <input [(ngModel)]="user.surname" name="surname" type="text" class="form-control" id="surname"
+                        <input *ngIf="!edit" [(ngModel)]="user.surname" name="surname" type="text" class="form-control" id="surname"
                             placeholder="" value="" disabled>
+                            <input *ngIf="edit" [(ngModel)]="user.surname" name="surname" type="text" class="form-control" id="surname"
+                            placeholder="" value="">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="email">Email</label>
-                        <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email"
+                        <input *ngIf="!edit" [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email"
                             placeholder="" value="" disabled>
+                            <input *ngIf="edit" [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email"
+                            placeholder="" value="">
                     </div>
 
 
                     <div class="col-md-6 mb-3">
                         <label for="password">Password</label>
-                        <input name="password" type="password" class="form-control" id="password" placeholder=""
+                        <input *ngIf="!edit" name="password" type="password" class="form-control" id="password" placeholder=""
                             value="fakepass" disabled>
+                            <input *ngIf="edit" name="password" type="password" class="form-control" id="password" placeholder=""
+                            value="fakepass">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="dni">ID card</label>
-                        <input [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
+                        <input *ngIf="!edit" [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
                             placeholder="" value="" disabled>
+                            <input *ngIf="edit" [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
+                            placeholder="" value="">
                     </div>
 
                     <div class="col-md-6 mb-3">
                         <label>Role</label>
                         <div class="form-control">
                             <label class="radio-inline">
-                                <input type="radio" value="user" name="role" [checked]="user.role=='user'" disabled>
+                                <input *ngIf="!edit" type="radio" value="user" name="role" [checked]="user.role=='user'" disabled>
+                                <input *ngIf="edit" type="radio" value="user" name="role" [checked]="user.role=='user'">
                                 user
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" value="admin" name="role" [checked]="user.role=='admin'" disabled>
+                                <input *ngIf="!edit" type="radio" value="admin" name="role" [checked]="user.role=='admin'" disabled>
+                                <input *ngIf="edit" type="radio" value="admin" name="role" [checked]="user.role=='admin'">
                                 admin
                             </label>
                         </div>

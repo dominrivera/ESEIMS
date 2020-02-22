@@ -6,7 +6,6 @@ var authCtrl = {};
 
 authCtrl.createUser = function (req, res) {
     var userData = new Auth(req.body);
-    
     if (!userData.email) {
         res.status(400).send({ error: true, message: 'Error creating user' });
     }
@@ -47,7 +46,7 @@ authCtrl.loginUser = function (req, res) {
             if (checkPassword) {
                 console.log(userData);
                 var expiresIn = 24 * 60 * 60;
-                var accessToken = jwt.sign({id: user.id, role: user.role}, SECRET_KEY, {expiresIn: expiresIn});
+                var accessToken = jwt.sign({id: user.id, name: user.name, surname: user.surname, role: user.role}, SECRET_KEY, {expiresIn: expiresIn});
                 var responseData = {
                     //no debemos devolver la password al frontend
                    // password: user.password,

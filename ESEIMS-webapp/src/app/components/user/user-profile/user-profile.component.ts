@@ -13,13 +13,15 @@ export class UserProfileComponent implements OnInit {
 
   userId: number;
   user: any = {};
-  currentUserId: any;
+  currentUserRole: any;
+  edit: boolean = false;
 
   constructor(private route: ActivatedRoute, private userService: UserService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     const id = parseInt(this.route.snapshot.paramMap.get('id'));
-    console.log(id)
+    var currentUser = this.auth.getCurrentUser();
+    this.currentUserRole = currentUser.role;
     this.userService.getUser(id)
       .subscribe(
         (data) => {
@@ -34,7 +36,29 @@ export class UserProfileComponent implements OnInit {
           }
         }
       )
+    }
 
+  editUser() {
+    this.edit = true;
+  }
+
+  saveUser() {
+    this.userService.editUser(this.user)
+    .subscribe(
+      (data) => {
+        this.edit == false;
+        // show message user correctly edited
+        console.log(data)
+      },
+      (err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401) {
+            // show message cannot edit
+            console.log(err)
+          }
+        }
+      }
+    )
   }
 
 }
