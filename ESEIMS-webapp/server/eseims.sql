@@ -7,10 +7,6 @@
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
-DROP DATABASE IF EXISTS eseims;
-
-CREATE DATABASE eseims;
-
 GRANT ALL PRIVILEGES ON eseims.* TO 'admin' IDENTIFIED BY 'admin';
 
 USE eseims;
