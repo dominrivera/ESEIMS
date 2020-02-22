@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Routes
-app.use('/api', routes)
+app.use('/api', routes);
 
 // Configure deployment to run angular under node process
 app.use(express.static('dist/ESEIMS-webapp'));

@@ -4,9 +4,9 @@ var auth = require('./controllers/authController');
 var user = require('./controllers/userController');
 var ticket = require('./controllers/ticketController');
 var comment = require('./controllers/commentController');
-
+console.log('in routes.js');
 router.post('/login', auth.loginUser);
-router.post('/register', auth.verifyToken, auth.createUser);
+router.post('/register', auth.createUser);
 
 router.get('/users', auth.verifyToken, user.listUsers);
 router.get('/users/:id', auth.verifyToken, user.listUser);

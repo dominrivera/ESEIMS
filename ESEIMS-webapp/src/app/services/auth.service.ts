@@ -9,7 +9,8 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   loginUser(user) {
-    return this.http.post('http://localhost:3000/api/login', user)
+    console.log('login');
+    return this.http.post('/api/login', user)
   }
 
   logoutUser() {
@@ -18,7 +19,8 @@ export class AuthService {
   }
 
   registerUser(user) {
-    return this.http.post('http://localhost:3000/api/register', user)
+    console.log('register');
+    return this.http.post('/api/register', user)
   }
 
   getToken() {

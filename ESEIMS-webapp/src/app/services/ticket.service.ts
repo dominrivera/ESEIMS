@@ -10,16 +10,16 @@ export class TicketService {
   constructor(protected http: HttpClient, private auth: AuthService) { }
 
   getTickets() {
-    return this.http.get('http://localhost:3000/api/tickets');
+    return this.http.get('/api/tickets');
   }
 
   getTicket(ticketId) {
-    const url = `http://localhost:3000/api/tickets/${ticketId}`;
+    const url = `/api/tickets/${ticketId}`;
     return this.http.get(url)
   }
 
   editTicket(ticket) {
-    const url = `http://localhost:3000/api/tickets/${ticket.id}`;
+    const url = `/api/tickets/${ticket.id}`;
     const token = this.auth.getToken()
     const httpOptions = {
       headers: new HttpHeaders({
@@ -31,7 +31,7 @@ export class TicketService {
   }
 
   deleteTicket(ticketId) {
-    const url = `http://localhost:3000/api/tickets/${ticketId}`;
+    const url = `/api/tickets/${ticketId}`;
     const token = this.auth.getToken();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -44,12 +44,12 @@ export class TicketService {
   }
 
   getComments(ticketId) {
-    const url = `http://localhost:3000/api/comments/${ticketId}`;
+    const url = `/api/comments/${ticketId}`;
     return this.http.get(url)
   }
 
   addComment(comment) {
-    return this.http.post('http://localhost:3000/api/comments', comment);
+    return this.http.post('/api/comments', comment);
   }
 
 }

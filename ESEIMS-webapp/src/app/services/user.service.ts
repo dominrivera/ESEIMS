@@ -10,16 +10,16 @@ export class UserService {
   constructor(protected http: HttpClient, private auth: AuthService) { }
 
   getUsers() {
-    return this.http.get('http://localhost:3000/api/users')
+    return this.http.get('/api/users')
   }
 
   getUser(userId) {
-    const url = `http://localhost:3000/api/users/${userId}`;
+    const url = `/api/users/${userId}`;
     return this.http.get(url)
   }
 
   editUser(user) {
-    const url = `http://localhost:3000/api/users/${user.id}`;
+    const url = `/api/users/${user.id}`;
     const token = this.auth.getToken()
     const httpOptions = {
       headers: new HttpHeaders({
@@ -31,7 +31,7 @@ export class UserService {
   }
 
   deleteUser(userId) {
-    const url = `http://localhost:3000/api/users/${userId}`;
+    const url = `/api/users/${userId}`;
     const token = this.auth.getToken();
     const httpOptions = {
       headers: new HttpHeaders({
