@@ -7,8 +7,6 @@
 -- Versión del servidor: 10.4.10-MariaDB
 -- Versión de PHP: 7.3.12
 
-GRANT ALL PRIVILEGES ON eseims.* TO 'admin' IDENTIFIED BY 'admin';
-
 USE eseims;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
