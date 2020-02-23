@@ -17,16 +17,13 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-    console.log(this.registerData);
     this.auth.registerUser(this.registerData)
-    .subscribe(
-      res => {
-        console.log(res)
-        localStorage.setItem('token', res['accessToken'])
-        this.router.navigate(['/dashboards'])
-      },
-      err => console.log(err)
-    )
+      .subscribe(
+        res => {
+          console.log(res)
+        },
+        err => console.log(err)
+      )
   }
 
 }
