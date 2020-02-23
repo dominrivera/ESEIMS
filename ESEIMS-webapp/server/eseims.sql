@@ -61,19 +61,21 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `status` enum('open','in progress','closed') NOT NULL,
   `assignment` varchar(40),
   `creator` varchar(100) NOT NULL,
+  `creatorId` int NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `modified` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY (`creatorId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table TICKETS';
 
 --
 -- Volcado de datos para la tabla `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `title`, `description`, `status`, `assignment`, `creator`, `created`, `modified`) VALUES
-(1, 'PC bloqueado', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor. Aliquam erat volutpat.', 'open', '', 'test creator', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
-(2, 'PC poco brillo de pantalla', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'in progress', 'jperez', 'test creator', '2020-02-06 21:00:23', '2020-02-06 21:00:23'),
-(3, 'PC no responde', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'closed', '', 'test creator', '2020-02-06 21:00:57', '2020-02-06 21:00:57');
+INSERT INTO `tickets` (`id`, `title`, `description`, `status`, `assignment`, `creator`, `creatorId`, `created`, `modified`) VALUES
+(1, 'PC bloqueado', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor. Aliquam erat volutpat.', 'open', '', 'test creator', 2, '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(2, 'PC poco brillo de pantalla', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'in progress', 'jperez', 'test creator', 2, '2020-02-06 21:00:23', '2020-02-06 21:00:23'),
+(3, 'PC no responde', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'closed', '', 'test creator', '2020-02-06 21:00:57', 1, '2020-02-06 21:00:57');
 
 -- --------------------------------------------------------
 
@@ -85,19 +87,19 @@ DROP TABLE IF EXISTS `comments`;
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `ticket_id` int NOT NULL,
+  `ticketId` int NOT NULL,
   `message` varchar(400) NOT NULL,
   `creator` varchar(100) NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY (`ticket_id`)
+  KEY (`ticketId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table COMMENTS';
 
 --
 -- Volcado de datos para la tabla `comments`
 --
 
-INSERT INTO `comments` (`id`, `ticket_id`, `message`, `creator`, `created`) VALUES
+INSERT INTO `comments` (`id`, `ticketId`, `message`, `creator`, `created`) VALUES
 (1, 1, 'el PC numero 2 del aula 31 esta bloqueado en la pantaall de inicio', 'Javier Garcia', '2020-02-06 20:59:10'),
 (2, 2, 'la pantalla del pc 3 del aula 33 parece que esta apagada y el boton para subir el brillo no funciona', 'Juan Martinez', '2020-02-06 21:00:23'),
 (3, 2, 'Hola juan, voy a revisarlo', 'Pedro Perez', '2020-02-06 22:00:57');
