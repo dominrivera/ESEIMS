@@ -38,7 +38,7 @@ export class TicketComponent implements OnInit {
   }
 
   openTicket() {
-    this.router.navigate(['/tickets/form'])
+    this.router.navigate(['/ticket-form'])
   }
 
   takeTicket(ticket) {
@@ -64,6 +64,23 @@ export class TicketComponent implements OnInit {
   
   selectTicket(ticketId) {
     this.router.navigate(['/tickets', ticketId])
+  }
+
+  closeTicket(ticket) {
+    ticket.status = 'closed';
+    this.ticketService.editTicket(ticket)
+    .subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401) {
+            this.router.navigate(['login'])
+          }
+        }
+      }
+    )
   }
 
   deleteTicket(ticketId) {

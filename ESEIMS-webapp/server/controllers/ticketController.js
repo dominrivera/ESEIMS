@@ -25,6 +25,7 @@ ticketCtrl.createTicket = function (req, res) {
     else {
         ticket.created = new Date();
         ticket.modified = new Date();
+        ticket.status = 'open';
         Ticket.addTicket(ticket, function (err, ticket) {
             if (err)
                 res.send(err);

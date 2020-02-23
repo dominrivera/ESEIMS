@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
   { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'tickets/form', component: TicketFormComponent, canActivate: [AuthGuard] },
+  { path: 'ticket-form', component: TicketFormComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },

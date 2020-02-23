@@ -2,9 +2,12 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ ticket.title }}</h1>
-        <div *ngIf="currentUserRole=='admin'" class="btn-toolbar mb-2 mb-md-0">
+        <div *ngIf="currentUserRole=='admin' && ticket.status!='closed'" class="btn-toolbar mb-2 mb-md-0">
             <button type="button" class="btn btn-warning btn-md" (click)="addComment(ticket.id)">Save</button>
-            <button type="button" class="btn btn-warning btn-md">Close</button>
+            <button type="button" class="btn btn-warning btn-md" (click)="closeTicket(ticket)">Close</button>
+        </div>
+        <div *ngIf="ticket.status=='closed'" class="btn-toolbar mb-2 mb-md-0">
+            <button type="button" class="btn btn-warning btn-md" (click)="reOpenTicket(ticket)">Re open</button>
         </div>
     </div>
     <div class="row">
@@ -17,12 +20,25 @@
     <div class="row">
         <div class="col-md-6 mb-3">
             <label for="creator">Creator</label>
-            <input [(ngModel)]="ticket.creator" name="creator" type="text" class="form-control" id="creator" placeholder=""
+            <input [(ngModel)]="ticket.creator" name="creator" type="text" class="form-control" id="creator"
+                placeholder="" value="" disabled>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="status">Status</label>
+            <input [(ngModel)]="ticket.status" name="status" type="text" class="form-control" id="status" placeholder=""
                 value="" disabled>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="modified">Modified</label>
+            <input [(ngModel)]="ticket.modified" name="modified" type="text" class="form-control" id="modified"
+                placeholder="" value="" disabled>
         </div>
         <div class="col-md-6 mb-3">
             <label for="created">Created</label>
-            <input [(ngModel)]="ticket.created" name="created" type="text" class="form-control" id="created" placeholder="" value="" disabled>
+            <input [(ngModel)]="ticket.created" name="created" type="text" class="form-control" id="created"
+                placeholder="" value="" disabled>
         </div>
     </div>
     <br>
@@ -30,9 +46,22 @@
         <div class="col-md-12 order-md-1">
             <form class="needs-validation" novalidate>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Comment</label>
-                    <textarea [(ngModel)]="newComment.message" class="form-control" name="message"
-                        id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <label for="description">Description</label>
+                    <textarea [(ngModel)]="ticket.description" class="form-control" name="description" id="description"
+                        rows="3" disabled></textarea>
+                </div>
+                <hr class="mb-4">
+            </form>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+            <form class="needs-validation" novalidate>
+                <div *ngIf="ticket.status!='closed'" class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea [(ngModel)]="newComment.message" class="form-control" name="comment" id="comment"
+                        rows="5"></textarea>
                 </div>
                 <div *ngFor="let comment of comments">
                     <hr>
@@ -40,7 +69,7 @@
                     <br>
                     <span>{{ comment.message }}</span>
                 </div>
-                <hr class="mb-4">
+                <hr *ngIf="ticket.status!='closed'" class="mb-4">
             </form>
         </div>
     </div>

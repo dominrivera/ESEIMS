@@ -72,4 +72,38 @@ export class TicketDetailsComponent implements OnInit {
     )
   }
 
+  closeTicket(ticket) {
+    ticket.status = 'closed';
+    this.ticketService.editTicket(ticket)
+    .subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401) {
+            this.router.navigate(['login'])
+          }
+        }
+      }
+    )
+  }
+
+  reOpenTicket(ticket) {
+    ticket.status = 'in progress';
+    this.ticketService.editTicket(ticket)
+    .subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status == 401) {
+            this.router.navigate(['login'])
+          }
+        }
+      }
+    )
+  }
+
 }

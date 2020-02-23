@@ -6,8 +6,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
 
-var config = require('./config');
-var routes = require('./routes');
+var config = require('./server/config');
+var routes = require('./server/routes');
 
 app.use(cors());
 app.use(morgan('dev'));

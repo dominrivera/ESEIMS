@@ -13,7 +13,7 @@ module.exports = {
     select_tickets: `SELECT * FROM tickets`,
     select_ticket: `SELECT * FROM tickets WHERE id = ?`,
     insert_ticket: `INSERT INTO tickets set ?`,
-    update_ticket: `UPDATE tickets SET comment = ?, status = ?, assignment = ?, creator = ?, modified = ? WHERE id = ?`,
+    update_ticket: `UPDATE tickets SET status = ?, assignment = ?, creator = ?, modified = ? WHERE id = ?`,
     delete_ticket: `DELETE FROM tickets WHERE id = ?`,
 
     // Comments

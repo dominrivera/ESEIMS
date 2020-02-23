@@ -19,6 +19,8 @@ export class TicketService {
   }
 
   addTicket(ticket) {
+    console.log('add ticket: ', ticket);
+    
     return this.http.post('/api/tickets', ticket)
   }
 

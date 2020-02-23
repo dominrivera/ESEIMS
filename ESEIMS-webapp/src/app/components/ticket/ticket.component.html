@@ -56,7 +56,7 @@
                                 <button class="dropdown-item" type="button"
                                     (click)="selectTicket(ticket.id)">View</button>
                                 <button *ngIf="ticket.status!='closed' && currentUser.role=='admin'"
-                                    class="dropdown-item" type="button" (click)="deleteTicket(ticket.id)">Close</button>
+                                    class="dropdown-item" type="button" (click)="closeTicket(ticket)">Close</button>
                             </div>
                         </div>
                     </td>
