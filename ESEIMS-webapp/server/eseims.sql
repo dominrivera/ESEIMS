@@ -57,6 +57,7 @@ DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(40) NOT NULL,
+  `description` varchar(200) NOT NULL,
   `status` enum('open','in progress','closed') NOT NULL,
   `assignment` varchar(40),
   `creator` varchar(100) NOT NULL,
@@ -69,10 +70,10 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 -- Volcado de datos para la tabla `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `title`, `status`, `assignment`, `creator`, `created`, `modified`) VALUES
-(1, 'PC bloqueado', 'open', '', 'test creator', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
-(2, 'PC poco brillo de pantalla', 'in progress', 'jperez', 'test creator', '2020-02-06 21:00:23', '2020-02-06 21:00:23'),
-(3, 'PC no responde', 'closed', '', 'test creator', '2020-02-06 21:00:57', '2020-02-06 21:00:57');
+INSERT INTO `tickets` (`id`, `title`, `description`, `status`, `assignment`, `creator`, `created`, `modified`) VALUES
+(1, 'PC bloqueado', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor. Aliquam erat volutpat.', 'open', '', 'test creator', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(2, 'PC poco brillo de pantalla', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'in progress', 'jperez', 'test creator', '2020-02-06 21:00:23', '2020-02-06 21:00:23'),
+(3, 'PC no responde', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'closed', '', 'test creator', '2020-02-06 21:00:57', '2020-02-06 21:00:57');
 
 -- --------------------------------------------------------
 

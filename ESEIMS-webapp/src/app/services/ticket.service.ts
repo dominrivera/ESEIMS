@@ -18,12 +18,16 @@ export class TicketService {
     return this.http.get(url)
   }
 
+  addTicket(ticket) {
+    return this.http.post('/api/tickets', ticket)
+  }
+
   editTicket(ticket) {
     const url = `/api/tickets/${ticket.id}`;
     const token = this.auth.getToken()
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         'Authorization': token
       })
     };
@@ -35,11 +39,10 @@ export class TicketService {
     const token = this.auth.getToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         'Authorization': token
       })
     };
-    
     return this.http.delete(url, httpOptions)
   }
 

@@ -9,7 +9,6 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
   loginUser(user) {
-    console.log('login');
     return this.http.post('/api/login', user)
   }
 
@@ -19,7 +18,6 @@ export class AuthService {
   }
 
   registerUser(user) {
-    console.log('register');
     return this.http.post('/api/register', user)
   }
 
@@ -39,7 +37,7 @@ export class AuthService {
 
   isAdmin() {
     var currentUser = this.getCurrentUser();
-    if (currentUser.role=='user') {
+    if (currentUser.role == 'user') {
       return false;
     }
     return true;

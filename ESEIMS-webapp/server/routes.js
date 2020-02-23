@@ -4,7 +4,7 @@ var auth = require('./controllers/authController');
 var user = require('./controllers/userController');
 var ticket = require('./controllers/ticketController');
 var comment = require('./controllers/commentController');
-console.log('in routes.js');
+
 router.post('/login', auth.loginUser);
 router.post('/register', auth.createUser);
 

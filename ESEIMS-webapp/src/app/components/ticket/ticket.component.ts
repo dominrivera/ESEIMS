@@ -37,13 +37,13 @@ export class TicketComponent implements OnInit {
       );
   }
 
-  createTicket() {
-    this.router.navigate(['/tickets'])
+  openTicket() {
+    this.router.navigate(['/tickets/form'])
   }
 
   takeTicket(ticket) {
     ticket.assignment = this.currentUserName;
-    ticket.status = 'In progress';
+    ticket.status = 'in progress';
     this.ticketService.editTicket(ticket)
     .subscribe(
       (data) => {
