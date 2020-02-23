@@ -5,6 +5,7 @@ var Ticket = function (ticket) {
     this.status = ticket.status;
     this.assignment = ticket.assignment;
     this.creator = ticket.creator;
+    this.creatorId = ticket.creatorId;
     this.created = ticket.created;
     this.modified = ticket.modified;
 };

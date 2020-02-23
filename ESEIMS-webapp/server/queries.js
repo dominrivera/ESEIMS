@@ -12,11 +12,12 @@ module.exports = {
     // Tickets
     select_tickets: `SELECT * FROM tickets`,
     select_ticket: `SELECT * FROM tickets WHERE id = ?`,
+    select_ticket_by_creatorId: `SELECT * FROM tickets WHERE creatorId = ?`,
     insert_ticket: `INSERT INTO tickets set ?`,
-    update_ticket: `UPDATE tickets SET status = ?, assignment = ?, creator = ?, modified = ? WHERE id = ?`,
+    update_ticket: `UPDATE tickets SET status = ?, assignment = ?, modified = ? WHERE id = ?`,
     delete_ticket: `DELETE FROM tickets WHERE id = ?`,
 
     // Comments
-    select_comments: `SELECT * FROM comments WHERE ticket_id = ? ORDER BY created DESC`,
+    select_comments: `SELECT * FROM comments WHERE ticketId = ? ORDER BY created DESC`,
     insert_comments: `INSERT INTO comments set ?`
 }

@@ -2,7 +2,7 @@ var Comment = require('../persistence/commentDAO');
 var commentCtrl = {};
 
 commentCtrl.listCommentsByTicketId = function (req, res) {
-    Comment.getCommentsByTicketId(req.params.ticket_id, function (err, comments) {
+    Comment.getCommentsByTicketId(req.params.ticketId, function (err, comments) {
         if (err)
             res.send(err);
         res.json(comments);

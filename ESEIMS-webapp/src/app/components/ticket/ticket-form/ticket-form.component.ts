@@ -21,7 +21,7 @@ export class TicketFormComponent implements OnInit {
   addTicket(ticket) {
     var currentUser = this.auth.getCurrentUser()
     ticket.creator = currentUser.name + ' ' + currentUser.surname;
-    console.log('ticket', ticket);
+    ticket.creatorId = currentUser.id;
     
     this.ticketService.addTicket(ticket)
     .subscribe(

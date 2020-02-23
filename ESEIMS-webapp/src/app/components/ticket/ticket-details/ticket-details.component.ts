@@ -55,7 +55,7 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   addComment(ticketId) {
-    this.newComment.ticket_id = ticketId;
+    this.newComment.ticketId = ticketId;
     this.newComment.creator = this.currentUser.name + ' ' + this.currentUser.surname;
     this.ticketService.addComment(this.newComment)
     .subscribe(

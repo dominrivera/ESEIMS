@@ -2,7 +2,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ ticket.title }}</h1>
-        <div *ngIf="currentUserRole=='admin' && ticket.status!='closed'" class="btn-toolbar mb-2 mb-md-0">
+        <div *ngIf="ticket.status!='closed'" class="btn-toolbar mb-2 mb-md-0">
             <button type="button" class="btn btn-warning btn-md" (click)="addComment(ticket.id)">Save</button>
             <button type="button" class="btn btn-warning btn-md" (click)="closeTicket(ticket)">Close</button>
         </div>
@@ -50,7 +50,7 @@
                     <textarea [(ngModel)]="ticket.description" class="form-control" name="description" id="description"
                         rows="3" disabled></textarea>
                 </div>
-                <hr class="mb-4">
+                <hr *ngIf="ticket.status!='closed'" class="mb-4">
             </form>
         </div>
     </div>

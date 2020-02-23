@@ -2,8 +2,8 @@ const dbConnection = require('../databaseConnection');
 const queries = require('../queries');
 const Comment = require('../models/comment');
 
-Comment.getCommentsByTicketId = function (ticket_id, result) {
-    dbConnection.query(queries.select_comments, ticket_id, function (err, res) {
+Comment.getCommentsByTicketId = function (ticketId, result) {
+    dbConnection.query(queries.select_comments, ticketId, function (err, res) {
         if (err) {
             result(null, err);
         }

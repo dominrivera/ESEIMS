@@ -17,6 +17,14 @@ ticketCtrl.listTicket = function (req, res) {
     });
 };
 
+ticketCtrl.listTicketByUserId = function (req, res) {
+    Ticket.getTicketByUserId(req.params.userId, function (err, ticket) {
+        if (err)
+            res.send(err);
+        res.json(ticket);
+    });
+};
+
 ticketCtrl.createTicket = function (req, res) {
     var ticket = new Ticket(req.body);
     if (!ticket.title) {

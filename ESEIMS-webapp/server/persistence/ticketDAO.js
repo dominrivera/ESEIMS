@@ -24,6 +24,17 @@ Ticket.getTicket = function(id, result) {
     });
 };
 
+Ticket.getTicketByUserId = function(userId, result) {
+    dbConnection.query(queries.select_ticket_by_creatorId, userId, function(err, res) {
+        if(err) {
+            result(err, null);
+        }
+        else{
+            result(null, res);
+        }
+    });
+};
+
 Ticket.addTicket = function(ticket, result){
     dbConnection.query(queries.insert_ticket, ticket, function(err, res) {
         if(err){
@@ -36,7 +47,7 @@ Ticket.addTicket = function(ticket, result){
 };
 
 Ticket.updateTicket = function(id, ticket, result){
-    dbConnection.query(queries.update_ticket, [ticket.status, ticket.assignment, ticket.creator, ticket.modified, id], function(err, res) {
+    dbConnection.query(queries.update_ticket, [ticket.status, ticket.assignment, ticket.modified, id], function(err, res) {
         if(err){
             result(err, null);
         }

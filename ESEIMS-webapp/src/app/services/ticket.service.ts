@@ -18,6 +18,11 @@ export class TicketService {
     return this.http.get(url)
   }
 
+  getTicketByUserId(userId) {
+    const url = `/api/tickets-userId/${userId}`;
+    return this.http.get(url)
+  }
+
   addTicket(ticket) {
     console.log('add ticket: ', ticket);
     
