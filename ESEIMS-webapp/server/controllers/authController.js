@@ -18,14 +18,7 @@ authCtrl.createUser = function (req, res) {
         Auth.addUser(userData, function (err, user) {
             if (err)
                 res.send(err);
-            var expiresIn = 24 * 60 * 60;
-            var accessToken = jwt.sign({ id: user.id }, SECRET_KEY, {expiresIn: expiresIn });
-            var responseData = {
-                email: user.email,
-                accessToken: accessToken,
-                expiresIn: expiresIn
-            }
-            res.json(responseData);
+            res.json('user created');
         });
     }
 };
@@ -34,7 +27,7 @@ authCtrl.createUser = function (req, res) {
 authCtrl.loginUser = function (req, res) {
     var userData = new Auth(req.body);
     console.log(userData);
-    Auth.logUser(userData.email, function (err, user) {
+    Auth.loginUser(userData.email, function (err, user) {
         if(err) {
           console.log(err);
         } else if(user==null) {

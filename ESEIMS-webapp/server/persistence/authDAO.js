@@ -6,21 +6,17 @@ const Auth = require('../models/user');
 Auth.addUser = function(user, result){
     dbConnection.query(queries.insert_user, user, function(err, res) {
         if(err){
-            console.log("error: ", err);
             result(err, null);
         }
         else{
-            console.log(res.insertId);
             result(null, res.insertId);
         }
     });
 };
 
-Auth.logUser = function(email, result) {
-    console.log(email);
+Auth.loginUser = function(email, result) {
     dbConnection.query(queries.select_login, email, function(err, res) {
         if(res.length == 0) {
-            console.log("error: ");
             result(err, null);
         }
         else{

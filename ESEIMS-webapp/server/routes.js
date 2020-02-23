@@ -4,7 +4,7 @@ var auth = require('./controllers/authController');
 var user = require('./controllers/userController');
 var ticket = require('./controllers/ticketController');
 var comment = require('./controllers/commentController');
-console.log('in routes.js');
+
 router.post('/login', auth.loginUser);
 router.post('/register', auth.createUser);
 
@@ -15,11 +15,12 @@ router.delete('/users/:id', auth.verifyToken, user.removeUser);
 
 router.get('/tickets', auth.verifyToken, ticket.listTickets);
 router.get('/tickets/:id', auth.verifyToken, ticket.listTicket);
+router.get('/tickets-userId/:userId', auth.verifyToken, ticket.listTicketByUserId)
 router.post('/tickets', auth.verifyToken, ticket.createTicket);
 router.put('/tickets/:id', auth.verifyToken, ticket.editTicket);
 router.delete('/tickets/:id', auth.verifyToken, ticket.removeTicket);
 
-router.get('/comments/:ticket_id', auth.verifyToken, comment.listCommentsByTicketId);
+router.get('/comments/:ticketId', auth.verifyToken, comment.listCommentsByTicketId);
 router.post('/comments', auth.verifyToken, comment.createComment);
 
 module.exports = router;

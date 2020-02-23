@@ -5,7 +5,6 @@ userCtrl.listUsers = function (req, res) {
     User.getUsers(function (err, users) {
         if (err)
             res.send(err);
-        console.log('res', users);
         res.json(users);
     });
 };
@@ -14,7 +13,6 @@ userCtrl.listUser = function (req, res) {
     User.getUser(req.params.id, function (err, user) {
         if (err)
             res.send(err);
-        console.log('res', user)
         res.json(user);
     });
 };
@@ -24,7 +22,6 @@ userCtrl.editUser = function (req, res) {
     User.updateUser(req.params.id, user_edit, function(err, user) {
         if(err)
             res.send(err);
-        console.log('res', user);
         res.json(user);
     });
 };

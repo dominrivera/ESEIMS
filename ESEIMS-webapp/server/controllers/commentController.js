@@ -2,10 +2,9 @@ var Comment = require('../persistence/commentDAO');
 var commentCtrl = {};
 
 commentCtrl.listCommentsByTicketId = function (req, res) {
-    Comment.getCommentsByTicketId(req.params.ticket_id, function (err, comments) {
+    Comment.getCommentsByTicketId(req.params.ticketId, function (err, comments) {
         if (err)
             res.send(err);
-        console.log('res', comments)
         res.json(comments);
     });
 };
@@ -20,7 +19,6 @@ commentCtrl.createComment = function (req, res) {
         Comment.addComment(comment, function (err, comment) {
             if (err)
                 res.send(err);
-            console.log('res', comment)
             res.json(comment);
         });
     }

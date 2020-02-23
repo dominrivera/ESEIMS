@@ -23,7 +23,7 @@ export class UserService {
     const token = this.auth.getToken()
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         'Authorization': token
       })
     };
@@ -35,16 +35,12 @@ export class UserService {
     const token = this.auth.getToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         'Authorization': token
       })
     };
-    
-    return this.http.delete(url, httpOptions)
-  }
 
-  getCurrentUser() {
-    
+    return this.http.delete(url, httpOptions)
   }
 
 }

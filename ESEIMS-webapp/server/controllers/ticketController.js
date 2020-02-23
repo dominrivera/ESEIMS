@@ -3,10 +3,8 @@ var ticketCtrl = {};
 
 ticketCtrl.listTickets = function (req, res) {
     Ticket.getTickets(function (err, tickets) {
-        console.log('controller')
         if (err)
             res.send(err);
-        console.log('res', tickets);
         res.json(tickets);
     });
 };
@@ -15,7 +13,14 @@ ticketCtrl.listTicket = function (req, res) {
     Ticket.getTicket(req.params.id, function (err, ticket) {
         if (err)
             res.send(err);
-        console.log('res', ticket)
+        res.json(ticket);
+    });
+};
+
+ticketCtrl.listTicketByUserId = function (req, res) {
+    Ticket.getTicketByUserId(req.params.userId, function (err, ticket) {
+        if (err)
+            res.send(err);
         res.json(ticket);
     });
 };
@@ -26,10 +31,12 @@ ticketCtrl.createTicket = function (req, res) {
         res.status(400).send({ error: true, message: 'Error creating ticket' });
     }
     else {
+        ticket.created = new Date();
+        ticket.modified = new Date();
+        ticket.status = 'open';
         Ticket.addTicket(ticket, function (err, ticket) {
             if (err)
                 res.send(err);
-            console.log('res', ticket)
             res.json(ticket);
         });
     }
@@ -41,7 +48,6 @@ ticketCtrl.editTicket = function (req, res) {
     Ticket.updateTicket(req.params.id, ticket_edit, function(err, ticket) {
         if(err)
             res.send(err);
-        console.log('res', ticket);
         res.json(ticket);
     });
 };

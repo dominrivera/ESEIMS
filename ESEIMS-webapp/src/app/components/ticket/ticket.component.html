@@ -2,7 +2,7 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Tickets</h1>
-        <button type="button" class="btn btn-success" (click)="createTicket()">Create Ticket</button>
+        <button type="button" class="btn btn-success" (click)="openTicket()">Create Ticket</button>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary active">
                 <input type="radio" name="options" id="option1" autocomplete="off" (click)="filterTicket('all')"
@@ -35,16 +35,16 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody *ngIf="ticket.creator==currentUserName || currentUser.role=='admin'">
+            <tbody>
                 <tr *ngFor="let ticket of tickets">
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">{{ ticket.title }}</td>
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">{{ ticket.description }}</td>
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">{{ ticket.status }}</td>
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">{{ ticket.assignment }}</td>
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">{{ ticket.creator }}</td>
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">{{ ticket.created }}</td>
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">{{ ticket.modified }}</td>
-                    <td *ngIf="ticket.status==selectedStatus || selectedStatus=='all'">
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.title }}</td>
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.description }}</td>
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.status }}</td>
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.assignment }}</td>
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.creator }}</td>
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.created }}</td>
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.modified }}</td>
+                    <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,7 +56,7 @@
                                 <button class="dropdown-item" type="button"
                                     (click)="selectTicket(ticket.id)">View</button>
                                 <button *ngIf="ticket.status!='closed' && currentUser.role=='admin'"
-                                    class="dropdown-item" type="button" (click)="deleteTicket(ticket.id)">Close</button>
+                                    class="dropdown-item" type="button" (click)="closeTicket(ticket)">Close</button>
                             </div>
                         </div>
                     </td>

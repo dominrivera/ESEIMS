@@ -12,7 +12,6 @@ import { AuthService } from 'src/app/services/auth.service';
 export class TicketComponent implements OnInit {
 
   tickets: any = [];
-  ticket: any = {};
   selectedStatus: string = 'all';
   currentUser: any = {};
   currentUserName: string;
@@ -22,64 +21,99 @@ export class TicketComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.auth.getCurrentUser()
     this.currentUserName = this.currentUser.name + ' ' + this.currentUser.surname;
-    this.ticketService.getTickets()
+
+    if (this.currentUser.role == 'admin') {
+      this.ticketService.getTickets()
+        .subscribe(
+          (data) => {
+            this.tickets = data;
+          },
+          (err) => {
+            if (err instanceof HttpErrorResponse) {
+              if (err.status == 401) {
+                this.router.navigate(['login'])
+              }
+            }
+          }
+        )
+    } else {
+      this.ticketService.getTicketByUserId(this.currentUser.id)
+        .subscribe(
+          (data) => {
+            this.tickets = data;
+          },
+          (err) => {
+            if (err instanceof HttpErrorResponse) {
+              if (err.status == 401) {
+                this.router.navigate(['login'])
+              }
+            }
+          }
+        )
+    }
+    
+  }
+
+  openTicket() {
+    this.router.navigate(['/ticket-form'])
+  }
+
+  takeTicket(ticket) {
+    ticket.assignment = this.currentUserName;
+    ticket.status = 'in progress';
+    this.ticketService.editTicket(ticket)
       .subscribe(
-        res => {
-          this.tickets = res;
+        (data) => {
+          console.log(data)
         },
-        err => {
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            console.log(err);
+
+          }
+        }
+      )
+  }
+
+  filterTicket(status) {
+    this.selectedStatus = status;
+  }
+
+  selectTicket(ticketId) {
+    this.router.navigate(['/tickets', ticketId])
+  }
+
+  closeTicket(ticket) {
+    ticket.status = 'closed';
+    this.ticketService.editTicket(ticket)
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status == 401) {
               this.router.navigate(['login'])
             }
           }
         }
-      );
-  }
-
-  createTicket() {
-    this.router.navigate(['/tickets'])
-  }
-
-  takeTicket(ticket) {
-    ticket.assignment = this.currentUserName;
-    ticket.status = 'In progress';
-    this.ticketService.editTicket(ticket)
-    .subscribe(
-      (data) => {
-        console.log(data)
-      },
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          console.log(err);
-          
-        }
-      }
-    )
-  }
-
-  filterTicket(status) {
-    this.selectedStatus = status;
-  }
-  
-  selectTicket(ticketId) {
-    this.router.navigate(['/tickets', ticketId])
+      )
   }
 
   deleteTicket(ticketId) {
     this.ticketService.deleteTicket(ticketId)
-    .subscribe(
-      (data) => {
-        console.log(data)
-      },
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            this.router.navigate(['/tickets'])
+      .subscribe(
+        (data) => {
+          console.log(data)
+        },
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['/tickets'])
+            }
           }
         }
-      }
-    )
+      )
   }
 
 }
