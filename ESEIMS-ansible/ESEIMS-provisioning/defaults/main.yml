@@ -49,3 +49,7 @@ influxdb_address: 'https://40.89.174.174:8086'
 
 telegraf_username: 'telegraf'
 telegraf_password: 'password'
+
+### Grafana ###
+
+grafana_port: '3001'
