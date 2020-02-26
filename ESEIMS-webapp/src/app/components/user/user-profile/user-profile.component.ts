@@ -19,10 +19,10 @@ export class UserProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute, private userService: UserService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
-    const id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.userId = parseInt(this.route.snapshot.paramMap.get('id'));
     var currentUser = this.auth.getCurrentUser();
     this.currentUserRole = currentUser.role;
-    this.userService.getUser(id)
+    this.userService.getUser(this.userId)
       .subscribe(
         (data) => {
           console.log(data)
@@ -49,6 +49,9 @@ export class UserProfileComponent implements OnInit {
         this.edit == false;
         // show message user correctly edited
         console.log(data)
+        this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/users', this.userId]);
+        });
       },
       (err) => {
         if (err instanceof HttpErrorResponse) {

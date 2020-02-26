@@ -34,21 +34,24 @@ export class UserComponent implements OnInit {
     console.log(userId);
     this.router.navigate(['/users', userId])
   }
-// TODO: show message when user is deleted.
+  // TODO: show message when user is deleted.
   deleteUser(userId) {
     this.userService.deleteUser(userId)
-    .subscribe(
-      (data) => {
-        console.log(data)
-      },
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            this.router.navigate(['/users'])
+      .subscribe(
+        (data) => {
+          console.log(data)
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/users']);
+          });
+        },
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['/users'])
+            }
           }
         }
-      }
-    )
+      )
   }
 
 }
