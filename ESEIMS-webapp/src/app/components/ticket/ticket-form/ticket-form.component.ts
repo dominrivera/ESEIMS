@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { TicketService } from 'src/app/services/ticket.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-form',
@@ -13,7 +14,7 @@ export class TicketFormComponent implements OnInit {
   ticket: any = {};
   currentUserName: string;
 
-  constructor(private auth: AuthService, private ticketService: TicketService) { }
+  constructor(private auth: AuthService, private ticketService: TicketService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,7 @@ export class TicketFormComponent implements OnInit {
     .subscribe(
       (data) => {
         console.log(data);
+       // this.router.navigate(['/tickets', data]);
       },
       (err) => {
         if (err instanceof HttpErrorResponse) {

@@ -37,7 +37,7 @@ export class TicketDetailsComponent implements OnInit {
           }
         }
       )
-      
+
     this.ticketService.getComments(id)
       .subscribe(
         (data) => {
@@ -58,52 +58,55 @@ export class TicketDetailsComponent implements OnInit {
     this.newComment.ticketId = ticketId;
     this.newComment.creator = this.currentUser.name + ' ' + this.currentUser.surname;
     this.ticketService.addComment(this.newComment)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            this.router.navigate(['login'])
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/tickets', this.newComment.ticketId]);
+          });
+        },
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['login'])
+            }
           }
         }
-      }
-    )
+      )
   }
 
   closeTicket(ticket) {
     ticket.status = 'closed';
     this.ticketService.editTicket(ticket)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            this.router.navigate(['login'])
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['login'])
+            }
           }
         }
-      }
-    )
+      )
   }
 
   reOpenTicket(ticket) {
     ticket.status = 'in progress';
     this.ticketService.editTicket(ticket)
-    .subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            this.router.navigate(['login'])
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['login'])
+            }
           }
         }
-      }
-    )
+      )
   }
 
 }

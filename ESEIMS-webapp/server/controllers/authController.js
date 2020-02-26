@@ -15,6 +15,10 @@ authCtrl.createUser = function (req, res) {
         userData.password = bcrypt.hashSync(userData.password, salt);
         // user creation date
         userData.created = new Date();
+        // assign role user
+        if (userData.role==undefined) {
+            userData.role='user';
+        }
         Auth.addUser(userData, function (err, user) {
             if (err)
                 res.send(err);

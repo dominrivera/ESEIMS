@@ -62,7 +62,7 @@
 
                     <div class="col-md-6 mb-3">
                         <label>Role</label>
-                        <div class="form-control">
+                        <div *ngIf="auth.isAuthenticated() && auth.isAdmin()" class="form-control">
                             <label class="radio-inline">
                                 <input type="radio" value="user" name="role" [(ngModel)]="registerData.role">
                                 user
@@ -71,6 +71,9 @@
                                 <input type="radio" value="admin" name="role" [(ngModel)]="registerData.role">
                                 admin
                             </label>
+                        </div>
+                        <div *ngIf="!auth.isAuthenticated() || !auth.isAdmin()">
+                            <i>user</i>
                         </div>
                     </div>
                 </div>

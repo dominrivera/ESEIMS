@@ -21,6 +21,9 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res)
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/register']);
+          });
         },
         err => console.log(err)
       )
