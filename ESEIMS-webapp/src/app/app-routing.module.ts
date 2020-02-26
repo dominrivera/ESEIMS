@@ -15,16 +15,18 @@ import { TicketFormComponent } from './components/ticket/ticket-form/ticket-form
 
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { ProfileGuard } from './guards/profile.guard';
+import { TicketGuard } from './guards/ticket.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] }, //dashboard-guard?
   { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
-  { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard, TicketGuard] }, //ticket-guard
   { path: 'ticket-form', component: TicketFormComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard, ProfileGuard] }, //profile-guard
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: PagenotfoundComponent }

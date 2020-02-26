@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'ESEIMS-webapp';
 
-  constructor(private auth: AuthService, private router: Router){}
+  constructor(private auth: AuthService, private router: Router) { }
 
   showProfile() {
     var currentUser = this.auth.getCurrentUser()
-    this.router.navigate(['/users', currentUser.id])
+    this.router.navigate(['/users', currentUser.id]);
   }
 
 }

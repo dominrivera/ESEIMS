@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,7 @@ export class UserComponent implements OnInit {
 
   users: any = [];
 
-  constructor(protected userService: UserService, private router: Router) { }
+  constructor(protected userService: UserService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.userService.getUsers()
@@ -31,8 +32,7 @@ export class UserComponent implements OnInit {
   }
 
   selectUser(userId) {
-    console.log(userId);
-    this.router.navigate(['/users', userId])
+      this.router.navigate(['/users', userId]);
   }
   // TODO: show message when user is deleted.
   deleteUser(userId) {
