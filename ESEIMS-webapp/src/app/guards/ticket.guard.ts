@@ -2,47 +2,32 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { TicketService } from '../services/ticket.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Injectable()
 export class TicketGuard implements CanActivate {
 
-  tickets: any = [];
-  access: boolean = false;
+  public access: string;
 
   constructor(private auth: AuthService, private router: Router, private ticketService: TicketService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     var urlId = route.paramMap.get('id');
     var currentUser = this.auth.getCurrentUser();
-    this.ticketService.getTicketByUserId(currentUser.id)
-      .subscribe(
+    return this.ticketService.checkTicketByUserId(urlId, currentUser.id).pipe(
+      map(
         (data) => {
-          this.tickets = data;
-          var i = 0;
-          this.tickets.forEach(ticket => {
-            if (ticket.id == urlId) {
-              i++;
-            }
-          });
-          console.log(i);
-          if (i > 0) {
-            this.access = true;
+          if ((data == true) || (this.auth.isAdmin())) {
+            return true;
+          } else {
+            this.router.navigate(['/**'])
+            return false;
           }
-        },
-        (err) => {
-          console.log(err);
         }
-      );
-    console.log(this.access);
-
-    if (this.auth.isAdmin()) {
-      return true
-    } else if (this.access == true) {
-      return true
-    } else {
-      this.router.navigate(['/**'])
-      return false
-    }
+      )
+    )
   }
 
 }

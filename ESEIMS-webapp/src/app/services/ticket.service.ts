@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -21,6 +21,14 @@ export class TicketService {
   getTicketByUserId(userId) {
     const url = `/api/tickets-userId/${userId}`;
     return this.http.get(url)
+  }
+
+  checkTicketByUserId(ticketId, userId) {
+    const params = new HttpParams()
+      .set('ticketId', ticketId)
+      .set('userId', userId);
+    const url = `/api/ticketValidation`;
+    return this.http.get(url, {params})
   }
 
   addTicket(ticket) {

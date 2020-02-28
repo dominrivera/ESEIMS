@@ -45,18 +45,42 @@ ticketCtrl.createTicket = function (req, res) {
 ticketCtrl.editTicket = function (req, res) {
     var ticket_edit = new Ticket(req.body);
     ticket_edit.modified = new Date();
-    Ticket.updateTicket(req.params.id, ticket_edit, function(err, ticket) {
-        if(err)
+    Ticket.updateTicket(req.params.id, ticket_edit, function (err, ticket) {
+        if (err)
             res.send(err);
         res.json(ticket);
     });
 };
 
 ticketCtrl.removeTicket = function (req, res) {
-    Ticket.deleteTicket(req.params.id, function(err, ticket) {
-        if(err)
+    Ticket.deleteTicket(req.params.id, function (err, ticket) {
+        if (err)
             res.send(err);
         res.json({ message: 'Ticket removed' });
+    });
+};
+
+ticketCtrl.validateTickets = function (req, res) {
+    var ticketId = req.query.ticketId;
+    Ticket.getTicketByUserId(req.query.userId, function (err, ticket) {
+        if (err)
+            res.send(err);
+        var i = 0;
+        if (ticket.length > 0) {
+            ticket.forEach(t => {
+                if (t.id == ticketId) {
+                    i++;
+                }
+            });
+            if (i > 0) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        }
+        else {
+            res.send(false)
+        }
     });
 };
 

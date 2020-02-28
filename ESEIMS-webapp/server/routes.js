@@ -14,6 +14,7 @@ router.put('/users/:id', auth.verifyToken, user.editUser);
 router.delete('/users/:id', auth.verifyToken, user.removeUser);
 
 router.get('/tickets', auth.verifyToken, ticket.listTickets);
+router.get('/ticketValidation', auth.verifyToken, ticket.validateTickets);
 router.get('/tickets/:id', auth.verifyToken, ticket.listTicket);
 router.get('/tickets-userId/:userId', auth.verifyToken, ticket.listTicketByUserId)
 router.post('/tickets', auth.verifyToken, ticket.createTicket);
