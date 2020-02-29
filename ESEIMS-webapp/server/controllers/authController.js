@@ -16,10 +16,11 @@ authCtrl.createUser = function (req, res) {
         return res.status(422)
     }
     var userData = new Auth(req.body);
-    if (!userData.email) {
-        res.status(400).send({ error: true, message: 'Error creating user' });
-    }
-    else {
+    Auth.loginUser(userData.email, function (err, user) {
+        if(user) {
+            console.log('email exists')
+            return res.send('email already exists')
+        } else {
         // password encryption
         var salt = bcrypt.genSaltSync()
         userData.password = bcrypt.hashSync(userData.password, salt);
@@ -35,6 +36,7 @@ authCtrl.createUser = function (req, res) {
             res.json('user created');
         });
     }
+    });
 };
 
 
