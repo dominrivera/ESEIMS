@@ -12,10 +12,13 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UserComponent implements OnInit {
 
   users: any = [];
+  searchDNI: string;
+  search: boolean = false;
 
   constructor(protected userService: UserService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.search = false;
     this.userService.getUsers()
       .subscribe(
         (data) => {
@@ -32,7 +35,7 @@ export class UserComponent implements OnInit {
   }
 
   selectUser(userId) {
-      this.router.navigate(['/users', userId]);
+    this.router.navigate(['/users', userId]);
   }
   // TODO: show message when user is deleted.
   deleteUser(userId) {
@@ -52,6 +55,15 @@ export class UserComponent implements OnInit {
           }
         }
       )
+  }
+
+  searchByDNI(dni) {
+    if (dni) {
+      this.search = true;
+      this.searchDNI = dni;
+    } else {
+      this.search = false;
+    }
   }
 
 }

@@ -5,6 +5,10 @@
         <div class="btn-toolbar mb-2 mb-md-0">
             <button type="button" class="btn btn-success btn-md" routerLink="/register">New User</button>
         </div>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="dni" [(ngModel)]="dni">
+            <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchByDNI(dni)">Search</button>
+          </form>
     </div>
     <div>
         <table class="table table-hover table-dark">
@@ -18,7 +22,7 @@
                     <th scope="col">Creation</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="!search">
                 <tr *ngFor="let user of users">
                     <td>{{ user.name }}</td>
                     <td>{{ user.surname }}</td>
@@ -27,6 +31,21 @@
                     <td>{{ user.role }}</td>
                     <td>{{ user.created }}</td>
                     <td>
+                        <button type="button" class="btn btn-primary" (click)="selectUser(user.id)"><span class="glyphicon glyphicon-edit"></span>view</button>
+                        <button type="button" class="btn btn-warning" (click)="editUser(user.id)"><i class="fas fa-edit"></i>edit</button>
+                        <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)"><i class="far fa-trash-alt">delete</i></button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="search">
+                <tr *ngFor="let user of users">
+                    <td *ngIf="user.dni == searchDNI">{{ user.name }}</td>
+                    <td *ngIf="user.dni == searchDNI">{{ user.surname }}</td>
+                    <td *ngIf="user.dni == searchDNI">{{ user.email }}</td>
+                    <td *ngIf="user.dni == searchDNI">{{ user.dni }}</td>
+                    <td *ngIf="user.dni == searchDNI">{{ user.role }}</td>
+                    <td *ngIf="user.dni == searchDNI">{{ user.created }}</td>
+                    <td *ngIf="user.dni == searchDNI">
                         <button type="button" class="btn btn-primary" (click)="selectUser(user.id)"><span class="glyphicon glyphicon-edit"></span>view</button>
                         <button type="button" class="btn btn-warning" (click)="editUser(user.id)"><i class="fas fa-edit"></i>edit</button>
                         <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)"><i class="far fa-trash-alt">delete</i></button>

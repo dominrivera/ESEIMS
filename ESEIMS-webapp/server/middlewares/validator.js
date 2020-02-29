@@ -1,4 +1,4 @@
-const { check, body } = require('express-validator');
+const { body } = require('express-validator');
 
 exports.checkData = [
     body('name')
@@ -10,7 +10,7 @@ exports.checkData = [
     .normalizeEmail()
     .contains('@esei.uvigo.es'),
     body('password')
-    .isLength({ min: 8 }),
+    .isLength({ min: 8, max: 20 }),
     body('dni')
     .isIdentityCard('ES'),
 ];

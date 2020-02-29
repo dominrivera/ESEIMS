@@ -81,6 +81,8 @@ export class TicketComponent implements OnInit {
 
   selectTicket(ticketId) {
     this.router.navigate(['/tickets', ticketId])
+    // scroll up in the new route
+    window.scrollTo(0, 0)
   }
 
   closeTicket(ticket) {
