@@ -4,7 +4,7 @@
         <h1 class="h2">Personal data of: {{ user.name }} {{ user.surname }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <button *ngIf="!edit" type="button" class="btn btn-warning btn-md" (click)="editUser()">Edit</button>
-            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser(user)">Save</button>
+            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser()">Save</button>
         </div>
     </div>
     <div class="row">

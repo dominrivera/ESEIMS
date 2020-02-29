@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UserComponent implements OnInit {
 
   users: any = [];
+  dni: string;
   searchDNI: string;
   search: boolean = false;
   modalData: number;
