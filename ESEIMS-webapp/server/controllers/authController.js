@@ -3,8 +3,18 @@ var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var SECRET_KEY = 'mysecretkey'; // configure it in config.js
 var authCtrl = {};
+const { validationResult } = require('express-validator');
 
 authCtrl.createUser = function (req, res) {
+    var errors = validationResult(req)
+    if(!errors.isEmpty()){
+        var list = [];
+        errors.errors.forEach(error => {
+            list.push(error.param)
+        });
+        console.log('ASDF: ', list)
+        return res.status(422)
+    }
     var userData = new Auth(req.body);
     if (!userData.email) {
         res.status(400).send({ error: true, message: 'Error creating user' });
@@ -30,7 +40,6 @@ authCtrl.createUser = function (req, res) {
 
 authCtrl.loginUser = function (req, res) {
     var userData = new Auth(req.body);
-    console.log(userData);
     Auth.loginUser(userData.email, function (err, user) {
         if(err) {
           console.log(err);
@@ -41,8 +50,8 @@ authCtrl.loginUser = function (req, res) {
             var user = user[0];
             var checkPassword = bcrypt.compareSync(userData.password, user.password);
             if (checkPassword) {
-                console.log(userData);
-                var expiresIn = 24 * 60 * 60;
+                // Signing a token with 1 hour of expiration:
+                var expiresIn = Math.floor(Date.now() / 1000) + (60 * 60);
                 var accessToken = jwt.sign({id: user.id, name: user.name, surname: user.surname, role: user.role}, SECRET_KEY, {expiresIn: expiresIn});
                 var responseData = {
                     //no debemos devolver la password al frontend
@@ -59,13 +68,12 @@ authCtrl.loginUser = function (req, res) {
 };
 
 authCtrl.verifyToken = function (req, res, next) {
-    console.log('token verification');
     if(!req.headers.authorization) {
         return res.status(401).send('Unauthorized');
     }
     var token = req.headers.authorization.split(' ')[1];
     console.log('tokenL ', token);
-    if(token == 'null' | token == 'undefined') {
+    if(token == null | token == undefined) {
         return res.status(401).send('Unauthorized');
     }
     var verification = jwt.verify(token, SECRET_KEY);
