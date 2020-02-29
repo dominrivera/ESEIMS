@@ -28,7 +28,8 @@ export class TicketFormComponent implements OnInit {
     .subscribe(
       (data) => {
         console.log(data);
-       // this.router.navigate(['/tickets', data]);
+        // TODO: instead of redirect, show message, ticket created.
+        this.router.navigate(['/tickets']);
       },
       (err) => {
         if (err instanceof HttpErrorResponse) {

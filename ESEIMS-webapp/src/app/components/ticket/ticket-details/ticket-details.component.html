@@ -3,7 +3,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ ticket.title }}</h1>
         <div *ngIf="ticket.status!='closed'" class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-warning btn-md" (click)="addComment(ticket.id)">Save</button>
+            <button id="saveTicket" type="button" class="btn btn-primary btn-md" (click)="addComment(ticket.id)">Save</button>
             <button type="button" class="btn btn-warning btn-md" (click)="closeTicket(ticket)">Close</button>
         </div>
         <div *ngIf="ticket.status=='closed'" class="btn-toolbar mb-2 mb-md-0">
