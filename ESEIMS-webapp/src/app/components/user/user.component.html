@@ -7,7 +7,8 @@
         </div>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Enter DNI" aria-label="Search" name="dni" [(ngModel)]="dni">
-            <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchByDNI(dni)">Search</button>
+            <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0" (click)="searchByDNI(dni)">Search</button>
+            <button *ngIf="search" class="btn btn-outline-success my-2 my-sm-0" (click)="clearSearch()">Clear</button>
           </form>
     </div>
     <div>
@@ -31,9 +32,8 @@
                     <td>{{ user.role }}</td>
                     <td>{{ user.created }}</td>
                     <td>
-                        <button type="button" class="btn btn-outline-primary" (click)="selectUser(user.id)"><i class="material-icons">visibility</i></button>
-                        <button type="button" class="btn btn-outline-warning" (click)="editUser(user.id)"><i class="material-icons"></i>edit</button>
-                        <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user.id)"><i class="material-icons">delete</i></button>
+                        <button type="button" id="editButton" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="edit" (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
+                        <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="delete" (click)="deleteUser(user.id)"><i class="material-icons">delete</i></button>
                     </td>
                 </tr>
             </tbody>
@@ -46,9 +46,8 @@
                     <td *ngIf="user.dni == searchDNI">{{ user.role }}</td>
                     <td *ngIf="user.dni == searchDNI">{{ user.created }}</td>
                     <td *ngIf="user.dni == searchDNI">
-                        <button type="button" class="btn btn-outline-primary" (click)="selectUser(user.id)"><span class="glyphicon glyphicon-edit"></span>view</button>
-                        <button type="button" class="btn btn-outline-warning" (click)="editUser(user.id)"><i class="fas fa-edit"></i>edit</button>
-                        <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user.id)"><i class="far fa-trash-alt">delete</i></button>
+                        <button type="button" id="editButton" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="edit" (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
+                        <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="delete" (click)="deleteUser(user.id)"><i class="material-icons">delete</i></button>
                     </td>
                 </tr>
             </tbody>

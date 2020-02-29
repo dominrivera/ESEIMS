@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class TicketComponent implements OnInit {
 
   tickets: any = [];
-  selectedStatus: string = 'all';
+  selectedStatus: string = 'open';
   currentUser: any = {};
   currentUserName: string;
 

@@ -1,9 +1,9 @@
 <div role="ticketForm" class="container">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Create ticket</h1>
+        <h1 class="h2">New ticket</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-warning btn-md" (click)="addTicket(ticket)">Submit</button>
+            <button type="button" class="btn btn-primary btn-md" (click)="addTicket(ticket)">Submit</button>
         </div>
     </div>
     <div class="row">
@@ -18,7 +18,7 @@
         <div class="col-md-12 order-md-1">
             <form class="needs-validation" novalidate>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Desciption</label>
+                    <label for="exampleFormControlTextarea1">Description</label>
                     <textarea [(ngModel)]="ticket.description" class="form-control" name="message"
                         id="exampleFormControlTextarea1" rows="5"></textarea>
                 </div>

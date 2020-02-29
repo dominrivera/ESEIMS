@@ -1,9 +1,8 @@
 <div class="container">
     <div class="py-5 text-center">
         <h2 id="formTitle">Register form</h2>
-        <p class="lead">
-            For registering a new accound fill out the data below and our team will review it in order to create your
-            account.
+        <p *ngIf="!auth.isAuthenticated()" class="lead">
+            For registering a new accound fill out the data below in order to create a new account.
         </p>
     </div>
 
@@ -60,9 +59,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div *ngIf="auth.isAuthenticated() && auth.isAdmin()" class="col-md-6 mb-3">
                         <label>Role</label>
-                        <div *ngIf="auth.isAuthenticated() && auth.isAdmin()" class="form-control">
+                        <div class="form-control">
                             <label class="radio-inline">
                                 <input type="radio" value="user" name="role" [(ngModel)]="registerData.role">
                                 user
@@ -71,9 +70,6 @@
                                 <input type="radio" value="admin" name="role" [(ngModel)]="registerData.role">
                                 admin
                             </label>
-                        </div>
-                        <div *ngIf="!auth.isAuthenticated() || !auth.isAdmin()">
-                            <i>user</i>
                         </div>
                     </div>
                 </div>

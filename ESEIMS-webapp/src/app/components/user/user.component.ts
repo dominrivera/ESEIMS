@@ -34,9 +34,10 @@ export class UserComponent implements OnInit {
       )
   }
 
-  selectUser(userId) {
+  editUser(userId) {
     this.router.navigate(['/users', userId]);
   }
+  
   // TODO: show message when user is deleted.
   deleteUser(userId) {
     this.userService.deleteUser(userId)
@@ -64,6 +65,12 @@ export class UserComponent implements OnInit {
     } else {
       this.search = false;
     }
+  }
+
+  clearSearch() {
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/users']);
+    });
   }
 
 }
