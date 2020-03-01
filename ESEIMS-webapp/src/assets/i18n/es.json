@@ -104,8 +104,7 @@
         "password": "Contraseña",
         "signin": "Iniciar Sesion",
         "createAccount": "Para crear una cuenta haz click",
-        "here": "aqui",
-        "forgotPass": "Olvidaste la contraseña? Haz click"
+        "here": "aqui"
     },
     "pageNotFound": {
         "text": "404 Pagina No Encontrada"

@@ -104,8 +104,7 @@
         "password": "Password",
         "signin": "Sign In",
         "createAccount": "To create an account click",
-        "here": "here",
-        "forgotPass": "Forgot password? Click"
+        "here": "here"
     },
     "pageNotFound": {
         "text": "404 Page Not Found"

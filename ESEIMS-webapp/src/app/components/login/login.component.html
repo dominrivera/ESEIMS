@@ -7,6 +7,5 @@
     <input [(ngModel)]="loginData.password" name="password" type="password" id="inputPassword" class="form-control" placeholder="{{ 'login.password' | translate }}" required>
     <button (click)="loginUser()" class="btn btn-lg btn-primary btn-block" type="submit">{{ 'login.signin' | translate }}</button>
     <p>{{ 'login.createAccount' | translate }} <a routerLink="/register">{{ 'login.here' | translate }}</a></p>
-    <p>{{ 'login.forgotPass' | translate }} <a routerLink="/">{{ 'login.here' | translate }}</a></p>
  <!--   <p class="mt-5 mb-3 text-muted">&copy; 2020-{{ site.time | date: "%Y" }}</p> -->
 </form>
