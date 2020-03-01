@@ -12,7 +12,6 @@ alarmCtrl.getAlarms = (req, res) => {
     var url = 'http://' + config.grafana_config.host + ':' + config.grafana_config.port + '/api/alerts';
     return fetch(url, options)
         .then(res => res.json())
-        .then(alarms => console.log(alarms))
         .then(alarms => res.send(alarms))
 }
 

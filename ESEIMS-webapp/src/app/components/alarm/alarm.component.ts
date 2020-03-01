@@ -8,6 +8,8 @@ import { AlarmService } from 'src/app/services/alarm.service';
 })
 export class AlarmComponent implements OnInit {
 
+  alarms: any = [];
+
   constructor(private alarmService: AlarmService) { }
 
   ngOnInit() {
@@ -15,6 +17,7 @@ export class AlarmComponent implements OnInit {
     .subscribe(
       (data) => {
         console.log(data);
+        this.alarms = data;
       },
       (err) => {
         console.log(err)
