@@ -4,6 +4,7 @@ var auth = require('./controllers/authController');
 var user = require('./controllers/userController');
 var ticket = require('./controllers/ticketController');
 var comment = require('./controllers/commentController');
+var alarm = require('./controllers/alarmController');
 var validator = require('./middlewares/validator');
 
 router.post('/login', auth.loginUser);
@@ -24,5 +25,7 @@ router.delete('/tickets/:id', auth.verifyToken, ticket.removeTicket);
 
 router.get('/comments/:ticketId', auth.verifyToken, comment.listCommentsByTicketId);
 router.post('/comments', auth.verifyToken, comment.createComment);
+
+router.get('/alarms', alarm.getAlarms);
 
 module.exports = router;
