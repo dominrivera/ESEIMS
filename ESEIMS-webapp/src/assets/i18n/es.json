@@ -73,6 +73,9 @@
         "description": "Descripcion",
         "comment": "Comentario"
     },
+    "alarm": {
+        "alarms": "Alarmas"
+    },
     "register": {
         "form": "Formulario de Registro",
         "text": "Para crear una cuenta rellena el formulario de abajo",

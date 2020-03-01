@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlarmService } from 'src/app/services/alarm.service';
 
 @Component({
   selector: 'app-alarm',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlarmComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alarmService: AlarmService) { }
 
   ngOnInit() {
+    this.alarmService.getAlarms()
+    .subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
   }
 
 }

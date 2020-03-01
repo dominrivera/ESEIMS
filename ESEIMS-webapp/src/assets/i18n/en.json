@@ -73,6 +73,9 @@
         "description": "Description",
         "comment": "Comment"
     },
+    "alarm": {
+        "alarms": "Alarms"
+    },
     "register": {
         "form": "Register Form",
         "text": "To create an account fill out the form below",
