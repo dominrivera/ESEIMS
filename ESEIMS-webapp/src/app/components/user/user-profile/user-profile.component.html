@@ -1,10 +1,10 @@
 <div role="userProfile" class="container">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Personal data of: {{ user.name }} {{ user.surname }}</h1>
+        <h1 class="h2">{{ 'userProfile.personalData' | translate }} {{ user.name }} {{ user.surname }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button *ngIf="!edit" type="button" class="btn btn-warning btn-md" (click)="editUser()">Edit User</button>
-            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser(user)">Save</button>
+            <button *ngIf="!edit" type="button" class="btn btn-warning btn-md" (click)="editUser()">{{ 'userProfile.edit' | translate }}</button>
+            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser()">{{ 'userProfile.save' | translate }}</button>
         </div>
     </div>
     <div class="row">
@@ -12,7 +12,7 @@
             <form class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="name">First name</label>
+                        <label for="name">{{ 'userProfile.name' | translate }}</label>
                         <input *ngIf="!edit" [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name"
                             placeholder="" value="" disabled>
                         <input *ngIf="edit && !auth.isAdmin()" [(ngModel)]="user.name" name="name" type="text" class="form-control" id="name"
@@ -21,7 +21,7 @@
                             placeholder="" value="">
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="surname">Last name</label>
+                        <label for="surname">{{ 'userProfile.surname' | translate }}</label>
                         <input *ngIf="!edit" [(ngModel)]="user.surname" name="surname" type="text" class="form-control" id="surname"
                             placeholder="" value="" disabled>
                         <input *ngIf="edit && !auth.isAdmin()" [(ngModel)]="user.surname" name="surname" type="text" class="form-control" id="surname"
@@ -33,7 +33,7 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="email">Email</label>
+                        <label for="email">{{ 'userProfile.email' | translate }}</label>
                         <input *ngIf="!edit" [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email"
                             placeholder="" value="" disabled>
                         <input *ngIf="edit" [(ngModel)]="user.email" name="email" type="email" class="form-control" id="email"
@@ -42,7 +42,7 @@
 
 
                     <div class="col-md-6 mb-3">
-                        <label for="password">Password</label>
+                        <label for="password">{{ 'userProfile.password' | translate }}</label>
                         <input *ngIf="!edit" name="password" type="password" class="form-control" id="password" placeholder=""
                             value="fakepass" disabled>
                             <input *ngIf="edit" name="password" type="password" class="form-control" id="password" placeholder=""
@@ -52,7 +52,7 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="dni">ID card</label>
+                        <label for="dni">{{ 'userProfile.idCard' | translate }}</label>
                         <input *ngIf="!edit" [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
                             placeholder="" value="" disabled>
                         <input *ngIf="edit && !auth.isAdmin()" [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
@@ -62,19 +62,19 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label>Role</label>
+                        <label>{{ 'userProfile.role' | translate }}</label>
                         <div class="form-control">
                             <label class="radio-inline">
-                                <input *ngIf="!edit" type="radio" value="user" name="role" [checked]="user.role=='user'" disabled>
-                                <input *ngIf="edit && !auth.isAdmin()" type="radio" value="user" name="role" [checked]="user.role=='user'" disabled>
-                                <input *ngIf="edit && auth.isAdmin()" type="radio" value="user" name="role" [checked]="user.role=='user'">
-                                user
+                                <input *ngIf="!edit" type="radio" value="user" name="role" [(ngModel)]="user.role" [checked]="user.role=='user'" disabled>
+                                <input *ngIf="edit && !auth.isAdmin()" type="radio" value="user" name="role" [(ngModel)]="user.role" [checked]="user.role=='user'" disabled>
+                                <input *ngIf="edit && auth.isAdmin()" type="radio" value="user" name="role" [(ngModel)]="user.role" [checked]="user.role=='user'">
+                                {{ 'userProfile.user' | translate }}
                             </label>
                             <label class="radio-inline">
-                                <input *ngIf="!edit" type="radio" value="admin" name="role" [checked]="user.role=='admin'" disabled>
-                                <input *ngIf="edit && !auth.isAdmin()" type="radio" value="admin" name="role" [checked]="user.role=='admin'" disabled>
-                                <input *ngIf="edit && auth.isAdmin()" type="radio" value="admin" name="role" [checked]="user.role=='admin'">
-                                admin
+                                <input id="inputRole" *ngIf="!edit" type="radio" value="admin" name="role" [(ngModel)]="user.role" [checked]="user.role=='admin'" disabled>
+                                <input id="inputRole2" *ngIf="edit && !auth.isAdmin()" type="radio" value="admin" name="role" [(ngModel)]="user.role" [checked]="user.role=='admin'" disabled>
+                                <input id="inputRole3" *ngIf="edit && auth.isAdmin()" type="radio" value="admin" name="role" [(ngModel)]="user.role" [checked]="user.role=='admin'">
+                                {{ 'userProfile.admin' | translate }}
                             </label>
                         </div>
                     </div>

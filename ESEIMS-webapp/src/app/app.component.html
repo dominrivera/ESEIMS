@@ -7,27 +7,33 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/alarms">Alarms</a>
+        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/alarms">{{ 'app.alarms' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/dashboards">Dashboards</a>
+        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/dashboards">{{ 'app.dashboards' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/tickets">Tickets</a>
+        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/tickets">{{ 'app.tickets' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/users">Users</a>
+        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/users">{{ 'app.users' | translate }}</a>
       </li>
     </ul>
-    <button *ngIf="!auth.isAuthenticated()" class="btn btn-outline-info my-2 my-sm-0" type="submit" routerLink="/login">Log In</button>
+    <div class="contenedor">
+        <div class="contenedor-botones">
+          <button [ngClass]="{'active': defaultLang == 'es'}" (click)="changeLanguage('es')">Es</button>
+          <button [ngClass]="{'active': defaultLang == 'en'}" (click)="changeLanguage('en')">En</button>
+        </div>
+      </div>
+    <button *ngIf="!auth.isAuthenticated()" class="btn btn-outline-info my-2 my-sm-0" type="submit" routerLink="/login">{{ 'app.login' | translate }}</button>
     <div *ngIf="auth.isAuthenticated()" class="dropdown show">
         <a class="btn btn-dark dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="material-icons">account_circle</i>
         </a>
       
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" type="button" (click)="showProfile()">Profile</a>
-          <a class="dropdown-item" type="button" (click)="auth.logoutUser()">Logout</a>
+          <a class="dropdown-item" type="button" (click)="showProfile()">{{ 'app.profile' | translate }}</a>
+          <a class="dropdown-item" type="button" (click)="auth.logoutUser()">{{ 'app.logout' | translate }}</a>
         </div>
       </div>
   </div>

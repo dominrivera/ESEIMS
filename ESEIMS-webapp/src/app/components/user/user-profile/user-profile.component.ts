@@ -16,7 +16,7 @@ export class UserProfileComponent implements OnInit {
   currentUserRole: any;
   edit: boolean = false;
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private auth: AuthService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.userId = parseInt(this.route.snapshot.paramMap.get('id'));

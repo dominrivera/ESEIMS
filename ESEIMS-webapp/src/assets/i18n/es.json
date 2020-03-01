@@ -1,0 +1,106 @@
+{
+    "app": {
+        "alarms": "Alarmas",
+        "dashboards": "Graficas",
+        "tickets": "Tickets",
+        "users": "Usuarios",
+        "login": "Iniciar Sesion",
+        "profile": "Perfil",
+        "logout": "Cerrar Sesion"
+    },
+    "user": {
+        "users": "Usuarios",
+        "newUser": "Nuevo Usuario",
+        "enterId": "Introduce DNI",
+        "search": "Buscar",
+        "clear": "Limpiar",
+        "name": "Nombre",
+        "surname": "Apellidos",
+        "email": "Correo electronico",
+        "idCard": "DNI",
+        "role": "Rol",
+        "created": "Creado",
+        "modalDeleteUser": "Eliminar Usuario",
+        "modalQuestion": "Estas seguro de que quieres eliminar el usuario?",
+        "modalClose": "Cerrar"
+    },
+    "userProfile": {
+        "personalData": "Datos personales de",
+        "edit": "Editar",
+        "save": "Guardar",
+        "name": "Nombre",
+        "surname": "Apellidos",
+        "email": "Correo electronico",
+        "password": "Contraseña",
+        "idCard": "DNI",
+        "role": "Rol",
+        "user": "Usuario",
+        "admin": "Administrador"
+    },
+    "ticket": {
+        "tickets": "Tickets",
+        "newTicket": "Nuevo Ticket",
+        "all": "Todos",
+        "open": "Abiertos",
+        "inProgress": "En curso",
+        "closed": "Cerrados",
+        "title": "Titulo",
+        "description": "Descripcion",
+        "status": "Estado",
+        "assignment": "Asignacion",
+        "creator": "Creador",
+        "created": "Creado",
+        "modified": "Modificado",
+        "takeTicket": "Coger ticket",
+        "view": "Ver",
+        "close": "Cerrar"
+    },
+    "ticketForm": {
+        "newTicket": "Nuevo Ticket",
+        "submit": "Enviar",
+        "title": "Titulo",
+        "description": "Descripcion"
+    },
+    "ticketDetails": {
+        "save": "Guardar",
+        "close": "Cerrar",
+        "reopen": "Reabrir",
+        "title": "Titulo",
+        "creator": "Creador",
+        "status": "Estado",
+        "modified": "Modificado",
+        "created": "Creado",
+        "description": "Descripcion",
+        "comment": "Comentario"
+    },
+    "register": {
+        "form": "Formulario de Registro",
+        "text": "Para crear una cuenta rellena el formulario de abajo",
+        "personalData": "Datos personales",
+        "name": "Nombre",
+        "validName": "wip",
+        "surname": "Apellidos",
+        "validSurname": "wip",
+        "email": "Correo electronico",
+        "validEmail": "wip",
+        "password": "Contraseña",
+        "validPassword": "wip",
+        "idCard": "DNI",
+        "validId": "wip",
+        "role": "Rol",
+        "user": "Usuario",
+        "admin": "Administrador",
+        "register": "Registrar"
+    },
+    "login": {
+        "email": "Correo electronico",
+        "password": "Contraseña",
+        "signin": "Iniciar Sesion",
+        "createAccount": "Para crear una cuenta haz click",
+        "here": "aqui",
+        "forgotPass": "Olvidaste la contraseña? Haz click"
+    },
+    "pageNotFound": {
+        "text": "404 Pagina No Encontrada"
+    }
+}

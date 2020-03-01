@@ -12,8 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UserComponent implements OnInit {
 
   users: any = [];
+  dni: string;
   searchDNI: string;
   search: boolean = false;
+  modalData: number;
 
   constructor(protected userService: UserService, private auth: AuthService, private router: Router) { }
 
@@ -71,6 +73,10 @@ export class UserComponent implements OnInit {
     this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/users']);
     });
+  }
+
+  sendModalData(userId) {
+    this.modalData = userId;
   }
 
 }

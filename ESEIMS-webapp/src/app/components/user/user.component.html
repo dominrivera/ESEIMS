@@ -1,26 +1,28 @@
 <div role="user" class="col-md-12 ml-sm-auto col-lg-20 px-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Users</h1>
+        <h1 class="h2">{{ 'user.users' | translate }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-success btn-md" routerLink="/register">New User</button>
+            <button type="button" class="btn btn-success btn-md" routerLink="/register">{{ 'user.newUser' | translate }}</button>
         </div>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Enter DNI" aria-label="Search" name="dni" [(ngModel)]="dni">
-            <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0" (click)="searchByDNI(dni)">Search</button>
-            <button *ngIf="search" class="btn btn-outline-success my-2 my-sm-0" (click)="clearSearch()">Clear</button>
-          </form>
+            <input class="form-control mr-sm-2" type="search" placeholder="{{ 'user.enterId' | translate}}" aria-label="Search" name="dni"
+                [(ngModel)]="dni">
+            <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0"
+                (click)="searchByDNI(dni)">{{ 'user.search' | translate }}</button>
+            <button *ngIf="search" class="btn btn-outline-success my-2 my-sm-0" (click)="clearSearch()">{{ 'user.clear' | translate }}</button>
+        </form>
     </div>
     <div>
         <table class="table table-hover table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Surname</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">DNI</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Creation</th>
+                    <th scope="col">{{ 'user.name' | translate }}</th>
+                    <th scope="col">{{ 'user.surname' | translate }}</th>
+                    <th scope="col">{{ 'user.email' | translate }}</th>
+                    <th scope="col">{{ 'user.idCard' | translate }}</th>
+                    <th scope="col">{{ 'user.role' | translate }}</th>
+                    <th scope="col">{{ 'user.created' | translate }}</th>
                 </tr>
             </thead>
             <tbody *ngIf="!search">
@@ -32,8 +34,13 @@
                     <td>{{ user.role }}</td>
                     <td>{{ user.created }}</td>
                     <td>
-                        <button type="button" id="editButton" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="edit" (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
-                        <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="delete" (click)="deleteUser(user.id)"><i class="material-icons">delete</i></button>
+                        <div>
+                            <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
+                                (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
+                            <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
+                                data-target="#deleteUserModal" title="delete"  (click)="sendModalData(user.id)"><i
+                                    class="material-icons">delete</i></button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -46,45 +53,36 @@
                     <td *ngIf="user.dni == searchDNI">{{ user.role }}</td>
                     <td *ngIf="user.dni == searchDNI">{{ user.created }}</td>
                     <td *ngIf="user.dni == searchDNI">
-                        <button type="button" id="editButton" class="btn btn-outline-warning" data-toggle="tooltip" data-placement="top" title="edit" (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
-                        <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="delete" (click)="deleteUser(user.id)"><i class="material-icons">delete</i></button>
+                        <div>
+                            <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
+                                (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
+                            <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
+                                data-target="#deleteUserModal" title="delete"  (click)="sendModalData(user.id)"><i
+                                    class="material-icons">delete</i></button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">{{ 'user.modalDeleteUser' | translate }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        {{ 'user.modalQuestion' | translate }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'user.modalClose' | translate }}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteUser(modalData)">{{ 'user.modalDeleteUser' | translate }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<!--
-<tr *ngFor="let user of users">
-    <td *ngIf="user.id == editUserId">{{ user.name }}</td>
-    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.name" name="name" type="text" class="form-control"
-            id="name" placeholder="" value=""></td>
-    <td *ngIf="!edit">{{ user.surname }}</td>
-    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.surname" name="surname" type="text" class="form-control"
-            id="surname" placeholder="" value=""></td>
-    <td *ngIf="!edit">{{ user.email }}</td>
-    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.email" name="email" type="email" class="form-control"
-            id="email" placeholder="" value=""></td>
-    <td *ngIf="!edit">********</td>
-    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="newPassword" name="pasword" type="password"
-            class="form-control" id="password" placeholder="" value=""></td>
-    <td *ngIf="!edit">{{ user.dni }}</td>
-    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.dni" name="dni" type="text" class="form-control" id="dni"
-            placeholder="" value=""></td>
-    <td *ngIf="!edit">{{ user.role }}</td>
-    <td><input *ngIf="edit && user.id == editUserId" [(ngModel)]="user.role" name="role" type="text" class="form-control"
-            id="role" placeholder="" value=""></td>
-    <td>{{ user.created }}</td>
-    <td>
-        <button type="button" class="btn btn-primary" (click)="selectUser(user.id)"><span
-                class="glyphicon glyphicon-edit"></span>view</button>
-        <button *ngIf="!edit" type="button" class="btn btn-warning" (click)="editUser(user.id)"><i
-                class="fas fa-edit"></i>edit</button>
-        <button *ngIf="edit" type="button" class="btn btn-warning btn-md"
-            (click)="saveUser(user)">Save</button>
-        <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)"><i
-                class="far fa-trash-alt">delete</i></button>
-    </td>
-</tr>
--->

@@ -1,0 +1,106 @@
+{
+    "app": {
+        "alarms": "Alarms",
+        "dashboards": "Dashboards",
+        "tickets": "Tickets",
+        "users": "Users",
+        "login": "Log In",
+        "profile": "Profile",
+        "logout": "Log Out"
+    },
+    "user": {
+        "users": "Users",
+        "newUser": "New User",
+        "enterId": "Enter ID",
+        "search": "Search",
+        "clear": "Clear",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "idCard": "ID card",
+        "role": "Role",
+        "created": "Created",
+        "modalDeleteUser": "Delete User",
+        "modalQuestion": "Are you sure you want to delete the user?",
+        "modalClose": "Close"
+    },
+    "userProfile": {
+        "personalData": "Personal data of",
+        "edit": "Edit",
+        "save": "Save",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "password": "Password",
+        "idCard": "ID card",
+        "role": "Role",
+        "user": "User",
+        "admin": "Admin"
+    },
+    "ticket": {
+        "tickets": "Tickets",
+        "newTicket": "New Ticket",
+        "all": "All",
+        "open": "Open",
+        "inProgress": "In progress",
+        "closed": "Closed",
+        "title": "Title",
+        "description": "Description",
+        "status": "Status",
+        "assignment": "Assignment",
+        "creator": "Creator",
+        "created": "Created",
+        "modified": "Modified",
+        "takeTicket": "Take ticket",
+        "view": "View",
+        "close": "Close"
+    },
+    "ticketForm": {
+        "newTicket": "New Ticket",
+        "submit": "Submit",
+        "title": "Title",
+        "description": "Description"
+    },
+    "ticketDetails": {
+        "save": "Save",
+        "close": "Close",
+        "reopen": "Re open",
+        "title": "Title",
+        "creator": "Creator",
+        "status": "Status",
+        "modified": "Modified",
+        "created": "Created",
+        "description": "Description",
+        "comment": "Comment"
+    },
+    "register": {
+        "form": "Register Form",
+        "text": "To create an account fill out the form below",
+        "personalData": "Personal data",
+        "name": "Name",
+        "validName": "wip",
+        "surname": "Surname",
+        "validSurname": "wip",
+        "email": "Email",
+        "validEmail": "wip",
+        "password": "Password",
+        "validPassword": "wip",
+        "idCard": "ID card",
+        "validId": "wip",
+        "role": "Role",
+        "user": "User",
+        "admin": "Admin",
+        "register": "Register"
+    },
+    "login": {
+        "email": "Email",
+        "password": "Password",
+        "signin": "Sign In",
+        "createAccount": "To create an account click",
+        "here": "here",
+        "forgotPass": "Forgot password? Click"
+    },
+    "pageNotFound": {
+        "text": "404 Page Not Found"
+    }
+}

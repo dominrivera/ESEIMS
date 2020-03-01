@@ -1,74 +1,74 @@
 <div class="container">
     <div class="py-5 text-center">
-        <h2 id="formTitle">Register form</h2>
+        <h2 id="formTitle">{{ 'register.form' | translate }}</h2>
         <p *ngIf="!auth.isAuthenticated()" class="lead">
-            For registering a new accound fill out the data below in order to create a new account.
+                {{ 'register.text' | translate }}
         </p>
     </div>
 
     <div class="row">
         <div class="col-md-12 order-md-1">
-            <h4 class="mb-3">Personal data</h4>
+            <h4 class="mb-3">{{ 'register.personalData' | translate }}</h4>
             <form class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="firstName">First name</label>
+                        <label for="firstName">{{ 'register.name' | translate }}</label>
                         <input [(ngModel)]="registerData.name" name="name" type="text" class="form-control"
                             id="firstName" placeholder="" value="" required>
                         <div class="invalid-feedback">
-                            Valid first name is required.
+                                {{ 'register.validName' | translate }}
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="lastName">Last name</label>
+                        <label for="lastName">{{ 'register.surname' | translate }}</label>
                         <input [(ngModel)]="registerData.surname" name="surname" type="text" class="form-control"
                             id="lastName" placeholder="" value="" required>
                         <div class="invalid-feedback">
-                            Valid last name is required.
+                                {{ 'register.validSurname' | translate }}
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="email">Email</label>
+                        <label for="email">{{ 'register.email' | translate }}</label>
                         <input [(ngModel)]="registerData.email" name="email" type="email" class="form-control"
                             id="email" placeholder="you@esei.uvigo.es">
                         <div class="invalid-feedback">
-                            Please enter a valid email address.
+                                {{ 'register.validEmail' | translate }}
                         </div>
                     </div>
 
 
                     <div class="col-md-6 mb-3">
-                        <label for="address2">Password</label>
+                        <label for="address2">{{ 'register.password' | translate }}</label>
                         <input [(ngModel)]="registerData.password" name="password" type="password" class="form-control"
                             id="password">
                         <div class="invalid-feedback">
-                            Valid Password is required.
+                                {{ 'register.validPassword' | translate }}
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="address2">ID card</label>
+                        <label for="address2">{{ 'register.idCard' | translate }}</label>
                         <input [(ngModel)]="registerData.dni" name="dni" type="text" class="form-control" id="id">
                         <div class="invalid-feedback">
-                            Valid last name is required.
+                                {{ 'register.validId' | translate }}
                         </div>
                     </div>
 
                     <div *ngIf="auth.isAuthenticated() && auth.isAdmin()" class="col-md-6 mb-3">
-                        <label>Role</label>
+                        <label>{{ 'register.role' | translate }}</label>
                         <div class="form-control">
                             <label class="radio-inline">
                                 <input type="radio" value="user" name="role" [(ngModel)]="registerData.role">
-                                user
+                                {{ 'register.user' | translate }}
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" value="admin" name="role" [(ngModel)]="registerData.role">
-                                admin
+                                <input id="inputRole" type="radio" value="admin" name="role" [(ngModel)]="registerData.role">
+                                {{ 'register.admin' | translate }}
                             </label>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
 
                 <hr class="mb-4">
                 <button (click)="registerUser()" class="btn btn-primary btn-lg btn-block"
-                    type="submit">Register</button>
+                    type="submit">{{ 'register.register' | translate }}</button>
             </form>
         </div>
     </div>

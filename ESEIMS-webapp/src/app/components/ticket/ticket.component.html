@@ -1,22 +1,22 @@
 <div role="ticket" class="col-md-12 ml-sm-auto col-lg-20 px-4">
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Tickets</h1>
-        <button type="button" class="btn btn-success" (click)="openTicket()">Create Ticket</button>
+        <h1 class="h2">{{ 'ticket.tickets' | translate }}</h1>
+        <button type="button" class="btn btn-success" (click)="openTicket()">{{ 'ticket.newTicket' | translate }}</button>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option1" autocomplete="off" (click)="filterTicket('all')"> All
+                <input type="radio" name="options" id="option1" autocomplete="off" (click)="filterTicket('all')"> {{ 'ticket.all' | translate }}
             </label>
             <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option2" autocomplete="off" (click)="filterTicket('open')" checked> Open
+                <input type="radio" name="options" id="option2" autocomplete="off" (click)="filterTicket('open')" checked> {{ 'ticket.open' | translate }}
             </label>
             <label class="btn btn-secondary">
                 <input type="radio" name="options" id="option3" autocomplete="off"
-                    (click)="filterTicket('in progress')"> In progress
+                    (click)="filterTicket('in progress')"> {{ 'ticket.inProgress' | translate }}
             </label>
             <label class="btn btn-secondary">
                 <input type="radio" name="options" id="option4" autocomplete="off" (click)="filterTicket('closed')">
-                Closed
+                {{ 'ticket.closed' | translate }}
             </label>
         </div>
     </div>
@@ -24,13 +24,13 @@
         <table class="table table-hover table-dark">
             <thead>
                 <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Assignment</th>
-                    <th scope="col">Creator</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">Modified</th>
+                    <th scope="col">{{ 'ticket.title' | translate }}</th>
+                    <th scope="col">{{ 'ticket.description' | translate }}</th>
+                    <th scope="col">{{ 'ticket.status' | translate }}</th>
+                    <th scope="col">{{ 'ticket.assignment' | translate }}</th>
+                    <th scope="col">{{ 'ticket.creator' | translate }}</th>
+                    <th scope="col">{{ 'ticket.created' | translate }}</th>
+                    <th scope="col">{{ 'ticket.modified' | translate }}</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -46,16 +46,16 @@
                     <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">
                         <div class="dropdown">
                             <button class="btn btn-outline-info dropdown" type="button" id="dropdownMenu2"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-placement="top" title="options">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="options">
                                 <i class="material-icons">menu</i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                                 <button *ngIf="ticket.status=='open' && currentUser.role=='admin'" class="dropdown-item"
-                                    type="button" (click)="takeTicket(ticket)">Take progress</button>
+                                    type="button" (click)="takeTicket(ticket)">{{ 'ticket.takeTicket' | translate }}</button>
                                 <button class="dropdown-item" type="button"
-                                    (click)="selectTicket(ticket.id)">View</button>
+                                    (click)="selectTicket(ticket.id)">{{ 'ticket.view' | translate }}</button>
                                 <button *ngIf="ticket.status!='closed' && currentUser.role=='admin'"
-                                    class="dropdown-item" type="button" (click)="closeTicket(ticket)">Close</button>
+                                    class="dropdown-item" type="button" (click)="closeTicket(ticket)">{{ 'ticket.close' | translate }}</button>
                             </div>
                         </div>
                     </td>
