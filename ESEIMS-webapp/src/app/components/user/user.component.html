@@ -34,7 +34,7 @@
                     <td>{{ user.role }}</td>
                     <td>{{ user.created }}</td>
                     <td>
-                        <div>
+                        <div *ngIf="(user.email!='admin@esei.uvigo.es') && (user.email!='user@esei.uvigo.es')">
                             <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
                                 (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
                             <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
