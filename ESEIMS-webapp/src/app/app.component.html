@@ -19,10 +19,10 @@
         <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/users">{{ 'app.users' | translate }}</a>
       </li>
     </ul>
-    <div class="contenedor">
-        <div class="contenedor-botones">
-          <button [ngClass]="{'active': defaultLang == 'es'}" (click)="changeLanguage('es')">Es</button>
-          <button [ngClass]="{'active': defaultLang == 'en'}" (click)="changeLanguage('en')">En</button>
+    <div id="languages">
+        <div>
+          <button id="langButton1" class="btn btn-outline-dark my-2 my-sm-0" [ngClass]="{'active': defaultLang == 'es'}" (click)="changeLanguage('es')" title="Español">ES</button>
+          <button id="langButton2" class="btn btn-outline-dark my-2 my-sm-0" [ngClass]="{'active': defaultLang == 'en'}" (click)="changeLanguage('en')" title="English">EN</button>
         </div>
       </div>
     <button *ngIf="!auth.isAuthenticated()" class="btn btn-outline-info my-2 my-sm-0" type="submit" routerLink="/login">{{ 'app.login' | translate }}</button>
