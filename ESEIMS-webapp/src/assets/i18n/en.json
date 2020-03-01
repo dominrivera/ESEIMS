@@ -74,7 +74,11 @@
         "comment": "Comment"
     },
     "alarm": {
-        "alarms": "Alarms"
+        "alarms": "Alarms",
+        "name": "Name",
+        "status": "Status",
+        "dashboard": "Panel",
+        "date": "Date"
     },
     "register": {
         "form": "Register Form",
