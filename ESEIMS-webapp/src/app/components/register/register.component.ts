@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
     'name': false,
     'surname': false,
     'email': false,
+    'email_exists': false,
     'password': false,
     'dni': false
   };
@@ -42,6 +43,8 @@ export class RegisterComponent implements OnInit {
               this.validations.surname = true;
             } else if(error=='email') {
               this.validations.email = true;
+            } else if(error=='email_exists') {
+              this.validations.email_exists = true;
             } else if(error=='password') {
               this.validations.password = true;
             } else if(error=='dni') {
