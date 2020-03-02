@@ -96,6 +96,7 @@
         "validEmail": "Error: el email debe tener la extension @esei.uvigo.es",
         "validEmail2": "Error: el email ya esta en uso",
         "password": "Contraseña",
+        "passchar": "Min. 8 caracteres",
         "validPassword": "Error: la contraseña debe contener al menos 8 caracteres",
         "idCard": "DNI",
         "validId": "Error: introduce un DNI valido",
