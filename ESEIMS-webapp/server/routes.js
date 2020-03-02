@@ -25,6 +25,7 @@ router.delete('/tickets/:id', auth.verifyToken, ticket.removeTicket);
 
 router.get('/comments/:ticketId', auth.verifyToken, comment.listCommentsByTicketId);
 router.post('/comments', auth.verifyToken, comment.createComment);
+router.delete('/comments/:ticketId', auth.verifyToken, comment.removeCommentsByTicketId);
 
 router.get('/alarms', alarm.getAlarms);
 

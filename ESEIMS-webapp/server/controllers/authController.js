@@ -19,7 +19,7 @@ authCtrl.createUser = function (req, res) {
     Auth.loginUser(userData.email, function (err, user) {
         if(user) {
             console.log('email exists')
-            return res.send('email already exists')
+            return res.status(422).send('email_exists')
         } else {
         // password encryption
         var salt = bcrypt.genSaltSync()

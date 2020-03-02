@@ -24,4 +24,12 @@ commentCtrl.createComment = function (req, res) {
     }
 };
 
+commentCtrl.removeCommentsByTicketId = function (req, res) {
+    Comment.deleteComments(req.params.ticketId, function (err, comments) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Comments removed' });
+    });
+};
+
 module.exports = commentCtrl;

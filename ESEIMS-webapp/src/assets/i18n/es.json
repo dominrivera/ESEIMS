@@ -53,25 +53,29 @@
         "modified": "Modificado",
         "takeTicket": "Coger ticket",
         "view": "Ver",
-        "close": "Cerrar"
+        "close": "Cerrar",
+        "delete": "Eliminar"
     },
     "ticketForm": {
         "newTicket": "Nuevo Ticket",
         "submit": "Enviar",
         "title": "Titulo",
-        "description": "Descripcion"
+        "description": "Descripcion",
+        "maxchar": "Max. 200 caracteres"
     },
     "ticketDetails": {
         "save": "Guardar",
         "close": "Cerrar",
         "reopen": "Reabrir",
+        "delete": "Eliminar",
         "title": "Titulo",
         "creator": "Creador",
         "status": "Estado",
         "modified": "Modificado",
         "created": "Creado",
         "description": "Descripcion",
-        "comment": "Comentario"
+        "comment": "Comentario",
+        "maxchar": "Max. 400 caracteres"
     },
     "alarm": {
         "alarms": "Alarmas",
@@ -85,15 +89,16 @@
         "text": "Para crear una cuenta rellena el formulario de abajo",
         "personalData": "Datos personales",
         "name": "Nombre",
-        "validName": "wip",
+        "validName": "Error: introduce un nombre",
         "surname": "Apellidos",
-        "validSurname": "wip",
+        "validSurname": "Error: introduce un apellido/s",
         "email": "Correo electronico",
-        "validEmail": "wip",
+        "validEmail": "Error: el email debe tener la extension @esei.uvigo.es",
+        "validEmail2": "Error: el email ya esta en uso",
         "password": "Contraseña",
-        "validPassword": "wip",
+        "validPassword": "Error: la contraseña debe contener al menos 8 caracteres",
         "idCard": "DNI",
-        "validId": "wip",
+        "validId": "Error: introduce un DNI valido",
         "role": "Rol",
         "user": "Usuario",
         "admin": "Administrador",

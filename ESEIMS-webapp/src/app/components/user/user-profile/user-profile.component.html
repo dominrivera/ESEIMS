@@ -3,8 +3,8 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'userProfile.personalData' | translate }} {{ user.name }} {{ user.surname }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button *ngIf="!edit" type="button" class="btn btn-warning btn-md" (click)="editUser()">{{ 'userProfile.edit' | translate }}</button>
-            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser()">{{ 'userProfile.save' | translate }}</button>
+            <button *ngIf="!edit" type="button" class="btn btn-warning btn-md" (click)="editUser()"><i id="editUserIcon" class="material-icons">edit</i>{{ 'userProfile.edit' | translate }}</button>
+            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser()"><i id="saveUserIcon" class="material-icons">save</i>{{ 'userProfile.save' | translate }}</button>
         </div>
     </div>
     <div class="row">

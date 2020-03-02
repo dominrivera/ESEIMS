@@ -53,25 +53,29 @@
         "modified": "Modified",
         "takeTicket": "Take ticket",
         "view": "View",
-        "close": "Close"
+        "close": "Close",
+        "delete": "Delete"
     },
     "ticketForm": {
         "newTicket": "New Ticket",
         "submit": "Submit",
         "title": "Title",
-        "description": "Description"
+        "description": "Description",
+        "maxchar": "Max. 200 characters"
     },
     "ticketDetails": {
         "save": "Save",
         "close": "Close",
         "reopen": "Re open",
+        "delete": "Delete",
         "title": "Title",
         "creator": "Creator",
         "status": "Status",
         "modified": "Modified",
         "created": "Created",
         "description": "Description",
-        "comment": "Comment"
+        "comment": "Comment",
+        "maxchar": "Max. 400 characters"
     },
     "alarm": {
         "alarms": "Alarms",
@@ -85,15 +89,16 @@
         "text": "To create an account fill out the form below",
         "personalData": "Personal data",
         "name": "Name",
-        "validName": "wip",
+        "validName": "Error: introduce a name",
         "surname": "Surname",
-        "validSurname": "wip",
+        "validSurname": "Error: introduce a surname",
         "email": "Email",
-        "validEmail": "wip",
+        "validEmail": "Error: email must have the extension @esei.uvigo.es",
+        "validEmail2": "Error: email already in use",
         "password": "Password",
-        "validPassword": "wip",
+        "validPassword": "Error: password must have at least 8 characters",
         "idCard": "ID card",
-        "validId": "wip",
+        "validId": "Error: introduce a valid ID",
         "role": "Role",
         "user": "User",
         "admin": "Admin",

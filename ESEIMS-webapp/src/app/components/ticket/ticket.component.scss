@@ -8,6 +8,19 @@
   }
 }
 
-#optionsButton {
+#addTicketIcon {
+  vertical-align: middle; 
+  text-align: center;
+  margin-right: 8px;
+}
+
+#optionsIcon {
+  vertical-align: middle; 
+  text-align: center;
   line-height: normal;
+}
+
+#roundRadius {
+  border-top-left-radius: .25rem;
+  border-bottom-left-radius: .25rem;
 }

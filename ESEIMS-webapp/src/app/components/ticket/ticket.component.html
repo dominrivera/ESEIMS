@@ -2,17 +2,21 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'ticket.tickets' | translate }}</h1>
-        <button type="button" class="btn btn-success" (click)="openTicket()">{{ 'ticket.newTicket' | translate }}</button>
+
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option1" autocomplete="off" (click)="filterTicket('all')"> {{ 'ticket.all' | translate }}
+            <div>
+                <button type="button" class="btn btn-success"
+                    (click)="openTicket()"><i id="addTicketIcon" class="material-icons">note_add</i>{{ 'ticket.newTicket' | translate }}</button>
+            </div>
+            <label id="roundRadius" class="btn btn-secondary ml-5">
+                <input type="radio" name="options" id="option1" autocomplete="off" (click)="filterTicket('all')">
+                {{ 'ticket.all' | translate }}
             </label>
             <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option2" autocomplete="off" (click)="filterTicket('open')" checked> {{ 'ticket.open' | translate }}
+                <input type="radio" name="options" id="option2" autocomplete="off" (click)="filterTicket('open')"> {{ 'ticket.open' | translate }}
             </label>
             <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autocomplete="off"
-                    (click)="filterTicket('in progress')"> {{ 'ticket.inProgress' | translate }}
+                <input type="radio" name="options" id="option3" autocomplete="off" (click)="filterTicket('in progress')"> {{ 'ticket.inProgress' | translate }}
             </label>
             <label class="btn btn-secondary">
                 <input type="radio" name="options" id="option4" autocomplete="off" (click)="filterTicket('closed')">
@@ -45,17 +49,21 @@
                     <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.modified }}</td>
                     <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">
                         <div class="dropdown">
-                            <button id="optionsButton" class="btn btn-outline-info dropdown" type="button" id="dropdownMenu2"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="options">
-                                <i class="material-icons">menu</i>
+                            <button class="btn btn-outline-info dropdown" type="button"
+                                id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="options">
+                                <i id="optionsIcon" class="material-icons">menu</i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                <button *ngIf="ticket.status=='open' && currentUser.role=='admin'" class="dropdown-item"
-                                    type="button" (click)="takeTicket(ticket)">{{ 'ticket.takeTicket' | translate }}</button>
+                                <button *ngIf="ticket.status=='open' && currentUser.role=='admin'" class="dropdown-item" type="button"
+                                    (click)="takeTicket(ticket)">{{ 'ticket.takeTicket' | translate }}</button>
                                 <button class="dropdown-item" type="button"
                                     (click)="selectTicket(ticket.id)">{{ 'ticket.view' | translate }}</button>
                                 <button *ngIf="ticket.status!='closed' && currentUser.role=='admin'"
-                                    class="dropdown-item" type="button" (click)="closeTicket(ticket)">{{ 'ticket.close' | translate }}</button>
+                                    class="dropdown-item" type="button"
+                                    (click)="closeTicket(ticket)">{{ 'ticket.close' | translate }}</button>
+                                <button *ngIf="ticket.status=='closed' && currentUser.role=='admin'"
+                                    class="dropdown-item" type="button"
+                                    (click)="deleteComment(ticket.id); deleteTicket(ticket.id)">{{ 'ticket.delete' | translate }}</button>
                             </div>
                         </div>
                     </td>

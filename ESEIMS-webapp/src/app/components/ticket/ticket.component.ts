@@ -107,6 +107,9 @@ export class TicketComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data)
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/tickets']);
+          });
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
@@ -114,6 +117,19 @@ export class TicketComponent implements OnInit {
               this.router.navigate(['/tickets'])
             }
           }
+        }
+      )
+  }
+
+  deleteComment(ticketId) {
+    this.ticketService.deleteComments(ticketId)
+      .subscribe(
+        (data) => {
+          console.log(data)
+        },
+        (err) => {
+          console.log(err);
+          
         }
       )
   }

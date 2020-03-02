@@ -24,4 +24,15 @@ Comment.addComment = function(comment, result){
     });
 };
 
+Comment.deleteComments = function(ticketId, result){
+    dbConnection.query(queries.delete_comments, [ticketId], function(err, res) {
+        if(err){
+            result(err, null);
+        }
+        else{
+            result(null, res);
+        }
+    });
+};
+
 module.exports = Comment;

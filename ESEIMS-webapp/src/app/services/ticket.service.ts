@@ -70,4 +70,16 @@ export class TicketService {
     return this.http.post('/api/comments', comment);
   }
 
+  deleteComments(ticketId) {
+    const url = `/api/comments/${ticketId}`;
+    const token = this.auth.getToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+    };
+    return this.http.delete(url, httpOptions)
+  }
+
 }

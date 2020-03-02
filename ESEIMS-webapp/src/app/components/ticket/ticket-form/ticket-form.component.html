@@ -3,7 +3,7 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'ticketForm.newTicket' | translate }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-primary btn-md" (click)="addTicket(ticket)">{{ 'ticketForm.submit' | translate }}</button>
+            <button type="button" class="btn btn-primary btn-md" (click)="addTicket(ticket)"><i id="sendTicketIcon" class="material-icons">send</i>{{ 'ticketForm.submit' | translate }}</button>
         </div>
     </div>
     <div class="row">
@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">{{ 'ticketForm.description' | translate }}</label>
                     <textarea [(ngModel)]="ticket.description" class="form-control" name="message"
-                        id="exampleFormControlTextarea1" rows="5"></textarea>
+                        id="exampleFormControlTextarea1" rows="5" placeholder="{{ 'ticketForm.maxchar' | translate }}"></textarea>
                 </div>
                 <hr class="mb-4">
             </form>

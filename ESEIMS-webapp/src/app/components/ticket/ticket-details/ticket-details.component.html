@@ -3,11 +3,12 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ ticket.title }}</h1>
         <div *ngIf="ticket.status!='closed'" class="btn-toolbar mb-2 mb-md-0">
-            <button id="saveTicket" type="button" class="btn btn-primary btn-md" (click)="addComment(ticket.id)">{{ 'ticketDetails.save' | translate }}</button>
-            <button type="button" class="btn btn-warning btn-md" (click)="closeTicket(ticket)">{{ 'ticketDetails.close' | translate }}</button>
+            <button id="saveTicket" type="button" class="btn btn-primary btn-md" (click)="addComment(ticket.id)"><i id="saveTicketIcon" class="material-icons">save</i>{{ 'ticketDetails.save' | translate }}</button>
+            <button *ngIf="auth.isAdmin()" type="button" class="btn btn-warning btn-md" (click)="closeTicket(ticket)"><i id="closeTicketIcon" class="material-icons">close</i>{{ 'ticketDetails.close' | translate }}</button>
         </div>
         <div *ngIf="ticket.status=='closed'" class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-warning btn-md" (click)="reOpenTicket(ticket)">{{ 'ticketDetails.reopen' | translate }}</button>
+            <button type="button" class="btn btn-warning btn-md" (click)="reOpenTicket(ticket)"><i id="reopenTicketIcon" class="material-icons">undo</i>{{ 'ticketDetails.reopen' | translate }}</button>
+            <button type="button" class="btn btn-warning btn-md" (click)="deleteTicket(ticket.id)"><i id="deleteTicketIcon" class="material-icons">delete</i>{{ 'ticketDetails.delete' | translate }}</button>
         </div>
     </div>
     <div class="row">
@@ -61,7 +62,7 @@
                 <div *ngIf="ticket.status!='closed'" class="form-group">
                     <label for="comment">{{ 'ticketDetails.comment' | translate }}</label>
                     <textarea [(ngModel)]="newComment.message" class="form-control" name="comment" id="comment"
-                        rows="5"></textarea>
+                        rows="5" placeholder="{{ 'ticketDetails.maxchar' | translate }}"></textarea>
                 </div>
                 <div *ngFor="let comment of comments">
                     <hr>
