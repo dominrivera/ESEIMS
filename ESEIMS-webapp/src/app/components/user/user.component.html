@@ -2,11 +2,9 @@
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'user.users' | translate }}</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-success btn-md" routerLink="/register">{{ 'user.newUser' | translate }}</button>
-        </div>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="{{ 'user.enterId' | translate}}" aria-label="Search" name="dni"
+            <button type="button" class="btn btn-success btn-md" routerLink="/register">{{ 'user.newUser' | translate }}</button>
+            <input class="form-control ml-sm-5 mr-sm-2" type="search" placeholder="{{ 'user.enterId' | translate}}" aria-label="Search" name="dni"
                 [(ngModel)]="dni">
             <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0"
                 (click)="searchByDNI(dni)">{{ 'user.search' | translate }}</button>
