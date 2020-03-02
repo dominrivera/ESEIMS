@@ -53,3 +53,4 @@ telegraf_password: 'password'
 ### Grafana ###
 
 grafana_port: '3001'
+grafana_auth_anonymous: true
