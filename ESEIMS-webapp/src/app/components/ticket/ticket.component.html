@@ -13,7 +13,7 @@
                 {{ 'ticket.all' | translate }}
             </label>
             <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option2" autocomplete="off" (click)="filterTicket('open')" checked> {{ 'ticket.open' | translate }}
+                <input type="radio" name="options" id="option2" autocomplete="off" (click)="filterTicket('open')"> {{ 'ticket.open' | translate }}
             </label>
             <label class="btn btn-secondary">
                 <input type="radio" name="options" id="option3" autocomplete="off" (click)="filterTicket('in progress')"> {{ 'ticket.inProgress' | translate }}
@@ -61,6 +61,9 @@
                                 <button *ngIf="ticket.status!='closed' && currentUser.role=='admin'"
                                     class="dropdown-item" type="button"
                                     (click)="closeTicket(ticket)">{{ 'ticket.close' | translate }}</button>
+                                <button *ngIf="ticket.status=='closed' && currentUser.role=='admin'"
+                                    class="dropdown-item" type="button"
+                                    (click)="deleteComment(ticket.id); deleteTicket(ticket.id)">{{ 'ticket.delete' | translate }}</button>
                             </div>
                         </div>
                     </td>

@@ -53,25 +53,29 @@
         "modified": "Modificado",
         "takeTicket": "Coger ticket",
         "view": "Ver",
-        "close": "Cerrar"
+        "close": "Cerrar",
+        "delete": "Eliminar"
     },
     "ticketForm": {
         "newTicket": "Nuevo Ticket",
         "submit": "Enviar",
         "title": "Titulo",
-        "description": "Descripcion"
+        "description": "Descripcion",
+        "maxchar": "Max. 200 caracteres"
     },
     "ticketDetails": {
         "save": "Guardar",
         "close": "Cerrar",
         "reopen": "Reabrir",
+        "delete": "Eliminar",
         "title": "Titulo",
         "creator": "Creador",
         "status": "Estado",
         "modified": "Modificado",
         "created": "Creado",
         "description": "Descripcion",
-        "comment": "Comentario"
+        "comment": "Comentario",
+        "maxchar": "Max. 400 caracteres"
     },
     "alarm": {
         "alarms": "Alarmas",

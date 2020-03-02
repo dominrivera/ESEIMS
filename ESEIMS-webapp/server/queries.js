@@ -19,5 +19,6 @@ module.exports = {
 
     // Comments
     select_comments: `SELECT * FROM comments WHERE ticketId = ? ORDER BY created DESC`,
-    insert_comments: `INSERT INTO comments set ?`
+    insert_comments: `INSERT INTO comments set ?`,
+    delete_comments: `DELETE FROM comments WHERE ticketId = ?`
 }
