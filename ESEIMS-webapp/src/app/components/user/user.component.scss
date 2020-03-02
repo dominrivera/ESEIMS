@@ -8,9 +8,17 @@
   }
 }
 
+#addUserIcon {
+  vertical-align: middle; 
+  text-align: center;
+  margin-right: 8px;
+}
+
 #editButton {
   border-color: #FFDE87;
   margin-right: 10px;
+  vertical-align: middle; 
+  text-align: center;
   line-height: normal;
 }
 #editButton>i {
@@ -18,6 +26,8 @@
 }
 #deleteButton {
   border-color: #FF7E6D;
+  vertical-align: middle; 
+  text-align: center;
   line-height: normal;
 }
 #deleteButton>i {
