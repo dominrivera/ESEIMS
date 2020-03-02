@@ -2,7 +2,7 @@ var fetch = require('node-fetch');
 var config = require('../config')
 var alarmCtrl = {};
 
-alarmCtrl.getAlarms = () => {
+alarmCtrl.getAlarms = (req, res) => {
     var options = {
         headers: {
             'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ alarmCtrl.getAlarms = () => {
     var url = 'http://' + config.grafana_config.host + ':' + config.grafana_config.port + '/api/alerts';
     return fetch(url, options)
         .then(res => res.json())
-        .then(alerts => console.log(alerts))
+        .then(alarms => res.send(alarms))
 }
 
 module.exports = alarmCtrl;

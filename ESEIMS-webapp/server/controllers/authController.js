@@ -13,7 +13,7 @@ authCtrl.createUser = function (req, res) {
             list.push(error.param)
         });
         console.log('ASDF: ', list)
-        return res.status(422)
+        return res.status(422).send(list)
     }
     var userData = new Auth(req.body);
     Auth.loginUser(userData.email, function (err, user) {

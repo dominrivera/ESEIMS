@@ -73,6 +73,13 @@
         "description": "Descripcion",
         "comment": "Comentario"
     },
+    "alarm": {
+        "alarms": "Alarmas",
+        "name": "Nombre",
+        "status": "Estado",
+        "dashboard": "Panel",
+        "date": "Fecha"
+    },
     "register": {
         "form": "Formulario de Registro",
         "text": "Para crear una cuenta rellena el formulario de abajo",
@@ -97,8 +104,7 @@
         "password": "Contraseña",
         "signin": "Iniciar Sesion",
         "createAccount": "Para crear una cuenta haz click",
-        "here": "aqui",
-        "forgotPass": "Olvidaste la contraseña? Haz click"
+        "here": "aqui"
     },
     "pageNotFound": {
         "text": "404 Pagina No Encontrada"

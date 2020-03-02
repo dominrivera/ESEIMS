@@ -24,6 +24,7 @@ import { TicketFormComponent } from './components/ticket/ticket-form/ticket-form
 
 import { UserService } from './services/user.service';
 import { TicketService } from './services/ticket.service';
+import { AlarmService } from './services/alarm.service';
 import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service'
 
@@ -52,7 +53,7 @@ import { TicketGuard } from './guards/ticket.guard';
       }
     })
   ],
-  providers: [UserService, TicketService, AuthService, AuthGuard, AdminGuard, ProfileGuard, TicketGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
+  providers: [UserService, TicketService, AlarmService, AuthService, AuthGuard, AdminGuard, ProfileGuard, TicketGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

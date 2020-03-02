@@ -73,6 +73,13 @@
         "description": "Description",
         "comment": "Comment"
     },
+    "alarm": {
+        "alarms": "Alarms",
+        "name": "Name",
+        "status": "Status",
+        "dashboard": "Panel",
+        "date": "Date"
+    },
     "register": {
         "form": "Register Form",
         "text": "To create an account fill out the form below",
@@ -97,8 +104,7 @@
         "password": "Password",
         "signin": "Sign In",
         "createAccount": "To create an account click",
-        "here": "here",
-        "forgotPass": "Forgot password? Click"
+        "here": "here"
     },
     "pageNotFound": {
         "text": "404 Page Not Found"

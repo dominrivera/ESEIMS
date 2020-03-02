@@ -1,16 +1,30 @@
-<div role="alarm" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Alarms</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-            </button>
+<div role="alarm" class="col-md-12 ml-sm-auto col-lg-20 px-4">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">{{ 'alarm.alarms' | translate }}</h1>
+        </div>
+        <div>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">{{ 'alarm.name' | translate }}</th>
+                        <th scope="col">{{ 'alarm.status' | translate }}</th>
+                        <th scope="col">{{ 'alarm.dashboard' | translate }}</th>
+                        <th scope="col">{{ 'alarm.date' | translate }}</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let alarm of alarms">
+                        <td>{{ alarm.name }}</td>
+                        <td>{{ alarm.state }}</td>
+                        <td>{{ alarm.dashboardSlug }}</td>
+                        <td>{{ alarm.newStateDate }}</td>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-</div>
