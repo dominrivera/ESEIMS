@@ -1,6 +1,6 @@
 ---
-- hosts: all
-#- hosts: ubuntu-server
+#- hosts: all
+- hosts: ubuntu-server
 #- hosts: ubuntu-vm-test
 #- hosts: windows-vm
   roles:
