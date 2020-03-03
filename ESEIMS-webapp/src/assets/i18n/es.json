@@ -28,6 +28,7 @@
         "personalData": "Datos personales de",
         "edit": "Editar",
         "save": "Guardar",
+        "delete": "Eliminar",
         "name": "Nombre",
         "surname": "Apellidos",
         "email": "Correo electronico",
@@ -54,7 +55,10 @@
         "takeTicket": "Coger ticket",
         "view": "Ver",
         "close": "Cerrar",
-        "delete": "Eliminar"
+        "delete": "Eliminar",
+        "modalDeleteTicket": "Eliminar Ticket",
+        "modalQuestion": "Estas seguro de que quieres eliminar el ticket?",
+        "modalClose": "Cerrar"
     },
     "ticketForm": {
         "newTicket": "Nuevo Ticket",

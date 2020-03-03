@@ -28,6 +28,7 @@
         "personalData": "Personal data of",
         "edit": "Edit",
         "save": "Save",
+        "delete": "Delete",
         "name": "Name",
         "surname": "Surname",
         "email": "Email",
@@ -54,7 +55,10 @@
         "takeTicket": "Take ticket",
         "view": "View",
         "close": "Close",
-        "delete": "Delete"
+        "delete": "Delete",
+        "modalDeleteTicket": "Delete Ticket",
+        "modalQuestion": "Are you sure you want to delete the ticket?",
+        "modalClose": "Close"
     },
     "ticketForm": {
         "newTicket": "New Ticket",

@@ -3,8 +3,10 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'userProfile.personalData' | translate }} {{ user.name }} {{ user.surname }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <button *ngIf="!edit" type="button" class="btn btn-warning btn-md" (click)="editUser()"><i id="editUserIcon" class="material-icons">edit</i>{{ 'userProfile.edit' | translate }}</button>
-            <button *ngIf="edit" type="button" class="btn btn-warning btn-md" (click)="saveUser()"><i id="saveUserIcon" class="material-icons">save</i>{{ 'userProfile.save' | translate }}</button>
+            <button id="editUser" *ngIf="!edit" type="button" class="btn btn-warning btn-md" (click)="editUser()"><i id="editUserIcon" class="material-icons">edit</i>{{ 'userProfile.edit' | translate }}</button>
+            <button *ngIf="edit" type="button" class="btn btn-primary btn-md" (click)="saveUser()"><i id="saveUserIcon" class="material-icons">save</i>{{ 'userProfile.save' | translate }}</button>
+            <button *ngIf="!edit" type="button" class="btn btn-danger btn-md" data-toggle="modal"
+            data-target="#deleteUserModal" title="delete" (click)="sendModalData(user.id)"><i id="deleteUserIcon" class="material-icons">delete</i>{{ 'userProfile.delete' | translate }}</button>
         </div>
     </div>
     <div class="row">
@@ -93,4 +95,27 @@
             <li class="list-inline-item"><a href="#">Support</a></li>
         </ul>
     </footer>
+</div>
+
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel">{{ 'user.modalDeleteUser' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ 'user.modalQuestion' | translate }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">{{ 'user.modalClose' | translate }}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="deleteUser(modalData)">{{ 'user.modalDeleteUser' | translate }}</button>
+            </div>
+        </div>
+    </div>
 </div>
