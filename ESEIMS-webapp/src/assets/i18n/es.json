@@ -107,14 +107,17 @@
         "role": "Rol",
         "user": "Usuario",
         "admin": "Administrador",
-        "register": "Registrar"
+        "register": "Registrar",
+        "success": "Usuario registrado! Redirigiendo al login..."
     },
     "login": {
         "email": "Correo electronico",
         "password": "Contraseña",
         "signin": "Iniciar Sesion",
         "createAccount": "Para crear una cuenta haz click",
-        "here": "aqui"
+        "here": "aqui",
+        "wronglogin": "Error al iniciar sesion! Intentalo de nuevo",
+        "contact": "No puedes acceder? Contactanos en"
     },
     "pageNotFound": {
         "text": "404 Pagina No Encontrada"

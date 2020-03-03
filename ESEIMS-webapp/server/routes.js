@@ -7,8 +7,8 @@ var comment = require('./controllers/commentController');
 var alarm = require('./controllers/alarmController');
 var validator = require('./middlewares/validator');
 
-router.post('/login', auth.loginUser);
-router.post('/register', validator.checkData, auth.createUser);
+router.post('/login', validator.checkDataLogin, auth.loginUser);
+router.post('/register', validator.checkDataRegister, auth.createUser);
 
 router.get('/users', auth.verifyToken, user.listUsers);
 router.get('/users/:id', auth.verifyToken, user.listUser);

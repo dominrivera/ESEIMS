@@ -2,8 +2,9 @@ var Auth = require('../persistence/authDAO');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var SECRET_KEY = 'mysecretkey'; // configure it in config.js
+var { validationResult } = require('express-validator');
 var authCtrl = {};
-const { validationResult } = require('express-validator');
+
 
 authCtrl.createUser = function (req, res) {
     var errors = validationResult(req)
@@ -41,6 +42,10 @@ authCtrl.createUser = function (req, res) {
 
 
 authCtrl.loginUser = function (req, res) {
+    var errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(422).send('wrong_login')
+    }
     var userData = new Auth(req.body);
     Auth.loginUser(userData.email, function (err, user) {
         if(err) {
@@ -70,6 +75,7 @@ authCtrl.loginUser = function (req, res) {
 };
 
 authCtrl.verifyToken = function (req, res, next) {
+    console.log('verify token')
     if(!req.headers.authorization) {
         return res.status(401).send('Unauthorized');
     }

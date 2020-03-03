@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginData: any = {};
+  loginSuccess: boolean;
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -21,17 +22,14 @@ export class LoginComponent implements OnInit {
     console.log(this.loginData);
     this.auth.loginUser(this.loginData)
       .subscribe(
-        res => {
-          console.log(res)
-          localStorage.setItem('token', res['accessToken'])
-          this.router.navigate(['/dashboards'])
+        (data) => {
+          console.log(data)
+          localStorage.setItem('token', data['accessToken'])
+          this.router.navigate(['/'])
         },
-        err => { 
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            this.router.navigate(['login'])
-          }
-        }
+        (err) => { 
+          console.log(err)
+          this.loginSuccess = false;
       }
     )
   }
