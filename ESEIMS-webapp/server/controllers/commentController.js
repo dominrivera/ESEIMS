@@ -4,7 +4,7 @@ var commentCtrl = {};
 commentCtrl.listCommentsByTicketId = function (req, res) {
     Comment.getCommentsByTicketId(req.params.ticketId, function (err, comments) {
         if (err)
-            res.send(err);
+            res.status(404);
         res.json(comments);
     });
 };

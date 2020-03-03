@@ -4,7 +4,7 @@ var ticketCtrl = {};
 ticketCtrl.listTickets = function (req, res) {
     Ticket.getTickets(function (err, tickets) {
         if (err)
-            res.send(err);
+            res.status(404);
         res.json(tickets);
     });
 };
@@ -12,7 +12,7 @@ ticketCtrl.listTickets = function (req, res) {
 ticketCtrl.listTicket = function (req, res) {
     Ticket.getTicket(req.params.id, function (err, ticket) {
         if (err)
-            res.send(err);
+            res.status(404);
         res.json(ticket);
     });
 };
@@ -20,7 +20,7 @@ ticketCtrl.listTicket = function (req, res) {
 ticketCtrl.listTicketByUserId = function (req, res) {
     Ticket.getTicketByUserId(req.params.userId, function (err, ticket) {
         if (err)
-            res.send(err);
+            res.status(404);
         res.json(ticket);
     });
 };

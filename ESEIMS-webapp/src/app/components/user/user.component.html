@@ -3,12 +3,14 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'user.users' | translate }}</h1>
         <form class="form-inline my-2 my-lg-0">
-            <button type="button" class="btn btn-success btn-md" routerLink="/register"><i id="addUserIcon" class="material-icons">person_add</i>{{ 'user.newUser' | translate }}</button>
-            <input class="form-control ml-sm-5 mr-sm-2" type="search" placeholder="{{ 'user.enterId' | translate}}" aria-label="Search" name="dni"
-                [(ngModel)]="dni">
+            <button type="button" class="btn btn-success btn-md" routerLink="/register"><i id="addUserIcon"
+                    class="material-icons">person_add</i>{{ 'user.newUser' | translate }}</button>
+            <input class="form-control ml-sm-5 mr-sm-2" type="search" placeholder="{{ 'user.enterId' | translate}}"
+                aria-label="Search" name="dni" [(ngModel)]="dni">
             <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0"
                 (click)="searchByDNI(dni)">{{ 'user.search' | translate }}</button>
-            <button *ngIf="search" class="btn btn-outline-success my-2 my-sm-0" (click)="clearSearch()">{{ 'user.clear' | translate }}</button>
+            <button *ngIf="search" class="btn btn-outline-success my-2 my-sm-0"
+                (click)="clearSearch()">{{ 'user.clear' | translate }}</button>
         </form>
     </div>
     <div>
@@ -36,7 +38,7 @@
                             <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
                                 (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
                             <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
-                                data-target="#deleteUserModal" title="delete"  (click)="sendModalData(user.id)"><i
+                                data-target="#deleteUserModal" title="delete" (click)="sendModalData(user.id)"><i
                                     class="material-icons">delete</i></button>
                         </div>
                     </td>
@@ -55,7 +57,7 @@
                             <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
                                 (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
                             <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
-                                data-target="#deleteUserModal" title="delete"  (click)="sendModalData(user.id)"><i
+                                data-target="#deleteUserModal" title="delete" (click)="sendModalData(user.id)"><i
                                     class="material-icons">delete</i></button>
                         </div>
                     </td>
@@ -63,23 +65,26 @@
             </tbody>
         </table>
     </div>
-    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteUserModalLabel">{{ 'user.modalDeleteUser' | translate }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                        {{ 'user.modalQuestion' | translate }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'user.modalClose' | translate }}</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteUser(modalData)">{{ 'user.modalDeleteUser' | translate }}</button>
-                </div>
+</div>
+
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModalLabel">{{ 'user.modalDeleteUser' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ 'user.modalQuestion' | translate }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">{{ 'user.modalClose' | translate }}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="deleteUser(modalData)">{{ 'user.modalDeleteUser' | translate }}</button>
             </div>
         </div>
     </div>

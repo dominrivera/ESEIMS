@@ -3,12 +3,19 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ ticket.title }}</h1>
         <div *ngIf="ticket.status!='closed'" class="btn-toolbar mb-2 mb-md-0">
-            <button id="saveTicket" type="button" class="btn btn-primary btn-md" (click)="addComment(ticket.id)"><i id="saveTicketIcon" class="material-icons">save</i>{{ 'ticketDetails.save' | translate }}</button>
-            <button *ngIf="auth.isAdmin()" type="button" class="btn btn-warning btn-md" (click)="closeTicket(ticket)"><i id="closeTicketIcon" class="material-icons">close</i>{{ 'ticketDetails.close' | translate }}</button>
+            <button id="saveTicket" type="button" class="btn btn-primary btn-md" (click)="addComment(ticket.id)"><i
+                    id="saveTicketIcon" class="material-icons">save</i>{{ 'ticketDetails.save' | translate }}</button>
+            <button *ngIf="auth.isAdmin()" type="button" class="btn btn-warning btn-md" (click)="closeTicket(ticket)"><i
+                    id="closeTicketIcon"
+                    class="material-icons">close</i>{{ 'ticketDetails.close' | translate }}</button>
         </div>
         <div *ngIf="ticket.status=='closed'" class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-warning btn-md" (click)="reOpenTicket(ticket)"><i id="reopenTicketIcon" class="material-icons">undo</i>{{ 'ticketDetails.reopen' | translate }}</button>
-            <button type="button" class="btn btn-warning btn-md" (click)="deleteTicket(ticket.id)"><i id="deleteTicketIcon" class="material-icons">delete</i>{{ 'ticketDetails.delete' | translate }}</button>
+            <button id="reopenTicket" type="button" class="btn btn-warning btn-md" (click)="reOpenTicket(ticket)"><i
+                    id="reopenTicketIcon"
+                    class="material-icons">undo</i>{{ 'ticketDetails.reopen' | translate }}</button>
+            <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#deleteTicketModal"
+                (click)="sendModalData(ticket)"><i id="deleteTicketIcon"
+                    class="material-icons">delete</i>{{ 'ticketDetails.delete' | translate }}</button>
         </div>
     </div>
     <div class="row">
@@ -61,8 +68,8 @@
             <form class="needs-validation" novalidate>
                 <div *ngIf="ticket.status!='closed'" class="form-group">
                     <label for="comment">{{ 'ticketDetails.comment' | translate }}</label>
-                    <textarea [(ngModel)]="newComment.message" class="form-control" name="comment" id="comment"
-                        rows="5" placeholder="{{ 'ticketDetails.maxchar' | translate }}"></textarea>
+                    <textarea [(ngModel)]="newComment.message" class="form-control" name="comment" id="comment" rows="5"
+                        placeholder="{{ 'ticketDetails.maxchar' | translate }}"></textarea>
                 </div>
                 <div *ngFor="let comment of comments">
                     <hr>
@@ -83,4 +90,27 @@
             <li class="list-inline-item"><a href="#">Support</a></li>
         </ul>
     </footer>
+</div>
+
+<div class="modal fade" id="deleteTicketModal" tabindex="-1" role="dialog" aria-labelledby="deleteTicketModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteTicketModalLabel">{{ 'ticket.modalDeleteTicket' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ 'ticket.modalQuestion' | translate }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">{{ 'ticket.modalClose' | translate }}</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                    (click)="deleteComment(modalTicketId); deleteTicket(modalTicketId)">{{ 'ticket.modalDeleteTicket' | translate }}</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -16,6 +16,7 @@ export class TicketDetailsComponent implements OnInit {
   ticket: any = {};
   currentUser: any;
   currentUserRole: any;
+  modalTicketId: number;
 
   constructor(private route: ActivatedRoute, private ticketService: TicketService, private auth: AuthService, private router: Router) { }
 
@@ -27,12 +28,16 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketService.getTicket(id)
       .subscribe(
         (data) => {
-          this.ticket = data[0];
+          if(!data[0]) {
+            this.router.navigate(['/**'])
+           } else {
+             this.ticket = data[0];
+           }
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['login'])
+            if (err.status == 404) {
+              this.router.navigate(['/tickets'])
             }
           }
         }
@@ -46,7 +51,7 @@ export class TicketDetailsComponent implements OnInit {
         (err) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status == 401) {
-              this.router.navigate(['login'])
+              this.router.navigate(['/tickets'])
             }
           }
         }
@@ -109,6 +114,43 @@ export class TicketDetailsComponent implements OnInit {
           }
         }
       )
+  }
+
+  deleteTicket(ticketId) {
+    this.ticketService.deleteTicket(ticketId)
+      .subscribe(
+        (data) => {
+          console.log(data)
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/tickets']);
+          });
+        },
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['/tickets'])
+            }
+          }
+        }
+      )
+  }
+
+  deleteComment(ticketId) {
+    this.ticketService.deleteComments(ticketId)
+      .subscribe(
+        (data) => {
+          console.log(data)
+        },
+        (err) => {
+          console.log(err);
+          
+        }
+      )
+  }
+
+  sendModalData(ticket) {
+    var ticketId = ticket.id
+    this.modalTicketId = ticketId;
   }
 
 }

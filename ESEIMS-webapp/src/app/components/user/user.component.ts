@@ -60,6 +60,10 @@ export class UserComponent implements OnInit {
       )
   }
 
+  sendModalData(userId) {
+    this.modalData = userId;
+  }
+
   searchByDNI(dni) {
     if (dni) {
       this.search = true;
@@ -73,10 +77,6 @@ export class UserComponent implements OnInit {
     this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/users']);
     });
-  }
-
-  sendModalData(userId) {
-    this.modalData = userId;
   }
 
 }

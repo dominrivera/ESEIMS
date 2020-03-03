@@ -15,6 +15,7 @@ export class TicketComponent implements OnInit {
   selectedStatus: string = 'open';
   currentUser: any = {};
   currentUserName: string;
+  modalTicketId: number;
 
   constructor(protected ticketService: TicketService, private auth: AuthService, private router: Router) { }
 
@@ -132,6 +133,11 @@ export class TicketComponent implements OnInit {
           
         }
       )
+  }
+
+  sendModalData(ticket) {
+    var ticketId = ticket.id
+    this.modalTicketId = ticketId;
   }
 
 }

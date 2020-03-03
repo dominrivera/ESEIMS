@@ -15,6 +15,7 @@ export class UserProfileComponent implements OnInit {
   user: any = {};
   currentUserRole: any;
   edit: boolean = false;
+  modalData: number;
 
   constructor(private route: ActivatedRoute, private userService: UserService, public auth: AuthService, private router: Router) { }
 
@@ -25,8 +26,11 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUser(this.userId)
       .subscribe(
         (data) => {
-          console.log(data)
-          this.user = data[0];
+          if(!data[0]) {
+            this.router.navigate(['/**'])
+           } else {
+             this.user = data[0];
+           }
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
@@ -62,6 +66,29 @@ export class UserProfileComponent implements OnInit {
         }
       }
     )
+  }
+
+  deleteUser(userId) {
+    this.userService.deleteUser(userId)
+      .subscribe(
+        (data) => {
+          console.log(data)
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/users']);
+          });
+        },
+        (err) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status == 401) {
+              this.router.navigate(['/users'])
+            }
+          }
+        }
+      )
+  }
+
+  sendModalData(userId) {
+    this.modalData = userId;
   }
 
 }
