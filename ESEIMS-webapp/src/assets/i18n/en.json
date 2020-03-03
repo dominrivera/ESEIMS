@@ -107,14 +107,17 @@
         "role": "Role",
         "user": "User",
         "admin": "Admin",
-        "register": "Register"
+        "register": "Register",
+        "success": "User registered! Redirecting to login..."
     },
     "login": {
         "email": "Email",
         "password": "Password",
         "signin": "Sign In",
         "createAccount": "To create an account click",
-        "here": "here"
+        "here": "here",
+        "wronglogin": "Wrong login! Try again",
+        "contact": "Cannot access? Contact us in"
     },
     "pageNotFound": {
         "text": "404 Page Not Found"

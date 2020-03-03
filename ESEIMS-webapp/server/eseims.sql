@@ -28,8 +28,8 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `surname` varchar(50) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `surname` varchar(32) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(32) NOT NULL,

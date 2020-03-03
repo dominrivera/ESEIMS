@@ -21,12 +21,12 @@ import { TicketGuard } from './guards/ticket.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'alarms', component: AlarmComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] }, //dashboard-guard?
+  { path: 'dashboards', component: DashboardComponent, canActivate: [AuthGuard] }, //admin-guard?
   { path: 'tickets', component: TicketComponent, canActivate: [AuthGuard] },
-  { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard, TicketGuard] }, //ticket-guard
+  { path: 'tickets/:id', component: TicketDetailsComponent, canActivate: [AuthGuard, TicketGuard] },
   { path: 'ticket-form', component: TicketFormComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserComponent, canActivate: [AuthGuard, AdminGuard] },
-  { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard, ProfileGuard] }, //profile-guard
+  { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard, ProfileGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', component: PagenotfoundComponent }
