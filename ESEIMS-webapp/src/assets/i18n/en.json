@@ -65,7 +65,9 @@
         "submit": "Submit",
         "title": "Title",
         "description": "Description",
-        "maxchar": "Max. 200 characters"
+        "maxchar": "Max. 200 characters",
+        "createSuccess": "Ticket created!",
+        "createError": "Error creating ticket! Try again"
     },
     "ticketDetails": {
         "save": "Save",
@@ -79,7 +81,8 @@
         "created": "Created",
         "description": "Description",
         "comment": "Comment",
-        "maxchar": "Max. 400 characters"
+        "maxchar": "Max. 400 characters",
+        "createError": "Error saving ticket! Please, enter a valid comment"
     },
     "alarm": {
         "alarms": "Alarms",

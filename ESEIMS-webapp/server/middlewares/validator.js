@@ -3,11 +3,11 @@ const { body } = require('express-validator');
 exports.checkDataRegister = [
     body('name')
     .isAlpha()
-    .not().isEmpty()
+    .notEmpty()
     .isLength({ max: 32 }),
     body('surname')
     .isAlpha()
-    .not().isEmpty()
+    .notEmpty()
     .isLength({ max: 32 }),
     body('email')
     .isEmail()
@@ -24,5 +24,23 @@ exports.checkDataLogin = [
     body('email')
     .isEmail(),
     body('password')
-    .not().isEmpty(),
+    .notEmpty(),
+];
+
+exports.checkTicket = [
+    body('title')
+    .isString()
+    .notEmpty()
+    .isLength({ max: 40 }),
+    body('description')
+    .isString()
+    .notEmpty()
+    .isLength({ max: 200 }),
+];
+
+exports.checkComment = [
+    body('message')
+    .isString()
+    .notEmpty()
+    .isLength({ max: 400 }),
 ];
