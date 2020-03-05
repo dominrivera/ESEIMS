@@ -13,6 +13,7 @@ export class TicketFormComponent implements OnInit {
 
   ticket: any = {};
   currentUserName: string;
+  createSuccess: boolean;
 
   constructor(private auth: AuthService, private ticketService: TicketService, private router: Router) { }
 
@@ -23,22 +24,25 @@ export class TicketFormComponent implements OnInit {
     var currentUser = this.auth.getCurrentUser()
     ticket.creator = currentUser.name + ' ' + currentUser.surname;
     ticket.creatorId = currentUser.id;
-    
-    this.ticketService.addTicket(ticket)
-    .subscribe(
-      (data) => {
-        console.log(data);
-        // TODO: instead of redirect, show message, ticket created.
-        this.router.navigate(['/tickets']);
-      },
-      (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            console.log('error');
+
+    if (ticket.title && ticket.description) {
+      this.ticketService.addTicket(ticket)
+        .subscribe(
+          (data) => {
+            console.log(data);
+            this.createSuccess = true;
+            setTimeout(() => {
+              this.router.navigate(['/tickets', data]);
+            }, 2000);
+          },
+          (err) => {
+            console.log(err);
+            this.createSuccess = false;
           }
-        }
-      }
-    )
+        )
+    } else {
+      this.createSuccess = false;
+    }
   }
 
 }

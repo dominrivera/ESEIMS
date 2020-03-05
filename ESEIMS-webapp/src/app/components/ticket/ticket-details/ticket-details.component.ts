@@ -17,6 +17,7 @@ export class TicketDetailsComponent implements OnInit {
   currentUser: any;
   currentUserRole: any;
   modalTicketId: number;
+  commentSuccess: boolean;
 
   constructor(private route: ActivatedRoute, private ticketService: TicketService, private auth: AuthService, private router: Router) { }
 
@@ -67,18 +68,18 @@ export class TicketDetailsComponent implements OnInit {
         .subscribe(
           (data) => {
             console.log(data);
+            this.commentSuccess = true;
             this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
               this.router.navigate(['/tickets', this.newComment.ticketId]);
             });
           },
           (err) => {
-            if (err instanceof HttpErrorResponse) {
-              if (err.status == 401) {
-                this.router.navigate(['login'])
-              }
-            }
+            console.log(err);
+            this.commentSuccess = false;
           }
         )
+    } else {
+      this.commentSuccess = false;
     }
   }
 

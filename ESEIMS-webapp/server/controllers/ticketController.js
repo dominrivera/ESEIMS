@@ -1,4 +1,5 @@
 var Ticket = require('../persistence/ticketDAO');
+var { validationResult } = require('express-validator');
 var ticketCtrl = {};
 
 ticketCtrl.listTickets = function (req, res) {
@@ -26,6 +27,15 @@ ticketCtrl.listTicketByUserId = function (req, res) {
 };
 
 ticketCtrl.createTicket = function (req, res) {
+    var errors = validationResult(req)
+    if(!errors.isEmpty()){
+        var list = [];
+        errors.errors.forEach(error => {
+            list.push(error.param)
+        });
+        console.log('ASDF: ', list)
+        return res.status(422).send(list)
+    }
     var ticket = new Ticket(req.body);
     if (!ticket.title) {
         res.status(400).send({ error: true, message: 'Error creating ticket' });

@@ -1,4 +1,10 @@
 <div role="ticketForm" class="container">
+        <div id="createAlert" *ngIf="this.createSuccess==true" class="alert alert-success" role="alert">
+                {{ 'ticketForm.createSuccess' | translate }}
+            </div>
+        <div id="createAlert2" *ngIf="this.createSuccess==false" class="alert alert-danger" role="alert">
+                {{ 'ticketForm.createError' | translate }}
+            </div>
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'ticketForm.newTicket' | translate }}</h1>

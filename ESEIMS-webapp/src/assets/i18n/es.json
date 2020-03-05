@@ -65,7 +65,9 @@
         "submit": "Enviar",
         "title": "Titulo",
         "description": "Descripcion",
-        "maxchar": "Max. 200 caracteres"
+        "maxchar": "Max. 200 caracteres",
+        "createSuccess": "Ticket creado!",
+        "createError": "Error al crear el ticket! Intentalo de nuevo"
     },
     "ticketDetails": {
         "save": "Guardar",
@@ -79,7 +81,8 @@
         "created": "Creado",
         "description": "Descripcion",
         "comment": "Comentario",
-        "maxchar": "Max. 400 caracteres"
+        "maxchar": "Max. 400 caracteres",
+        "createError": "Error al guardar el ticket! Por favor, introduce un comentario valido"
     },
     "alarm": {
         "alarms": "Alarmas",
