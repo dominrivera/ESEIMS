@@ -18,7 +18,9 @@ export class AppComponent {
 
   showProfile() {
     var currentUser = this.auth.getCurrentUser()
-    this.router.navigate(['/users', currentUser.id]);
+    this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/users', currentUser.id]);
+    })
   }
 
   changeLanguage(language) {

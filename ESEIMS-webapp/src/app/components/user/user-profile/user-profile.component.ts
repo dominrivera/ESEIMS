@@ -15,14 +15,23 @@ export class UserProfileComponent implements OnInit {
   user: any = {};
   currentUserRole: any;
   edit: boolean = false;
+  newPassword: string = '';
   modalData: number;
+  validations: any = {
+    'name': false,
+    'surname': false,
+    'email': false,
+    'email_exists': false,
+    'password': false,
+    'dni': false
+  };
 
   constructor(private route: ActivatedRoute, private userService: UserService, public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.userId = parseInt(this.route.snapshot.paramMap.get('id'));
-    var currentUser = this.auth.getCurrentUser();
-    this.currentUserRole = currentUser.role;
+    //var currentUser = this.auth.getCurrentUser();
+    //this.currentUserRole = currentUser.role;
     this.userService.getUser(this.userId)
       .subscribe(
         (data) => {
@@ -30,6 +39,7 @@ export class UserProfileComponent implements OnInit {
             this.router.navigate(['/**'])
            } else {
              this.user = data[0];
+             console.log(this.user);
            }
         },
         (err) => {
@@ -47,6 +57,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   saveUser() {
+    // If user types password we send the new password to update it
+    if(this.newPassword != ''){
+      this.user.password = this.newPassword;
+    }
+    console.log(this.user)
     this.userService.editUser(this.user)
     .subscribe(
       (data) => {
@@ -58,12 +73,26 @@ export class UserProfileComponent implements OnInit {
         });
       },
       (err) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status == 401) {
-            // show message cannot edit
-            console.log(err)
+        console.log(err.error);
+          if (err.error == 'email_exists') {
+            this.validations.email_exists = true;
+          } else {
+            err.error.forEach(error => {
+              console.log(error);
+              if (error == 'name') {
+                this.validations.name = true;
+              } else if (error == 'surname') {
+                this.validations.surname = true;
+              } else if (error == 'email') {
+                this.validations.email = true;
+              } else if (error == 'password') {
+                this.validations.password = true;
+              } else if (error == 'dni') {
+                this.validations.dni = true;
+              }
+
+            });
           }
-        }
       }
     )
   }

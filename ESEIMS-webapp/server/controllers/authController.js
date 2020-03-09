@@ -61,8 +61,6 @@ authCtrl.loginUser = function (req, res) {
                 var expiresIn = Math.floor(Date.now() / 1000) + (60 * 60);
                 var accessToken = jwt.sign({id: user.id, name: user.name, surname: user.surname, role: user.role}, SECRET_KEY, {expiresIn: expiresIn});
                 var responseData = {
-                    //no debemos devolver la password al frontend
-                   // password: user.password,
                     accessToken: accessToken,
                     expiresIn: expiresIn
                 }

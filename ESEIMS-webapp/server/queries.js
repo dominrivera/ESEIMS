@@ -7,6 +7,7 @@ module.exports = {
     select_user: `SELECT * FROM users WHERE id = ?`,
     insert_user: `INSERT INTO users set ?`,
     update_user: `UPDATE users SET name = ?, surname = ?, dni = ?, password = ?, email = ?, role = ? WHERE id = ?`,
+    update_user_no_pass: `UPDATE users SET name = ?, surname = ?, dni = ?, email = ?, role = ? WHERE id = ?`,
     delete_user: `DELETE FROM users WHERE id = ?`,
 
     // Tickets
