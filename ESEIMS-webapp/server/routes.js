@@ -12,7 +12,7 @@ router.post('/register', validator.checkDataRegister, auth.createUser);
 
 router.get('/users', auth.verifyToken, user.listUsers);
 router.get('/users/:id', auth.verifyToken, user.listUser);
-router.put('/users/:id', auth.verifyToken, user.editUser);
+router.put('/users/:id', auth.verifyToken, validator.checkUserData, user.editUser);
 router.delete('/users/:id', auth.verifyToken, user.removeUser);
 
 router.get('/tickets', auth.verifyToken, ticket.listTickets);
