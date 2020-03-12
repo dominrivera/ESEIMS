@@ -14,15 +14,15 @@
         </form>
     </div>
     <div>
-        <table class="table table-hover table-dark">
+        <table id="userTable" class="table table-hover table-dark">
             <thead>
                 <tr>
-                    <th scope="col">{{ 'user.name' | translate }}</th>
-                    <th scope="col">{{ 'user.surname' | translate }}</th>
-                    <th scope="col">{{ 'user.email' | translate }}</th>
-                    <th scope="col">{{ 'user.idCard' | translate }}</th>
-                    <th scope="col">{{ 'user.role' | translate }}</th>
-                    <th scope="col">{{ 'user.created' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'user.name' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'user.surname' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'user.email' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'user.idCard' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'user.role' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'user.created' | translate }}</th>
                 </tr>
             </thead>
             <tbody *ngIf="!search">

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagenotfoundComponent implements OnInit {
 
+  showMessage: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.showMessage = true;
+    }, 1500);
   }
 
 }

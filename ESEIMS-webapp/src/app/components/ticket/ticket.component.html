@@ -25,17 +25,16 @@
         </div>
     </div>
     <div>
-        <table class="table table-hover table-dark">
+        <table id="ticketTable" class="table table-hover table-dark">
             <thead>
                 <tr>
-                    <th scope="col">{{ 'ticket.title' | translate }}</th>
-                    <th scope="col">{{ 'ticket.description' | translate }}</th>
-                    <th scope="col">{{ 'ticket.status' | translate }}</th>
-                    <th scope="col">{{ 'ticket.assignment' | translate }}</th>
-                    <th scope="col">{{ 'ticket.creator' | translate }}</th>
-                    <th scope="col">{{ 'ticket.created' | translate }}</th>
-                    <th scope="col">{{ 'ticket.modified' | translate }}</th>
-                    <th scope="col"></th>
+                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'ticket.title' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'ticket.description' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'ticket.status' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'ticket.assignment' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'ticket.creator' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'ticket.created' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(6)">{{ 'ticket.modified' | translate }}</th>
                 </tr>
             </thead>
             <tbody>
