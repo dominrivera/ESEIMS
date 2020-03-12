@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let ticket of tickets">
+                <tr *ngFor="let ticket of tickets | paginate: { itemsPerPage: 10, currentPage: page }">
                     <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.title }}</td>
                     <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.description }}</td>
                     <td *ngIf="(ticket.status==selectedStatus || selectedStatus=='all')">{{ ticket.status }}</td>
@@ -71,6 +71,9 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div id="pagination">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
 </div>
 

@@ -15,16 +15,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let alarm of alarms">
+                    <tr *ngFor="let alarm of alarms | paginate: { itemsPerPage: 10, currentPage: page }">
                         <td>{{ alarm.name }}</td>
                         <td>{{ alarm.state }}</td>
                         <td>{{ alarm.dashboardSlug }}</td>
                         <td>{{ alarm.newStateDate }}</td>
-                        <td>
-                            
-                        </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div id="pagination">
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
         </div>
     </div>

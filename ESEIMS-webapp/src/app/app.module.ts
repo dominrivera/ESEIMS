@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 // translation
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -43,6 +44,7 @@ import { TicketGuard } from './guards/ticket.guard';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

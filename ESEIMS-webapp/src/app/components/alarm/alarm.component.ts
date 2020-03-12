@@ -9,6 +9,7 @@ import { AlarmService } from 'src/app/services/alarm.service';
 export class AlarmComponent implements OnInit {
 
   alarms: any = [];
+  page: number = 1;
 
   constructor(private alarmService: AlarmService) { }
 

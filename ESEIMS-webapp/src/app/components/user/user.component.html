@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody *ngIf="!search">
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }">
                     <td>{{ user.name }}</td>
                     <td>{{ user.surname }}</td>
                     <td>{{ user.email }}</td>
@@ -45,7 +45,7 @@
                 </tr>
             </tbody>
             <tbody *ngIf="search">
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }">
                     <td *ngIf="user.dni == searchDNI">{{ user.name }}</td>
                     <td *ngIf="user.dni == searchDNI">{{ user.surname }}</td>
                     <td *ngIf="user.dni == searchDNI">{{ user.email }}</td>
@@ -64,6 +64,9 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div id="pagination">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
 </div>
 

@@ -16,6 +16,7 @@ export class UserComponent implements OnInit {
   searchDNI: string;
   search: boolean = false;
   modalData: number;
+  page: number = 1;
 
   constructor(protected userService: UserService, private auth: AuthService, private router: Router) { }
 

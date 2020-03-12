@@ -16,6 +16,7 @@ export class TicketComponent implements OnInit {
   currentUser: any = {};
   currentUserName: string;
   modalTicketId: number;
+  page: number = 1;
 
   constructor(protected ticketService: TicketService, private auth: AuthService, private router: Router) { }
 
