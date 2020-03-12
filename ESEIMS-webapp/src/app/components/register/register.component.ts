@@ -31,11 +31,15 @@ export class RegisterComponent implements OnInit {
         (data) => {
           console.log(data)
           this.registerSuccess = true;
-          setTimeout(() => {
-            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-              this.router.navigate(['/login']);
-            })
-          }, 4000);
+          if (this.auth.isAuthenticated()) {
+            this.router.navigate(['/users', data]);
+          } else {
+            setTimeout(() => {
+              this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/login']);
+              })
+            }, 4000);
+          }
         },
         (err) => {
           console.log(err.error);
@@ -63,22 +67,3 @@ export class RegisterComponent implements OnInit {
   }
 
 }
-
-
-/*  switch (error) {
-    case error=='name':
-      this.validations.name = true;
-      break;
-    case error=='surname':
-      this.validations.surname = true;
-      break;
-    case error=='email':
-      this.validations.email = true;
-      break;
-    case error=='password':
-      this.validations.password = true;
-      break;
-    case error='dni':
-      this.validations.dni = true;
-      break;
-  }*/

@@ -34,7 +34,7 @@ authCtrl.createUser = function (req, res) {
         Auth.addUser(userData, function (err, user) {
             if (err)
                 res.send(err);
-            res.json('user created');
+            res.json(user);
         });
     }
     });
