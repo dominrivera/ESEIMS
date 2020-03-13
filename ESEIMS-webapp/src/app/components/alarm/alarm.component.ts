@@ -15,15 +15,15 @@ export class AlarmComponent implements OnInit {
 
   ngOnInit() {
     this.alarmService.getAlarms()
-    .subscribe(
-      (data) => {
-        console.log(data);
-        this.alarms = data;
-      },
-      (err) => {
-        console.log(err)
-      }
-    )
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.alarms = data;
+        },
+        (err) => {
+          console.log(err)
+        }
+      )
   }
 
 }

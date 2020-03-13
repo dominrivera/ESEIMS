@@ -42,7 +42,6 @@ export class UserComponent implements OnInit {
     this.router.navigate(['/users', userId]);
   }
 
-  // TODO: show message when user is deleted.
   deleteUser(userId) {
     this.userService.deleteUser(userId)
       .subscribe(

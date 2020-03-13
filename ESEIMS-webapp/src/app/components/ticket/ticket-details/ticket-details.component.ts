@@ -29,11 +29,11 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketService.getTicket(id)
       .subscribe(
         (data) => {
-          if(!data[0]) {
+          if (!data[0]) {
             this.router.navigate(['/**'])
-           } else {
-             this.ticket = data[0];
-           }
+          } else {
+            this.ticket = data[0];
+          }
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
@@ -144,7 +144,6 @@ export class TicketDetailsComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-          
         }
       )
   }

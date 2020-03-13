@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,11 +26,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', data['accessToken'])
           this.router.navigate(['/'])
         },
-        (err) => { 
+        (err) => {
           console.log(err)
           this.loginSuccess = false;
-      }
-    )
+        }
+      )
   }
 
 }

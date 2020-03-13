@@ -35,12 +35,12 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUser(this.userId)
       .subscribe(
         (data) => {
-          if(!data[0]) {
+          if (!data[0]) {
             this.router.navigate(['/**'])
-           } else {
-             this.user = data[0];
-             console.log(this.user);
-           }
+          } else {
+            this.user = data[0];
+            console.log(this.user);
+          }
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
           }
         }
       )
-    }
+  }
 
   editUser() {
     this.edit = true;
@@ -58,22 +58,22 @@ export class UserProfileComponent implements OnInit {
 
   saveUser() {
     // If user types password we send the new password to update it
-    if(this.newPassword != ''){
+    if (this.newPassword != '') {
       this.user.password = this.newPassword;
     }
     console.log(this.user)
     this.userService.editUser(this.user)
-    .subscribe(
-      (data) => {
-        this.edit == false;
-        // show message user correctly edited
-        console.log(data)
-        this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/users', this.userId]);
-        });
-      },
-      (err) => {
-        console.log(err.error);
+      .subscribe(
+        (data) => {
+          this.edit == false;
+          // show message user correctly edited
+          console.log(data)
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/users', this.userId]);
+          });
+        },
+        (err) => {
+          console.log(err.error);
           if (err.error == 'email_exists') {
             this.validations.email_exists = true;
           } else {
@@ -90,11 +90,10 @@ export class UserProfileComponent implements OnInit {
               } else if (error == 'dni') {
                 this.validations.dni = true;
               }
-
             });
           }
-      }
-    )
+        }
+      )
   }
 
   deleteUser(userId) {
