@@ -143,7 +143,6 @@ export class TicketComponent implements OnInit {
   }
 
   sortTable(n) {
-    console.log(n);
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("ticketTable");
     switching = true;
@@ -166,8 +165,6 @@ export class TicketComponent implements OnInit {
         y = rows[i + 1].getElementsByTagName("td")[n];
         /* Check if the two rows should switch place,
         based on the direction, asc or desc: */
-        console.log(x.innerHTML);
-        console.log(y.innerHTML);
         if (dir == "asc") {
           if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
             // If so, mark as a switch and break the loop:
