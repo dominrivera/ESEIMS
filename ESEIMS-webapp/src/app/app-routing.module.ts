@@ -12,6 +12,7 @@ import { UserComponent } from './components/user/user.component';
 import { TicketDetailsComponent } from './components/ticket/ticket-details/ticket-details.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { TicketFormComponent } from './components/ticket/ticket-form/ticket-form.component';
+import { InfoComponent } from './components/info/info.component';
 
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'users/:id', component: UserProfileComponent, canActivate: [AuthGuard, ProfileGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'info', component: InfoComponent },
   { path: '**', component: PagenotfoundComponent }
 ];
 
@@ -50,5 +52,6 @@ export const routingComponents = [
   UserProfileComponent,
   LoginComponent,
   RegisterComponent,
-  PagenotfoundComponent
+  PagenotfoundComponent,
+  InfoComponent
 ];
