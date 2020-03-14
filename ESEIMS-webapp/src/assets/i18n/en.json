@@ -22,7 +22,9 @@
         "created": "Created",
         "modalDeleteUser": "Delete User",
         "modalQuestion": "Are you sure you want to delete the user?",
-        "modalClose": "Close"
+        "modalClose": "Close",
+        "deleteSuccess":"User removed!",
+        "deleteError": "Error removing user. Please try again."
     },
     "userProfile": {
         "personalData": "Personal data of",
@@ -30,20 +32,22 @@
         "save": "Save",
         "delete": "Delete",
         "name": "Name",
-        "validName": "Error: introduce a name",
+        "validName": "Error: introduce a valid name",
         "surname": "Surname",
-        "validSurname": "Error: introduce a surname",
+        "validSurname": "Error: introduce a valid surname",
         "email": "Email",
         "validEmail": "Error: email must have the extension @esei.uvigo.es",
         "validEmail2": "Error: email already in use",
         "password": "Password",
         "passEdit": "Type to edit password",
-        "validPassword": "Error: password must have at least 8 characters",
+        "validPassword": "Error: password must have at least 8 characters and maximum 20",
         "idCard": "ID card",
         "validId": "Error: introduce a valid ID",
         "role": "Role",
         "user": "User",
-        "admin": "Admin"
+        "admin": "Admin",
+        "deleteSuccess":"User removed!",
+        "deleteError": "Error removing user. Please try again."
     },
     "ticket": {
         "tickets": "Tickets",
@@ -65,7 +69,9 @@
         "delete": "Delete",
         "modalDeleteTicket": "Delete Ticket",
         "modalQuestion": "Are you sure you want to delete the ticket?",
-        "modalClose": "Close"
+        "modalClose": "Close",
+        "deleteSuccess": "Ticket removed!",
+        "deleteError": "Error removing ticket. Please try again."
     },
     "ticketForm": {
         "newTicket": "New Ticket",
@@ -89,7 +95,9 @@
         "description": "Description",
         "comment": "Comment",
         "maxchar": "Max. 400 characters",
-        "createError": "Error saving ticket! Please, enter a valid comment"
+        "createError": "Error saving ticket! Please, enter a valid comment",
+        "deleteSuccess": "Ticket removed!",
+        "deleteError": "Error removing ticket. Please try again."
     },
     "alarm": {
         "alarms": "Alarms",
@@ -103,15 +111,15 @@
         "text": "To create an account fill out the form below",
         "personalData": "Personal data",
         "name": "Name",
-        "validName": "Error: introduce a name",
+        "validName": "Error: introduce a valid name",
         "surname": "Surname",
-        "validSurname": "Error: introduce a surname",
+        "validSurname": "Error: introduce a valid surname",
         "email": "Email",
         "validEmail": "Error: email must have the extension @esei.uvigo.es",
         "validEmail2": "Error: email already in use",
         "password": "Password",
         "passchar": "Min. 8 characters",
-        "validPassword": "Error: password must have at least 8 characters",
+        "validPassword": "Error: password must have at least 8 characters and maximum 20",
         "idCard": "ID card",
         "validId": "Error: introduce a valid ID",
         "role": "Role",

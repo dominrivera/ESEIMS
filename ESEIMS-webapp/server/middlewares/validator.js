@@ -45,7 +45,7 @@ exports.checkUserData = [
     .contains('@esei.uvigo.es')
     .isLength({ min: 17, max: 32 }),
     body('password')
-    .if(body('password').exists())
+    .if(body('password').exists()) // if field password exists it means the password was changed, so we validate the new password
     .isLength({ min: 8 }),
     body('dni')
     .isIdentityCard('ES'), // if we set it to 'ES' it will check Spanish DNIs otherwise using 'any' -> ['ES', 'zh-TW', 'he-IL']

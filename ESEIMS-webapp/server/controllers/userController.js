@@ -4,6 +4,7 @@ var bcrypt = require('bcrypt');
 var { validationResult } = require('express-validator');
 var userCtrl = {};
 
+// returns all the users
 userCtrl.listUsers = function (req, res) {
     User.getUsers(function (err, users) {
         if (err)
@@ -12,6 +13,7 @@ userCtrl.listUsers = function (req, res) {
     });
 };
 
+// returns the user given an id
 userCtrl.listUser = function (req, res) {
     User.getUser(req.params.id, function (err, user) {
         if (err)
@@ -20,8 +22,9 @@ userCtrl.listUser = function (req, res) {
     });
 };
 
+// edits the user given an id
 userCtrl.editUser = function (req, res) {
-    console.log('editando: ', req.body);
+    // check if validator.js returns errors
     var errors = validationResult(req)
     if (!errors.isEmpty()) {
         var list = [];
@@ -38,6 +41,7 @@ userCtrl.editUser = function (req, res) {
             if ((user[0].dni != user_edit.dni) && (user[0].email == user_edit.email)) {
                 return res.status(422).send('email_exists')
             } else {
+                // if we receive a password we encrypt and update it
                 if (user_edit.password) {
                     var salt = bcrypt.genSaltSync()
                     user_edit.password = bcrypt.hashSync(user_edit.password, salt);
@@ -54,6 +58,7 @@ userCtrl.editUser = function (req, res) {
     });
 };
 
+// removes the user given an id
 userCtrl.removeUser = function (req, res) {
     User.deleteUser(req.params.id, function (err, user) {
         if (err)

@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
     'password': false,
     'dni': false
   };
+  deleteSuccess: boolean;
 
   constructor(private route: ActivatedRoute, private userService: UserService, public auth: AuthService, private router: Router) { }
 
@@ -35,12 +36,12 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUser(this.userId)
       .subscribe(
         (data) => {
-          if(!data[0]) {
+          if (!data[0]) {
             this.router.navigate(['/**'])
-           } else {
-             this.user = data[0];
-             console.log(this.user);
-           }
+          } else {
+            this.user = data[0];
+            console.log(this.user);
+          }
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
@@ -50,7 +51,7 @@ export class UserProfileComponent implements OnInit {
           }
         }
       )
-    }
+  }
 
   editUser() {
     this.edit = true;
@@ -58,22 +59,22 @@ export class UserProfileComponent implements OnInit {
 
   saveUser() {
     // If user types password we send the new password to update it
-    if(this.newPassword != ''){
+    if (this.newPassword != '') {
       this.user.password = this.newPassword;
     }
     console.log(this.user)
     this.userService.editUser(this.user)
-    .subscribe(
-      (data) => {
-        this.edit == false;
-        // show message user correctly edited
-        console.log(data)
-        this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/users', this.userId]);
-        });
-      },
-      (err) => {
-        console.log(err.error);
+      .subscribe(
+        (data) => {
+          this.edit == false;
+          // show message user correctly edited
+          console.log(data)
+          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+            this.router.navigate(['/users', this.userId]);
+          });
+        },
+        (err) => {
+          console.log(err.error);
           if (err.error == 'email_exists') {
             this.validations.email_exists = true;
           } else {
@@ -90,11 +91,10 @@ export class UserProfileComponent implements OnInit {
               } else if (error == 'dni') {
                 this.validations.dni = true;
               }
-
             });
           }
-      }
-    )
+        }
+      )
   }
 
   deleteUser(userId) {
@@ -102,15 +102,21 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data)
-          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/users']);
-          });
+          this.deleteSuccess = true;
+          setTimeout(() => {
+            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/users']);
+            });
+          }, 2500);
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['/users'])
-            }
+          if (err) {
+            this.deleteSuccess = false;
+            setTimeout(() => {
+              this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/users']);
+              });
+            }, 2500);
           }
         }
       )

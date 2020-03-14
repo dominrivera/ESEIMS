@@ -2,7 +2,6 @@ var config = {}
 
 config.port = process.env.PORT || 3000
 
-
 var db_config = {}
 
 db_config.host = process.env.DB_HOST || 'myhost'

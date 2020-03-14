@@ -1,11 +1,17 @@
 <div role="user" class="col-md-12 ml-sm-auto col-lg-20 px-4">
+        <div id="deleteAlert" *ngIf="this.deleteSuccess==true" class="alert alert-success" role="alert">
+                {{ 'user.deleteSuccess' | translate }}
+            </div>
+            <div id="deleteAlert2" *ngIf="this.deleteSuccess==false" class="alert alert-danger" role="alert">
+                    {{ 'user.deleteError' | translate }}
+                </div>
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'user.users' | translate }}</h1>
         <form class="form-inline my-2 my-lg-0">
             <button type="button" class="btn btn-success btn-md" routerLink="/register"><i id="addUserIcon"
                     class="material-icons">person_add</i>{{ 'user.newUser' | translate }}</button>
-            <input class="form-control ml-sm-5 mr-sm-2" type="search" placeholder="{{ 'user.enterId' | translate}}"
+            <input class="form-control ml-sm-5 mr-sm-2" type="text" placeholder="{{ 'user.enterId' | translate}}"
                 aria-label="Search" name="dni" [(ngModel)]="dni">
             <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0"
                 (click)="searchByDNI(dni)">{{ 'user.search' | translate }}</button>
@@ -14,19 +20,19 @@
         </form>
     </div>
     <div>
-        <table class="table table-hover table-dark">
+        <table id="userTable" class="table table-hover table-dark">
             <thead>
                 <tr>
-                    <th scope="col">{{ 'user.name' | translate }}</th>
-                    <th scope="col">{{ 'user.surname' | translate }}</th>
-                    <th scope="col">{{ 'user.email' | translate }}</th>
-                    <th scope="col">{{ 'user.idCard' | translate }}</th>
-                    <th scope="col">{{ 'user.role' | translate }}</th>
-                    <th scope="col">{{ 'user.created' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'user.name' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'user.surname' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'user.email' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'user.idCard' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'user.role' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'user.created' | translate }}</th>
                 </tr>
             </thead>
             <tbody *ngIf="!search">
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }">
                     <td>{{ user.name }}</td>
                     <td>{{ user.surname }}</td>
                     <td>{{ user.email }}</td>
@@ -45,7 +51,7 @@
                 </tr>
             </tbody>
             <tbody *ngIf="search">
-                <tr *ngFor="let user of users">
+                <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }">
                     <td *ngIf="user.dni == searchDNI">{{ user.name }}</td>
                     <td *ngIf="user.dni == searchDNI">{{ user.surname }}</td>
                     <td *ngIf="user.dni == searchDNI">{{ user.email }}</td>
@@ -64,6 +70,9 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div id="pagination">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
 </div>
 
