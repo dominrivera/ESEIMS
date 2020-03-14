@@ -2,6 +2,9 @@
     <div id="registerAlert" *ngIf="this.registerSuccess==true&&!auth.isAuthenticated()" class="alert alert-success" role="alert">
             {{ 'register.success' | translate }}
     </div>
+    <div id="registerAlert" *ngIf="this.registerSuccess==true&&auth.isAuthenticated()" class="alert alert-success" role="alert">
+        {{ 'register.adminSuccess' | translate }}
+</div>
     <div class="py-5 text-center">
         <h2 id="formTitle">{{ 'register.form' | translate }}</h2>
         <p *ngIf="!auth.isAuthenticated()" class="lead">

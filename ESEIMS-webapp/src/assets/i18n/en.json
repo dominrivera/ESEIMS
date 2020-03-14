@@ -126,7 +126,8 @@
         "user": "User",
         "admin": "Admin",
         "register": "Register",
-        "success": "User registered! Redirecting to login..."
+        "success": "User registered! Redirecting to login...",
+        "adminSuccess": "User registered!"
     },
     "login": {
         "email": "Email",

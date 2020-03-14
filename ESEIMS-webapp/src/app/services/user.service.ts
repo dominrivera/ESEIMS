@@ -18,6 +18,11 @@ export class UserService {
     return this.http.get(url)
   }
 
+  getUserByDNI(dni) {
+    const url = `/api/user/${dni}`;
+    return this.http.get(url)
+  }
+
   editUser(user) {
     const url = `/api/users/${user.id}`;
     const token = this.auth.getToken()

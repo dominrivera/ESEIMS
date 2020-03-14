@@ -12,6 +12,7 @@ router.post('/register', validator.checkDataRegister, auth.createUser);
 
 router.get('/users', auth.verifyToken, user.listUsers);
 router.get('/users/:id', auth.verifyToken, user.listUser);
+router.get('/user/:dni', auth.verifyToken, user.listUserByDNI);
 router.put('/users/:id', auth.verifyToken, validator.checkUserData, user.editUser);
 router.delete('/users/:id', auth.verifyToken, user.removeUser);
 
