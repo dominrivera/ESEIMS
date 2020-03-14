@@ -22,7 +22,9 @@
         "created": "Creado",
         "modalDeleteUser": "Eliminar Usuario",
         "modalQuestion": "Estas seguro de que quieres eliminar el usuario?",
-        "modalClose": "Cerrar"
+        "modalClose": "Cerrar",
+        "deleteSuccess": "Usuario eliminado!",
+        "deleteError": "Error eliminando el usuario. Por favor intentalo de nuevo."
     },
     "userProfile": {
         "personalData": "Datos personales de",
@@ -43,7 +45,9 @@
         "validId": "Error: introduce un DNI valido",
         "role": "Rol",
         "user": "Usuario",
-        "admin": "Administrador"
+        "admin": "Administrador",
+        "deleteSuccess":"Usuario eliminado!",
+        "deleteError": "Error eliminando el usuario. Por favor intentalo de nuevo."
     },
     "ticket": {
         "tickets": "Tickets",
@@ -65,7 +69,9 @@
         "delete": "Eliminar",
         "modalDeleteTicket": "Eliminar Ticket",
         "modalQuestion": "Estas seguro de que quieres eliminar el ticket?",
-        "modalClose": "Cerrar"
+        "modalClose": "Cerrar",
+        "deleteSuccess": "Ticket eliminado!",
+        "deleteError": "Error eliminando el ticket. Por favor intentalo de nuevo."
     },
     "ticketForm": {
         "newTicket": "Nuevo Ticket",
@@ -89,7 +95,9 @@
         "description": "Descripcion",
         "comment": "Comentario",
         "maxchar": "Max. 400 caracteres",
-        "createError": "Error al guardar el ticket! Por favor, introduce un comentario valido"
+        "createError": "Error al guardar el ticket! Por favor, introduce un comentario valido",
+        "deleteSuccess": "Ticket eliminado!",
+        "deleteError": "Error eliminando el ticket. Por favor intentalo de nuevo."
     },
     "alarm": {
         "alarms": "Alarmas",

@@ -17,6 +17,7 @@ export class TicketComponent implements OnInit {
   currentUserName: string;
   modalTicketId: number;
   page: number = 1;
+  deleteSuccess: boolean;
 
   constructor(protected ticketService: TicketService, private auth: AuthService, private router: Router) { }
 
@@ -110,15 +111,21 @@ export class TicketComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data)
-          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/tickets']);
-          });
+          this.deleteSuccess = true;
+          setTimeout(() => {
+            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/tickets']);
+            });
+          }, 2500);
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['/tickets'])
-            }
+          if (err) {
+            this.deleteSuccess = false;
+            setTimeout(() => {
+              this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/tickets']);
+              });
+            }, 2500);
           }
         }
       )

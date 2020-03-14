@@ -1,4 +1,10 @@
 <div role="userProfile" class="container">
+        <div id="deleteAlert" *ngIf="this.deleteSuccess==true" class="alert alert-success" role="alert">
+                {{ 'userProfile.deleteSuccess' | translate }}
+            </div>
+            <div id="deleteAlert2" *ngIf="this.deleteSuccess==false" class="alert alert-danger" role="alert">
+                    {{ 'userProfile.deleteError' | translate }}
+                </div>
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">{{ 'userProfile.personalData' | translate }} {{ user.name }} {{ user.surname }}</h1>

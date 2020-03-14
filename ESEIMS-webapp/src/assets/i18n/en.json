@@ -22,7 +22,9 @@
         "created": "Created",
         "modalDeleteUser": "Delete User",
         "modalQuestion": "Are you sure you want to delete the user?",
-        "modalClose": "Close"
+        "modalClose": "Close",
+        "deleteSuccess":"User removed!",
+        "deleteError": "Error removing user. Please try again."
     },
     "userProfile": {
         "personalData": "Personal data of",
@@ -43,7 +45,9 @@
         "validId": "Error: introduce a valid ID",
         "role": "Role",
         "user": "User",
-        "admin": "Admin"
+        "admin": "Admin",
+        "deleteSuccess":"User removed!",
+        "deleteError": "Error removing user. Please try again."
     },
     "ticket": {
         "tickets": "Tickets",
@@ -65,7 +69,9 @@
         "delete": "Delete",
         "modalDeleteTicket": "Delete Ticket",
         "modalQuestion": "Are you sure you want to delete the ticket?",
-        "modalClose": "Close"
+        "modalClose": "Close",
+        "deleteSuccess": "Ticket removed!",
+        "deleteError": "Error removing ticket. Please try again."
     },
     "ticketForm": {
         "newTicket": "New Ticket",
@@ -89,7 +95,9 @@
         "description": "Description",
         "comment": "Comment",
         "maxchar": "Max. 400 characters",
-        "createError": "Error saving ticket! Please, enter a valid comment"
+        "createError": "Error saving ticket! Please, enter a valid comment",
+        "deleteSuccess": "Ticket removed!",
+        "deleteError": "Error removing ticket. Please try again."
     },
     "alarm": {
         "alarms": "Alarms",

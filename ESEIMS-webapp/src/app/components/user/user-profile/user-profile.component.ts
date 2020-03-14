@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
     'password': false,
     'dni': false
   };
+  deleteSuccess: boolean;
 
   constructor(private route: ActivatedRoute, private userService: UserService, public auth: AuthService, private router: Router) { }
 
@@ -101,15 +102,21 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data)
-          this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/users']);
-          });
+          this.deleteSuccess = true;
+          setTimeout(() => {
+            this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+              this.router.navigate(['/users']);
+            });
+          }, 2500);
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['/users'])
-            }
+          if (err) {
+            this.deleteSuccess = false;
+            setTimeout(() => {
+              this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/users']);
+              });
+            }, 2500);
           }
         }
       )
