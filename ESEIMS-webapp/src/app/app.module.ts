@@ -22,6 +22,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { TicketDetailsComponent } from './components/ticket/ticket-details/ticket-details.component';
 import { TicketFormComponent } from './components/ticket/ticket-form/ticket-form.component';
+import { InfoComponent } from './components/info/info.component';
 
 import { UserService } from './services/user.service';
 import { TicketService } from './services/ticket.service';
