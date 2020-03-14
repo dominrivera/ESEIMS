@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
 
   users: any = [];
   dni: string;
-  searchDNI: string;
+  userByDNI: any = {};
   search: boolean = false;
   modalData: number;
   page: number = 1;
@@ -56,14 +56,14 @@ export class UserComponent implements OnInit {
           }, 2500);
         },
         (err) => {
-            if (err) {
-              this.deleteSuccess = false;
-              setTimeout(() => {
-                this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-                  this.router.navigate(['/users']);
-                });
-              }, 2500);
-            }
+          if (err) {
+            this.deleteSuccess = false;
+            setTimeout(() => {
+              this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+                this.router.navigate(['/users']);
+              });
+            }, 2500);
+          }
         }
       )
   }
@@ -73,11 +73,14 @@ export class UserComponent implements OnInit {
   }
 
   searchByDNI(dni) {
-    if (dni) {
-      this.search = true;
-      this.searchDNI = dni;
-    } else {
-      this.search = false;
+    if (dni && dni.length == 9) {
+      this.userService.getUserByDNI(dni)
+        .subscribe(
+          (data) => {
+            this.search = true
+            this.userByDNI = data[0]
+          }
+        );
     }
   }
 

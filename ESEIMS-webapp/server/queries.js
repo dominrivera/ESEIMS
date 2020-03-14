@@ -5,6 +5,7 @@ module.exports = {
     // Users
     select_users: `SELECT * FROM users`,
     select_user: `SELECT * FROM users WHERE id = ?`,
+    select_userDNI: `SELECT * FROM users WHERE dni = ?`,
     insert_user: `INSERT INTO users set ?`,
     update_user: `UPDATE users SET name = ?, surname = ?, dni = ?, password = ?, email = ?, role = ? WHERE id = ?`,
     update_user_no_pass: `UPDATE users SET name = ?, surname = ?, dni = ?, email = ?, role = ? WHERE id = ?`,

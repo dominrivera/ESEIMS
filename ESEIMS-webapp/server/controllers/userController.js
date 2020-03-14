@@ -22,6 +22,21 @@ userCtrl.listUser = function (req, res) {
     });
 };
 
+// returns the user given a dni
+userCtrl.listUserByDNI = function (req, res) {
+    var dni = req.params.dni;
+    var n = dni.length;
+    if (n != 9) {
+        return res.status(422).send('error');
+    } else {
+        User.getUserByDNI(req.params.dni, function (err, user) {
+            if (err)
+                res.send(err);
+            res.json(user);
+        });
+    }
+};
+
 // edits the user given an id
 userCtrl.editUser = function (req, res) {
     // check if validator.js returns errors

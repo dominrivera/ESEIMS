@@ -19,7 +19,23 @@ User.getUser = function (id, result) {
             result(err, null);
         }
         else {
-            delete res[0].password;
+            if (res[0]) {
+                delete res[0].password;
+            }
+            result(null, res);
+        }
+    });
+};
+
+User.getUserByDNI = function (dni, result) {
+    dbConnection.query(queries.select_userDNI, dni, function (err, res) {
+        if (err) {
+            result(err, null);
+        }
+        else {
+            if (res[0]) {
+                delete res[0].password;
+            }
             result(null, res);
         }
     });

@@ -32,13 +32,15 @@ export class RegisterComponent implements OnInit {
           console.log(data)
           this.registerSuccess = true;
           if (this.auth.isAuthenticated()) {
-            this.router.navigate(['/users', data]);
+            setTimeout(() => {
+              this.router.navigate(['/users', data]);
+            }, 2500);
           } else {
             setTimeout(() => {
               this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
                 this.router.navigate(['/login']);
               })
-            }, 4000);
+            }, 3000);
           }
         },
         (err) => {
