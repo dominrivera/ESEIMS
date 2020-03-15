@@ -69,12 +69,12 @@ echo "You can now connect using 'ssh ${serverName}@${ip_server}'"
 ##### Ubuntu VM #####
 echo "---- Creating ${uvmName} ----"
 
-ip_uvm=$(az vm create --name ${uvmName} --resource-group ${rgName} --image "${uvmImage}" --size ${uvmSize} --nsg "${serverName}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
+ip_uvm=$(az vm create --name ${uvmName} --resource-group ${rgName} --image "${uvmImage}" --size ${uvmSize} --nsg "${uvmName}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
 
 echo "Virtual machine created!"
 
 # Configure network rule
-az network nsg rule create -g $rgName --nsg-name "${serverName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
+az network nsg rule create -g $rgName --nsg-name "${uvmName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
 
 echo "Network configured!"
 
@@ -102,7 +102,7 @@ ip_wvm=$(az vm create --name ${wvmName} --resource-group ${rgName} --admin-usern
 echo "Virtual machine created!"
 
 # Configure network rule
-az network nsg rule create -g $rgName --nsg-name "${serverName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
+az network nsg rule create -g $rgName --nsg-name "${wvmName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
 
 echo "Network configured!"
 

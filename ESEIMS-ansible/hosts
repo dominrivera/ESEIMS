@@ -1,17 +1,18 @@
 [ubuntu-server]
+40.89.143.169
 
-[ubuntu-vm-test]
+[ubuntu-vm]
+40.89.181.41
 
 [windows-vm]
+20.188.44.251
 
 [ubuntu-server:vars]
-ansible_user=ubuntu
 
-[ubuntu-vm-test:vars]
-ansible_user=ubuntu
+[ubuntu-vm:vars]
 
 [windows-vm:vars]
 ansible_user=windows
-ansible_password=
+ansible_password=Admin12345678!
 ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore
