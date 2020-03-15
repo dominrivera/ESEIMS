@@ -17,6 +17,29 @@
         - pyOpenSSL
       become: yes
 
+
+# -- Influxdata --
+
+    - name: Import InfluxDB GPG signing key
+      apt_key:
+        url: "{{ influxdb_gpg_repo }}"
+        state: present
+      become: yes
+
+    - name: Add InfluxDB repository
+      apt_repository:
+        repo: "{{ influxdb_source_repo }}"
+        state: present
+      become: yes
+
+    - name: Install InfluxDB
+      apt:
+        update_cache: yes
+        name: influxdb
+        state: present
+        force_apt_get: yes
+      become: yes
+
     - name: Create directory for InfluxDB SSL cert
       file:
         path: /etc/ssl/influxdb
@@ -49,19 +72,17 @@
         owner: influxdb
       become: yes
 
-# -- Influxdata --
-
-    - name: Import InfluxDB GPG signing key
-      apt_key:
-        url: "{{ influxdb_gpg_repo }}"
+    - name: Create user Telegraf
+      influxdb_user:
+        user_name: "{{ influxdb_telegraf_user }}"
+        user_password: "{{ influxdb_telegraf_password }}"
+        admin: yes
+        login_username: "{{ influxdb_telegraf_user }}"
+        login_password: "{{ influxdb_telegraf_password }}"
+        ssl: yes
+        validate_certs: no
         state: present
-      become: yes
 
-    - name: Add InfluxDB repository
-      apt_repository:
-        repo: "{{ influxdb_source_repo }}"
-        state: present
-      become: yes
 
 # -- Telegraf --
 
@@ -88,14 +109,6 @@
       become: yes
 
 # -- InfluxDB --
-
-    - name: Install InfluxDB
-      apt:
-        update_cache: yes
-        name: influxdb
-        state: present
-        force_apt_get: yes
-      become: yes
 
     - name: Replace default InfluxDB configuration file
       template:

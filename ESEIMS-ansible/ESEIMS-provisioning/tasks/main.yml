@@ -4,14 +4,14 @@
 - name: "Configure Ubuntu Server"
   include_tasks: "configure_server.yml"
   when:
-    - ansible_os_family == "Debian" and ansible_fqdn == "ubuntu-server"
+    - ansible_os_family == "Debian" and ansible_hostname == "ubuntu-server"
 
-# also facts like ansible_nodename or ansible_hostname would be valid
+# check facts: ansible ubuntu-server -m setup
 
 - name: "Configure Ubuntu"
   include_tasks: "configure_ubuntu.yml"
   when:
-    - ansible_os_family == "Debian" and ansible_fqdn != "ubuntu-server"
+    - ansible_os_family == "Debian" and ansible_hostname != "ubuntu-server"
 
 - name: "Configure Windows"
   include_tasks: "configure_windows.yml"

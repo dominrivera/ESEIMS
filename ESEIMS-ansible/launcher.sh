@@ -117,13 +117,11 @@ done
 
 echo "Ports configured!"
 
-# Se actualiza el usuario de despliegue con la clave ssh pública
-#az vm user update --resource-group $rgName -n $wvmName -u $wvmUser --ssh-key-value "$(< ~/.ssh/id_ecdsa.pub)"
-
 ##### Ansible provisioning #####
 
 echo "---- Provisioning virtual machines ----"
 
-echo -e "[${serverName}]\n${ip_server}\n\n[${uvmName}]\n${ip_uvm}\n\n[${wvmName}]\n${ip_wvm}\n\n[${serverName}:vars]\nansible_user=${serverUser}\n\n[${uvmName}:vars]\nansible_user=${uvmUser}\n\n[${wvmName}:vars]\nansible_user=${wvmUser}\nansible_password=${wvmPassword}\nansible_connection=winrm\nansible_winrm_server_cert_validation=ignore" >> hosts_test
+echo -e "[${serverName}]\n${ip_server}\n\n[${uvmName}]\n${ip_uvm}\n\n[${wvmName}]\n${ip_wvm}\n\n[${serverName}:vars]\nansible_user=${serverUser}\n\n[${uvmName}:vars]\nansible_user=${uvmUser}\n\n[${wvmName}:vars]\nansible_user=${wvmUser}\nansible_password=${wvmPassword}\nansible_connection=winrm\nansible_winrm_server_cert_validation=ignore" >> hosts
 
-# ansible-playbook runansible.yml -vv
+echo "Run: ansible-playbook runansible.yml"
+#ansible-playbook runansible.yml -vv

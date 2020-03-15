@@ -45,7 +45,7 @@ influxdb_telegraf_password: 'password'
 
 ### Telegraf ###
 
-influxdb_address: 'https://40.89.174.174:8086'
+influxdb_address: 'https://40.89.143.169:8086'
 
 telegraf_username: 'telegraf'
 telegraf_password: 'password'
@@ -54,3 +54,7 @@ telegraf_password: 'password'
 
 grafana_port: '3001'
 grafana_auth_anonymous: true
+
+### WEB ###
+web_local_path: 'files/ESEIMS-webapp'
+web_remote_path: '/etc/ESEIMS-webapp'
