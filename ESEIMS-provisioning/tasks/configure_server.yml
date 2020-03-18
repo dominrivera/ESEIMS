@@ -49,15 +49,6 @@
     - name: wait
       pause: seconds=3
 
-#    - name: Create user Telegraf
-#      influxdb_user:
-#        user_name: "{{ influxdb_telegraf_user }}"
-#        user_password: "{{ influxdb_telegraf_password }}"
-#        admin: yes
-#        login_username: "{{ influxdb_telegraf_user }}"
-#        login_password: "{{ influxdb_telegraf_password }}"
-#        state: present
-
     - name: Create directory for InfluxDB SSL cert
       file:
         path: /etc/ssl/influxdb
@@ -101,16 +92,6 @@
     - name: wait
       pause: seconds=3
 
-#    - name: Create user Telegraf
-#      influxdb_user:
-#        user_name: "{{ influxdb_telegraf_user }}"
-#        user_password: "{{ influxdb_telegraf_password }}"
-#        admin: yes
-#        login_username: "{{ influxdb_telegraf_user }}"
-#        login_password: "{{ influxdb_telegraf_password }}"
-#        validate_certs: no
-#        state: present
-
 # -- Telegraf --
 
     - name: Install Telegraf
@@ -134,32 +115,6 @@
         name: telegraf
         state: started
       become: yes
-
-# -- InfluxDB --
-
-#    - name: Replace default InfluxDB configuration file
-#      template:
-#        src: "{{ influxdb_local_config }}"
-#        dest: "{{ influxdb_remote_config }}"
-#      notify:
-#        - Restart InfluxDB
-#      become: yes
-
-#    - name: Ensure InfluxDB is running
-#      service:
-#        name: influxdb
-#        state: started
-#      become: yes
-
-#    - name: Create user Telegraf
-#      influxdb_user:
-#        user_name: "{{ influxdb_telegraf_user }}"
-#        user_password: "{{ influxdb_telegraf_password }}"
-#        admin: yes
-#        login_username: "{{ influxdb_telegraf_user }}"
-#        login_password: "{{ influxdb_telegraf_password }}"
-#        ssl: yes
-#        validate_certs: no
 
 # -- Grafana --
 
@@ -304,7 +259,7 @@
         - '@ngx-translate/http-loader'
 
     - name: Build web
-      shell: ng build
+      command: ng build
       args:
         chdir: "{{ web_full_remote_path }}"
 
@@ -312,11 +267,11 @@
       pause: seconds=20
 
     - name: apply envar.sh
-      shell: source envar.sh
+      command: source envar.sh
       args:
         chdir: "{{ web_full_remote_path }}"
 
     - name: run web
-      shell: node server.js
+      command: node server.js
       args:
         chdir: "{{ web_full_remote_path }}"
