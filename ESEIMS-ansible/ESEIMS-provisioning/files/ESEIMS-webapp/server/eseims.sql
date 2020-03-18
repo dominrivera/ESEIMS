@@ -43,9 +43,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `dni`, `password`, `email`, `role`, `created`) VALUES
-(1, 'Juan', 'Blanco Garcia', '87654321A', '345623445ASFghtrBvV4344344', 'jbgarcia@esei.uvigo.es', 'admin', '2020-02-06 21:00:57'),
-(2, 'David', 'Perez Rodriguez', '12345678A', '1243513245FGETRGeferg43', 'dprodriguez@esei.uvigo.es', 'user', '2020-02-06 21:00:57');
-
+(1, 'Admin', 'Default', '66391711A', '$2b$10$jofbTlMQgr1iDc78U5pdx.jiedrOtUxgNMWM8P3sI9Yg2J5S8Gfnm', 'admin@esei.uvigo.es', 'admin', '2020-02-06 21:00:57'),
+(2, 'User', 'Default', '05382011B', '$2b$10$iNXn1NF3chEULcm0S2uSseyYqHCSAvXI71H6S6H8kJWjZ68JoACQO', 'user@esei.uvigo.es', 'user', '2020-02-06 21:00:57');
 -- --------------------------------------------------------
 
 --
@@ -75,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 INSERT INTO `tickets` (`id`, `title`, `description`, `status`, `assignment`, `creator`, `creatorId`, `created`, `modified`) VALUES
 (1, 'PC bloqueado', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor. Aliquam erat volutpat.', 'open', '', 'test creator', 2, '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (2, 'PC poco brillo de pantalla', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'in progress', 'jperez', 'test creator', 2, '2020-02-06 21:00:23', '2020-02-06 21:00:23'),
-(3, 'PC no responde', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'closed', '', 'test creator', '2020-02-06 21:00:57', 1, '2020-02-06 21:00:57');
+(3, 'PC no responde', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id condimentum purus. Cras efficitur dignissim ex, eget varius massa maximus ut. Duis et turpis dolor.', 'closed', '', 'test creator', 1, '2020-02-06 21:00:57', '2020-02-06 21:00:57');
 
 -- --------------------------------------------------------
 

@@ -27,3 +27,10 @@
     state: restarted
     enabled: yes
   become: yes
+
+- name: "Restart MySQL"
+  service:
+    name: mysql
+    state: restarted
+    enabled: yes
+  become: yes

@@ -1,7 +1,9 @@
 ---
 #- hosts: all
-#- hosts: ubuntu-server
+- hosts: ubuntu-server
 #- hosts: ubuntu-vm
-- hosts: windows-vm
+#- hosts: windows-vm
+  become: yes
+  become_user: root
   roles:
     - ESEIMS-provisioning

@@ -40,6 +40,24 @@
         force_apt_get: yes
       become: yes
 
+    - name: Start InfluxDB
+      service:
+        name: influxdb
+        state: started
+      become: yes
+
+    - name: wait
+      pause: seconds=3
+
+#    - name: Create user Telegraf
+#      influxdb_user:
+#        user_name: "{{ influxdb_telegraf_user }}"
+#        user_password: "{{ influxdb_telegraf_password }}"
+#        admin: yes
+#        login_username: "{{ influxdb_telegraf_user }}"
+#        login_password: "{{ influxdb_telegraf_password }}"
+#        state: present
+
     - name: Create directory for InfluxDB SSL cert
       file:
         path: /etc/ssl/influxdb
@@ -72,17 +90,26 @@
         owner: influxdb
       become: yes
 
-    - name: Create user Telegraf
-      influxdb_user:
-        user_name: "{{ influxdb_telegraf_user }}"
-        user_password: "{{ influxdb_telegraf_password }}"
-        admin: yes
-        login_username: "{{ influxdb_telegraf_user }}"
-        login_password: "{{ influxdb_telegraf_password }}"
-        ssl: yes
-        validate_certs: no
-        state: present
+    - name: Replace default InfluxDB configuration file
+      template:
+        src: "{{ influxdb_local_config }}"
+        dest: "{{ influxdb_remote_config }}"
+      notify:
+        - Restart InfluxDB
+      become: yes
 
+    - name: wait
+      pause: seconds=3
+
+#    - name: Create user Telegraf
+#      influxdb_user:
+#        user_name: "{{ influxdb_telegraf_user }}"
+#        user_password: "{{ influxdb_telegraf_password }}"
+#        admin: yes
+#        login_username: "{{ influxdb_telegraf_user }}"
+#        login_password: "{{ influxdb_telegraf_password }}"
+#        validate_certs: no
+#        state: present
 
 # -- Telegraf --
 
@@ -110,29 +137,29 @@
 
 # -- InfluxDB --
 
-    - name: Replace default InfluxDB configuration file
-      template:
-        src: "{{ influxdb_local_config }}"
-        dest: "{{ influxdb_remote_config }}"
-      notify:
-        - Restart InfluxDB
-      become: yes
+#    - name: Replace default InfluxDB configuration file
+#      template:
+#        src: "{{ influxdb_local_config }}"
+#        dest: "{{ influxdb_remote_config }}"
+#      notify:
+#        - Restart InfluxDB
+#      become: yes
 
-    - name: Ensure InfluxDB is running
-      service:
-        name: influxdb
-        state: started
-      become: yes
+#    - name: Ensure InfluxDB is running
+#      service:
+#        name: influxdb
+#        state: started
+#      become: yes
 
-    - name: Create user Telegraf
-      influxdb_user:
-        user_name: "{{ influxdb_telegraf_user }}"
-        user_password: "{{ influxdb_telegraf_password }}"
-        admin: yes
-        login_username: "{{ influxdb_telegraf_user }}"
-        login_password: "{{ influxdb_telegraf_password }}"
-        ssl: yes
-        validate_certs: no
+#    - name: Create user Telegraf
+#      influxdb_user:
+#        user_name: "{{ influxdb_telegraf_user }}"
+#        user_password: "{{ influxdb_telegraf_password }}"
+#        admin: yes
+#        login_username: "{{ influxdb_telegraf_user }}"
+#        login_password: "{{ influxdb_telegraf_password }}"
+#        ssl: yes
+#        validate_certs: no
 
 # -- Grafana --
 
@@ -161,7 +188,7 @@
         src: "{{ grafana_local_config }}"
         dest: "{{ grafana_remote_config }}"
       notify:
-        - restart Grafana
+        - Restart Grafana
       become: yes
 
     - name: Ensure Grafana is running
@@ -169,3 +196,127 @@
         name: grafana-server
         state: started
       become: yes
+
+##### WEB #####
+
+    - name: Copy Web folder
+      copy:
+        src: "{{ web_local_path }}"
+        dest: "{{ web_remote_path }}"
+      become: yes
+
+    - name: Install MySQL database
+      apt:
+        update_cache: yes
+        name: "{{ item }}"
+        state: present
+        force_apt_get: yes
+      loop:
+        - mysql-server
+        - libmysqlclient-dev
+      notify:
+        - Restart MySQL
+      become: yes
+
+    - name: Install the Python MySQLB module
+      pip:
+        name: MySQL-python
+        state: forcereinstall
+      become: yes
+
+#    - name: Create anonymous user account for localhost
+#      mysql_user:
+#        name: 'root'
+#        host: localhost
+#        state: present
+
+    - name: Create ESEIMS database
+      mysql_db:
+        name: eseims
+        state: present
+      become: yes
+
+    - name: Create admin user
+      mysql_user:
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
+        priv: 'eseims.*:ALL,GRANT'
+        state: present
+      become: yes
+
+    - name: Import eseims.sql to create database tables
+      mysql_db:
+        state: import
+        name: eseims
+        target: "{{ eseims_sql_path }}"
+      notify:
+        - Restart MySQL
+      become: yes
+
+    - name: Import Nodejs GPG signin key
+      apt_key:
+        url: "{{ nodejs_gpg_repo }}"
+        state: present
+      become: yes
+
+    - name: Install Nodejs repository
+      apt_repository:
+        repo: "{{ nodejs_source_repo }}"
+        state: present
+        update_cache: yes
+      become: yes
+
+    - name: Install Nodejs
+      apt:
+        update_cache: yes
+        name: nodejs
+        state: present
+        force_apt_get: yes
+      become: yes
+    - name: Install packages based on package.json.
+      npm:
+        path:
+
+    - name: Install web dependencies
+      npm:
+        name: "{{ item }}"
+        path: "{{ web_full_remote_path }}"
+      loop:
+        - 'bcrypt'
+        - 'body-parser'
+        - 'cors'
+        - 'express'
+        - 'express-list-endpoints'
+        - 'express-validator'
+        - 'jsonwebtoken'
+        - 'jwt-decode'
+        - 'mysql'
+        - 'morgan'
+        - 'material-design-icons'
+        - 'ngx-pagination'
+        - 'node-fetch'
+        - '@angular/cli'
+        - 'angular'
+        - '@angular-devkit/build-angular'
+        - '@angular/compiler-cli'
+        - '@angular/compiler'
+        - '@ngx-translate/core'
+        - '@ngx-translate/http-loader'
+
+    - name: Build web
+      shell: ng build
+      args:
+        chdir: "{{ web_full_remote_path }}"
+
+    - name: wait
+      pause: seconds=20
+
+    - name: apply envar.sh
+      shell: source envar.sh
+      args:
+        chdir: "{{ web_full_remote_path }}"
+
+    - name: run web
+      shell: node server.js
+      args:
+        chdir: "{{ web_full_remote_path }}"

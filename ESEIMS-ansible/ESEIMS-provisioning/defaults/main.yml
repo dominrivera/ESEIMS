@@ -56,5 +56,19 @@ grafana_port: '3001'
 grafana_auth_anonymous: true
 
 ### WEB ###
+
 web_local_path: 'files/ESEIMS-webapp'
 web_remote_path: '/etc/ESEIMS-webapp'
+
+web_full_remote_path: '{{ web_remote_path }}/ESEIMS-webapp'
+
+nodejs_version: 10
+ansible_distribution_release: 18.04
+nodejs_gpg_repo: 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
+nodejs_source_repo: 'deb https://deb.nodesource.com/node_{{ nodejs_version }}.x {{ ansible_distribution_release }} main'
+
+### MYSQL ###
+
+eseims_sql_path: '/etc/ESEIMS-webapp/ESEIMS-webapp/server/eseims.sql'
+mysql_user: 'admin'
+mysql_password: 'admin'
