@@ -47,6 +47,7 @@ Thumbs.db
 
 # Environment variables
 envar.sh
+.env
 
 #
 package-lock.json

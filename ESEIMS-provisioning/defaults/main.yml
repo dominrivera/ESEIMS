@@ -57,11 +57,13 @@ grafana_port: '3001'
 grafana_auth_anonymous: true
 
 ### WEB ###
-
+#
 web_local_path: 'files/ESEIMS-webapp'
 web_remote_path: '/etc'
-
 web_full_remote_path: '{{ web_remote_path }}/ESEIMS-webapp'
+
+envar_local_path: 'files/envar.sh'
+envar_remote_path: '/etc/profile.d'
 
 nodejs_version: 10
 ansible_distribution_release: 18.04

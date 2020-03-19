@@ -8,10 +8,11 @@ Before running ansible in a windows host, it has to be setup following next step
   - sudo killall remmina
 - Run remmina and configure RDP connection -> domain = ip, user and password
 - Disable windows firewall in control panel -> security -> windows firewall -> turn off option in left bar
-- Open windows powershell and run the following in order to configure winRM:
+- Open windows powershell and run the following in order to configure winRM (WinRM comes installed in windows by default but it is not enabled by default):
     - $url = "https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"
     - $file = "$env:temp\ConfigureRemotingForAnsible.ps1"
     - (New-Object -TypeName System.Net.WebClient).DownloadFile($url, $file)
     - powershell.exe -ExecutionPolicy ByPass -File $file
+- pip install pywinrm
 
 After following previous steps we run ansible and everything should be installed.

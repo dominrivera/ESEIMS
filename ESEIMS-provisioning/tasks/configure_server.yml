@@ -243,6 +243,7 @@
         - 'bcryptjs'
         - 'body-parser'
         - 'cors'
+        - 'dotenv'
         - 'express'
         - 'express-list-endpoints'
         - 'express-validator'
@@ -316,8 +317,8 @@
         state: import
         name: eseims
         target: "{{ eseims_sql_path }}"
-      notify:
-        - Restart MySQL
+#      notify:
+#        - Restart MySQL
       become: yes
 
     - name: Build web
@@ -326,15 +327,8 @@
         chdir: "{{ web_full_remote_path }}"
       become: yes
 
-    - name: apply envar.sh
-      shell: source envar.sh
-      args:
-        chdir: "{{ web_full_remote_path }}"
-        executable: /bin/bash
-      become: yes
-
     - name: run forever nodejs
-      command: forever start -l eseims.log -o out.log -e err.log server.js
+      command: forever start -l eseims.log -o out.log -e err.log -a server.js
       args:
         chdir: "{{ web_full_remote_path }}"
       become: yes
