@@ -27,6 +27,7 @@
         src: "{{ telegraf_local_config }}"
         dest: "{{ telegraf_remote_config }}"
       notify:
+        - Reload Telegraf
         - Restart Telegraf
       become: yes
 

@@ -8,6 +8,13 @@
     enabled: yes
   become: yes
 
+- name: "Reload Telegraf"
+  service:
+    name: telegraf
+    state: reloaded
+    enabled: yes
+  become: yes
+
 - name: "Restart Telegraf Windows"
   win_service:
     name: Telegraf
@@ -21,6 +28,13 @@
     enabled: yes
   become: yes
 
+- name: "Reload InfluxDB"
+  service:
+    name: influxdb
+    state: reloaded
+    enabled: yes
+  become: yes
+
 - name: "Restart Grafana"
   service:
     name: grafana-server
@@ -28,9 +42,23 @@
     enabled: yes
   become: yes
 
+- name: "Reload Grafana"
+  service:
+    name: grafana-server
+    state: reloaded
+    enabled: yes
+  become: yes
+
 - name: "Restart MySQL"
   service:
     name: mysql
     state: restarted
+    enabled: yes
+  become: yes
+
+- name: "Reload MySQL"
+  service:
+    name: mysql
+    state: reloaded
     enabled: yes
   become: yes

@@ -1,6 +1,6 @@
 var Auth = require('../persistence/authDAO');
 var jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var SECRET_KEY = 'mysecretkey'; // configure it in config.js
 var { validationResult } = require('express-validator');
 var authCtrl = {};

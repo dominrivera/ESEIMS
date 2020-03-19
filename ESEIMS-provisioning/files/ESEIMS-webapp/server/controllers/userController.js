@@ -1,6 +1,6 @@
 var User = require('../persistence/userDAO');
 var Auth = require('../persistence/authDAO');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var { validationResult } = require('express-validator');
 var userCtrl = {};
 

@@ -49,6 +49,40 @@
     - name: wait
       pause: seconds=3
 
+    - name: Check if https is configured
+      uri:
+        url: "{{ influxdb_address_local }}"
+        status_code: 400
+      failed_when: false
+      ignore_errors: yes
+      register: http
+
+    - name: Create telegraf user without ssl
+      influxdb_user:
+        user_name: "{{ influxdb_telegraf_user }}"
+        user_password: "{{ influxdb_telegraf_password }}"
+        admin: yes
+        login_username: "{{ influxdb_telegraf_user }}"
+        login_password: "{{ influxdb_telegraf_password }}"
+        state: present
+      when:
+        - http.status != 400
+      become: yes
+
+    - name: Create telegraf user with ssl
+      influxdb_user:
+        user_name: "{{ influxdb_telegraf_user }}"
+        user_password: "{{ influxdb_telegraf_password }}"
+        admin: yes
+        login_username: "{{ influxdb_telegraf_user }}"
+        login_password: "{{ influxdb_telegraf_password }}"
+        ssl: yes
+        validate_certs: no
+        state: present
+      when:
+        - http.status == 400
+      become: yes
+
     - name: Create directory for InfluxDB SSL cert
       file:
         path: /etc/ssl/influxdb
@@ -86,6 +120,7 @@
         src: "{{ influxdb_local_config }}"
         dest: "{{ influxdb_remote_config }}"
       notify:
+        - Reload InfluxDB
         - Restart InfluxDB
       become: yes
 
@@ -107,6 +142,7 @@
         src: "{{ telegraf_local_config }}"
         dest: "{{ telegraf_remote_config }}"
       notify:
+        - Reload Telegraf
         - Restart Telegraf
       become: yes
 
@@ -143,6 +179,7 @@
         src: "{{ grafana_local_config }}"
         dest: "{{ grafana_remote_config }}"
       notify:
+        - Reload Grafana
         - Restart Grafana
       become: yes
 
@@ -154,10 +191,85 @@
 
 ##### WEB #####
 
+    - name: Import Nodejs GPG signin key
+      apt_key:
+        url: "{{ nodejs_gpg_repo }}"
+        state: present
+      become: yes
+
+    - name: Install Nodejs repository
+      apt_repository:
+        repo: "{{ nodejs_source_repo }}"
+        state: present
+        update_cache: yes
+      become: yes
+
+    - name: Install Nodejs
+      apt:
+        update_cache: yes
+        name: nodejs
+        state: present
+        force_apt_get: yes
+      become: yes
+
+    - stat:
+        path: "{{ web_full_remote_path }}"
+      register: web
+
     - name: Copy Web folder
       copy:
         src: "{{ web_local_path }}"
         dest: "{{ web_remote_path }}"
+      when:
+        - not web.stat.exists
+      become: yes
+
+#    - name: Run npm install
+#      npm:
+#        path: "{{ web_full_remote_path }}"
+
+    - name: Install angular/cli
+      command: npm install -g @angular/cli
+      args:
+        chdir: "{{ web_full_remote_path }}"
+      become: yes
+
+    - name: Install web dependencies
+      npm:
+        name: "{{ item }}"
+        path: "{{ web_full_remote_path }}"
+        state: present
+      with_items:
+        - 'bcryptjs'
+        - 'body-parser'
+        - 'cors'
+        - 'express'
+        - 'express-list-endpoints'
+        - 'express-validator'
+        - 'jsonwebtoken'
+        - 'jwt-decode'
+        - 'mysql'
+        - 'morgan'
+        - 'material-design-icons'
+        - 'ngx-pagination'
+        - 'node-fetch'
+        - '@angular-devkit/build-angular'
+        - '@angular/compiler-cli'
+        - '@angular/compiler'
+        - '@ngx-translate/core'
+        - '@ngx-translate/http-loader'
+      become: yes
+
+    - name: Install forever to run nodejs as a daemon
+      command: sudo npm install -g forever
+      args:
+        chdir: "{{ web_full_remote_path }}"
+      become: yes
+
+    - name: Create npm link to fix dependecy issues
+      command: sudo npm link
+      args:
+        chdir: "{{ web_full_remote_path }}"
       become: yes
 
     - name: Install MySQL database
@@ -208,70 +320,21 @@
         - Restart MySQL
       become: yes
 
-    - name: Import Nodejs GPG signin key
-      apt_key:
-        url: "{{ nodejs_gpg_repo }}"
-        state: present
-      become: yes
-
-    - name: Install Nodejs repository
-      apt_repository:
-        repo: "{{ nodejs_source_repo }}"
-        state: present
-        update_cache: yes
-      become: yes
-
-    - name: Install Nodejs
-      apt:
-        update_cache: yes
-        name: nodejs
-        state: present
-        force_apt_get: yes
-      become: yes
-    - name: Install packages based on package.json.
-      npm:
-        path:
-
-    - name: Install web dependencies
-      npm:
-        name: "{{ item }}"
-        path: "{{ web_full_remote_path }}"
-      loop:
-        - 'bcrypt'
-        - 'body-parser'
-        - 'cors'
-        - 'express'
-        - 'express-list-endpoints'
-        - 'express-validator'
-        - 'jsonwebtoken'
-        - 'jwt-decode'
-        - 'mysql'
-        - 'morgan'
-        - 'material-design-icons'
-        - 'ngx-pagination'
-        - 'node-fetch'
-        - '@angular/cli'
-        - 'angular'
-        - '@angular-devkit/build-angular'
-        - '@angular/compiler-cli'
-        - '@angular/compiler'
-        - '@ngx-translate/core'
-        - '@ngx-translate/http-loader'
-
     - name: Build web
       command: ng build
       args:
         chdir: "{{ web_full_remote_path }}"
-
-    - name: wait
-      pause: seconds=20
+      become: yes
 
     - name: apply envar.sh
-      command: source envar.sh
+      shell: source envar.sh
       args:
         chdir: "{{ web_full_remote_path }}"
+        executable: /bin/bash
+      become: yes
 
-    - name: run web
-      command: node server.js
+    - name: run forever nodejs
+      command: forever start -l eseims.log -o out.log -e err.log server.js
       args:
         chdir: "{{ web_full_remote_path }}"
+      become: yes

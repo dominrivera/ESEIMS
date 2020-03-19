@@ -45,6 +45,7 @@ influxdb_telegraf_password: 'password'
 
 ### Telegraf ###
 
+influxdb_address_local: 'http://127.0.0.1:8086'
 influxdb_address: 'https://40.89.143.169:8086'
 
 telegraf_username: 'telegraf'
@@ -58,7 +59,7 @@ grafana_auth_anonymous: true
 ### WEB ###
 
 web_local_path: 'files/ESEIMS-webapp'
-web_remote_path: '/etc/ESEIMS-webapp'
+web_remote_path: '/etc'
 
 web_full_remote_path: '{{ web_remote_path }}/ESEIMS-webapp'
 
@@ -69,6 +70,6 @@ nodejs_source_repo: 'deb https://deb.nodesource.com/node_{{ nodejs_version }}.x 
 
 ### MYSQL ###
 
-eseims_sql_path: '/etc/ESEIMS-webapp/ESEIMS-webapp/server/eseims.sql'
+eseims_sql_path: '{{ web_full_remote_path }}/server/eseims.sql'
 mysql_user: 'admin'
 mysql_password: 'admin'
