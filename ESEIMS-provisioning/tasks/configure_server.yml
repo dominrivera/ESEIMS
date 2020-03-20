@@ -44,76 +44,11 @@
       service:
         name: influxdb
         state: started
+        enabled: yes
       become: yes
 
     - name: wait
       pause: seconds=3
-
-    - name: Check if https is configured
-      uri:
-        url: "{{ influxdb_address_local }}"
-        status_code: 400
-      failed_when: false
-      ignore_errors: yes
-      register: http
-
-    - name: Create telegraf user without ssl
-      influxdb_user:
-        user_name: "{{ influxdb_telegraf_user }}"
-        user_password: "{{ influxdb_telegraf_password }}"
-        admin: yes
-        login_username: "{{ influxdb_telegraf_user }}"
-        login_password: "{{ influxdb_telegraf_password }}"
-        state: present
-      when:
-        - http.status != 400
-      become: yes
-
-    - name: Create telegraf user with ssl
-      influxdb_user:
-        user_name: "{{ influxdb_telegraf_user }}"
-        user_password: "{{ influxdb_telegraf_password }}"
-        admin: yes
-        login_username: "{{ influxdb_telegraf_user }}"
-        login_password: "{{ influxdb_telegraf_password }}"
-        ssl: yes
-        validate_certs: no
-        state: present
-      when:
-        - http.status == 400
-      become: yes
-
-    - name: Create directory for InfluxDB SSL cert
-      file:
-        path: /etc/ssl/influxdb
-        state: directory
-        mode: '0755'
-        owner: influxdb
-        group: influxdb
-      become: yes
-
-    - name: Generate an OpenSSL private key with the default values (4096 bits, RSA)
-      openssl_privatekey:
-        path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.pem'
-        owner: influxdb
-      become: yes
-
-    - name: Generate an OpenSSL Certificate Signing Request
-      openssl_csr:
-        path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.csr'
-        privatekey_path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.pem'
-        common_name: '{{ ansible_fqdn }}'
-        owner: influxdb
-      become: yes
-
-    - name: Create OpenSSL certificate for https
-      openssl_certificate:
-        path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.crt'
-        privatekey_path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.pem'
-        csr_path: '/etc/ssl/influxdb/{{ ansible_fqdn }}.csr'
-        provider: selfsigned
-        owner: influxdb
-      become: yes
 
     - name: Replace default InfluxDB configuration file
       template:
@@ -126,6 +61,20 @@
 
     - name: wait
       pause: seconds=3
+
+#    - name: create user telegraf
+#      command: "influx -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+
+#    - name: Create telegraf user
+#      influxdb_user:
+#        user_name: "{{ influxdb_telegraf_user }}"
+#        user_password: "{{ influxdb_telegraf_password }}"
+#        admin: yes
+#        login_username: "{{ influxdb_telegraf_user }}"
+#        login_password: "{{ influxdb_telegraf_password }}"
+#        state: present
+#      become: yes
+
 
 # -- Telegraf --
 
@@ -150,6 +99,7 @@
       service:
         name: telegraf
         state: started
+        enabled: yes
       become: yes
 
 # -- Grafana --
@@ -187,6 +137,67 @@
       service:
         name: grafana-server
         state: started
+        enabled: yes
+      become: yes
+
+    - name: Configure influxDB as a grafana datasource
+      grafana_datasource:
+        name: "datasource-influxdb"
+        grafana_url: "{{ grafana_address }}"
+#        grafana_user: "{{ influxdb_telegraf_user }}"
+#        grafana_password: "{{ influxdb_telegraf_password }}"
+        grafana_user: "{{ grafana_admin_user }}"
+        grafana_password: "{{ grafana_admin_password }}"
+        ds_type: "influxdb"
+        url: "{{ influxdb_address }}"
+        database: "telegraf"
+        user: "{{ influxdb_telegraf_user }}"
+        password: "{{ influxdb_telegraf_password }}"
+
+#    - name: Create public dashboard
+#      grafana_dashboard:
+#        grafana_url: "{{ grafana_address }}"
+#        grafana_user: "{{ grafana_admin_user }}"
+#        grafana_password: "{{ grafana_admin_password }}"
+#        state: present
+#        uid: 'm5LfCz_Wz'
+#        path: "{{ grafana_public_dashboard }}"
+#      become: yes
+
+#    - name: Create linux dashboard
+#      grafana_dashboard:
+#        grafana_url: "{{ grafana_address }}"
+#        grafana_user: "{{ grafana_admin_user }}"
+#        grafana_password: "{{ grafana_admin_password }}"
+#        state: present
+#        uid: 'ftp1S9fWz'
+#        path: "{{ grafana_linux_dashboard }}"
+#      become: yes
+
+#    - name: Create windows dashboard
+#      grafana_dashboard:
+#        grafana_url: "{{ grafana_address }}"
+#        grafana_user: "{{ grafana_admin_user }}"
+#        grafana_password: "{{ grafana_admin_password }}"
+#        state: present
+#        uid: 'Ji3kJqBWk'
+#        path: "{{ grafana_windows_dashboard }}"
+#      become: yes
+
+    - name: copu grafana dashboard json file to /tmp
+      copy:
+        src: "{{ grafana_dashboards_local }}/{{ grafana_public_dashboard }}"
+        dest: "{{ grafana_dashboards_remote }}"
+      become: yes
+
+    - name: graf
+      grafana_dashboard:
+        grafana_url: "{{ grafana_address }}"
+        grafana_user: "{{ grafana_admin_user }}"
+        grafana_password: "{{ grafana_admin_password }}"
+        state: present
+        overwrite: yes
+        path: "{{ grafana_dashboards_remote }}/{{ grafana_public_dashboard }}"
       become: yes
 
 ##### WEB #####
@@ -284,6 +295,13 @@
         - libmysqlclient-dev
       notify:
         - Restart MySQL
+      become: yes
+
+    - name: Ensure MySQL is running
+      service:
+        name: mysql
+        state: started
+        enabled: yes
       become: yes
 
     - name: Install the Python MySQLB module

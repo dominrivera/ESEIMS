@@ -43,10 +43,15 @@ influxdb_telegraf_password: 'password'
 
 ### Template variables ###
 
-### Telegraf ###
+### InfluxDB ###
 
-influxdb_address_local: 'http://127.0.0.1:8086'
-influxdb_address: 'https://40.89.143.169:8086'
+influxdb_owner: 'influxdb'
+influxdb_group: 'influxdb'
+
+influxdb_port: '8086'
+influxdb_address: 'http://40.89.143.169:{{ influxdb_port }}'
+
+### Telegraf ###
 
 telegraf_username: 'telegraf'
 telegraf_password: 'password'
@@ -56,14 +61,20 @@ telegraf_password: 'password'
 grafana_port: '3001'
 grafana_auth_anonymous: true
 
+grafana_address: 'http://localhost:{{ grafana_port }}'
+grafana_admin_user: 'admin'
+grafana_admin_password: 'admin'
+grafana_dashboards_local: 'files/grafana-dashboards'
+grafana_dashboards_remote: '/tmp'
+grafana_public_dashboard: 'ESEIpublicDashboard.json'
+grafana_linux_dashboard: 'LinuxDashboard.json'
+grafana_windows_dashboard: 'WindowsDashboard.json'
+
 ### WEB ###
-#
+
 web_local_path: 'files/ESEIMS-webapp'
 web_remote_path: '/etc'
 web_full_remote_path: '{{ web_remote_path }}/ESEIMS-webapp'
-
-envar_local_path: 'files/envar.sh'
-envar_remote_path: '/etc/profile.d'
 
 nodejs_version: 10
 ansible_distribution_release: 18.04

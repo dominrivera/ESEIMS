@@ -10,6 +10,7 @@
 [ubuntu-server:vars]
 
 [ubuntu-vm:vars]
+ansible_user=drb
 
 [windows-vm:vars]
 ansible_user=windows
