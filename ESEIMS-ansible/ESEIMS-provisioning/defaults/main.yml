@@ -49,7 +49,7 @@ influxdb_owner: 'influxdb'
 influxdb_group: 'influxdb'
 
 influxdb_port: '8086'
-influxdb_address: 'http://40.89.143.169:{{ influxdb_port }}'
+influxdb_address: 'http://localhost:{{ influxdb_port }}'
 
 ### Telegraf ###
 

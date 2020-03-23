@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Generate ssh key for locally to add into azure virtual machines
+ssh-keygen -t rsa -N "" -f ~/.ssh/eseimskey
+
 # Login azure
 read -sp "Azure password: " AZ_PASS && echo && az login -u eseims@outlook.es -p $AZ_PASS
 
@@ -30,7 +33,7 @@ wvmPassword='Admin12345678!'
 wvmPorts=(443 5986)
 
 # Se crea un grupo de recursos.
-#az group create --name $rgName --location $rgLocation
+az group create --name $rgName --location $rgLocation
 
 ##### Ubuntu Server #####
 
@@ -60,7 +63,7 @@ done
 echo "Ports configured!"
 
 # Se actualiza el usuario de despliegue con la clave ssh pública
-az vm user update --resource-group $rgName -n $serverName -u $serverUser --ssh-key-value "$(< ~/.ssh/id_ecdsa.pub)"
+az vm user update --resource-group $rgName -n $serverName -u $serverUser --ssh-key-value "$(< ~/.ssh/eseimskey.pub)"
 
 
 echo "You can now connect using 'ssh ${serverName}@${ip_server}'"
@@ -90,40 +93,40 @@ done
 echo "Ports configured!"
 
 # Se actualiza el usuario de despliegue con la clave ssh pública
-az vm user update --resource-group $rgName -n $uvmName -u $uvmUser --ssh-key-value "$(< ~/.ssh/id_ecdsa.pub)"
+az vm user update --resource-group $rgName -n $uvmName -u $uvmUser --ssh-key-value "$(< ~/.ssh/eseimskey.pub)"
 
 echo "You can now connect using 'ssh ${uvmName}@${ip_uvm}'"
 
 ##### Windows VM #####
-echo "---- Creating ${wvmName} ----"
+#echo "---- Creating ${wvmName} ----"
 
-ip_wvm=$(az vm create --name ${wvmName} --resource-group ${rgName} --admin-username ${wvmUser} --admin-password ${wvmPassword} --image "${wvmImage}" --size ${wvmSize} --nsg "${wvmName}-NSG" --public-ip-address-allocation 'static' | jq -r '.publicIpAddress')
+#ip_wvm=$(az vm create --name ${wvmName} --resource-group ${rgName} --admin-username ${wvmUser} --admin-password ${wvmPassword} --image "${wvmImage}" --size ${wvmSize} --nsg "${wvmName}-NSG" --public-ip-address-allocation 'static' | jq -r '.publicIpAddress')
 
-echo "Virtual machine created!"
+#echo "Virtual machine created!"
 
 # Configure network rule
-az network nsg rule create -g $rgName --nsg-name "${wvmName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
+#az network nsg rule create -g $rgName --nsg-name "${wvmName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
 
-echo "Network configured!"
+#echo "Network configured!"
 
-priority=1000
+#priority=1000
 
-for port in "${wvmPorts[@]}"
-do
-	echo "Opening port: ${port}"
-	((priority=priority+10))
-	az vm open-port --port $port --priority $priority --resource-group $rgName --name $wvmName
-done
+#for port in "${wvmPorts[@]}"
+#do
+#	echo "Opening port: ${port}"
+#	((priority=priority+10))
+#	az vm open-port --port $port --priority $priority --resource-group $rgName --name $wvmName
+#done
 
-echo "Ports configured!"
+#echo "Ports configured!"
 
 # Se actualiza el usuario de despliegue con la clave ssh pública
 #az vm user update --resource-group $rgName -n $wvmName -u $wvmUser --ssh-key-value "$(< ~/.ssh/id_ecdsa.pub)"
 
 ##### Ansible provisioning #####
 
-echo "---- Provisioning virtual machines ----"
+#echo "---- Provisioning virtual machines ----"
 
-echo -e "[${serverName}]\n${ip_server}\n\n[${uvmName}]\n${ip_uvm}\n\n[${wvmName}]\n${ip_wvm}\n\n[${serverName}:vars]\nansible_user=${serverUser}\n\n[${uvmName}:vars]\nansible_user=${uvmUser}\n\n[${wvmName}:vars]\nansible_user=${wvmUser}\nansible_password=${wvmPassword}\nansible_connection=winrm\nansible_winrm_server_cert_validation=ignore" >> hosts_test
+#echo -e "[${serverName}]\n${ip_server}\n\n[${uvmName}]\n${ip_uvm}\n\n[${wvmName}]\n${ip_wvm}\n\n[${serverName}:vars]\nansible_user=${serverUser}\n\n[${uvmName}:vars]\nansible_user=${uvmUser}\n\n[${wvmName}:vars]\nansible_user=${wvmUser}\nansible_password=${wvmPassword}\nansible_connection=winrm\nansible_winrm_server_cert_validation=ignore" >> hosts_test
 
 # ansible-playbook runansible.yml -vv
