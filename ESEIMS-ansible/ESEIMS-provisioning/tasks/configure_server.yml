@@ -14,7 +14,6 @@
       with_items:
         - requests
         - influxdb
-        - pyOpenSSL
       become: yes
 
 
@@ -62,8 +61,8 @@
     - name: wait
       pause: seconds=3
 
-#    - name: create user telegraf
-#      command: "influx -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+    - name: create user telegraf
+      command: "influx -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
 
 #    - name: Create telegraf user
 #      influxdb_user:
