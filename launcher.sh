@@ -8,7 +8,7 @@ read -sp "Azure password: " AZ_PASS && echo && az login -u eseims@outlook.es -p 
 
 # common variables
 rgName='ESEIMS-RG'
-rgLocation='francecentral'
+rgLocation='westeurope'
 
 # ubuntu server variables
 serverSize='Standard_D2_v3'
