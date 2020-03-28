@@ -61,8 +61,11 @@
     - name: wait
       pause: seconds=3
 
-    - name: create user telegraf
-      command: "influx -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+#    - name: create user telegraf
+#command: "influx -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+
+#    - name: create telegraf database with retention policy
+#      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
 
 #    - name: Create telegraf user
 #      influxdb_user:
@@ -75,7 +78,12 @@
 #      become: yes
 
 
-# -- Telegraf --
+# -- Telegraf -- #
+
+    - name: Change syslog file permissions so that the logsparser plugin reads them
+      file:
+        path: /var/log/syslog
+        mode: '0644'
 
     - name: Install Telegraf
       apt:

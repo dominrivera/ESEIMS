@@ -1,7 +1,11 @@
 ---
 #- hosts: all
-- hosts: ubuntu-server
-#- hosts: ubuntu-vm
+- hosts: server
+  vars:
+    laboratory: "infra"
+#- hosts: laboratory-1
+#  vars:
+#    laboratory: "9A"
 #- hosts: windows-vm
   become: yes
   become_user: root

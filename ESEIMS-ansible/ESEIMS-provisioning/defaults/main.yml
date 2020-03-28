@@ -1,6 +1,10 @@
 ---
 # defaults file for ESEIMS-provisioning
 
+# Ansible playbook variables for telegraf configuration file
+
+laboratory_var: '{{ laboratory }}'
+
 # Tasks variables
 
 ### Playbook variables ###
