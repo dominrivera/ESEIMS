@@ -1,12 +1,7 @@
 ---
 #- hosts: all
-- hosts: server
-  vars:
-    laboratory: "infra"
-#- hosts: laboratory-1
-#  vars:
-#    laboratory: "9A"
-#- hosts: windows-vm
+- hosts: server-infra
+#- hosts: laboratory-SO5
   become: yes
   become_user: root
   roles:

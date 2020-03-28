@@ -149,7 +149,7 @@
 
     - name: Configure influxDB as a grafana datasource
       grafana_datasource:
-        name: "datasource-influxdb"
+        name: "${DS_INFLUXDB}"
         grafana_url: "{{ grafana_address }}"
 #        grafana_user: "{{ influxdb_telegraf_user }}"
 #        grafana_password: "{{ influxdb_telegraf_password }}"
@@ -161,21 +161,21 @@
         user: "{{ influxdb_telegraf_user }}"
         password: "{{ influxdb_telegraf_password }}"
 
-#    - name: copy grafana dashboard json file to /tmp
-#      copy:
-#        src: "{{ grafana_dashboards_local }}/{{ grafana_public_dashboard }}"
-#        dest: "{{ grafana_dashboards_remote }}"
-#      become: yes
+    - name: copy grafana dashboard json file to /tmp
+      copy:
+        src: "{{ grafana_dashboards_local }}/{{ grafana_host_dashboard }}"
+        dest: "{{ grafana_dashboards_remote }}"
+      become: yes
 
-#    - name: Import grafana dashboards from remote host
-#      grafana_dashboard:
-#        grafana_url: "{{ grafana_address }}"
-#        grafana_user: "{{ grafana_admin_user }}"
-#        grafana_password: "{{ grafana_admin_password }}"
-#        state: present
-#        overwrite: yes
-#        path: "{{ grafana_dashboards_remote }}/{{ grafana_public_dashboard }}"
-#      become: yes
+    - name: Import grafana dashboards from remote host
+      grafana_dashboard:
+        grafana_url: "{{ grafana_address }}"
+        grafana_user: "{{ grafana_admin_user }}"
+        grafana_password: "{{ grafana_admin_password }}"
+        state: present
+        overwrite: yes
+        path: "{{ grafana_dashboards_remote }}/{{ grafana_host_dashboard }}"
+      become: yes
 
 ##### WEB #####
 
@@ -281,7 +281,7 @@
         enabled: yes
       become: yes
 
-    - name: Install the Python MySQLB module
+    - name: Install the Python MySQL module
       pip:
         name: MySQL-python
         state: forcereinstall
@@ -323,7 +323,7 @@
       become: yes
 
     - name: run forever nodejs
-      command: forever start -l eseims.log -o out.log -e err.log -a server.js
+      command: sudo forever start -l eseims.log -o out.log -e err.log -a server.js
       args:
         chdir: "{{ web_full_remote_path }}"
       become: yes
