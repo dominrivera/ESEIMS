@@ -17,8 +17,9 @@ config.db_config = db_config;
 var grafana_config = {}
 
 grafana_config.host = process.env.GRAFANA_HOST || 'somehost'
-grafana_config.apikey = process.env.GRAFANA_API_KEY || ''
 grafana_config.port = process.env.GRAFANA_PORT || 3001
+grafana_config.username = process.env.GRAFANA_USERNAME || ''
+grafana_config.password = process.env.GRAFANA_PASSWORD || ''
 
 config.grafana_config = grafana_config;
 

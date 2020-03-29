@@ -3,14 +3,8 @@ var config = require('../config')
 var alarmCtrl = {};
 
 alarmCtrl.getAlarms = (req, res) => {
-    var options = {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': config.grafana_config.apikey
-        }
-    }
-    var url = 'http://' + config.grafana_config.host + ':' + config.grafana_config.port + '/api/alerts';
-    return fetch(url, options)
+    var url = 'http://' + config.grafana_config.username + ':' + config.grafana_config.password + '@' + config.grafana_config.host + ':' + config.grafana_config.port + '/api/alerts';
+    return fetch(url)
         .then(res => res.json())
         .then(alarms => res.send(alarms))
 }
