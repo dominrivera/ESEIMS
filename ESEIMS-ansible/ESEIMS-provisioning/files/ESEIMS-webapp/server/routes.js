@@ -28,6 +28,9 @@ router.get('/comments/:ticketId', auth.verifyToken, comment.listCommentsByTicket
 router.post('/comments', auth.verifyToken, validator.checkComment, comment.createComment);
 router.delete('/comments/:ticketId', auth.verifyToken, comment.removeCommentsByTicketId);
 
-router.get('/alarms', alarm.getAlarms);
+router.get('/alarms', alarm.listAlarms);
+router.post('/alarms', alarm.saveAlarm);
+router.put('/alarms/:id', auth.verifyToken, alarm.editAlarm);
+router.delete('/alarms/:id', auth.verifyToken, alarm.removeAlarm);
 
 module.exports = router;
