@@ -16,6 +16,18 @@
         - influxdb
       become: yes
 
+    - stat:
+        path: "{{ files_remote_path }}"
+      register: eseims
+
+    - name: Copy files to /etc/ESEIMS
+      copy:
+        src: "{{ files_local_path }}"
+        dest: "{{ files_remote_path }}"
+      when:
+        - not eseims.stat.exists
+      become: yes
+
 
 # -- Influxdata --
 
@@ -109,7 +121,48 @@
         enabled: yes
       become: yes
 
-# -- Grafana --
+# -- Kapacitor -- #
+
+    - name: Download Kapacitor
+      get_url:
+        url: "{{ kapacitor_pkg_url }}"
+        dest: '/tmp'
+      become: yes
+
+    - name: Install Kapacitor
+      apt:
+        deb: "/tmp/{{ kapacitor_pkg }}"
+      become: yes
+
+    - name: Replace default Kapacitor config file
+      template:
+        src: "{{ kapacitor_local_config }}"
+        dest: "{{ kapacitor_remote_config }}"
+      notify:
+        - Reload Kapacitor
+        - Restart Kapacitor
+      become: yes
+
+    - name: Ensure Kapacitor is running
+      service:
+        name: kapacitor
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: Alarms definition
+      command: kapacitor define "{{ item }}" -tick "{{ item }}.tick"
+      args:
+        chdir: "{{ alarms_remote_path }}"
+      loop: "{{ alarms }}"
+      become: yes
+
+    - name: Enable alarms
+      command: kapacitor enable "{{ item }}"
+      loop: "{{ alarms }}"
+
+
+# -- Grafana -- #
 
     - name: Import Grafana GPG signing key
       apt_key:
@@ -161,7 +214,7 @@
         user: "{{ influxdb_telegraf_user }}"
         password: "{{ influxdb_telegraf_password }}"
 
-    - name: copy grafana dashboard json file to /tmp
+    - name: copy grafana dashboards json file to ESEIMS
       copy:
         src: "{{ grafana_dashboards_local }}/{{ grafana_host_dashboard }}"
         dest: "{{ grafana_dashboards_remote }}"
@@ -200,17 +253,17 @@
         force_apt_get: yes
       become: yes
 
-    - stat:
-        path: "{{ web_full_remote_path }}"
-      register: web
-
-    - name: Copy Web folder
-      copy:
-        src: "{{ web_local_path }}"
-        dest: "{{ web_remote_path }}"
-      when:
-        - not web.stat.exists
-      become: yes
+#    - stat:
+#        path: "{{ web_full_remote_path }}"
+#      register: web
+#
+#    - name: Copy Web folder
+#      copy:
+#        src: "{{ web_local_path }}"
+#        dest: "{{ web_remote_path }}"
+#      when:
+#        - not web.stat.exists
+#      become: yes
 
 #    - name: Run npm install
 #      npm:

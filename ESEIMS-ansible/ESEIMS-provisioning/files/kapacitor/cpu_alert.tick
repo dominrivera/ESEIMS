@@ -1,0 +1,22 @@
+dbrp "telegraf"."autogen"
+
+var alert_name = 'cpu_usage_high'
+var limit = 90
+
+batch
+    |query('''
+        SELECT MAX(usage_user) AS value
+        FROM "telegraf"."autogen"."cpu"
+        WHERE cpu = 'cpu-total' AND time >= now() - 1m
+    ''')
+        .period(5m)
+        .every(1m)
+        .groupBy('host', 'lab')
+    |alert()
+        .id(alert_name)
+        .info(lambda: "value" < limit)
+        .crit(lambda: "value" > limit)
+        .details('')
+        .message('{{index .Fields "value"}}')
+        .post()
+          .endpoint('eseims')

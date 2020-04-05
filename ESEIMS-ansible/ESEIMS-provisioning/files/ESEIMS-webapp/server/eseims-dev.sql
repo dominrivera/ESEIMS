@@ -121,6 +121,7 @@ DROP TABLE IF EXISTS `alarms`;
 CREATE TABLE IF NOT EXISTS `alarms` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varchar(20) NOT NULL,
+  `value` int NOT NULL,
   `level` varchar(10) NOT NULL,
   `host` varchar(30) NOT NULL,
   `laboratory` varchar(10) NOT NULL,
@@ -135,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `alarms` (
 -- Volcado de datos para la tabla `alarms`
 --
 
-INSERT INTO `alarms` (`id`, `type`, `level`, `host`, `laboratory`, `status`, `assignment`, `created`, `modified`) VALUES
-(1, 'cpu_usage_high', 'WARNING', '192.168.0.33', '31', 'open', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
-(2, 'load_high', 'CRITICAL', '192.168.0.31', '33', 'in progress', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
-(3, 'disk_usage_high', 'CRITICAL', '192.168.0.20', '31', 'closed', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10')
+INSERT INTO `alarms` (`id`, `type`, `value`, `level`, `host`, `laboratory`, `status`, `assignment`, `created`, `modified`) VALUES
+(1, 'cpu_usage_high', 'WARNING', '85', '192.168.0.33', '31', 'open', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(2, 'load_high', 'CRITICAL', '6', '192.168.0.31', '33', 'in progress', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(3, 'disk_usage_high', 'CRITICAL', '96', '192.168.0.20', '31', 'closed', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10')

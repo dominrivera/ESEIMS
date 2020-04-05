@@ -14,6 +14,7 @@ alarmCtrl.saveAlarm = function (req, res) {
     var alarm = new Alarm(req.body);
     var new_alarm = {
         "type": alarm.id,
+        "value": alarm.message,
         "level": alarm.level,
         "host": alarm.data.series[0].tags.host,
         "laboratory": alarm.data.series[0].tags.laboratory

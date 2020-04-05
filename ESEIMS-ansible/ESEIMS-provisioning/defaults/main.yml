@@ -8,8 +8,6 @@ server_ip: '{{ server }}'
 
 # Tasks variables
 
-### Playbook variables ###
-
 influxdb_gpg_repo: 'https://repos.influxdata.com/influxdb.key'
 influxdb_source_repo: 'deb https://repos.influxdata.com/ubuntu trusty stable'
 
@@ -38,6 +36,11 @@ telegraf_repo_win: 'https://dl.influxdata.com/telegraf/releases/{{ telegraf_pack
 telegraf_local_config_win: 'templates/telegraf/telegraf_win.j2'
 telegraf_remote_config_win: '{{ telegraf_dir_win }}\telegraf\telegraf.conf'
 
+kapacitor_pkg_url: 'https://dl.influxdata.com/kapacitor/releases/kapacitor_1.5.4-1_amd64.deb'
+kapacitor_pkg: 'kapacitor_1.5.4-1_amd64.deb'
+kapacitor_local_config: 'templates/kapacitor/kapacitor.conf'
+kapacitor_remote_config: '/etc/kapacitor/kapacitor.conf'
+
 telegraf_params_win:
   - --service install
   - --config {{ telegraf_remote_config_win }}
@@ -46,7 +49,10 @@ telegraf_params_win:
 influxdb_telegraf_user: 'telegraf'
 influxdb_telegraf_password: 'password'
 
-### Template variables ###
+### ESEIMS ###
+
+files_local_path: 'files/'
+files_remote_path: '/etc/ESEIMS'
 
 ### InfluxDB ###
 
@@ -61,6 +67,16 @@ influxdb_address: 'http://{{ server_ip }}:{{ influxdb_port }}'
 telegraf_username: 'telegraf'
 telegraf_password: 'password'
 
+### Kapacitor ###
+
+alarms_local_path: 'files/alarms'
+alarms_remote_path: '{{ files_remote_path }}/alarms'
+alarms:
+  - 'cpu_alert'
+  - 'disk_alert'
+  - 'load_alert'
+  - 'memory_alert'
+
 ### Grafana ###
 
 grafana_port: '3001'
@@ -70,15 +86,16 @@ grafana_address: 'http://{{ server_ip }}:{{ grafana_port }}'
 grafana_admin_user: 'admin'
 grafana_admin_password: 'admin'
 grafana_dashboards_local: 'files/grafana-dashboards'
-grafana_dashboards_remote: '/tmp'
+grafana_dashboards_remote: '{{ files_remote_path }}/grafana-dashboards'
 grafana_public_dashboard: 'ESEIpublicDashboard.json'
 grafana_host_dashboard: 'ESEIMS_host_overview.json'
 
 ### WEB ###
 
+nodejs_port: '3000'
+web_address: 'http://{{ server_ip }}:{{ nodejs_port }}'
 web_local_path: 'files/ESEIMS-webapp'
-web_remote_path: '/etc'
-web_full_remote_path: '{{ web_remote_path }}/ESEIMS-webapp'
+web_full_remote_path: '{{ files_remote_path }}/ESEIMS-webapp'
 
 nodejs_version: 10
 ansible_distribution_release: 18.04
