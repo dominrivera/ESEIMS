@@ -138,9 +138,9 @@
       template:
         src: "{{ kapacitor_local_config }}"
         dest: "{{ kapacitor_remote_config }}"
-      notify:
-        - Reload Kapacitor
-        - Restart Kapacitor
+#      notify:
+#        - Reload Kapacitor
+#        - Restart Kapacitor
       become: yes
 
     - name: Ensure Kapacitor is running
