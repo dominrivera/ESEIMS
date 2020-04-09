@@ -46,4 +46,4 @@ Alarm.deleteAlarm = function(id, result){
     });
 };
 
-module.exports = Ticket;
+module.exports = Alarm;

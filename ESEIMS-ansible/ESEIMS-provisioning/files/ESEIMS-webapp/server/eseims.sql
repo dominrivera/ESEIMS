@@ -102,3 +102,34 @@ INSERT INTO `comments` (`id`, `ticketId`, `message`, `creator`, `created`) VALUE
 (1, 1, 'el PC numero 2 del aula 31 esta bloqueado en la pantaall de inicio', 'Javier Garcia', '2020-02-06 20:59:10'),
 (2, 2, 'la pantalla del pc 3 del aula 33 parece que esta apagada y el boton para subir el brillo no funciona', 'Juan Martinez', '2020-02-06 21:00:23'),
 (3, 2, 'Hola juan, voy a revisarlo', 'Pedro Perez', '2020-02-06 22:00:57');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alarms`
+--
+
+DROP TABLE IF EXISTS `alarms`;
+
+CREATE TABLE IF NOT EXISTS `alarms` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL,
+  `level` enum('WARNING', 'CRITICAL') NOT NULL,
+  `value` int NOT NULL,
+  `host` varchar(30) NOT NULL,
+  `laboratory` varchar(10) NOT NULL,
+  `status` enum('open','in progress','closed') NOT NULL,
+  `assignment` varchar(40),
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table ALARMS';
+
+	  --
+-- Volcado de datos para la tabla `alarms`
+--
+
+INSERT INTO `alarms` (`id`, `type`, `level`, `value`, `host`, `laboratory`, `status`, `assignment`, `created`, `modified`) VALUES
+(1, 'cpu_usage_high', 'WARNING', '85', '192.168.0.33', '31', 'open', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(2, 'load_high', 'CRITICAL', '6', '192.168.0.31', '33', 'in progress', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(3, 'disk_usage_high', 'CRITICAL', '96', '192.168.0.20', '31', 'closed', 'Javier Garcia', '2020-02-06 20:59:10', '2020-02-06 20:59:10');

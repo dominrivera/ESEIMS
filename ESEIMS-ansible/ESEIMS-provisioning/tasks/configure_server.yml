@@ -1,17 +1,20 @@
 ---
 
-    - name: Install python-pip
+    - name: Install python-pip and python-apt
       apt:
         update-cache: yes
-        name: python-pip
+        name: '{{ item }}'
         state: present
+      loop:
+        - python-apt
+        - python-pip
       become: yes
 
     - name: Install dependencies
       pip:
         name: '{{ item }}'
         state: forcereinstall
-      with_items:
+      loop:
         - requests
         - influxdb
       become: yes
@@ -73,22 +76,23 @@
     - name: wait
       pause: seconds=3
 
-#    - name: create user telegraf
-#command: "influx -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+    - name: start influxdb
+      service:
+        name: influxdb
+        state: restarted
+      become: yes
 
 #    - name: create telegraf database with retention policy
 #      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
 
-#    - name: Create telegraf user
-#      influxdb_user:
-#        user_name: "{{ influxdb_telegraf_user }}"
-#        user_password: "{{ influxdb_telegraf_password }}"
-#        admin: yes
-#        login_username: "{{ influxdb_telegraf_user }}"
-#        login_password: "{{ influxdb_telegraf_password }}"
-#        state: present
-#      become: yes
+    - name: create telegraf database
+      command: influx -execute "CREATE USER admin WITH PASSWORD 'admin' WITH ALL PRIVILEGES"
 
+    - name: create user telegraf
+      command: "influx -database telegraf -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+
+#    - name: create telegraf database with retention policy
+#      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
 
 # -- Telegraf -- #
 
@@ -135,12 +139,11 @@
       become: yes
 
     - name: Replace default Kapacitor config file
-      template:
+      copy:
         src: "{{ kapacitor_local_config }}"
         dest: "{{ kapacitor_remote_config }}"
-#      notify:
-#        - Reload Kapacitor
-#        - Restart Kapacitor
+      notify:
+        - Restart Kapacitor
       become: yes
 
     - name: Ensure Kapacitor is running
@@ -204,8 +207,6 @@
       grafana_datasource:
         name: "${DS_INFLUXDB}"
         grafana_url: "{{ grafana_address }}"
-#        grafana_user: "{{ influxdb_telegraf_user }}"
-#        grafana_password: "{{ influxdb_telegraf_password }}"
         grafana_user: "{{ grafana_admin_user }}"
         grafana_password: "{{ grafana_admin_password }}"
         ds_type: "influxdb"
@@ -253,22 +254,6 @@
         force_apt_get: yes
       become: yes
 
-#    - stat:
-#        path: "{{ web_full_remote_path }}"
-#      register: web
-#
-#    - name: Copy Web folder
-#      copy:
-#        src: "{{ web_local_path }}"
-#        dest: "{{ web_remote_path }}"
-#      when:
-#        - not web.stat.exists
-#      become: yes
-
-#    - name: Run npm install
-#      npm:
-#        path: "{{ web_full_remote_path }}"
-
     - name: Install angular/cli
       command: npm install -g @angular/cli@8.3.23
       args:
@@ -280,7 +265,7 @@
         name: "{{ item }}"
         path: "{{ web_full_remote_path }}"
         state: present
-      with_items:
+      loop:
         - 'bcryptjs'
         - 'body-parser'
         - 'cors'
@@ -294,7 +279,6 @@
         - 'morgan'
         - 'material-design-icons'
         - 'ngx-pagination'
-        - 'node-fetch'
         - '@angular-devkit/build-angular@0.803.23'
         - '@angular/compiler-cli'
         - '@angular/compiler'
@@ -323,8 +307,8 @@
       loop:
         - mysql-server
         - libmysqlclient-dev
-      notify:
-        - Restart MySQL
+#      notify:
+#        - Restart MySQL
       become: yes
 
     - name: Ensure MySQL is running
@@ -365,8 +349,6 @@
         state: import
         name: eseims
         target: "{{ eseims_sql_path }}"
-#      notify:
-#        - Restart MySQL
       become: yes
 
     - name: Build web

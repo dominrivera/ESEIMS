@@ -48,29 +48,29 @@ wvmPorts=(443 5986)
 # Además se extrae la IP pública de la máquina y se guarda en la variable $ip_server.
 #echo "---- Creating ${serverName} ----"
 
-#ip_server=$(az vm create --name ${serverName} --resource-group ${rgName} --image "${serverImage}" --size ${serverSize} --nsg "${serverName}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
+ip_server=$(az vm create --name ${serverName} --resource-group ${rgName} --image "${serverImage}" --size ${serverSize} --nsg "${serverName}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
 
 #echo "Virtual machine created!"
 
 # Create network rules
-#az network nsg rule create -g $rgName --nsg-name "${serverName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
+az network nsg rule create -g $rgName --nsg-name "${serverName}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
 
 # Abrir puertos para el servidor
 # 22: ssh, 443: SSL, 3000: nodejs, 3001: grafana, 3306: MySQL, 8086: influxDB
 
-#priority=1000
+priority=1000
 
-#for port in "${serverPorts[@]}"
-#do
-#	echo "Opening port: ${port}"
-#	((priority=priority+10))
-#	az vm open-port --port $port --priority $priority --resource-group $rgName --name $serverName
-#done
+for port in "${serverPorts[@]}"
+do
+	echo "Opening port: ${port}"
+	((priority=priority+10))
+	az vm open-port --port $port --priority $priority --resource-group $rgName --name $serverName
+done
 
 #echo "Ports configured!"
 
 # Se actualiza el usuario de despliegue con la clave ssh pública
-#az vm user update --resource-group $rgName -n $serverName -u $serverUser --ssh-key-value "$(< ~/.ssh/eseimskey.pub)"
+az vm user update --resource-group $rgName -n $serverName -u $serverUser --ssh-key-value "$(< ~/.ssh/eseimskey.pub)"
 
 
 echo "You can now connect using 'ssh ${serverName}@${ip_server}'"
@@ -108,28 +108,28 @@ echo "You can now connect using 'ssh ${uvmName}@${ip_uvm}'"
 
 echo "---- Creating ${uvm2Name} ----"
 
-ip_uvm2=$(az vm create --name ${uvm2Name} --resource-group ${rgName} --image "${uvm2Image}" --size ${uvm2Size} --nsg "${uvm2Name}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
+#ip_uvm2=$(az vm create --name ${uvm2Name} --resource-group ${rgName} --image "${uvm2Image}" --size ${uvm2Size} --nsg "${uvm2Name}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
 
 echo "Virtual machine created!"
 
 # Configure network rule
-az network nsg rule create -g $rgName --nsg-name "${uvm2Name}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
+#az network nsg rule create -g $rgName --nsg-name "${uvm2Name}-NSG" -n "ICMP" --priority 350 --source-address-prefixes '*' --source-port-ranges '*' --destination-address-prefixes '*' --destination-port-ranges '*' --access 'Allow' --protocol 'ICMP'
 
 echo "Network configured!"
 
-priority=1000
+#priority=1000
 
-for port in "${uvm2Ports[@]}"
-do
-    echo "Opening port: ${port}"
-      ((priority=priority+10))
-    az vm open-port --port $port --priority $priority --resource-group $rgName --name $uvm2Name
-done
+#for port in "${uvm2Ports[@]}"
+#do
+#    echo "Opening port: ${port}"
+#      ((priority=priority+10))
+#    az vm open-port --port $port --priority $priority --resource-group $rgName --name $uvm2Name
+#done
 
 echo "Ports configured!"
 
 # Se actualiza el usuario de despliegue con la clave ssh pública
-az vm user update --resource-group $rgName -n $uvm2Name -u $uvm2User --ssh-key-value "$(< ~/.ssh/eseimskey.pub)"
+#az vm user update --resource-group $rgName -n $uvm2Name -u $uvm2User --ssh-key-value "$(< ~/.ssh/eseimskey.pub)"
 
 echo "You can now connect using 'ssh ${uvm2Name}@${ip_uvm2}'"
 
