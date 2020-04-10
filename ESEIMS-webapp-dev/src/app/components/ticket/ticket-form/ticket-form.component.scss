@@ -1,0 +1,43 @@
+[role="ticketForm"] {
+    padding-top: 133px; /* Space for fixed navbar */
+  }
+  
+@media (min-width: 768px) {
+    [role="ticketForm"] {
+      padding-top: 60px; /* Space for fixed navbar */
+    }
+}
+
+textarea {
+  resize: none;
+}
+
+.container {
+    max-width: 960px;
+}
+  
+.lh-condensed { line-height: 1.25; }
+  
+#formTitle {
+    padding-top: 60px;
+}
+
+#sendTicketIcon {
+  vertical-align: middle; 
+  text-align: center;
+  margin-right: 8px;
+}
+
+#createAlert {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  background-color: #6dec8c;
+  color: #0a2b11;
+}
+
+#createAlert2 {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}

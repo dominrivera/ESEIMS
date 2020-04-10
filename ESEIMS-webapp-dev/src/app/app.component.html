@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" routerLink="/">ESEIMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/alarms">{{ 'app.alarms' | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/dashboards">{{ 'app.dashboards' | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="auth.isAuthenticated()" routerLink="/tickets">{{ 'app.tickets' | translate }}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="auth.isAuthenticated() && auth.isAdmin()" routerLink="/users">{{ 'app.users' | translate }}</a>
+      </li>
+    </ul>
+    <div id="languages">
+        <div>
+          <button id="langButton1" class="btn btn-outline-dark my-2 my-sm-0" [ngClass]="{'active': defaultLang == 'es'}" (click)="changeLanguage('es')" title="Español">ES</button>
+          <button id="langButton2" class="btn btn-outline-dark my-2 my-sm-0" [ngClass]="{'active': defaultLang == 'en'}" (click)="changeLanguage('en')" title="English">EN</button>
+        </div>
+      </div>
+    <button *ngIf="!auth.isAuthenticated()" class="btn btn-outline-info my-2 my-sm-0" type="submit" routerLink="/login">{{ 'app.login' | translate }}</button>
+    <div *ngIf="auth.isAuthenticated()" class="dropdown show">
+        <a class="btn btn-dark dropdown" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="material-icons">account_circle</i>
+        </a>
+      
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" type="button" (click)="showProfile()">{{ 'app.profile' | translate }}</a>
+          <a class="dropdown-item" type="button" (click)="auth.logoutUser()">{{ 'app.logout' | translate }}</a>
+        </div>
+      </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

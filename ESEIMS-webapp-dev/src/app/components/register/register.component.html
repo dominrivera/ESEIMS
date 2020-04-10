@@ -1,0 +1,96 @@
+<div class="container">
+    <div id="registerAlert" *ngIf="this.registerSuccess==true&&!auth.isAuthenticated()" class="alert alert-success" role="alert">
+            {{ 'register.success' | translate }}
+    </div>
+    <div id="registerAlert" *ngIf="this.registerSuccess==true&&auth.isAuthenticated()" class="alert alert-success" role="alert">
+        {{ 'register.adminSuccess' | translate }}
+</div>
+    <div class="py-5 text-center">
+        <h2 id="formTitle">{{ 'register.form' | translate }}</h2>
+        <p *ngIf="!auth.isAuthenticated()" class="lead">
+            {{ 'register.text' | translate }}
+        </p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 order-md-1">
+            <h4 class="mb-3">{{ 'register.personalData' | translate }}</h4>
+            <form class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">{{ 'register.name' | translate }}</label>
+                        <input [(ngModel)]="registerData.name" name="name" type="text" class="form-control"
+                            id="firstName" placeholder="" value="" required>
+                        <p class="validations" *ngIf="validations.name===true"> {{ 'register.validName' | translate }}
+                        </p>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">{{ 'register.surname' | translate }}</label>
+                        <input [(ngModel)]="registerData.surname" name="surname" type="text" class="form-control"
+                            id="lastName" placeholder="" value="" required>
+                        <p class="validations" *ngIf="validations.surname===true">
+                            {{ 'register.validSurname' | translate }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="email">{{ 'register.email' | translate }}</label>
+                        <input [(ngModel)]="registerData.email" name="email" type="email" class="form-control"
+                            id="email" placeholder="you@esei.uvigo.es">
+                        <p class="validations" *ngIf="validations.email===true"> {{ 'register.validEmail' | translate }}
+                        </p>
+                        <p class="validations" *ngIf="validations.email_exists===true">
+                            {{ 'register.validEmail2' | translate }}</p>
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+                        <label for="address2">{{ 'register.password' | translate }}</label>
+                        <input [(ngModel)]="registerData.password" name="password" type="password" class="form-control"
+                            id="password" placeholder="{{ 'register.passchar' | translate }}">
+                        <p class="validations" *ngIf="validations.password===true">
+                            {{ 'register.validPassword' | translate }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="address2">{{ 'register.idCard' | translate }}</label>
+                        <input [(ngModel)]="registerData.dni" name="dni" type="text" class="form-control" id="id">
+                        <p class="validations" *ngIf="validations.dni===true"> {{ 'register.validId' | translate }}</p>
+                    </div>
+
+                    <div *ngIf="auth.isAuthenticated() && auth.isAdmin()" class="col-md-6 mb-3">
+                        <label>{{ 'register.role' | translate }}</label>
+                        <div class="form-control">
+                            <label class="radio-inline">
+                                <input type="radio" value="user" name="role" [(ngModel)]="registerData.role">
+                                {{ 'register.user' | translate }}
+                            </label>
+                            <label class="radio-inline">
+                                <input id="inputRole" type="radio" value="admin" name="role"
+                                    [(ngModel)]="registerData.role">
+                                {{ 'register.admin' | translate }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <button (click)="registerUser()" class="btn btn-primary btn-lg btn-block"
+                    type="submit">{{ 'register.register' | translate }}</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020 ESEIMS</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a routerLink="/info">Privacy</a></li>
+            <li class="list-inline-item"><a routerLink="/info">Terms</a></li>
+            <li class="list-inline-item"><a routerLink="/info">Support</a></li>
+            <li class="list-inline-item"><a href="mailto:eseims@outlook.com">Contact</a></li>
+        </ul>
+    </footer>
+</div>
