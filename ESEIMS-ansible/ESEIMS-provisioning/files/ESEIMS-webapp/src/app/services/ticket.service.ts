@@ -28,12 +28,10 @@ export class TicketService {
       .set('ticketId', ticketId)
       .set('userId', userId);
     const url = `/api/ticketValidation`;
-    return this.http.get(url, {params})
+    return this.http.get(url, { params })
   }
 
   addTicket(ticket) {
-    console.log('add ticket: ', ticket);
-    
     return this.http.post('/api/tickets', ticket)
   }
 

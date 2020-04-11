@@ -28,11 +28,9 @@ export class AlarmComponent implements OnInit {
       this.alarmService.getAlarms()
         .subscribe(
           (data) => {
-            console.log(data);
             this.alarms = data;
           },
           (err) => {
-            console.log(err)
           }
         )
     } else {
@@ -50,13 +48,8 @@ export class AlarmComponent implements OnInit {
     this.alarmService.editAlarm(alarm)
       .subscribe(
         (data) => {
-          console.log(data)
         },
         (err) => {
-          if (err) {
-            console.log(err);
-
-          }
         }
       )
   }
@@ -66,12 +59,8 @@ export class AlarmComponent implements OnInit {
     this.alarmService.editAlarm(alarm)
       .subscribe(
         (data) => {
-          console.log(data);
         },
         (err) => {
-            if (err) {
-              this.router.navigate(['login'])
-            }
         }
       )
   }
@@ -80,7 +69,6 @@ export class AlarmComponent implements OnInit {
     this.alarmService.deleteAlarm(alarmId)
       .subscribe(
         (data) => {
-          console.log(data)
           this.deleteSuccess = true;
           setTimeout(() => {
             this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {

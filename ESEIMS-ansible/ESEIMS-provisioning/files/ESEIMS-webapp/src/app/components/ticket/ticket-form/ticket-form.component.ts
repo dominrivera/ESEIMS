@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { TicketService } from 'src/app/services/ticket.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,7 +28,6 @@ export class TicketFormComponent implements OnInit {
       this.ticketService.addTicket(ticket)
         .subscribe(
           (data) => {
-            console.log(data);
             this.createSuccess = true;
             setTimeout(() => {
               this.router.navigate(['/tickets', data]);

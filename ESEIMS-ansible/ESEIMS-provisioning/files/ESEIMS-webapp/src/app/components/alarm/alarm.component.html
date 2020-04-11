@@ -31,15 +31,15 @@
         <table id="alarmTable" class="table table-hover table-dark">
             <thead>
                 <tr *ngIf="selectedStatus=='all'">
-                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'alarm.type' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'alarm.level' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'alarm.value' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'alarm.host' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'alarm.laboratory' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'alarm.status' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(6)">{{ 'alarm.assignment' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(7)">{{ 'alarm.created' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(8)">{{ 'alarm.modified' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'alarm.type' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'alarm.level' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'alarm.value' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'alarm.host' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'alarm.laboratory' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'alarm.status' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(6)">{{ 'alarm.assignment' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(7)">{{ 'alarm.created' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(8)">{{ 'alarm.modified' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
                 </tr>
                 <tr *ngIf="selectedStatus!='all'">
                     <th scope="col">{{ 'alarm.type' | translate }}</th>

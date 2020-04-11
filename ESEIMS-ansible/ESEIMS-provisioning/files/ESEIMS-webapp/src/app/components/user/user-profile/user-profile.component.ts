@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -40,15 +39,11 @@ export class UserProfileComponent implements OnInit {
             this.router.navigate(['/**'])
           } else {
             this.user = data[0];
-            console.log(this.user);
           }
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['login'])
-            }
-          }
+          console.log(err);
+          this.router.navigate(['login'])
         }
       )
   }
@@ -62,24 +57,20 @@ export class UserProfileComponent implements OnInit {
     if (this.newPassword != '') {
       this.user.password = this.newPassword;
     }
-    console.log(this.user)
     this.userService.editUser(this.user)
       .subscribe(
         (data) => {
           this.edit == false;
           // show message user correctly edited
-          console.log(data)
           this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
             this.router.navigate(['/users', this.userId]);
           });
         },
         (err) => {
-          console.log(err.error);
           if (err.error == 'email_exists') {
             this.validations.email_exists = true;
           } else {
             err.error.forEach(error => {
-              console.log(error);
               if (error == 'name') {
                 this.validations.name = true;
               } else if (error == 'surname') {
@@ -101,7 +92,6 @@ export class UserProfileComponent implements OnInit {
     this.userService.deleteUser(userId)
       .subscribe(
         (data) => {
-          console.log(data)
           this.deleteSuccess = true;
           setTimeout(() => {
             this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {

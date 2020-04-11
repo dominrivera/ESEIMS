@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TicketService } from 'src/app/services/ticket.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-ticket-details',
@@ -37,11 +36,8 @@ export class TicketDetailsComponent implements OnInit {
           }
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 404) {
-              this.router.navigate(['/tickets'])
-            }
-          }
+          console.log(err);
+          this.router.navigate(['/tickets'])
         }
       )
 
@@ -51,11 +47,8 @@ export class TicketDetailsComponent implements OnInit {
           this.comments = data
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['/tickets'])
-            }
-          }
+          console.log(err);
+          this.router.navigate(['/tickets'])
         }
       )
 
@@ -68,7 +61,6 @@ export class TicketDetailsComponent implements OnInit {
       this.ticketService.addComment(this.newComment)
         .subscribe(
           (data) => {
-            console.log(data);
             this.commentSuccess = true;
             this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
               this.router.navigate(['/tickets', this.newComment.ticketId]);
@@ -89,14 +81,10 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketService.editTicket(ticket)
       .subscribe(
         (data) => {
-          console.log(data);
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['login'])
-            }
-          }
+          console.log(err);
+          this.router.navigate(['login'])
         }
       )
   }
@@ -106,14 +94,10 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketService.editTicket(ticket)
       .subscribe(
         (data) => {
-          console.log(data);
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['login'])
-            }
-          }
+          console.log(err);
+          this.router.navigate(['login'])
         }
       )
   }
@@ -122,7 +106,6 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketService.deleteTicket(ticketId)
       .subscribe(
         (data) => {
-          console.log(data)
           this.deleteSuccess = true;
           setTimeout(() => {
             this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
@@ -147,7 +130,6 @@ export class TicketDetailsComponent implements OnInit {
     this.ticketService.deleteComments(ticketId)
       .subscribe(
         (data) => {
-          console.log(data)
         },
         (err) => {
           console.log(err);

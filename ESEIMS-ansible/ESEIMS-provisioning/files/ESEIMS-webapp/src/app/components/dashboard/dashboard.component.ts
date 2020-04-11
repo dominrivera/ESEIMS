@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.url = eseims_host_overview;
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 
 }

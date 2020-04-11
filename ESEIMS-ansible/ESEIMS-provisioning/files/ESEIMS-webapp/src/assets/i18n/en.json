@@ -115,7 +115,7 @@
         "created": "Created",
         "modified": "Modified",
         "takeAlarm": "Take alarm",
-        "view": "View",
+        "close": "Close",
         "delete": "Delete",
         "modalDeleteAlarm": "Delete Alarm",
         "modalQuestion": "Are you sure you want to delete the alarm?",
