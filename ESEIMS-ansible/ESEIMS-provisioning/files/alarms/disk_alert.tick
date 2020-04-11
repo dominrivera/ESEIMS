@@ -1,0 +1,22 @@
+dbrp "telegraf"."autogen"
+
+var alert_name = 'disk_usage_high'
+var limit = 90
+
+batch
+    |query('''
+        SELECT LAST(used_percent) AS value
+        FROM "telegraf"."autogen"."disk"
+        WHERE path = '/'
+    ''')
+        .period(5m)
+        .every(1m)
+        .groupBy('host', 'laboratory')
+    |alert()
+        .id(alert_name)
+        .warn(lambda: "value" < limit)
+        .crit(lambda: "value" > limit)
+        .details('')
+        .message('{{index .Fields "value"}}')
+        .post()
+          .endpoint('eseims')

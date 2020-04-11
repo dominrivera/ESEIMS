@@ -1,20 +1,34 @@
 ---
 
-    - name: Install python-pip
+    - name: Install python-pip and python-apt
       apt:
         update-cache: yes
-        name: python-pip
+        name: '{{ item }}'
         state: present
+      loop:
+        - python-apt
+        - python-pip
       become: yes
 
     - name: Install dependencies
       pip:
         name: '{{ item }}'
         state: forcereinstall
-      with_items:
+      loop:
         - requests
         - influxdb
-        - pyOpenSSL
+      become: yes
+
+    - stat:
+        path: "{{ files_remote_path }}"
+      register: eseims
+
+    - name: Copy files to /etc/ESEIMS
+      copy:
+        src: "{{ files_local_path }}"
+        dest: "{{ files_remote_path }}"
+      when:
+        - not eseims.stat.exists
       become: yes
 
 
@@ -62,21 +76,30 @@
     - name: wait
       pause: seconds=3
 
-#    - name: create user telegraf
-#      command: "influx -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+    - name: start influxdb
+      service:
+        name: influxdb
+        state: restarted
+      become: yes
 
-#    - name: Create telegraf user
-#      influxdb_user:
-#        user_name: "{{ influxdb_telegraf_user }}"
-#        user_password: "{{ influxdb_telegraf_password }}"
-#        admin: yes
-#        login_username: "{{ influxdb_telegraf_user }}"
-#        login_password: "{{ influxdb_telegraf_password }}"
-#        state: present
-#      become: yes
+#    - name: create telegraf database with retention policy
+#      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
 
+    - name: create telegraf database
+      command: influx -execute "CREATE USER admin WITH PASSWORD 'admin' WITH ALL PRIVILEGES"
 
-# -- Telegraf --
+    - name: create user telegraf
+      command: "influx -database telegraf -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+
+#    - name: create telegraf database with retention policy
+#      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
+
+# -- Telegraf -- #
+
+    - name: Change syslog file permissions so that the logsparser plugin reads them
+      file:
+        path: /var/log/syslog
+        mode: '0644'
 
     - name: Install Telegraf
       apt:
@@ -102,7 +125,47 @@
         enabled: yes
       become: yes
 
-# -- Grafana --
+# -- Kapacitor -- #
+
+    - name: Download Kapacitor
+      get_url:
+        url: "{{ kapacitor_pkg_url }}"
+        dest: '/tmp'
+      become: yes
+
+    - name: Install Kapacitor
+      apt:
+        deb: "/tmp/{{ kapacitor_pkg }}"
+      become: yes
+
+    - name: Replace default Kapacitor config file
+      copy:
+        src: "{{ kapacitor_local_config }}"
+        dest: "{{ kapacitor_remote_config }}"
+      notify:
+        - Restart Kapacitor
+      become: yes
+
+    - name: Ensure Kapacitor is running
+      service:
+        name: kapacitor
+        state: started
+        enabled: yes
+      become: yes
+
+    - name: Alarms definition
+      command: kapacitor define "{{ item }}" -tick "{{ item }}.tick"
+      args:
+        chdir: "{{ alarms_remote_path }}"
+      loop: "{{ alarms }}"
+      become: yes
+
+    - name: Enable alarms
+      command: kapacitor enable "{{ item }}"
+      loop: "{{ alarms }}"
+
+
+# -- Grafana -- #
 
     - name: Import Grafana GPG signing key
       apt_key:
@@ -142,10 +205,8 @@
 
     - name: Configure influxDB as a grafana datasource
       grafana_datasource:
-        name: "datasource-influxdb"
+        name: "${DS_INFLUXDB}"
         grafana_url: "{{ grafana_address }}"
-#        grafana_user: "{{ influxdb_telegraf_user }}"
-#        grafana_password: "{{ influxdb_telegraf_password }}"
         grafana_user: "{{ grafana_admin_user }}"
         grafana_password: "{{ grafana_admin_password }}"
         ds_type: "influxdb"
@@ -154,21 +215,21 @@
         user: "{{ influxdb_telegraf_user }}"
         password: "{{ influxdb_telegraf_password }}"
 
-#    - name: copy grafana dashboard json file to /tmp
-#      copy:
-#        src: "{{ grafana_dashboards_local }}/{{ grafana_public_dashboard }}"
-#        dest: "{{ grafana_dashboards_remote }}"
-#      become: yes
+    - name: copy grafana dashboards json file to ESEIMS
+      copy:
+        src: "{{ grafana_dashboards_local }}/{{ grafana_host_dashboard }}"
+        dest: "{{ grafana_dashboards_remote }}"
+      become: yes
 
-#    - name: Import grafana dashboards from remote host
-#      grafana_dashboard:
-#        grafana_url: "{{ grafana_address }}"
-#        grafana_user: "{{ grafana_admin_user }}"
-#        grafana_password: "{{ grafana_admin_password }}"
-#        state: present
-#        overwrite: yes
-#        path: "{{ grafana_dashboards_remote }}/{{ grafana_public_dashboard }}"
-#      become: yes
+    - name: Import grafana dashboards from remote host
+      grafana_dashboard:
+        grafana_url: "{{ grafana_address }}"
+        grafana_user: "{{ grafana_admin_user }}"
+        grafana_password: "{{ grafana_admin_password }}"
+        state: present
+        overwrite: yes
+        path: "{{ grafana_dashboards_remote }}/{{ grafana_host_dashboard }}"
+      become: yes
 
 ##### WEB #####
 
@@ -193,22 +254,6 @@
         force_apt_get: yes
       become: yes
 
-    - stat:
-        path: "{{ web_full_remote_path }}"
-      register: web
-
-    - name: Copy Web folder
-      copy:
-        src: "{{ web_local_path }}"
-        dest: "{{ web_remote_path }}"
-      when:
-        - not web.stat.exists
-      become: yes
-
-#    - name: Run npm install
-#      npm:
-#        path: "{{ web_full_remote_path }}"
-
     - name: Install angular/cli
       command: npm install -g @angular/cli@8.3.23
       args:
@@ -220,7 +265,7 @@
         name: "{{ item }}"
         path: "{{ web_full_remote_path }}"
         state: present
-      with_items:
+      loop:
         - 'bcryptjs'
         - 'body-parser'
         - 'cors'
@@ -234,7 +279,6 @@
         - 'morgan'
         - 'material-design-icons'
         - 'ngx-pagination'
-        - 'node-fetch'
         - '@angular-devkit/build-angular@0.803.23'
         - '@angular/compiler-cli'
         - '@angular/compiler'
@@ -263,8 +307,8 @@
       loop:
         - mysql-server
         - libmysqlclient-dev
-      notify:
-        - Restart MySQL
+#      notify:
+#        - Restart MySQL
       become: yes
 
     - name: Ensure MySQL is running
@@ -274,7 +318,7 @@
         enabled: yes
       become: yes
 
-    - name: Install the Python MySQLB module
+    - name: Install the Python MySQL module
       pip:
         name: MySQL-python
         state: forcereinstall
@@ -305,8 +349,6 @@
         state: import
         name: eseims
         target: "{{ eseims_sql_path }}"
-#      notify:
-#        - Restart MySQL
       become: yes
 
     - name: Build web
@@ -316,7 +358,7 @@
       become: yes
 
     - name: run forever nodejs
-      command: forever start -l eseims.log -o out.log -e err.log -a server.js
+      command: sudo forever start -l eseims.log -o out.log -e err.log -a server.js
       args:
         chdir: "{{ web_full_remote_path }}"
       become: yes

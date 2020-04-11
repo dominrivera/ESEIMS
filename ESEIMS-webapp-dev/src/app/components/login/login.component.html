@@ -1,0 +1,27 @@
+<div>
+<form class="form-signin">
+        <div id="loginAlert" *ngIf="this.loginSuccess==false" class="alert alert-danger" role="alert">
+                {{ 'login.wronglogin' | translate }}
+            </div>
+    <h1>ESEIMS</h1>
+    <label for="inputEmail" class="sr-only">{{ 'login.email' | translate }}</label>
+    <input [(ngModel)]="loginData.email" name="email" type="email" id="inputEmail" class="form-control" placeholder="{{ 'login.email' | translate }}" required autofocus>
+    <label for="inputPassword" class="sr-only">{{ 'login.password' | translate }}</label>
+    <input [(ngModel)]="loginData.password" name="password" type="password" id="inputPassword" class="form-control" placeholder="{{ 'login.password' | translate }}" required>
+    <button (click)="loginUser()" class="btn btn-lg btn-primary btn-block" type="submit">{{ 'login.signin' | translate }}</button>
+    <br>
+    <p>{{ 'login.createAccount' | translate }} <a routerLink="/register">{{ 'login.here' | translate }}</a></p>
+    <hr>
+    <p>{{ 'login.contact' | translate }} <a href="mailto:eseims@outlook.com">eseims@outlook.com</a></p>
+ <!--   <p class="mt-5 mb-3 text-muted">&copy; 2020-{{ site.time | date: "%Y" }}</p> -->
+</form>
+<footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020 ESEIMS</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a routerLink="/info">Privacy</a></li>
+            <li class="list-inline-item"><a routerLink="/info">Terms</a></li>
+            <li class="list-inline-item"><a routerLink="/info">Support</a></li>
+            <li class="list-inline-item"><a href="mailto:eseims@outlook.com">Contact</a></li>
+        </ul>
+    </footer>
+</div>

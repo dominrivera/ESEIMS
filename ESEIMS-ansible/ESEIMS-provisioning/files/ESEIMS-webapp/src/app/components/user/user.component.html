@@ -23,12 +23,12 @@
         <table id="userTable" class="table table-hover table-dark">
             <thead>
                 <tr>
-                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'user.name' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'user.surname' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'user.email' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'user.idCard' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'user.role' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'user.created' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'user.name' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'user.surname' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'user.email' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'user.idCard' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'user.role' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'user.created' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
                 </tr>
             </thead>
             <tbody *ngIf="!search">
@@ -59,7 +59,7 @@
                     <td>{{ userByDNI.role }}</td>
                     <td>{{ userByDNI.created }}</td>
                     <td>
-                        <div>
+                        <div *ngIf="(userByDNI.email!='admin@esei.uvigo.es') && (userByDNI.email!='user@esei.uvigo.es')">
                             <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
                                 (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
                             <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"

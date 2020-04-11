@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
     this.auth.registerUser(this.registerData)
       .subscribe(
         (data) => {
-          console.log(data)
           this.registerSuccess = true;
           if (this.auth.isAuthenticated()) {
             setTimeout(() => {
@@ -44,12 +43,10 @@ export class RegisterComponent implements OnInit {
           }
         },
         (err) => {
-          console.log(err.error);
           if (err.error == 'email_exists') {
             this.validations.email_exists = true;
           } else {
             err.error.forEach(error => {
-              console.log(error);
               if (error == 'name') {
                 this.validations.name = true;
               } else if (error == 'surname') {

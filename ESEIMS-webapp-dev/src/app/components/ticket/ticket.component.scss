@@ -1,0 +1,48 @@
+[role="ticket"] {
+  padding-top: 133px; /* Space for fixed navbar */
+}
+
+@media (min-width: 768px) {
+  [role="ticket"] {
+    padding-top: 60px; /* Space for fixed navbar */
+  }
+}
+
+#addTicketIcon {
+  vertical-align: middle; 
+  text-align: center;
+  margin-right: 8px;
+}
+
+#optionsIcon {
+  vertical-align: middle; 
+  text-align: center;
+  line-height: normal;
+}
+
+#roundRadius {
+  border-top-left-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+}
+
+#deleteAlert {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  background-color: #6dec8c;
+  color: #0a2b11;
+}
+
+#deleteAlert2 {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#pagination {
+  text-align: center;
+}
+
+.pointer {
+  cursor:pointer;
+}

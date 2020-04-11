@@ -1,0 +1,12 @@
+var User = function (user) {
+    this.id = user.id;
+    this.name = user.name;
+    this.surname = user.surname;
+    this.dni = user.dni;
+    this.password = user.password;
+    this.email = user.email;
+    this.role = user.role;
+    this.created = user.created;
+};
+
+module.exports = User;

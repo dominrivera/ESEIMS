@@ -21,6 +21,13 @@
     start_mode: auto
     state: restarted
 
+- name: "Restart Kapacitor"
+  service:
+    name: kapacitor
+    state: restarted
+    enabled: yes
+  become: yes
+
 - name: "Restart InfluxDB"
   service:
     name: influxdb

@@ -3,16 +3,6 @@ sudo apt update
 sudo apt install curl
 sudo apt install jq
 
-# Install docker
-sudo apt-get update
-sudo apt-get remove docker docker-engine docker.io
-sudo apt install docker.io
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo groupadd docker
-sudo usermod -aG docker $USER
-logout current session and login
-
 # Install azure
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 

@@ -25,12 +25,12 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
-//  checkTokenValidity() {
-//    if (this.getToken() == undefined) {
-//      localStorage.removeItem('token')
-//      this.router.navigate(['/login'])
-//    }
-//  }
+  //  checkTokenValidity() {
+  //    if (this.getToken() == undefined) {
+  //      localStorage.removeItem('token')
+  //      this.router.navigate(['/login'])
+  //    }
+  //  }
 
   isAuthenticated() {
     return !!localStorage.getItem('token')

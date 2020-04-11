@@ -1,0 +1,22 @@
+dbrp "telegraf"."autogen"
+
+var alert_name = 'memory_usage_high'
+var limit = 12
+
+batch
+    |query('''
+        SELECT MAX(used)/1000000000 AS value
+        FROM "telegraf"."autogen"."mem"
+        WHERE time >= now() - 1m
+    ''')
+        .period(5m)
+        .every(1m)
+        .groupBy('host', 'laboratory')
+    |alert()
+        .id(alert_name)
+        .warn(lambda: "value" < limit)
+        .crit(lambda: "value" > limit)
+        .details('')
+        .message('{{index .Fields "value"}}')
+        .post()
+          .endpoint('eseims')

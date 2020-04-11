@@ -18,16 +18,13 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    console.log(this.loginData);
     this.auth.loginUser(this.loginData)
       .subscribe(
         (data) => {
-          console.log(data)
           localStorage.setItem('token', data['accessToken'])
           this.router.navigate(['/'])
         },
         (err) => {
-          console.log(err)
           this.loginSuccess = false;
         }
       )

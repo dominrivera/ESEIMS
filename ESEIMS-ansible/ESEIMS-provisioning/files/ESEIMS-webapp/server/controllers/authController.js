@@ -41,7 +41,6 @@ authCtrl.createUser = function (req, res) {
 
 // user login
 authCtrl.loginUser = function (req, res) {
-    console.log(req.body)
     // check if validator.js returns errors
     var errors = validationResult(req)
     if (!errors.isEmpty()) {

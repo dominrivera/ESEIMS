@@ -1,0 +1,71 @@
+[role="userProfile"] {
+    padding-top: 133px; /* Space for fixed navbar */
+  }
+  
+@media (min-width: 768px) {
+    [role="userProfile"] {
+      padding-top: 60px; /* Space for fixed navbar */
+    }
+}
+
+.container {
+    max-width: 960px;
+}
+  
+.lh-condensed { line-height: 1.25; }
+  
+#formTitle {
+    padding-top: 60px;
+}
+
+#inputRole {
+  margin-left: 15px;
+}
+
+#inputRole2 {
+  margin-left: 15px;
+}
+
+#inputRole3 {
+  margin-left: 15px;
+}
+
+#editUser {
+  margin-right: 15px;
+}
+
+#editUserIcon {
+  vertical-align: middle; 
+  text-align: center;
+  margin-right: 8px;
+}
+
+#saveUserIcon {
+  vertical-align: middle; 
+  text-align: center;
+  margin-right: 8px;
+}
+
+#deleteUserIcon {
+  vertical-align: middle; 
+  text-align: center;
+  margin-right: 8px;
+}
+
+#deleteAlert {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  background-color: #6dec8c;
+  color: #0a2b11;
+}
+
+#deleteAlert2 {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.validations {
+  color: red;
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { eseims_host_overview } from 'src/variables';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  url: string;
+  urlSafe: SafeResourceUrl;
+
+  constructor(public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.url = eseims_host_overview;
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -27,14 +26,10 @@ export class UserComponent implements OnInit {
       .subscribe(
         (data) => {
           this.users = data;
-          console.log(this.users);
         },
         (err) => {
-          if (err instanceof HttpErrorResponse) {
-            if (err.status == 401) {
-              this.router.navigate(['/login'])
-            }
-          }
+          console.log(err);
+          this.router.navigate(['/login'])
         }
       )
   }
@@ -47,7 +42,6 @@ export class UserComponent implements OnInit {
     this.userService.deleteUser(userId)
       .subscribe(
         (data) => {
-          console.log(data)
           this.deleteSuccess = true;
           setTimeout(() => {
             this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {

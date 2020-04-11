@@ -20,7 +20,7 @@
   # rack = "1a"
   ## Environment variables can be used as tags, and throughout the config file
   # user = "$USER"
-
+  laboratory = "{{ laboratory_var }}"
 
 # Configuration for telegraf agent
 [agent]
@@ -3435,7 +3435,7 @@
 
 
 # # Read metrics about network interface usage
-# [[inputs.net]]
+ [[inputs.net]]
 #   ## By default, telegraf gathers stats from any up interface (excluding loopback)
 #   ## Setting interfaces will tell it to gather these explicit interfaces,
 #   ## regardless of status.
@@ -5224,35 +5224,35 @@
 
 
 # # Stream and parse log file(s).
-# [[inputs.logparser]]
+ [[inputs.logparser]]
 #   ## Log files to parse.
 #   ## These accept standard unix glob matching rules, but with the addition of
 #   ## ** as a "super asterisk". ie:
 #   ##   /var/log/**.log     -> recursively find all .log files in /var/log
 #   ##   /var/log/*/*.log    -> find all .log files with a parent dir in /var/log
 #   ##   /var/log/apache.log -> only tail the apache log file
-#   files = ["/var/log/telegraf/*.log"]
+   files = ["/var/log/syslog"]
 #
 #   ## Read files that currently exist from the beginning. Files that are created
 #   ## while telegraf is running (and that match the "files" globs) will always
 #   ## be read from the beginning.
-#   from_beginning = true
+   from_beginning = false
 #
 #   ## Method used to watch for file updates.  Can be either "inotify" or "poll".
-#    watch_method = "poll"
+    watch_method = "poll"
 #
 #   ## Parse logstash-style "grok" patterns:
-#   [inputs.logparser.grok]
+   [inputs.logparser.grok]
 #     ## This is a list of patterns to check the given log file(s) for.
 #     ## Note that adding patterns here increases processing time. The most
 #     ## efficient configuration is to have one pattern per logparser.
 #     ## Other common built-in patterns are:
 #     ##   %{COMMON_LOG_FORMAT}   (plain apache & nginx access logs)
 #     ##   %{COMBINED_LOG_FORMAT} (access logs + referrer & agent)
-#     patterns = ["%{GREEDYDATA}"]
+     patterns = ["%{GREEDYDATA:log}"]
 #
 #     ## Name of the outputted measurement name.
-#     measurement = "logs"
+     measurement = "syslog"
 #
 #     ## Full path(s) to custom pattern files.
 #     custom_pattern_files = []
