@@ -65,7 +65,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1586625598478,
+  "iteration": 1586723316856,
   "links": [],
   "panels": [
     {
@@ -159,7 +159,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Number of Hosts",
+      "title": "Numero de Equipos",
       "type": "stat"
     },
     {
@@ -269,7 +269,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total CPUs",
+      "title": "Numero de CPUs",
       "type": "singlestat",
       "valueFontSize": "120%",
       "valueMaps": [
@@ -389,7 +389,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total RAM Memory",
+      "title": "Memoria RAM",
       "type": "singlestat",
       "valueFontSize": "120%",
       "valueMaps": [
@@ -509,7 +509,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Disk Space",
+      "title": "Almacenamiento",
       "type": "singlestat",
       "valueFontSize": "120%",
       "valueMaps": [
@@ -627,7 +627,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Disk Used",
+      "title": "Almacenamiento Usado",
       "type": "singlestat",
       "valueFontSize": "120%",
       "valueMaps": [
@@ -745,7 +745,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Total Number of Processes",
+      "title": "Numero de Procesos",
       "type": "singlestat",
       "valueFontSize": "120%",
       "valueMaps": [
@@ -801,7 +801,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$host",
+          "alias": "$tag_host",
           "groupBy": [
             {
               "params": [
@@ -843,7 +843,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU Usage",
+      "title": "CPU Uso",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -923,7 +923,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$host",
+          "alias": "$tag_host",
           "groupBy": [
             {
               "params": [
@@ -965,7 +965,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "RAM Memory Usage",
+      "title": "Memoria RAM Uso",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1063,7 +1063,7 @@
           "measurement": "disk",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(total) AS \"total\", SUM(used) AS \"used\", SUM(free) AS \"free\" FROM (SELECT mean(total) AS \"total\", mean(used) as \"used\", mean(free) as \"free\" FROM \"disk\" WHERE (\"host\" =~ /^$host$/ AND \"path\" = '/')  GROUP BY \"host\", \"path\") GROUP BY time($interval)",
+          "query": "SELECT SUM(total) AS \"total\", SUM(used) AS \"usado\", SUM(free) AS \"libre\" FROM (SELECT mean(total) AS \"total\", mean(used) as \"used\", mean(free) as \"free\" FROM \"disk\" WHERE (\"host\" =~ /^$host$/ AND \"path\" = '/')  GROUP BY \"host\", \"path\") GROUP BY time($interval)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1100,7 +1100,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk Usage",
+      "title": "Almacenamiento",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1177,7 +1177,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:2853",
-          "alias": "/ in$/",
+          "alias": "/ entrada$/",
           "transform": "negative-Y"
         }
       ],
@@ -1186,7 +1186,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$host: $col",
+          "alias": "$tag_host: $col",
           "groupBy": [
             {
               "params": [
@@ -1203,7 +1203,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(bytes_recv),1s)*8 as \"in\"  FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
+          "query": "SELECT non_negative_derivative(mean(bytes_recv),1s)*8 as \"entrada\"  FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1224,7 +1224,7 @@
           "tags": []
         },
         {
-          "alias": "$host: $col",
+          "alias": "$tag_host: $col",
           "groupBy": [
             {
               "params": [
@@ -1241,7 +1241,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(bytes_sent),1s)*8 as \"out\" FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
+          "query": "SELECT non_negative_derivative(mean(bytes_sent),1s)*8 as \"salida\" FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1266,7 +1266,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Traffic In/Out",
+      "title": "Trafico de Red Entrada/Salida",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1348,7 +1348,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$host",
+          "alias": "$tag_host",
           "groupBy": [
             {
               "params": [
@@ -1390,7 +1390,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "TCP connections",
+      "title": "Conexiones TCP",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1449,7 +1449,7 @@
       "styles": [
         {
           "$$hashKey": "object:140",
-          "alias": "Hosts",
+          "alias": "Equipos",
           "align": "",
           "colorMode": "value",
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
@@ -1459,7 +1459,7 @@
         },
         {
           "$$hashKey": "object:141",
-          "alias": "Laboratory",
+          "alias": "Laboratorio",
           "align": "",
           "colorMode": "value",
           "colors": [
@@ -1518,7 +1518,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Number of Hosts per Laboratory",
+      "title": "Numero de Equipos por Laboratorio",
       "transform": "table",
       "type": "table"
     }
@@ -1537,7 +1537,7 @@
         "hide": 2,
         "includeAll": true,
         "index": -1,
-        "label": "Laboratory",
+        "label": "Laboratorio",
         "multi": true,
         "name": "laboratory",
         "options": [],
@@ -1560,7 +1560,7 @@
         "hide": 2,
         "includeAll": true,
         "index": -1,
-        "label": "Host",
+        "label": "Equipo",
         "multi": true,
         "name": "host",
         "options": [],
@@ -1601,7 +1601,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1619,10 +1619,10 @@
     ]
   },
   "timezone": "",
-  "title": "ESEIMS Infrastructure Overview",
+  "title": "ESEIMS Vision General",
   "uid": "i70DWsjWk",
   "variables": {
     "list": []
   },
-  "version": 12
+  "version": 2
 }

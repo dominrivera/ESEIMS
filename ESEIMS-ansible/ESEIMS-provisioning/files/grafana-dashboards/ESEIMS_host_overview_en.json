@@ -65,7 +65,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1586637427307,
+  "iteration": 1586718363338,
   "links": [],
   "panels": [
     {
@@ -655,7 +655,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU usage",
+      "title": "CPU Usage",
       "type": "gauge"
     },
     {
@@ -754,7 +754,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "RAM usage",
+      "title": "RAM Usage",
       "type": "gauge"
     },
     {
@@ -764,6 +764,106 @@
         "h": 4,
         "w": 3,
         "x": 18,
+        "y": 1
+      },
+      "id": 41,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "decimals": 2,
+            "mappings": [
+              {
+                "$$hashKey": "object:767",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "#d44a3a",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"used_percent\") FROM \"disk\" WHERE (\"host\" =~ /^$host$/ AND \"path\" = '/') AND $timeFilter GROUP BY time($interval) fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Root FS Usage",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "${DS_INFLUXDB}",
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 21,
         "y": 1
       },
       "id": 20,
@@ -855,106 +955,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "IO Wait",
-      "type": "gauge"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "${DS_INFLUXDB}",
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 21,
-        "y": 1
-      },
-      "id": 41,
-      "links": [],
-      "options": {
-        "fieldOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "defaults": {
-            "decimals": 2,
-            "mappings": [
-              {
-                "$$hashKey": "object:767",
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "#299c46",
-                  "value": null
-                },
-                {
-                  "color": "rgba(237, 129, 40, 0.89)",
-                  "value": 30
-                },
-                {
-                  "color": "#d44a3a",
-                  "value": 40
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "orientation": "horizontal",
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "6.7.2",
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"used_percent\") FROM \"swap\" WHERE (\"host\" =~ /^$host$/) AND $timeFilter GROUP BY time($interval) fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Swap",
       "type": "gauge"
     },
     {
@@ -1657,7 +1657,7 @@
       "thresholds": "2,3,5",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Blocked processes",
+      "title": "Blocked Processes",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -2260,7 +2260,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU cores usage",
+      "title": "CPU Cores Usage",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2636,7 +2636,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk usage",
+      "title": "Disk Usage",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2931,7 +2931,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "TCP connections",
+      "title": "TCP Connections",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -3057,7 +3057,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "System logs",
+      "title": "System Logs",
       "transform": "table",
       "type": "table"
     }
@@ -3140,7 +3140,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -3158,10 +3158,10 @@
     ]
   },
   "timezone": "",
-  "title": "Host Overview",
+  "title": "ESEIMS Host Overview",
   "uid": "nmcimT9Zz",
   "variables": {
     "list": []
   },
-  "version": 6
+  "version": 9
 }

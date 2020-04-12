@@ -10,7 +10,7 @@ var config = require('./server/config');
 var routes = require('./server/routes');
 
 app.use(cors());
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
