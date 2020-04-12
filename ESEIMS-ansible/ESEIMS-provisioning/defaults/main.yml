@@ -60,7 +60,8 @@ influxdb_owner: 'influxdb'
 influxdb_group: 'influxdb'
 
 influxdb_port: '8086'
-influxdb_address: 'http://{{ server_ip }}:{{ influxdb_port }}'
+influxdb_address: 'http://localhost:{{ influxdb_port }}'
+influxdb_address_hosts: 'http://{{ server }}:{{ influxdb_port }}'
 
 ### Telegraf ###
 
@@ -87,8 +88,8 @@ grafana_admin_user: 'admin'
 grafana_admin_password: 'admin'
 grafana_dashboards_local: 'files/grafana-dashboards'
 grafana_dashboards_remote: '{{ files_remote_path }}/grafana-dashboards'
-grafana_public_dashboard: 'ESEIpublicDashboard.json'
-grafana_host_dashboard: 'ESEIMS_host_overview.json'
+grafana_public_dashboard: 'ESEIMS_infra_overview_es.json'
+grafana_host_dashboard: 'ESEIMS_host_overview_es.json'
 
 ### WEB ###
 

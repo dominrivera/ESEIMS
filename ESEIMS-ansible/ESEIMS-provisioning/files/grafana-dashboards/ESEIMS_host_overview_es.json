@@ -20,7 +20,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.7.1"
+      "version": "6.7.2"
     },
     {
       "type": "panel",
@@ -65,7 +65,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1585435493003,
+  "iteration": 1586721745458,
   "links": [],
   "panels": [
     {
@@ -189,7 +189,7 @@
       "thresholds": "4,8,12",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Uptime",
+      "title": "Tiempo de Actividad",
       "type": "singlestat",
       "valueFontSize": "100%",
       "valueMaps": [
@@ -546,7 +546,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Used RAM",
+      "title": "RAM Uso",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -613,7 +613,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.7.1",
+      "pluginVersion": "6.7.2",
       "targets": [
         {
           "groupBy": [
@@ -655,7 +655,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU usage",
+      "title": "CPU Uso",
       "type": "gauge"
     },
     {
@@ -712,7 +712,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.7.1",
+      "pluginVersion": "6.7.2",
       "targets": [
         {
           "groupBy": [
@@ -754,7 +754,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "RAM usage",
+      "title": "RAM % Uso",
       "type": "gauge"
     },
     {
@@ -764,6 +764,106 @@
         "h": 4,
         "w": 3,
         "x": 18,
+        "y": 1
+      },
+      "id": 41,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "decimals": 2,
+            "mappings": [
+              {
+                "$$hashKey": "object:767",
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "nullValueMode": "connected",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#299c46",
+                  "value": null
+                },
+                {
+                  "color": "rgba(237, 129, 40, 0.89)",
+                  "value": 80
+                },
+                {
+                  "color": "#d44a3a",
+                  "value": 90
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.7.2",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT last(\"used_percent\") FROM \"disk\" WHERE (\"host\" =~ /^$host$/ AND \"path\" = '/') AND $timeFilter GROUP BY time($interval) fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Root FS Uso",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "${DS_INFLUXDB}",
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 21,
         "y": 1
       },
       "id": 20,
@@ -812,7 +912,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.7.1",
+      "pluginVersion": "6.7.2",
       "targets": [
         {
           "groupBy": [
@@ -855,106 +955,6 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "IO Wait",
-      "type": "gauge"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": "${DS_INFLUXDB}",
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 21,
-        "y": 1
-      },
-      "id": 41,
-      "links": [],
-      "options": {
-        "fieldOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "defaults": {
-            "decimals": 2,
-            "mappings": [
-              {
-                "$$hashKey": "object:767",
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "#299c46",
-                  "value": null
-                },
-                {
-                  "color": "rgba(237, 129, 40, 0.89)",
-                  "value": 30
-                },
-                {
-                  "color": "#d44a3a",
-                  "value": 40
-                }
-              ]
-            },
-            "unit": "percent"
-          },
-          "overrides": [],
-          "values": false
-        },
-        "orientation": "horizontal",
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
-      },
-      "pluginVersion": "6.7.1",
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT last(\"used_percent\") FROM \"swap\" WHERE (\"host\" =~ /^$host$/) AND $timeFilter GROUP BY time($interval) fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Swap",
       "type": "gauge"
     },
     {
@@ -1063,7 +1063,7 @@
       "thresholds": "4,8,12",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Load Average",
+      "title": "Carga Media",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1182,7 +1182,7 @@
       "thresholds": "3,5",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Load 1m",
+      "title": "Carga 1 min",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1301,7 +1301,7 @@
       "thresholds": "3,5",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Load 5m",
+      "title": "Carga 5 min",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1420,7 +1420,7 @@
       "thresholds": "3,5",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Load 15m",
+      "title": "Carga 15 min",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1539,7 +1539,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Processes",
+      "title": "Procesos",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1657,7 +1657,7 @@
       "thresholds": "2,3,5",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Blocked processes",
+      "title": "Procesos Bloqueados",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1776,7 +1776,7 @@
       "thresholds": "1,2,3",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Zombie Processes",
+      "title": "Procesos Zombie",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1896,7 +1896,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Threads",
+      "title": "Hilos",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -1916,7 +1916,7 @@
       "dashes": false,
       "datasource": "${DS_INFLUXDB}",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 4,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -1938,7 +1938,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -1970,7 +1970,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(usage_user) as \"user\", mean(usage_system) as \"system\", mean(usage_softirq) as \"softirq\", mean(usage_steal) as \"steal\", mean(usage_nice) as \"nice\", mean(usage_irq) as \"irq\", mean(usage_iowait) as \"iowait\", mean(usage_guest) as \"guest\", mean(usage_guest_nice) as \"guest_nice\"  FROM \"cpu\" WHERE \"host\" =~ /$host$/ and cpu = 'cpu-total' AND $timeFilter GROUP BY time($interval), *",
+          "query": "SELECT mean(usage_user) as \"usuario\", mean(usage_system) as \"sistema\", mean(usage_softirq) as \"softirq\", mean(usage_steal) as \"steal\", mean(usage_nice) as \"nice\", mean(usage_irq) as \"irq\", mean(usage_iowait) as \"iowait\", mean(usage_guest) as \"guest\", mean(usage_guest_nice) as \"guest_nice\"  FROM \"cpu\" WHERE \"host\" =~ /$host$/ and cpu = 'cpu-total' AND $timeFilter GROUP BY time($interval), *",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1995,7 +1995,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU Usage",
+      "title": "CPU Uso",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2043,7 +2043,7 @@
       "dashes": false,
       "datasource": "${DS_INFLUXDB}",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 4,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -2063,7 +2063,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -2101,7 +2101,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(total) as total, mean(used) as used, mean(cached) as cached, mean(free) as free, mean(buffered) as buffered  FROM \"mem\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
+          "query": "SELECT mean(total) as total, mean(used) as usada, mean(cached) as cache, mean(free) as libre, mean(buffered) as buffered  FROM \"mem\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2126,7 +2126,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Memory Usage",
+      "title": "Memoria RAM Uso",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2172,7 +2172,7 @@
       "dashes": false,
       "datasource": "${DS_INFLUXDB}",
       "fill": 1,
-      "fillGradient": 5,
+      "fillGradient": 4,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -2194,7 +2194,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -2260,7 +2260,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "CPU cores usage",
+      "title": "CPU Nucleos Uso",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2326,7 +2326,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -2358,7 +2358,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(load1) as load1,mean(load5) as load5,mean(load15) as load15 FROM \"system\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), * ORDER BY asc",
+          "query": "SELECT mean(load1) as carga1,mean(load5) as carga5,mean(load15) as carga15 FROM \"system\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), * ORDER BY asc",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2383,7 +2383,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "System Load",
+      "title": "Carga del Sistema",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2429,7 +2429,7 @@
       "dashes": false,
       "datasource": "${DS_INFLUXDB}",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 4,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -2450,7 +2450,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -2482,7 +2482,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(running) as running, mean(blocked) as blocked, mean(sleeping) as sleeping, mean(stopped) as stopped, mean(zombies) as zombies, mean(paging) as paging, mean(unknown) as unknown FROM \"processes\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
+          "query": "SELECT mean(running) as ejecucion, mean(blocked) as bloqueados, mean(sleeping) as durmiendo, mean(stopped) as parados, mean(zombies) as zombies, mean(paging) as paginacion, mean(unknown) as desconocido FROM \"processes\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2507,7 +2507,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Processes",
+      "title": "Procesos",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2553,7 +2553,7 @@
       "dashes": false,
       "datasource": "${DS_INFLUXDB}",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 4,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -2573,7 +2573,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -2611,7 +2611,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(total) AS \"total\", mean(used) as \"used\", mean(free) as \"free\" FROM \"disk\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval), \"host\", \"path\"",
+          "query": "SELECT mean(total) AS \"total\", mean(used) as \"usado\", mean(free) as \"libre\" FROM \"disk\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval), \"host\", \"path\"",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2636,7 +2636,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Disk usage",
+      "title": "Disco Uso",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2682,7 +2682,7 @@
       "dashes": false,
       "datasource": "${DS_INFLUXDB}",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 4,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -2703,7 +2703,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -2715,7 +2715,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:1012",
-          "alias": "/ in$/",
+          "alias": "/ entrada$/",
           "transform": "negative-Y"
         }
       ],
@@ -2742,7 +2742,7 @@
           "measurement": "net_bytes_recv",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(bytes_recv),1s)*8 as \"in\"  FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
+          "query": "SELECT non_negative_derivative(mean(bytes_recv),1s)*8 as \"entrada\"  FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2780,7 +2780,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(bytes_sent),1s)*8 as \"out\" FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
+          "query": "SELECT non_negative_derivative(mean(bytes_sent),1s)*8 as \"salida\" FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -2805,7 +2805,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Network Usage",
+      "title": "Trafico Red",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -2851,7 +2851,7 @@
       "dashes": false,
       "datasource": "${DS_INFLUXDB}",
       "fill": 1,
-      "fillGradient": 0,
+      "fillGradient": 4,
       "gridPos": {
         "h": 9,
         "w": 12,
@@ -2874,7 +2874,7 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 1,
+      "linewidth": 2,
       "nullPointMode": "connected",
       "options": {
         "dataLinks": []
@@ -2906,7 +2906,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(tcp_close) as CLOSED, mean(tcp_close_wait) as CLOSE_WAIT, mean(tcp_closing) as CLOSING, mean(tcp_established) as ESTABLISHED, mean(tcp_fin_wait1) as FIN_WAIT1, mean(tcp_fin_wait2) as FIN_WAIT2, mean(tcp_last_ack) as LAST_ACK, mean(tcp_syn_recv) as SYN_RECV, mean(tcp_syn_sent) as SYN_SENT, mean(tcp_time_wait) as TIME_WAIT FROM \"netstat\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
+          "query": "SELECT mean(tcp_close) as CERRADA, mean(tcp_close_wait) as CERRADA, mean(tcp_closing) as CERRADA, mean(tcp_established) as ESTABLECIDA, mean(tcp_time_wait) as ESPERA FROM \"netstat\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -2931,7 +2931,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "TCP connections",
+      "title": "Conexiones TCP",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -3057,11 +3057,12 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "System logs",
+      "title": "Logs del Sistema",
       "transform": "table",
       "type": "table"
     }
   ],
+  "refresh": false,
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -3075,7 +3076,7 @@
         "hide": 0,
         "includeAll": true,
         "index": -1,
-        "label": "Laboratory",
+        "label": "Laboratorio",
         "multi": true,
         "name": "lab",
         "options": [],
@@ -3098,7 +3099,7 @@
         "hide": 0,
         "includeAll": true,
         "index": -1,
-        "label": "Host",
+        "label": "Equipo",
         "multi": true,
         "name": "host",
         "options": [],
@@ -3139,7 +3140,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -3157,10 +3158,10 @@
     ]
   },
   "timezone": "",
-  "title": "ESEIMS Host Overview",
+  "title": "ESEIMS Equipos",
   "uid": "nmcimT9Zz",
   "variables": {
     "list": []
   },
-  "version": 65
+  "version": 10
 }

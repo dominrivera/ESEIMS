@@ -85,11 +85,14 @@
 #    - name: create telegraf database with retention policy
 #      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
 
-    - name: create telegraf database
-      command: influx -execute "CREATE USER admin WITH PASSWORD 'admin' WITH ALL PRIVILEGES"
+#    - name: Create telegraf database
+#      command: influx -execute "CREATE DATABASE telegraf"
 
-    - name: create user telegraf
-      command: "influx -database telegraf -execute \"CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES\""
+#    - name: Create admin user
+#      command: influx -execute "CREATE USER admin WITH PASSWORD 'admin' WITH ALL PRIVILEGES"
+
+      #    - name: Create telegraf user
+      #      command: influx -execute "CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES"
 
 #    - name: create telegraf database with retention policy
 #      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
@@ -192,7 +195,6 @@
         src: "{{ grafana_local_config }}"
         dest: "{{ grafana_remote_config }}"
       notify:
-        - Reload Grafana
         - Restart Grafana
       become: yes
 
@@ -205,7 +207,7 @@
 
     - name: Configure influxDB as a grafana datasource
       grafana_datasource:
-        name: "${DS_INFLUXDB}"
+        name: "InfluxDB"
         grafana_url: "{{ grafana_address }}"
         grafana_user: "{{ grafana_admin_user }}"
         grafana_password: "{{ grafana_admin_password }}"
@@ -217,8 +219,11 @@
 
     - name: copy grafana dashboards json file to ESEIMS
       copy:
-        src: "{{ grafana_dashboards_local }}/{{ grafana_host_dashboard }}"
+        src: "{{ grafana_dashboards_local }}/{{ item }}"
         dest: "{{ grafana_dashboards_remote }}"
+      loop:
+        - "{{ grafana_host_dashboard }}"
+        - "{{ grafana_public_dashboard }}"
       become: yes
 
     - name: Import grafana dashboards from remote host
@@ -228,7 +233,10 @@
         grafana_password: "{{ grafana_admin_password }}"
         state: present
         overwrite: yes
-        path: "{{ grafana_dashboards_remote }}/{{ grafana_host_dashboard }}"
+        path: "{{ grafana_dashboards_remote }}/{{ item }}"
+      loop:
+        - "{{ grafana_host_dashboard }}"
+        - "{{ grafana_public_dashboard }}"
       become: yes
 
 ##### WEB #####
@@ -266,24 +274,24 @@
         path: "{{ web_full_remote_path }}"
         state: present
       loop:
-        - 'bcryptjs'
-        - 'body-parser'
-        - 'cors'
-        - 'dotenv'
-        - 'express'
-        - 'express-list-endpoints'
-        - 'express-validator'
-        - 'jsonwebtoken'
-        - 'jwt-decode'
-        - 'mysql'
-        - 'morgan'
-        - 'material-design-icons'
-        - 'ngx-pagination'
+        - 'bcryptjs@2.4.3'
+        - 'body-parser@1.19.0'
+        - 'cors@2.8.5'
+        - 'dotenv@8.2.0'
+        - 'express@4.17.1'
+        - 'express-list-endpoints@4.0.1'
+        - 'express-validator@6.4.0'
+        - 'jsonwebtoken@8.5.1'
+        - 'jwt-decode@2.2.0'
+        - 'mysql@2.18.1'
+        - 'morgan@1.10.0'
+        - 'material-design-icons@3.0.1'
+        - 'ngx-pagination@5.0.0'
         - '@angular-devkit/build-angular@0.803.23'
-        - '@angular/compiler-cli'
-        - '@angular/compiler'
-        - '@ngx-translate/core'
-        - '@ngx-translate/http-loader'
+        - '@angular/compiler-cli@8.2.14'
+        - '@angular/compiler@8.2.14'
+        - '@ngx-translate/core@12.1.2'
+        - '@ngx-translate/http-loader@4.0.0'
       become: yes
 
     - name: Install forever to run nodejs as a daemon
@@ -305,7 +313,7 @@
         state: present
         force_apt_get: yes
       loop:
-        - mysql-server
+        - mysql-server-5.7
         - libmysqlclient-dev
 #      notify:
 #        - Restart MySQL

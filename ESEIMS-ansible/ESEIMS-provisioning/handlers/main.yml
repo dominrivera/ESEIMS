@@ -15,12 +15,6 @@
     enabled: yes
   become: yes
 
-- name: "Restart Telegraf Windows"
-  win_service:
-    name: Telegraf
-    start_mode: auto
-    state: restarted
-
 - name: "Restart Kapacitor"
   service:
     name: kapacitor
@@ -46,13 +40,6 @@
   service:
     name: grafana-server
     state: restarted
-    enabled: yes
-  become: yes
-
-- name: "Reload Grafana"
-  service:
-    name: grafana-server
-    state: reloaded
     enabled: yes
   become: yes
 

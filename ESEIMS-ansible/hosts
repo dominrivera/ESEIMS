@@ -1,19 +1,20 @@
-[ubuntu-server]
-40.89.143.169
+[server-infra]
+104.47.136.175
 
-[ubuntu-vm]
-40.89.181.41
+[laboratory-SO5]
+52.178.105.140
 
-[windows-vm]
-20.188.44.251
+[laboratory-SO6]
+40.118.106.110
 
-[ubuntu-server:vars]
+[server-infra:vars]
+laboratory=infra
+server=104.47.136.175
 
-[ubuntu-vm:vars]
-ansible_user=drb
+[laboratory-SO5:vars]
+laboratory=SO5
+server=104.47.136.175
 
-[windows-vm:vars]
-ansible_user=windows
-ansible_password=Admin12345678!
-ansible_connection=winrm
-ansible_winrm_server_cert_validation=ignore
+[laboratory-SO6:vars]
+laboratory=SO6
+server=104.47.136.175
