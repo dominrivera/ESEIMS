@@ -30,31 +30,31 @@
     <div class="row">
         <div class="col-md-12 mb-3">
             <label for="title">{{ 'ticketDetails.title' | translate }}</label>
-            <input [(ngModel)]="ticket.title" name="title" type="text" class="form-control" id="title" placeholder=""
+            <input value="{{ this.ticket.title }}" name="title" type="text" class="form-control" id="title" placeholder=""
                 value="" disabled>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 mb-3">
             <label for="creator">{{ 'ticketDetails.creator' | translate }}</label>
-            <input [(ngModel)]="ticket.creator" name="creator" type="text" class="form-control" id="creator"
+            <input value="{{ this.ticket.creator }} ({{ this.ticketCreatorEmail }})" name="creator" type="text" class="form-control" id="creator"
                 placeholder="" value="" disabled>
         </div>
         <div class="col-md-6 mb-3">
             <label for="status">{{ 'ticketDetails.status' | translate }}</label>
-            <input [(ngModel)]="ticket.status" name="status" type="text" class="form-control" id="status" placeholder=""
+            <input value="{{ this.ticket.status }}" name="status" type="text" class="form-control" id="status" placeholder=""
                 value="" disabled>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 mb-3">
             <label for="modified">{{ 'ticketDetails.modified' | translate }}</label>
-            <input [(ngModel)]="ticket.modified" name="modified" type="text" class="form-control" id="modified"
+            <input value="{{ this.ticket.modified }}" name="modified" type="text" class="form-control" id="modified"
                 placeholder="" value="" disabled>
         </div>
         <div class="col-md-6 mb-3">
             <label for="created">{{ 'ticketDetails.created' | translate }}</label>
-            <input [(ngModel)]="ticket.created" name="created" type="text" class="form-control" id="created"
+            <input value="{{ this.ticket.created }}" name="created" type="text" class="form-control" id="created"
                 placeholder="" value="" disabled>
         </div>
     </div>
@@ -64,8 +64,8 @@
             <form class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="description">{{ 'ticketDetails.description' | translate }}</label>
-                    <textarea [(ngModel)]="ticket.description" class="form-control" name="description" id="description"
-                        rows="3" disabled></textarea>
+                    <textarea value="{{ this.ticket.description }}" class="form-control" name="description" id="description"
+                        rows="4" disabled></textarea>
                 </div>
                 <hr *ngIf="ticket.status!='closed'" class="mb-4">
             </form>
