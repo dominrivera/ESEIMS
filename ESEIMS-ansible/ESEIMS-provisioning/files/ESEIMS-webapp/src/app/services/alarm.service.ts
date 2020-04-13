@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -15,26 +15,12 @@ export class AlarmService {
 
   editAlarm(alarm) {
     const url = `/api/alarms/${alarm.id}`;
-    const token = this.auth.getToken()
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.put(url, alarm, httpOptions);
+    return this.http.put(url, alarm);
   }
 
   deleteAlarm(alarmId) {
     const url = `/api/alarms/${alarmId}`;
-    const token = this.auth.getToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.delete(url, httpOptions)
+    return this.http.delete(url)
   }
 
 }

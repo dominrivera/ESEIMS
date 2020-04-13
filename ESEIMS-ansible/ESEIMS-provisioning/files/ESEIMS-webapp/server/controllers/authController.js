@@ -1,7 +1,7 @@
 var Auth = require('../persistence/authDAO');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
-var SECRET_KEY = 'mysecretkey'; // configure it in config.js
+var config = require('../config');
 var { validationResult } = require('express-validator');
 var authCtrl = {};
 
@@ -61,7 +61,7 @@ authCtrl.loginUser = function (req, res) {
             if (checkPassword) {
                 // Creating access token:
                 var expiresIn = Math.floor(Date.now() / 1000) + (60 * 60);
-                var accessToken = jwt.sign({ id: user.id, name: user.name, surname: user.surname, role: user.role }, SECRET_KEY, { expiresIn: expiresIn });
+                var accessToken = jwt.sign({ id: user.id, name: user.name, surname: user.surname, role: user.role }, config.secret_key, { expiresIn: expiresIn });
                 var responseData = {
                     accessToken: accessToken,
                     expiresIn: expiresIn
@@ -86,7 +86,7 @@ authCtrl.verifyToken = function (req, res, next) {
     if (token == null | token == undefined) {
         return res.status(401).send('Unauthorized');
     }
-    var verification = jwt.verify(token, SECRET_KEY);
+    var verification = jwt.verify(token, config.secret_key);
     // if token fails verification
     if (!verification) {
         return res.status(401).send('Unauthorized');

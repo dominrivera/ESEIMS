@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -37,26 +37,12 @@ export class TicketService {
 
   editTicket(ticket) {
     const url = `/api/tickets/${ticket.id}`;
-    const token = this.auth.getToken()
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.put(url, ticket, httpOptions);
+    return this.http.put(url, ticket);
   }
 
   deleteTicket(ticketId) {
     const url = `/api/tickets/${ticketId}`;
-    const token = this.auth.getToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.delete(url, httpOptions)
+    return this.http.delete(url)
   }
 
   getComments(ticketId) {
@@ -70,14 +56,7 @@ export class TicketService {
 
   deleteComments(ticketId) {
     const url = `/api/comments/${ticketId}`;
-    const token = this.auth.getToken();
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': token
-      })
-    };
-    return this.http.delete(url, httpOptions)
+    return this.http.delete(url)
   }
 
 }

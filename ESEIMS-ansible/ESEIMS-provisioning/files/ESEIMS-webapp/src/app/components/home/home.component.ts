@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { eseims_infrastructure_overview } from 'src/grafana_dashboards';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  url: string;
+  urlSafe: SafeResourceUrl;
 
-  ngOnInit() { }
+  constructor(public sanitizer: DomSanitizer) { }
+
+  ngOnInit() {
+    this.url = eseims_infrastructure_overview;
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  }
 
 }
