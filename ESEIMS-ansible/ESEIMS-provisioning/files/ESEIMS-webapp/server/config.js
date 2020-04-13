@@ -3,7 +3,7 @@ require('dotenv').config();
 var config = {}
 
 config.port = process.env.PORT || 3000
-config.SECRETKEY = process.env.SECRETKEY || 'mysecretkey'
+config.secret_key = process.env.SECRET_KEY || 'mysecretkey'
 
 var db_config = {}
 
