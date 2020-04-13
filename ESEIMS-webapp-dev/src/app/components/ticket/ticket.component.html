@@ -35,13 +35,13 @@
         <table id="ticketTable" class="table table-hover table-dark">
             <thead>
                 <tr *ngIf="selectedStatus=='all'">
-                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'ticket.title' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'ticket.description' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'ticket.status' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'ticket.assignment' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'ticket.creator' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'ticket.created' | translate }}</th>
-                    <th class="pointer" scope="col" (click)="sortTable(6)">{{ 'ticket.modified' | translate }}</th>
+                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'ticket.title' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'ticket.description' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'ticket.status' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'ticket.assignment' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'ticket.creator' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'ticket.created' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                    <th class="pointer" scope="col" (click)="sortTable(6)">{{ 'ticket.modified' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
                 </tr>
                 <tr *ngIf="selectedStatus!='all'">
                     <th scope="col">{{ 'ticket.title' | translate }}</th>
