@@ -1,1 +1,2 @@
-export var eseims_host_overview:string = 'http://localhost:3001/d/nmcimT9Zz/host-overview?orgId=1&from=1586545268844&to=1586545568844&var-lab=All&var-host=All&var-interface=All';
+export var eseims_infrastructure_overview:string = 'http://localhost:3001/d/i70DWsjWk/eseims-infrastructure-overview?orgId=1&kiosk';
+export var eseims_host_overview:string = 'http://localhost:3001/d/nmcimT9Zz/host-overview?orgId=1&from=now-30m&to=now';
