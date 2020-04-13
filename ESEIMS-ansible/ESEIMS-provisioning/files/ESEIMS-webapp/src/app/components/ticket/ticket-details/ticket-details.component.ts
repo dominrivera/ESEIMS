@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TicketService } from 'src/app/services/ticket.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-ticket-details',
@@ -13,13 +14,14 @@ export class TicketDetailsComponent implements OnInit {
   comments: any = [];
   newComment: any = {};
   ticket: any = {};
+  ticketCreatorEmail: string;
   currentUser: any;
   currentUserRole: any;
   modalTicketId: number;
   commentSuccess: boolean;
   deleteSuccess: boolean;
 
-  constructor(private route: ActivatedRoute, private ticketService: TicketService, private auth: AuthService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private ticketService: TicketService, private auth: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     const id = parseInt(this.route.snapshot.paramMap.get('id'));
@@ -33,6 +35,16 @@ export class TicketDetailsComponent implements OnInit {
             this.router.navigate(['/**'])
           } else {
             this.ticket = data[0];
+            var creatorId = this.ticket.creatorId;
+            this.userService.getUser(creatorId)
+              .subscribe(
+                (data) => {
+                  this.ticketCreatorEmail = data[0].email;
+                },
+                (err) => {
+                  console.log(err);
+                }
+              )
           }
         },
         (err) => {
