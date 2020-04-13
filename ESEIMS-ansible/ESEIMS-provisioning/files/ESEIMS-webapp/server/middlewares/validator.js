@@ -3,13 +3,13 @@ const { body } = require('express-validator');
 // validations of register data
 exports.checkDataRegister = [
     body('name')
-    .isAlpha()
+    .isString()
     .notEmpty()
     .isLength({ max: 32 }),
     body('surname')
-    .isAlpha()
+    .isString()
     .notEmpty()
-    .isLength({ max: 32 }),
+    .isLength({ max: 50 }),
     body('email')
     .isEmail()
     .normalizeEmail()
@@ -32,11 +32,11 @@ exports.checkDataLogin = [
 // validations of user data when modified
 exports.checkUserData = [
     body('name')
-    .isAlpha()
+    .isString()
     .notEmpty()
     .isLength({ max: 32 }),
     body('surname')
-    .isAlpha()
+    .isString()
     .notEmpty()
     .isLength({ max: 32 }),
     body('email')
@@ -56,11 +56,11 @@ exports.checkTicket = [
     body('title')
     .isString()
     .notEmpty()
-    .isLength({ max: 40 }),
+    .isLength({ max: 100 }),
     body('description')
     .isString()
     .notEmpty()
-    .isLength({ max: 200 }),
+    .isLength({ max: 400 }),
 ];
 
 // validations for new comment
