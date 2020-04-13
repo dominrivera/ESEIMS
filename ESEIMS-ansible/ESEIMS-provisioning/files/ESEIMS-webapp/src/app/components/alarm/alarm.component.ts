@@ -38,10 +38,12 @@ export class AlarmComponent implements OnInit {
     }
   }
 
+  // Showing in table alarms by status
   filterAlarm(status) {
     this.selectedStatus = status;
   }
 
+  // Assign alarm yourself
   takeAlarm(alarm) {
     alarm.assignment = this.currentUserName;
     alarm.status = 'in progress';
@@ -89,11 +91,13 @@ export class AlarmComponent implements OnInit {
       )
   }
 
+  // Send data about the element we want to remove
   sendModalData(alarm) {
     var alarmId = alarm.id
     this.modalAlarmId = alarmId;
   }
 
+  // Function for table sorting
   sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("alarmTable");
