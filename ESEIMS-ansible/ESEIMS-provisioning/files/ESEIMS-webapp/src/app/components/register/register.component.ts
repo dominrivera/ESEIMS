@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
               } else if (error == 'dni') {
                 this.validations.dni = true;
               }
-
             });
           }
         }

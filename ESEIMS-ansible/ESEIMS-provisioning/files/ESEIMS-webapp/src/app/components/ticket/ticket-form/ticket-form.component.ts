@@ -34,7 +34,6 @@ export class TicketFormComponent implements OnInit {
             }, 2000);
           },
           (err) => {
-            console.log(err);
             this.createSuccess = false;
           }
         )
