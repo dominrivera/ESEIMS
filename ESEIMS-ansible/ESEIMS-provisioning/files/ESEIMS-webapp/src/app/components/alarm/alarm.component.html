@@ -56,14 +56,15 @@
             <tbody>
                 <tr *ngFor="let alarm of alarms | paginate: { itemsPerPage: 10, currentPage: page }">
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.type }}</td>
-                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.level }}</td>
+                    <td *ngIf="((alarm.status==selectedStatus || selectedStatus=='all') && alarm.level == 'WARNING')" id="warning">{{ alarm.level }}</td>
+                    <td *ngIf="((alarm.status==selectedStatus || selectedStatus=='all') && alarm.level == 'CRITICAL')" id="critical">{{ alarm.level }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.value }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.host }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.laboratory }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.status }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.assignment }}</td>
-                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.created }}</td>
-                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.modified }}</td>
+                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.created | date:'short' }}</td>
+                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.modified | date:'short' }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">
                         <div class="dropdown">
                             <button class="btn btn-outline-info dropdown" type="button" id="dropdownMenu2"
