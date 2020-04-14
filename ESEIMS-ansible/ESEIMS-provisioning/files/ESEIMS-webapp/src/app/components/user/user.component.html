@@ -38,7 +38,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.dni }}</td>
                     <td>{{ user.role }}</td>
-                    <td>{{ user.created }}</td>
+                    <td>{{ user.created | date:'short' }}</td>
                     <td>
                         <div *ngIf="(user.email!='admin@esei.uvigo.es') && (user.email!='user@esei.uvigo.es')">
                             <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
@@ -57,7 +57,7 @@
                     <td>{{ userByDNI.email }}</td>
                     <td>{{ userByDNI.dni }}</td>
                     <td>{{ userByDNI.role }}</td>
-                    <td>{{ userByDNI.created }}</td>
+                    <td>{{ userByDNI.created | date:'short' }}</td>
                     <td>
                         <div *ngIf="(userByDNI.email!='admin@esei.uvigo.es') && (userByDNI.email!='user@esei.uvigo.es')">
                             <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
