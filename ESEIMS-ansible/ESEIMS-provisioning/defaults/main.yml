@@ -38,7 +38,9 @@ telegraf_remote_config_win: '{{ telegraf_dir_win }}\telegraf\telegraf.conf'
 
 kapacitor_pkg_url: 'https://dl.influxdata.com/kapacitor/releases/kapacitor_1.5.4-1_amd64.deb'
 kapacitor_pkg: 'kapacitor_1.5.4-1_amd64.deb'
-kapacitor_local_config: 'files/kapacitor.conf'
+#kapacitor_local_config: 'files/kapacitor.conf'
+#kapacitor_remote_config: '/etc/kapacitor/kapacitor.conf'
+kapacitor_local_config: 'templates/kapacitor/kapacitor.j2'
 kapacitor_remote_config: '/etc/kapacitor/kapacitor.conf'
 
 telegraf_params_win:
@@ -72,11 +74,21 @@ telegraf_password: 'password'
 
 alarms_local_path: 'files/alarms'
 alarms_remote_path: '{{ files_remote_path }}/alarms'
+alarms_remote_path_hosts: '/etc/kapacitor'
 alarms:
-  - 'cpu_alert'
-  - 'disk_alert'
-  - 'load_alert'
-  - 'memory_alert'
+  - 'cpu_alarm'
+  - 'disk_alarm'
+  - 'load_alarm'
+  - 'memory_alarm'
+
+httppost_endpoint: 'eseims'
+httppost_address: 'http://localhost:3000/api/alarms'
+httppost_address_hosts: 'http://{{ server_ip }}:3000/api/alarms'
+
+smtp_username: 'eseims@outlook.es'
+smtp_password: 'Admin987alfa?'
+smtp_email_from: 'eseims@outlook.es'
+smtp_email_to: 'eseims@outlook.es'
 
 ### Grafana ###
 
