@@ -11,7 +11,7 @@ batch
         WHERE time >= now() - 1m
     ''')
         .period(5m)
-        .every(1m)
+        .every(5m)
         .groupBy('host', 'laboratory')
     |alert()
         .id(alarm_name)
