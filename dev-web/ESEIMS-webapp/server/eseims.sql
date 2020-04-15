@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
-  `surname` varchar(32) NOT NULL,
+  `surname` varchar(50) NOT NULL,
   `dni` varchar(9) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(32) NOT NULL,
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `alarms` (
 INSERT INTO `alarms` (`id`, `type`, `level`, `value`, `host`, `laboratory`, `status`, `assignment`, `created`, `modified`) VALUES
 (1, 'cpu_usage_high', 'WARNING', '85', '192.168.0.33', '31', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (2, 'load_high', 'WARNING', '3', '192.168.0.31', 'SO8', 'in progress', 'Domingo Rivera Barros', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
-(3, 'memory_usage_high', 'CRITICAL', '92', '192.168.0.31', '33', 'in progress', 'Domingo Rivera Barros', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(3, 'memory_usage_high', 'CRITICAL', '92', '192.168.0.31', '33', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (4, 'load_high', 'CRITICAL', '6', '192.168.0.1', 'SO5', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (5, 'disk_usage_high', 'WARNING', '85', '192.168.0.43', 'SO2', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (6, 'disk_usage_high', 'CRITICAL', '94', '192.168.0.3', 'SO4', 'open', '', '2020-02-06 20:59:10', '2020-02-06 21:59:10'),

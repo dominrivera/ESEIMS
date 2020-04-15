@@ -1,21 +1,22 @@
 dbrp "telegraf"."autogen"
 
-var alert_name = 'load_high'
-var limit = 3
+var alarm_name = 'memory_usage_high'
+var warn = 6
+var crit = 7
 
 batch
     |query('''
-        SELECT MAX(load1) AS value
-        FROM "telegraf"."autogen"."system"
+        SELECT MAX(used)/1000000000 AS value
+        FROM "telegraf"."autogen"."mem"
         WHERE time >= now() - 1m
     ''')
         .period(5m)
-        .every(1m)
+        .every(5m)
         .groupBy('host', 'laboratory')
     |alert()
-        .id(alert_name)
-        .warn(lambda: "value" < limit)
-        .crit(lambda: "value" > limit)
+        .id(alarm_name)
+        .warn(lambda: "value" > warn)
+        .crit(lambda: "value" > crit)
         .details('')
         .message('{{index .Fields "value"}}')
         .post()

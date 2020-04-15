@@ -29,7 +29,7 @@ router.post('/comments', auth.verifyToken, validator.checkComment, comment.creat
 router.delete('/comments/:ticketId', auth.verifyToken, comment.removeCommentsByTicketId);
 
 router.get('/alarms', auth.verifyToken, alarm.listAlarms);
-router.post('/alarms', auth.verifyToken, alarm.saveAlarm);
+router.post('/alarms', alarm.saveAlarm); // do not verify token otherwise kapacitor cannot post
 router.put('/alarms/:id', auth.verifyToken, alarm.editAlarm);
 router.delete('/alarms/:id', auth.verifyToken, alarm.removeAlarm);
 

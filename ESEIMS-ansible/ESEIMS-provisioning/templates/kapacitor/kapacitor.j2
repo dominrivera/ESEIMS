@@ -1,6 +1,8 @@
+# This configuration file is created by Ansible
+
 # The hostname of this node.
 # Must be resolvable by any configured InfluxDB hosts.
-hostname = "localhost"
+hostname = "{{ ansible_hostname }}"
 # Directory for storing a small amount of metadata about the server.
 data_dir = "/var/lib/kapacitor"
 
@@ -85,34 +87,23 @@ default-retention-policy = ""
   # Where to store the Kapacitor boltdb database
   boltdb = "/var/lib/kapacitor/kapacitor.db"
 
-#[deadman]
-  # Configure a deadman's switch
-  # Globally configure deadman's switches on all tasks.
-  # NOTE: for this to be of use you must also globally configure at least one alerting method.
-#  global = false
-  # Threshold, if globally configured the alert will be triggered if the throughput in points/interval is <= threshold.
-#  threshold = 0.0
-  # Interval, if globally configured the frequency at which to check the throughput.
-#  interval = "10s"
-  # Id -- the alert Id, NODE_NAME will be replaced with the name of the node being monitored.
-#  id = "node 'NODE_NAME' in task '{{ .TaskName }}'"
-  # The message of the alert. INTERVAL will be replaced by the interval.
-#  message = "{{ .ID }} is {{ if eq .Level \"OK\" }}alive{{ else }}dead{{ end }}: {{ index .Fields \"collected\" | printf \"%0.3f\" }} points/INTERVAL."
-
-
-# Multiple InfluxDB configurations can be defined.
-# Exactly one must be marked as the default.
-# Each one will be given a name and can be referenced in batch queries and InfluxDBOut nodes.
 [[influxdb]]
+
+  {% if ansible_hostname == 'ubuntu-server' %}  
+    {% set url_value = influxdb_address %}      
+  {% else %}                                    
+    {% set url_value = influxdb_address_hosts %}
+  {% endif %}                                   
+
   # Connect to an InfluxDB cluster
   # Kapacitor can subscribe, query and write to this cluster.
   # Using InfluxDB is not required and can be disabled.
   enabled = true
   default = true
   name = "telegraf"
-  urls = ["http://localhost:8086"]
-  username = "telegraf"
-  password = "password"
+  urls = ["{{ url_value }}"]
+  username = "{{ telegraf_username }}"
+  password = "{{ telegraf_password }}"
   timeout = 0
   # Absolute path to pem encoded CA file.
   # A CA can be provided without a key/cert pair
@@ -190,32 +181,32 @@ default-retention-policy = ""
     # Example:
     # my_database = [ "default", "longterm" ]
 
-[smtp]
-  # Configure an SMTP email server
-  # Will use TLS and authentication if possible
-  # Only necessary for sending emails from alerts.
-  enabled = false
-  host = "localhost"
-  port = 25
-  username = ""
-  password = ""
-  # From address for outgoing mail
-  from = ""
-  # List of default To addresses.
-  # to = ["oncall@example.com"]
+  [smtp]
+    # Configure an SMTP email server
+    # Will use TLS and authentication if possible
+    # Only necessary for sending emails from alerts.
+    enabled = false
+    host = "localhost"
+    port = 25
+    username = ""
+    password = ""
+    # From address for outgoing mail
+    from = ""
+    # List of default To addresses.
+    # to = ["oncall@example.com"]
 
-  # Skip TLS certificate verify when connecting to SMTP server
-  no-verify = false
-  # Close idle connections after timeout
-  idle-timeout = "30s"
+    # Skip TLS certificate verify when connecting to SMTP server
+    no-verify = false
+    # Close idle connections after timeout
+    idle-timeout = "30s"
 
-  # If true the all alerts will be sent via Email
-  # without explicitly marking them in the TICKscript.
-  global = false
-  # Only applies if global is true.
-  # Sets all alerts in state-changes-only mode,
-  # meaning alerts will only be sent if the alert state changes.
-  state-changes-only = false
+    # If true the all alerts will be sent via Email
+    # without explicitly marking them in the TICKscript.
+    global = false
+    # Only applies if global is true.
+    # Sets all alerts in state-changes-only mode,
+    # meaning alerts will only be sent if the alert state changes.
+    state-changes-only = false
 
 ##########################################
 # Configure Alert POST request Endpoints
@@ -225,37 +216,14 @@ default-retention-policy = ""
 # KAPACITOR_HTTPPOST_0_URL = "http://example.com"
 # KAPACITOR_HTTPPOST_0_HEADERS_Example = "header"
 
+
  [[httppost]]
-   endpoint = "eseims"
-   url = "http://localhost:3000/api/alarms"
-#   headers = { Example = "your-key" }
-#   basic-auth = { username = "my-user", password = "my-pass" }
-#
-#   # Provide an alert template for constructing a custom HTTP body.
-#   # Alert templates are only used with post alert handlers as they consume alert data.
-#   # The template uses https://golang.org/pkg/text/template/ and has access to the following fields:
-#   #    * .ID - The unique ID for this alert
-#   #    * .Message - The message of the alert
-#   #    * .Details - The details of the alert
-#   #    * .Time - The time the alert event occurred
-#   #    * .Duration - The duration of the alert event.
-#   #    * .Level - The level of the alert, i.e INFO, WARN, or CRITICAL.
-#   #    * .Data - The data that triggered the alert.
-#   #
-#   # Specify the template inline.
-#   alert-template = "ALERT:  in host {{ index .Tags \"host\" }}: {{range .Data.Series}}{{.Tags}},{{range .Values}}{{.}}{{end}}{{end}}"
-#   # Specify an absolute path to a template file.
-#   alert-template-file = "/tmp/template.html"
-#
-#   # Provide a row template for constructing a custom HTTP body.
-#   # Row templates are only used with httpPost pipeline nodes as they consume a row at a time.
-#   # The template uses https://golang.org/pkg/text/template/ and has access to the following fields:
-#   #    * .Name - The measurement name of the data stream
-#   #    * .Tags - A map of tags on the data.
-#   #    * .Values - A list of values, each entry is a map containing a "time" key for the time of the point
-#   #       and keys for all other fields on the point.
-#   #
-#   # Specify the template inline.
-#   row-template = "{{.Name}} host={{index .Tags \"host\"}}{{range .Values}} {{index . "time"}} {{index . "value"}}{{end}}"
-#   # Specify an absolute path to a template file.
-#   row-template-file = "/path/to/template/file"
+
+  {% if ansible_hostname == 'ubuntu-server' %}
+    {% set url_value = httppost_address %}
+  {% else %}
+    {% set url_value = httppost_address_hosts %}
+  {% endif %}
+
+   endpoint = "{{ httppost_endpoint }}"
+   url = "{{ url_value }}"

@@ -1,7 +1,8 @@
 dbrp "telegraf"."autogen"
 
-var alert_name = 'disk_usage_high'
-var limit = 90
+var alarm_name = 'disk_usage_high'
+var warn = 85
+var crit = 90
 
 batch
     |query('''
@@ -10,12 +11,12 @@ batch
         WHERE path = '/'
     ''')
         .period(5m)
-        .every(1m)
+        .every(5m)
         .groupBy('host', 'laboratory')
     |alert()
-        .id(alert_name)
-        .warn(lambda: "value" < limit)
-        .crit(lambda: "value" > limit)
+        .id(alarm_name)
+        .warn(lambda: "value" > warn)
+        .crit(lambda: "value" > crit)
         .details('')
         .message('{{index .Fields "value"}}')
         .post()
