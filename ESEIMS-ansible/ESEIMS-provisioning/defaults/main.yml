@@ -106,9 +106,20 @@ grafana_host_dashboard: 'ESEIMS_host_overview_es.json'
 ### WEB ###
 
 nodejs_port: '3000'
+secret_key: 'OjDfr4sAQlrLGF1zCxTXYv21Bbxl2gyf'
+db_host: 'localhost'
+db_port: '3306'
+db_user: 'admin'
+db_password: 'admin'
+db_database: 'eseims'
+
 web_address: 'http://{{ server_ip }}:{{ nodejs_port }}'
 web_local_path: 'files/ESEIMS-webapp'
 web_full_remote_path: '{{ files_remote_path }}/ESEIMS-webapp'
+web_local_dashboards: 'templates/web/web_grafana_dashboards.j2'
+web_remote_dashboards: '{{ web_full_remote_path }}/src/grafana_dashboards.ts'
+web_local_env_file: 'templates/web/env.j2'
+web_remote_env_file: '{{ web_full_remote_path }}/.env'
 
 nodejs_version: 10
 ansible_distribution_release: 18.04

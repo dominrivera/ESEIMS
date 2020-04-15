@@ -241,6 +241,18 @@
 
 ##### WEB #####
 
+    - name: Import Web env file
+      template:
+        src: "{{ web_local_env_file }}"
+        dest: "{{ web_remote_env_file }}"
+      become: yes
+
+    - name: Import file with the urls for the integration of grafana
+      template:
+        src: "{{ web_local_dashboards }}"
+        dest: "{{ web_remote_dashboards }}"
+      become: yes
+
     - name: Import Nodejs GPG signin key
       apt_key:
         url: "{{ nodejs_gpg_repo }}"
