@@ -82,20 +82,17 @@
         state: restarted
       become: yes
 
-#    - name: create telegraf database with retention policy
-#      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
+    - name: Check if telegraf is created
+      command: influx -username '{{ influxdb_telegraf_user }}' -password '{{ influxdb_telegraf_password }}' -execute "SHOW DATABASES"
+      register: command_output
+      ignore_errors: true
+      failed_when: '"testing" in command_output.stderr'
+      #    - debug:
+      #        var: command_output
 
-#    - name: Create telegraf database
-#      command: influx -execute "CREATE DATABASE telegraf"
-
-#    - name: Create admin user
-#      command: influx -execute "CREATE USER admin WITH PASSWORD 'admin' WITH ALL PRIVILEGES"
-
-      #    - name: Create telegraf user
-      #      command: influx -execute "CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES"
-
-#    - name: create telegraf database with retention policy
-#      command: "influx -execute \"CREATE DATABASE telegraf WITH DURATION 2d REPLICATION 1 NAME telegraf_retention_policy\""
+    - name: Create telegraf user
+      command: influx -execute "CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES"
+      when: '"error authorizing query" in command_output.stderr'
 
 # -- Telegraf -- #
 
@@ -327,8 +324,6 @@
       loop:
         - mysql-server-5.7
         - libmysqlclient-dev
-#      notify:
-#        - Restart MySQL
       become: yes
 
     - name: Ensure MySQL is running
@@ -381,4 +376,12 @@
       command: sudo forever start -l eseims.log -o out.log -e err.log -a server.js
       args:
         chdir: "{{ web_full_remote_path }}"
+      become: yes
+
+    - name: Create cronjob to start web when reboot
+      cron:
+        name: start_eseims
+        special_time: reboot
+        job: "cd {{ web_full_remote_path }} && sudo /usr/bin/forever start server.js"
+        state: present
       become: yes
