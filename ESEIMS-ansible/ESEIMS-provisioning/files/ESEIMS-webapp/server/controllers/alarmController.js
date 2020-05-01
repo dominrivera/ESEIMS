@@ -25,7 +25,6 @@ alarmCtrl.saveAlarm = function (req, res) {
         }
         new_alarm.host = new_alarm.host.slice(1, -1);
         new_alarm.laboratory = new_alarm.laboratory.slice(1, -1);
-        console.log(new_alarm);
         if (!alarm) {
             return res.status(400).send({ error: true, message: 'Error saving alarm' });
         } else {
