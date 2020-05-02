@@ -22,7 +22,7 @@
             <button id="reopenTicket" type="button" class="btn btn-warning btn-md" (click)="reOpenTicket(ticket)"><i
                     id="reopenTicketIcon"
                     class="material-icons">undo</i>{{ 'ticketDetails.reopen' | translate }}</button>
-            <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#deleteTicketModal"
+            <button *ngIf="auth.isAdmin()" type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#deleteTicketModal"
                 (click)="sendModalData(ticket)"><i id="deleteTicketIcon"
                     class="material-icons">delete</i>{{ 'ticketDetails.delete' | translate }}</button>
         </div>
