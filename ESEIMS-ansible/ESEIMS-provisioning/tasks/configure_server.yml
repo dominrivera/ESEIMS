@@ -202,6 +202,9 @@
         enabled: yes
       become: yes
 
+    - name: wait
+      pause: seconds=10
+
     - name: Configure influxDB as a grafana datasource
       grafana_datasource:
         name: "InfluxDB"
@@ -213,6 +216,9 @@
         database: "telegraf"
         user: "{{ influxdb_telegraf_user }}"
         password: "{{ influxdb_telegraf_password }}"
+      register: grafana
+      until: grafana is not failed
+      retries: 5
 
     - name: copy grafana dashboards json file to ESEIMS
       copy:
@@ -338,12 +344,6 @@
         name: MySQL-python
         state: forcereinstall
       become: yes
-
-#    - name: Create anonymous user account for localhost
-#      mysql_user:
-#        name: 'root'
-#        host: localhost
-#        state: present
 
     - name: Create ESEIMS database
       mysql_db:

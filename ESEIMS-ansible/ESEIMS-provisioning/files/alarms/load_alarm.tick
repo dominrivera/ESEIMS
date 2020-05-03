@@ -1,8 +1,8 @@
 dbrp "telegraf"."autogen"
 
 var alarm_name = 'load_high'
-var warn = 2
-var crit = 3
+var warn = 2.0
+var crit = 3.0
 
 batch
     |query('''

@@ -1,8 +1,8 @@
 dbrp "telegraf"."autogen"
 
 var alarm_name = 'disk_usage_high'
-var warn = 85
-var crit = 90
+var warn = 8.0
+var crit = 10.0
 
 batch
     |query('''
