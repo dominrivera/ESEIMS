@@ -70,7 +70,7 @@
   "panels": [
     {
       "cacheTimeout": null,
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "gridPos": {
         "h": 4,
         "w": 4,
@@ -171,7 +171,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -291,7 +291,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -411,7 +411,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -531,7 +531,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -649,7 +649,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -763,7 +763,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
@@ -887,7 +887,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
@@ -1009,7 +1009,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
@@ -1144,7 +1144,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
@@ -1310,7 +1310,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
@@ -1431,7 +1431,7 @@
     },
     {
       "columns": [],
-      "datasource": "${DS_INFLUXDB}",
+      "datasource": "InfluxDB",
       "fontSize": "100%",
       "gridPos": {
         "h": 5,
@@ -1532,7 +1532,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_INFLUXDB}",
+        "datasource": "InfluxDB",
         "definition": "SHOW TAG VALUES FROM system WITH KEY=laboratory",
         "hide": 2,
         "includeAll": true,
@@ -1555,7 +1555,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_INFLUXDB}",
+        "datasource": "InfluxDB",
         "definition": "SHOW TAG VALUES FROM \"system\" WITH KEY = \"host\" WHERE laboratory =~ /$laboratory/",
         "hide": 2,
         "includeAll": true,
@@ -1578,7 +1578,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_INFLUXDB}",
+        "datasource": "InfluxDB",
         "definition": "SHOW TAG VALUES FROM \"net\" WITH KEY = \"interface\" WHERE host =~ /$host/",
         "hide": 2,
         "includeAll": true,
