@@ -69,7 +69,6 @@
         src: "{{ influxdb_local_config }}"
         dest: "{{ influxdb_remote_config }}"
       notify:
-        - Reload InfluxDB
         - Restart InfluxDB
       become: yes
 
