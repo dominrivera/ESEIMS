@@ -44,7 +44,7 @@ export class AlarmComponent implements OnInit {
   }
 
   // Assign alarm yourself
-  takeAlarm(alarm) {
+  assignAlarm(alarm) {
     alarm.assignment = this.currentUserName;
     alarm.status = 'in progress';
     this.alarmService.editAlarm(alarm)
