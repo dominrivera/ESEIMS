@@ -54,7 +54,7 @@ export class TicketComponent implements OnInit {
     this.router.navigate(['/ticket-form'])
   }
 
-  takeTicket(ticket) {
+  assignTicket(ticket) {
     ticket.assignment = this.currentUserName;
     ticket.status = 'in progress';
     this.ticketService.editTicket(ticket)
