@@ -20,7 +20,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.7.2"
+      "version": "6.7.3"
     },
     {
       "type": "panel",
@@ -45,6 +45,12 @@
       "id": "table",
       "name": "Table",
       "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
     }
   ],
   "annotations": {
@@ -65,7 +71,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1586721745458,
+  "iteration": 1590442542790,
   "links": [],
   "panels": [
     {
@@ -82,6 +88,506 @@
       "repeat": "host",
       "title": "$host",
       "type": "row"
+    },
+    {
+      "content": "\n\n",
+      "datasource": "InfluxDB",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 65,
+      "mode": "html",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Vision General",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorPostfix": false,
+      "colorPrefix": false,
+      "colorValue": false,
+      "colors": [
+        "#5794F2",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "InfluxDB",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 2
+      },
+      "id": 57,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:562",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:563",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "pluginVersion": "6.7.3",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "80%",
+      "rangeMaps": [
+        {
+          "$$hashKey": "object:1596",
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "#5794F2",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "value",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "system",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SHOW TAG VALUES FROM \"system\" WITH KEY = \"laboratory\" WHERE (\"host\" =~ /^$host$/)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=~",
+              "value": "/^$host$/"
+            }
+          ]
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Laboratorio",
+      "type": "singlestat",
+      "valueFontSize": "70%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:565",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "InfluxDB",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 2
+      },
+      "id": 59,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:1772",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:1773",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "value",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SHOW TAG VALUES FROM \"system\" WITH KEY = \"os\" WHERE (\"host\" =~ /^$host$/)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Sistema Operativo",
+      "type": "singlestat",
+      "valueFontSize": "70%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:1775",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "InfluxDB",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 2
+      },
+      "id": 63,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:2060",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:2061",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "value",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SHOW TAG VALUES FROM \"system\" WITH KEY = \"processor\" WHERE (\"host\" =~ /^$host$/)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Procesador",
+      "type": "singlestat",
+      "valueFontSize": "70%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:2063",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "InfluxDB",
+      "format": "none",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 2
+      },
+      "id": 61,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "$$hashKey": "object:1916",
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "$$hashKey": "object:1917",
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "value",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SHOW TAG VALUES FROM \"system\" WITH KEY = \"ip\" WHERE (\"host\" =~ /^$host$/)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Direccion IP Privada",
+      "type": "singlestat",
+      "valueFontSize": "70%",
+      "valueMaps": [
+        {
+          "$$hashKey": "object:1919",
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
     },
     {
       "cacheTimeout": null,
@@ -106,7 +612,7 @@
         "h": 4,
         "w": 3,
         "x": 0,
-        "y": 1
+        "y": 5
       },
       "id": 2,
       "interval": null,
@@ -127,6 +633,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "pluginVersion": "6.7.3",
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -191,7 +698,7 @@
       "timeShift": null,
       "title": "Tiempo de Actividad",
       "type": "singlestat",
-      "valueFontSize": "100%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "$$hashKey": "object:272",
@@ -224,7 +731,7 @@
         "h": 4,
         "w": 3,
         "x": 3,
-        "y": 1
+        "y": 5
       },
       "id": 22,
       "interval": null,
@@ -342,7 +849,7 @@
         "h": 4,
         "w": 3,
         "x": 6,
-        "y": 1
+        "y": 5
       },
       "id": 26,
       "interval": null,
@@ -462,7 +969,7 @@
         "h": 4,
         "w": 3,
         "x": 9,
-        "y": 1
+        "y": 5
       },
       "id": 28,
       "interval": null,
@@ -522,7 +1029,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"used\") FROM \"mem\" WHERE (\"host\" =~ /^$host$/) AND $timeFilter GROUP BY time($__interval) fill(null)",
+          "query": "SELECT last(total) AS \"total\" FROM \"disk\" WHERE (\"host\" =~ /^$host$/) AND $timeFilter",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -546,7 +1053,7 @@
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "RAM Uso",
+      "title": "Total Disco",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -566,7 +1073,7 @@
         "h": 4,
         "w": 3,
         "x": 12,
-        "y": 1
+        "y": 5
       },
       "id": 14,
       "links": [],
@@ -613,7 +1120,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.7.3",
       "targets": [
         {
           "groupBy": [
@@ -665,7 +1172,7 @@
         "h": 4,
         "w": 3,
         "x": 15,
-        "y": 1
+        "y": 5
       },
       "id": 16,
       "links": [],
@@ -712,7 +1219,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.7.3",
       "targets": [
         {
           "groupBy": [
@@ -764,7 +1271,7 @@
         "h": 4,
         "w": 3,
         "x": 18,
-        "y": 1
+        "y": 5
       },
       "id": 41,
       "links": [],
@@ -812,7 +1319,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.7.3",
       "targets": [
         {
           "groupBy": [
@@ -864,7 +1371,7 @@
         "h": 4,
         "w": 3,
         "x": 21,
-        "y": 1
+        "y": 5
       },
       "id": 20,
       "links": [],
@@ -912,7 +1419,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.7.3",
       "targets": [
         {
           "groupBy": [
@@ -980,7 +1487,7 @@
         "h": 4,
         "w": 3,
         "x": 0,
-        "y": 5
+        "y": 9
       },
       "id": 4,
       "interval": null,
@@ -1099,7 +1606,7 @@
         "h": 4,
         "w": 3,
         "x": 3,
-        "y": 5
+        "y": 9
       },
       "id": 32,
       "interval": null,
@@ -1218,7 +1725,7 @@
         "h": 4,
         "w": 3,
         "x": 6,
-        "y": 5
+        "y": 9
       },
       "id": 34,
       "interval": null,
@@ -1337,7 +1844,7 @@
         "h": 4,
         "w": 3,
         "x": 9,
-        "y": 5
+        "y": 9
       },
       "id": 36,
       "interval": null,
@@ -1456,7 +1963,7 @@
         "h": 4,
         "w": 3,
         "x": 12,
-        "y": 5
+        "y": 9
       },
       "id": 6,
       "interval": null,
@@ -1574,7 +2081,7 @@
         "h": 4,
         "w": 3,
         "x": 15,
-        "y": 5
+        "y": 9
       },
       "id": 24,
       "interval": null,
@@ -1693,7 +2200,7 @@
         "h": 4,
         "w": 3,
         "x": 18,
-        "y": 5
+        "y": 9
       },
       "id": 8,
       "interval": null,
@@ -1812,7 +2319,7 @@
         "h": 4,
         "w": 3,
         "x": 21,
-        "y": 5
+        "y": 9
       },
       "id": 12,
       "interval": null,
@@ -1910,6 +2417,23 @@
       "valueName": "current"
     },
     {
+      "content": "\n\n",
+      "datasource": "InfluxDB",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 67,
+      "mode": "markdown",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Graficas Detalladas",
+      "transparent": true,
+      "type": "text"
+    },
+    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
@@ -1921,7 +2445,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 14
       },
       "hiddenSeries": false,
       "id": 38,
@@ -2048,7 +2572,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 14
       },
       "hiddenSeries": false,
       "id": 40,
@@ -2177,7 +2701,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 45,
@@ -2311,7 +2835,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 43,
@@ -2434,7 +2958,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 32
       },
       "hiddenSeries": false,
       "id": 49,
@@ -2558,7 +3082,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 27
+        "y": 32
       },
       "hiddenSeries": false,
       "id": 47,
@@ -2687,7 +3211,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 41
       },
       "hiddenSeries": false,
       "id": 51,
@@ -2856,7 +3380,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 36
+        "y": 41
       },
       "hiddenSeries": false,
       "id": 53,
@@ -2971,6 +3495,23 @@
       }
     },
     {
+      "content": "\n\n",
+      "datasource": "InfluxDB",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 50
+      },
+      "id": 69,
+      "mode": "markdown",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Logs del Sistema",
+      "transparent": true,
+      "type": "text"
+    },
+    {
       "columns": [],
       "datasource": "InfluxDB",
       "fontSize": "100%",
@@ -2978,7 +3519,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 51
       },
       "id": 55,
       "pageSize": null,
@@ -3057,7 +3598,7 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Logs del Sistema",
+      "title": "",
       "transform": "table",
       "type": "table"
     }
@@ -3136,6 +3677,52 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "InfluxDB",
+        "definition": "SHOW TAG VALUES FROM system WITH KEY=os",
+        "hide": 2,
+        "includeAll": false,
+        "index": -1,
+        "label": "os",
+        "multi": false,
+        "name": "os",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM system WITH KEY=os",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "InfluxDB",
+        "definition": "SHOW TAG VALUES FROM system WITH KEY=ip",
+        "hide": 2,
+        "includeAll": false,
+        "index": -1,
+        "label": "ip",
+        "multi": false,
+        "name": "ip",
+        "options": [],
+        "query": "SHOW TAG VALUES FROM system WITH KEY=ip",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
@@ -3163,5 +3750,5 @@
   "variables": {
     "list": []
   },
-  "version": 10
+  "version": 8
 }
