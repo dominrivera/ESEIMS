@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.7.2"
+      "version": "6.7.3"
     },
     {
       "type": "panel",
@@ -45,6 +45,12 @@
       "id": "table",
       "name": "Table",
       "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
     }
   ],
   "annotations": {
@@ -65,9 +71,26 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1586723316856,
+  "iteration": 1590449537671,
   "links": [],
   "panels": [
+    {
+      "content": "\n\n",
+      "datasource": "InfluxDB",
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 26,
+      "mode": "markdown",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ESEIMS Vision General",
+      "transparent": true,
+      "type": "text"
+    },
     {
       "cacheTimeout": null,
       "datasource": "InfluxDB",
@@ -75,7 +98,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 6,
       "links": [],
@@ -115,7 +138,7 @@
         "justifyMode": "auto",
         "orientation": "horizontal"
       },
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "6.7.3",
       "targets": [
         {
           "alias": "$col",
@@ -184,7 +207,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 0
+        "y": 1
       },
       "id": 4,
       "interval": null,
@@ -304,7 +327,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 0
+        "y": 1
       },
       "id": 2,
       "interval": null,
@@ -424,7 +447,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 0
+        "y": 1
       },
       "id": 8,
       "interval": null,
@@ -544,7 +567,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 0
+        "y": 1
       },
       "id": 24,
       "interval": null,
@@ -662,7 +685,7 @@
         "h": 4,
         "w": 4,
         "x": 20,
-        "y": 0
+        "y": 1
       },
       "id": 14,
       "interval": null,
@@ -770,7 +793,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 5
       },
       "hiddenSeries": false,
       "id": 16,
@@ -894,7 +917,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 18,
@@ -1016,7 +1039,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 17
       },
       "hiddenSeries": false,
       "id": 22,
@@ -1151,7 +1174,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 23
       },
       "hiddenSeries": false,
       "id": 20,
@@ -1317,7 +1340,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 29
       },
       "hiddenSeries": false,
       "id": 12,
@@ -1437,7 +1460,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 35
       },
       "id": 10,
       "pageSize": null,
