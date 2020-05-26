@@ -23,6 +23,9 @@
   ## Environment variables can be used as tags, and throughout the config file
   # user = "$USER"
   laboratory = "{{ laboratory_var }}"
+  ip = "{{ ansible_default_ipv4.address }}"
+  os = "{{ ansible_lsb.description }}"
+  processor = "{{ ansible_processor[2] }}"
 
 # Configuration for telegraf agent
 [agent]

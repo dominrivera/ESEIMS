@@ -22,10 +22,10 @@
     enabled: yes
   become: yes
 
-- name: "Reload InfluxDB"
+- name: "Restart InfluxDB"
   service:
     name: influxdb
-    state: reloaded
+    state: restarted
     enabled: yes
   become: yes
 

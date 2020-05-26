@@ -2,7 +2,7 @@
 - hosts: all
 #- hosts: server-infra
 #- hosts: laboratory-SO5
-#- hosts: laboratory-SO6
+- hosts: laboratory-SO6
   become: yes
   become_user: root
   roles:
