@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.7.3"
+      "version": "7.0.1"
     },
     {
       "type": "panel",
@@ -71,12 +71,18 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1590449537671,
+  "iteration": 1590779444050,
   "links": [],
   "panels": [
     {
       "content": "\n\n",
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -94,8 +100,35 @@
     {
       "cacheTimeout": null,
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [
+            {
+              "$$hashKey": "object:1004",
+              "id": 0,
+              "op": "=",
+              "text": "N/A",
+              "type": 1,
+              "value": "null"
+            }
+          ],
+          "nullValueMode": "connected",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 0,
         "y": 1
@@ -104,41 +137,17 @@
       "links": [],
       "options": {
         "colorMode": "background",
-        "fieldOptions": {
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
           "calcs": [
             "lastNotNull"
           ],
-          "defaults": {
-            "mappings": [
-              {
-                "$$hashKey": "object:1004",
-                "id": 0,
-                "op": "=",
-                "text": "N/A",
-                "type": 1,
-                "value": "null"
-              }
-            ],
-            "nullValueMode": "connected",
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "semi-dark-blue",
-                  "value": null
-                }
-              ]
-            },
-            "unit": "none"
-          },
-          "overrides": [],
           "values": false
-        },
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "horizontal"
+        }
       },
-      "pluginVersion": "6.7.3",
+      "pluginVersion": "7.0.1",
       "targets": [
         {
           "alias": "$col",
@@ -195,6 +204,12 @@
         "#d44a3a"
       ],
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -204,7 +219,7 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 4,
         "y": 1
@@ -315,6 +330,12 @@
         "#d44a3a"
       ],
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -324,7 +345,7 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 8,
         "y": 1
@@ -435,6 +456,12 @@
         "#d44a3a"
       ],
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -444,7 +471,7 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 12,
         "y": 1
@@ -555,6 +582,12 @@
         "#d44a3a"
       ],
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -564,7 +597,7 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 16,
         "y": 1
@@ -673,6 +706,12 @@
         "#d44a3a"
       ],
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -682,7 +721,7 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 4,
         "x": 20,
         "y": 1
@@ -787,13 +826,19 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
-        "h": 6,
-        "w": 24,
+        "h": 7,
+        "w": 8,
         "x": 0,
-        "y": 5
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 16,
@@ -804,7 +849,7 @@
         "hideZero": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -841,7 +886,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(usage_user) as \"user\" FROM \"cpu\" WHERE \"host\" =~ /$host$/ and cpu = 'cpu-total' AND $timeFilter GROUP BY time($interval), *",
+          "query": "SELECT mean(\"usage_user\") AS \"cpu\" FROM \"cpu\" WHERE (\"cpu\" = 'cpu-total' AND \"host\" =~ /^$host$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -911,13 +956,198 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 11
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 4
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "connected",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "$col",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "disk",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT SUM(total) AS total FROM (SELECT LAST(\"total\") AS total FROM \"disk\" GROUP BY \"host\") GROUP BY time(1m) fill(null)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "host",
+              "operator": "=~",
+              "value": "/^$host$/"
+            },
+            {
+              "condition": "AND",
+              "key": "path",
+              "operator": "=",
+              "value": "/"
+            }
+          ]
+        },
+        {
+          "alias": "$col",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT SUM(used) AS usado FROM (SELECT LAST(\"used\") AS used FROM \"disk\" GROUP BY \"host\") GROUP BY time(1m) fill(null)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Almacenamiento",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:3304",
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:3305",
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 4,
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 4
       },
       "hiddenSeries": false,
       "id": 18,
@@ -926,7 +1156,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -963,7 +1193,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(used) as used FROM \"mem\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
+          "query": "SELECT last(\"used\") FROM \"mem\" WHERE (\"host\" =~ /^$host$/) AND $timeFilter GROUP BY time($__interval), \"host\" fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1028,27 +1258,40 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "procesos": "yellow"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
+      "decimals": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
-        "h": 6,
-        "w": 24,
+        "h": 7,
+        "w": 8,
         "x": 0,
-        "y": 17
+        "y": 11
       },
       "hiddenSeries": false,
-      "id": 22,
+      "id": 28,
       "legend": {
+        "alignAsTable": false,
         "avg": false,
         "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
         "max": false,
         "min": false,
-        "show": false,
+        "rightSide": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -1083,10 +1326,10 @@
               "type": "fill"
             }
           ],
-          "measurement": "disk",
+          "measurement": "processes",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT SUM(total) AS \"total\", SUM(used) AS \"usado\", SUM(free) AS \"libre\" FROM (SELECT mean(total) AS \"total\", mean(used) as \"used\", mean(free) as \"free\" FROM \"disk\" WHERE (\"host\" =~ /^$host$/ AND \"path\" = '/')  GROUP BY \"host\", \"path\") GROUP BY time($interval)",
+          "query": "SELECT SUM(total) AS total FROM (SELECT LAST(\"total\") AS total FROM \"processes\" GROUP BY \"host\") GROUP BY time(1m) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1094,36 +1337,30 @@
             [
               {
                 "params": [
-                  "value"
+                  "total"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
                 "type": "mean"
+              },
+              {
+                "params": [
+                  "procesos"
+                ],
+                "type": "alias"
               }
             ]
           ],
-          "tags": [
-            {
-              "key": "host",
-              "operator": "=~",
-              "value": "/^$host$/"
-            },
-            {
-              "condition": "AND",
-              "key": "path",
-              "operator": "=",
-              "value": "/"
-            }
-          ]
+          "tags": []
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Almacenamiento",
+      "title": "Procesos",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1139,17 +1376,17 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:3304",
-          "format": "bytes",
+          "$$hashKey": "object:594",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
-          "$$hashKey": "object:3305",
-          "format": "bytes",
+          "$$hashKey": "object:595",
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1163,18 +1400,27 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": {
+        "entrada": "green",
+        "salida": "orange"
+      },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 23
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 20,
@@ -1183,7 +1429,7 @@
         "current": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -1200,7 +1446,7 @@
       "seriesOverrides": [
         {
           "$$hashKey": "object:2853",
-          "alias": "/ entrada$/",
+          "alias": "/^entrada$/",
           "transform": "negative-Y"
         }
       ],
@@ -1209,7 +1455,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_host: $col",
+          "alias": "$col",
           "groupBy": [
             {
               "params": [
@@ -1226,7 +1472,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(bytes_recv),1s)*8 as \"entrada\"  FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
+          "query": "SELECT SUM(e) AS entrada FROM (SELECT non_negative_derivative(mean(bytes_recv),1s)*8 as \"e\"  FROM \"net\" WHERE (interface =~ /$interface/)) WHERE $timeFilter GROUP BY time($interval), * fill(none)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1247,7 +1493,7 @@
           "tags": []
         },
         {
-          "alias": "$tag_host: $col",
+          "alias": "$col",
           "groupBy": [
             {
               "params": [
@@ -1264,7 +1510,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT non_negative_derivative(mean(bytes_sent),1s)*8 as \"salida\" FROM \"net\" WHERE host =~ /$host/ AND interface =~ /$interface/ AND $timeFilter GROUP BY time($interval), * fill(none)",
+          "query": "SELECT SUM(s) AS salida FROM (SELECT non_negative_derivative(mean(bytes_sent),1s)*8 as \"s\" FROM \"net\" WHERE (interface =~ /$interface/)) WHERE $timeFilter GROUP BY time($interval), * fill(none)",
           "rawQuery": true,
           "refId": "B",
           "resultFormat": "time_series",
@@ -1334,13 +1580,19 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "InfluxDB",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 4,
       "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 29
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 11
       },
       "hiddenSeries": false,
       "id": 12,
@@ -1348,10 +1600,11 @@
         "alignAsTable": false,
         "avg": false,
         "current": false,
+        "hideEmpty": false,
         "hideZero": false,
         "max": false,
         "min": false,
-        "show": false,
+        "show": true,
         "total": false,
         "values": false
       },
@@ -1371,7 +1624,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "$tag_host",
+          "alias": "$col",
           "groupBy": [
             {
               "params": [
@@ -1388,7 +1641,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT mean(tcp_established) as ESTABLISHED FROM \"netstat\" WHERE host =~ /$host$/ AND $timeFilter GROUP BY time($interval), host ORDER BY asc",
+          "query": "SELECT SUM(e) AS establecidas FROM (SELECT last(\"tcp_established\") AS \"e\" FROM \"netstat\" GROUP BY \"host\") WHERE $timeFilter GROUP BY time($__interval) fill(null)",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -1403,6 +1656,51 @@
               {
                 "params": [],
                 "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "$col",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "netstat",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT SUM(l) AS escuchando FROM (SELECT last(\"tcp_listen\") AS \"l\" FROM \"netstat\" GROUP BY \"host\") WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "tcp_listen"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              },
+              {
+                "params": [
+                  "escuchando"
+                ],
+                "type": "alias"
               }
             ]
           ],
@@ -1453,53 +1751,67 @@
       }
     },
     {
-      "columns": [],
+      "cacheTimeout": null,
       "datasource": "InfluxDB",
-      "fontSize": "100%",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "center"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "laboratory"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Equipos"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "count"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Laboratorio"
+              }
+            ]
+          }
+        ]
+      },
       "gridPos": {
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 18
       },
       "id": 10,
-      "pageSize": null,
-      "showHeader": true,
-      "sort": {
-        "col": 0,
-        "desc": true
+      "links": [],
+      "options": {
+        "showHeader": true
       },
-      "styles": [
-        {
-          "$$hashKey": "object:140",
-          "alias": "Equipos",
-          "align": "",
-          "colorMode": "value",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "link": false,
-          "pattern": "laboratory",
-          "type": "number"
-        },
-        {
-          "$$hashKey": "object:141",
-          "alias": "Laboratorio",
-          "align": "",
-          "colorMode": "value",
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "count",
-          "preserveFormat": false,
-          "sanitize": false,
-          "thresholds": [],
-          "type": "string",
-          "unit": "short"
-        }
-      ],
+      "pluginVersion": "7.0.1",
       "targets": [
         {
           "groupBy": [
@@ -1542,12 +1854,11 @@
       "timeFrom": null,
       "timeShift": null,
       "title": "Numero de Equipos por Laboratorio",
-      "transform": "table",
       "type": "table"
     }
   ],
   "refresh": false,
-  "schemaVersion": 22,
+  "schemaVersion": 25,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1559,7 +1870,6 @@
         "definition": "SHOW TAG VALUES FROM system WITH KEY=laboratory",
         "hide": 2,
         "includeAll": true,
-        "index": -1,
         "label": "Laboratorio",
         "multi": true,
         "name": "laboratory",
@@ -1582,7 +1892,6 @@
         "definition": "SHOW TAG VALUES FROM \"system\" WITH KEY = \"host\" WHERE laboratory =~ /$laboratory/",
         "hide": 2,
         "includeAll": true,
-        "index": -1,
         "label": "Equipo",
         "multi": true,
         "name": "host",
@@ -1605,7 +1914,6 @@
         "definition": "SHOW TAG VALUES FROM \"net\" WITH KEY = \"interface\" WHERE host =~ /$host/",
         "hide": 2,
         "includeAll": true,
-        "index": -1,
         "label": "Interface",
         "multi": true,
         "name": "interface",
@@ -1629,7 +1937,6 @@
   },
   "timepicker": {
     "refresh_intervals": [
-      "5s",
       "10s",
       "30s",
       "1m",
@@ -1644,8 +1951,5 @@
   "timezone": "",
   "title": "ESEIMS Vision General",
   "uid": "i70DWsjWk",
-  "variables": {
-    "list": []
-  },
   "version": 2
 }
