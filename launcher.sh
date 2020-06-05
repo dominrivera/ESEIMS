@@ -10,6 +10,9 @@ read -sp "Azure password: " AZ_PASS && echo && az login -u eseims@outlook.es -p 
 rgName='ESEIMS-RG'
 rgLocation='westeurope'
 
+# public ssh key location
+ssh_path='~/.ssh/eseimskey.pub'
+
 # ubuntu server variables
 serverSize='Standard_D2_v3'
 serverImage='UbuntuLTS' # az vm image list --location westus --publisher Canonical --offer UbuntuServer --sku 18.04-LTS --all --output table
@@ -31,15 +34,9 @@ uvm2Name='ubuntu-vm2'
 uvm2User='ubuntu2'
 uvm2Ports=(22)
 
-
-
-
 # Se crea un grupo de recursos.
 #echo "---- Creating Resources Group ----"
 #az group create --name $rgName --location $rgLocation
-
-
-
 
 ##### Ubuntu Server #####
 
@@ -47,7 +44,7 @@ uvm2Ports=(22)
 # Además se extrae la IP pública de la máquina y se guarda en la variable $ip_server.
 echo "---- Creating ${serverName} ----"
 
-ip_server=$(az vm create --name ${serverName} --resource-group ${rgName} --image "${serverImage}" --size ${serverSize} --nsg "${serverName}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
+ip_server=$(az vm create --name ${serverName} --resource-group ${rgName} --image "${serverImage}" --size ${serverSize} --nsg "${serverName}-NSG" --ssh-key-values ${ssh_path} --public-ip-address-allocation static | jq -r '.publicIpAddress')
 
 #echo "Virtual machine created!"
 
@@ -80,7 +77,7 @@ az vm user update --resource-group $rgName -n $serverName -u $serverUser --ssh-k
 ##### Ubuntu VM #####
 echo "---- Creating ${uvmName} ----"
 
-ip_uvm=$(az vm create --name ${uvmName} --resource-group ${rgName} --image "${uvmImage}" --size ${uvmSize} --nsg "${uvmName}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
+ip_uvm=$(az vm create --name ${uvmName} --resource-group ${rgName} --image "${uvmImage}" --size ${uvmSize} --nsg "${uvmName}-NSG" --ssh-key-values ${ssh_path} --public-ip-address-allocation static | jq -r '.publicIpAddress')
 
 echo "Virtual machine created!"
 
@@ -112,7 +109,7 @@ az vm user update --resource-group $rgName -n $uvmName -u $uvmUser --ssh-key-val
 
 echo "---- Creating ${uvm2Name} ----"
 
-ip_uvm2=$(az vm create --name ${uvm2Name} --resource-group ${rgName} --image "${uvm2Image}" --size ${uvm2Size} --nsg "${uvm2Name}-NSG" --generate-ssh-keys --public-ip-address-allocation static | jq -r '.publicIpAddress')
+ip_uvm2=$(az vm create --name ${uvm2Name} --resource-group ${rgName} --image "${uvm2Image}" --size ${uvm2Size} --nsg "${uvm2Name}-NSG" --ssh-key-values ${ssh_path} --public-ip-address-allocation static | jq -r '.publicIpAddress')
 
 echo "Virtual machine created!"
 

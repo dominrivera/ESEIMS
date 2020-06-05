@@ -38,8 +38,6 @@ telegraf_remote_config_win: '{{ telegraf_dir_win }}\telegraf\telegraf.conf'
 
 kapacitor_pkg_url: 'https://dl.influxdata.com/kapacitor/releases/kapacitor_1.5.4-1_amd64.deb'
 kapacitor_pkg: 'kapacitor_1.5.4-1_amd64.deb'
-#kapacitor_local_config: 'files/kapacitor.conf'
-#kapacitor_remote_config: '/etc/kapacitor/kapacitor.conf'
 kapacitor_local_config: 'templates/kapacitor/kapacitor.j2'
 kapacitor_remote_config: '/etc/kapacitor/kapacitor.conf'
 
@@ -104,6 +102,26 @@ grafana_public_dashboard: 'ESEIMS_infra_overview_es.json'
 grafana_host_dashboard: 'ESEIMS_host_overview_es.json'
 
 ### WEB ###
+
+web_dependencies:
+  - 'bcryptjs@2.4.3'
+  - 'body-parser@1.19.0'
+  - 'cors@2.8.5'
+  - 'dotenv@8.2.0'
+  - 'express@4.17.1'
+  - 'express-list-endpoints@4.0.1'
+  - 'express-validator@6.4.0'
+  - 'jsonwebtoken@8.5.1'
+  - 'jwt-decode@2.2.0'
+  - 'mysql@2.18.1'
+  - 'morgan@1.10.0'
+  - 'material-design-icons@3.0.1'
+  - 'ngx-pagination@5.0.0'
+  - '@angular-devkit/build-angular@0.803.23'
+  - '@angular/compiler-cli@8.2.14'
+  - '@angular/compiler@8.2.14'
+  - '@ngx-translate/core@12.1.2'
+  - '@ngx-translate/http-loader@4.0.0'
 
 nodejs_port: '3000'
 secret_key: 'OjDfr4sAQlrLGF1zCxTXYv21Bbxl2gyf'

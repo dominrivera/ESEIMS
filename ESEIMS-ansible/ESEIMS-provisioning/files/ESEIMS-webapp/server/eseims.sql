@@ -51,6 +51,10 @@ INSERT INTO `users` (`id`, `name`, `surname`, `dni`, `password`, `email`, `role`
 (6, 'Xoan', 'Barros Mendez', '01535651X', '$2a$10$nOP8jGklq01sBTmHQ4CrDebuhtjYdC/OqVSd0vtzuk8n1tpz8ayvy', 'xbr@esei.uvigo.es', 'user', '2020-04-13 14:02:22'),
 (7, 'Diego', 'Rodriguez Perez', '45671686B', '$2a$10$ydCV0oM7TkUbELNA/YPvPu/nRV7Y2pvWkSoBhyxsVG9StSMKo392m', 'drp@esei.uvigo.es', 'user', '2020-04-13 14:27:55'),
 (8, 'Daniel', 'Julio Barros', '38958025G', '$2a$10$q4YyYcuYMi6O90uekHaDUOL1YvNWjq6xNHfNFTJC/lf7Thb8YUFCG', 'drb@esei.uvigo.es', 'admin', '2020-04-13 14:28:27');
+(9, 'Pablo', 'Perez', 'Z9620363C', '$2a$10$eL0fLFUT9nQg3NhJX7plZO138PCi.iasfeBVDCzy92yrYJoiaxHs2', 'pap@esei.uvigo.es', 'user', '2020-04-13 16:28:27'),
+(10, 'Juan', 'Mariño', '99999920Z', '$2a$10$tFKkJUqAAZrBLWfgHbgR6Oq0gU3f/QWLC4Rjsl06ZGiU414QX5PeK', 'jnu@esei.uvigo.es', 'user', '2020-04-13 17:28:27'),
+(11, 'José Juan', 'Julio', '03706002N', '$2a$10$G9lrGDqmOOCqM88iB/tYW.OWzK9/wxwr3K3C4XIh8ymHS0GSpkVh6', 'jjj@esei.uvigo.es', 'admin', '2020-04-13 17:55:27'),
+(12, 'Marco', 'Martín Matías', '22536230W', '$2a$10$tPcCxbw5Bv0T8MwKI3kA9e6QO5SVwkz0z2POcwdBLgIR8PExPsWkC', 'mmm@esei.uvigo.es', 'admin', '2020-04-13 18:38:27');
 
 -- --------------------------------------------------------
 
@@ -64,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL,
   `description` varchar(400) NOT NULL,
-  `status` enum('open','in progress','closed') NOT NULL,
+  `status` enum('open','progress','closed') NOT NULL,
   `assignment` varchar(40),
   `creator` varchar(100) NOT NULL,
   `creatorId` int NOT NULL,
@@ -79,9 +83,9 @@ CREATE TABLE IF NOT EXISTS `tickets` (
 --
 
 INSERT INTO `tickets` (`id`, `title`, `description`, `status`, `assignment`, `creator`, `creatorId`, `created`, `modified`) VALUES
-(1, 'PC 3 infraestructura falla', 'Hola, al encender el PC, este entra en bucle al cargar el SO.', 'in progress', 'Domingo Rivera Barros', 'Pedro Dominguez Lopez', 3, '2020-02-13 14:58:43', '2020-02-14 15:26:33'),
-(2, 'PC 6 aula SO7 no arranca', 'Hola, al darle al boton de encender, el pc no arranca.', 'in progress', 'Domingo Rivera Barros', 'Xoan Barros Mendez', 6, '2020-02-14 21:00:23', '2020-02-16 11:00:23'),
-(3, 'No veo las graficas en la web de ESEIMS', 'Hola, cuando le doy a la seccion de graficas, aparece un 404.', 'in progress', 'Nicolas Rey Ruiz', 'Juan Pedro Gomez Gomez', 4, '2020-03-06 13:00:57', '2020-03-08 21:00:57'),
+(1, 'PC 3 infraestructura falla', 'Hola, al encender el PC, este entra en bucle al cargar el SO.', 'progress', 'Domingo Rivera Barros', 'Pedro Dominguez Lopez', 3, '2020-02-13 14:58:43', '2020-02-14 15:26:33'),
+(2, 'PC 6 aula SO7 no arranca', 'Hola, al darle al boton de encender, el pc no arranca.', 'progress', 'Domingo Rivera Barros', 'Xoan Barros Mendez', 6, '2020-02-14 21:00:23', '2020-02-16 11:00:23'),
+(3, 'No veo las graficas en la web de ESEIMS', 'Hola, cuando le doy a la seccion de graficas, aparece un 404.', 'progress', 'Nicolas Rey Ruiz', 'Juan Pedro Gomez Gomez', 4, '2020-03-06 13:00:57', '2020-03-08 21:00:57'),
 (4, 'Monitor no funciona', 'Hola, el monitor del PC 4 del aula 3 no funciona. Podriais revisarlo?', 'closed', 'Nicolas Rey Ruiz', 'Juan Pedro Gomez Gomez', 4, '2020-03-17 11:00:57', '2020-03-19 10:00:07'),
 (5, 'Error de red PC 14 aula 25', 'Hola, el PC 14 no tiene conexion a internet, un saludo.', 'open', '', 'Pedro Dominguez Lopez', 3, '2020-04-06 21:00:57', '2020-04-06 21:00:57'),
 (6, 'Teclado sin teclas PC 10 aula SO3', 'Hola, al teclado del PC10 le faltan teclas. Un saludo.', 'open', '', 'Iago Sanchez Garcia', 5, '2020-04-06 21:00:57', '2020-04-06 21:00:57'),
@@ -132,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `alarms` (
   `value` float NOT NULL,
   `host` varchar(30) NOT NULL,
   `laboratory` varchar(10) NOT NULL,
-  `status` enum('open','in progress','closed') NOT NULL,
+  `status` enum('open','progress','closed') NOT NULL,
   `assignment` varchar(40),
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `modified` datetime NOT NULL DEFAULT current_timestamp(),
@@ -145,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `alarms` (
 
 INSERT INTO `alarms` (`id`, `type`, `level`, `value`, `host`, `laboratory`, `status`, `assignment`, `created`, `modified`) VALUES
 (1, 'cpu_usage_high', 'WARNING', '85', '192.168.0.33', '31', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
-(2, 'load_high', 'WARNING', '3', '192.168.0.31', 'SO8', 'in progress', 'Domingo Rivera Barros', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
+(2, 'load_high', 'WARNING', '3', '192.168.0.31', 'SO8', 'progress', 'Domingo Rivera Barros', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (3, 'memory_usage_high', 'CRITICAL', '92', '192.168.0.31', '33', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (4, 'load_high', 'CRITICAL', '6', '192.168.0.1', 'SO5', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),
 (5, 'disk_usage_high', 'WARNING', '85', '192.168.0.43', 'SO2', 'open', '', '2020-02-06 20:59:10', '2020-02-06 20:59:10'),

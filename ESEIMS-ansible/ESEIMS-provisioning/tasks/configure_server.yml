@@ -32,7 +32,7 @@
       become: yes
 
 
-# -- Influxdata --
+# -- InfluxDB --
 
     - name: Import InfluxDB GPG signing key
       apt_key:
@@ -88,6 +88,9 @@
       failed_when: '"testing" in command_output.stderr'
       #    - debug:
       #        var: command_output
+
+    - name: wait
+      pause: seconds=3
 
     - name: Create telegraf user
       command: influx -execute "CREATE USER {{ influxdb_telegraf_user }} WITH PASSWORD '{{ influxdb_telegraf_password }}' WITH ALL PRIVILEGES"
@@ -152,12 +155,18 @@
         enabled: yes
       become: yes
 
+    - name: wait
+      pause: seconds=3
+
     - name: Alarms definition
       command: kapacitor define "{{ item }}" -tick "{{ item }}.tick"
       args:
         chdir: "{{ alarms_remote_path }}"
       loop: "{{ alarms }}"
       become: yes
+      register: kapacitor
+      until: kapacitor is not failed
+      retries: 5
 
     - name: Enable alarms
       command: kapacitor enable "{{ item }}"
@@ -287,25 +296,7 @@
         name: "{{ item }}"
         path: "{{ web_full_remote_path }}"
         state: present
-      loop:
-        - 'bcryptjs@2.4.3'
-        - 'body-parser@1.19.0'
-        - 'cors@2.8.5'
-        - 'dotenv@8.2.0'
-        - 'express@4.17.1'
-        - 'express-list-endpoints@4.0.1'
-        - 'express-validator@6.4.0'
-        - 'jsonwebtoken@8.5.1'
-        - 'jwt-decode@2.2.0'
-        - 'mysql@2.18.1'
-        - 'morgan@1.10.0'
-        - 'material-design-icons@3.0.1'
-        - 'ngx-pagination@5.0.0'
-        - '@angular-devkit/build-angular@0.803.23'
-        - '@angular/compiler-cli@8.2.14'
-        - '@angular/compiler@8.2.14'
-        - '@ngx-translate/core@12.1.2'
-        - '@ngx-translate/http-loader@4.0.0'
+      loop: "{{ web_dependencies }}"
       become: yes
 
     - name: Install forever to run nodejs as a daemon
@@ -344,11 +335,17 @@
         state: forcereinstall
       become: yes
 
+    - name: wait
+      pause: seconds=3
+
     - name: Create ESEIMS database
       mysql_db:
         name: eseims
         state: present
       become: yes
+
+    - name: wait
+      pause: seconds=3
 
     - name: Create admin user
       mysql_user:
@@ -357,6 +354,9 @@
         priv: 'eseims.*:ALL,GRANT'
         state: present
       become: yes
+
+    - name: wait
+      pause: seconds=3
 
     - name: Import eseims.sql to create database tables
       mysql_db:
@@ -370,6 +370,9 @@
       args:
         chdir: "{{ web_full_remote_path }}"
       become: yes
+
+    - name: wait
+      pause: seconds=3
 
     - name: run forever nodejs
       command: sudo forever start -l eseims.log -o out.log -e err.log -a server.js

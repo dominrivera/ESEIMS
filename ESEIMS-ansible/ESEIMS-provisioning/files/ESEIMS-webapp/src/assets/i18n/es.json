@@ -1,12 +1,12 @@
 {
     "app": {
         "alarms": "Alarmas",
-        "dashboards": "Graficas",
+        "dashboards": "Gráficas",
         "tickets": "Tickets",
         "users": "Usuarios",
-        "login": "Iniciar Sesion",
+        "login": "Iniciar Sesión",
         "profile": "Perfil",
-        "logout": "Cerrar Sesion"
+        "logout": "Cerrar Sesión"
     },
     "user": {
         "users": "Usuarios",
@@ -16,15 +16,19 @@
         "clear": "Limpiar",
         "name": "Nombre",
         "surname": "Apellidos",
-        "email": "Correo electronico",
+        "email": "Correo electrónico",
         "idCard": "DNI",
         "role": "Rol",
         "created": "Creado",
         "modalDeleteUser": "Eliminar Usuario",
-        "modalQuestion": "Estas seguro de que quieres eliminar el usuario?",
+        "modalQuestion": "Estás seguro de que quieres eliminar el usuario?",
         "modalClose": "Cerrar",
         "deleteSuccess": "Usuario eliminado!",
-        "deleteError": "Error eliminando el usuario. Por favor intentalo de nuevo."
+        "deleteError": "Error eliminando el usuario. Por favor, inténtalo de nuevo.",
+        "values": {
+            "user": "Usuario",
+            "admin": "Administrador"
+        }
     },
     "userProfile": {
         "personalData": "Datos personales de",
@@ -32,22 +36,22 @@
         "save": "Guardar",
         "delete": "Eliminar",
         "name": "Nombre",
-        "validName":"Error: introduce un nombre valido",
+        "validName":"Error: introduce un nombre válido",
         "surname": "Apellidos",
-        "validSurname": "Error: introduce un apellido/s valido",
-        "email": "Correo electronico",
-        "validEmail": "Error: el email debe tener la extension @esei.uvigo.es",
-        "validEmail2": "Error: el email ya esta en uso",
+        "validSurname": "Error: introduce un apellido/s válido",
+        "email": "Correo electrónico",
+        "validEmail": "Error: el correo electrónico debe tener la extensión @esei.uvigo.es",
+        "validEmail2": "Error: el correo electrónico ya está en uso",
         "password": "Contraseña",
         "passEdit": "Escribe para editar la contraseña",
-        "validPassword": "Error: la contraseña debe contener al menos 8 caracteres y maximo 20",
+        "validPassword": "Error: la contraseña debe contener al menos 8 caracteres y como máximo 20",
         "idCard": "DNI",
-        "validId": "Error: introduce un DNI valido",
+        "validId": "Error: introduce un DNI válido",
         "role": "Rol",
         "user": "Usuario",
         "admin": "Administrador",
         "deleteSuccess":"Usuario eliminado!",
-        "deleteError": "Error eliminando el usuario. Por favor intentalo de nuevo."
+        "deleteError": "Error eliminando el usuario. Por favor, inténtalo de nuevo."
     },
     "ticket": {
         "tickets": "Tickets",
@@ -56,10 +60,10 @@
         "open": "Abiertos",
         "inProgress": "En curso",
         "closed": "Cerrados",
-        "title": "Titulo",
-        "description": "Descripcion",
+        "title": "Título",
+        "description": "Descripción",
         "status": "Estado",
-        "assignment": "Asignacion",
+        "assignment": "Asignación",
         "creator": "Creador",
         "created": "Creado",
         "modified": "Modificado",
@@ -68,36 +72,41 @@
         "close": "Cerrar",
         "delete": "Eliminar",
         "modalDeleteTicket": "Eliminar Ticket",
-        "modalQuestion": "Estas seguro de que quieres eliminar el ticket?",
+        "modalQuestion": "Estás seguro de que quieres eliminar el ticket?",
         "modalClose": "Cerrar",
         "deleteSuccess": "Ticket eliminado!",
-        "deleteError": "Error eliminando el ticket. Por favor intentalo de nuevo."
+        "deleteError": "Error eliminando el ticket. Por favor, inténtalo de nuevo.",
+        "values": {
+            "open": "Abierto",
+            "progress": "En curso",
+            "closed": "Cerrado"
+        }
     },
     "ticketForm": {
         "newTicket": "Nuevo Ticket",
         "submit": "Enviar",
-        "title": "Titulo",
-        "description": "Descripcion",
+        "title": "Título",
+        "description": "Descripción",
         "maxchar": "Max. 200 caracteres",
         "createSuccess": "Ticket creado!",
-        "createError": "Error al crear el ticket! Intentalo de nuevo"
+        "createError": "Error al crear el ticket! Inténtalo de nuevo"
     },
     "ticketDetails": {
         "save": "Guardar",
         "close": "Cerrar",
         "reopen": "Reabrir",
         "delete": "Eliminar",
-        "title": "Titulo",
+        "title": "Título",
         "creator": "Creador",
         "status": "Estado",
         "modified": "Modificado",
         "created": "Creado",
-        "description": "Descripcion",
+        "description": "Descripción",
         "comment": "Comentario",
         "maxchar": "Max. 400 caracteres",
-        "createError": "Error al guardar el ticket! Por favor, introduce un comentario valido",
+        "createError": "Error al guardar el ticket! Por favor, introduce un comentario válido",
         "deleteSuccess": "Ticket eliminado!",
-        "deleteError": "Error eliminando el ticket. Por favor intentalo de nuevo."
+        "deleteError": "Error eliminando el ticket. Por favor, inténtalo de nuevo."
     },
     "alarm": {
         "alarms": "Alarmas",
@@ -111,60 +120,80 @@
         "host": "Equipo",
         "laboratory": "Laboratorio",
         "status": "Estado",
-        "assignment": "Asignacion",
+        "assignment": "Asignación",
         "created": "Creada",
         "modified": "Modificada",
         "assign": "Asignarse alarma",
         "close": "Cerrar",
         "delete": "Eliminar",
         "modalDeleteAlarm": "Eliminar Alarma",
-        "modalQuestion": "Estas seguro de que quieres eliminar la alarma?",
+        "modalQuestion": "Estás seguro de que quieres eliminar la alarma?",
         "modalClose": "Cerrar",
         "deleteSuccess": "Alarma eliminada!",
-        "deleteError": "Error eliminando la alarma. Por favor intentalo de nuevo."
+        "deleteError": "Error eliminando la alarma. Por favor, inténtalo de nuevo.",
+        "values": {
+            "WARNING": "PRECAUCIÓN",
+            "CRITICAL": "CRÍTICO"
+        },
+        "values_st": {
+            "open": "Abierta",
+            "progress": "En curso",
+            "closed": "Cerrada"
+        },
+        "name": {
+            "cpu_usage_high": "CPU - Uso elevado",
+            "disk_usage_high": "DISCO - Uso elevado",
+            "load_high": "CARGA - Alta",
+            "memory_usage_high": "MEMORIA - Uso elevado"
+        }
     },
     "register": {
         "form": "Formulario de Registro",
         "text": "Para crear una cuenta rellena el formulario de abajo",
         "personalData": "Datos personales",
         "name": "Nombre",
-        "validName": "Error: introduce un nombre valido",
+        "validName": "Error: introduce un nombre válido",
         "surname": "Apellidos",
-        "validSurname": "Error: introduce un apellido/s valido",
-        "email": "Correo electronico",
-        "validEmail": "Error: el email debe tener la extension @esei.uvigo.es",
-        "validEmail2": "Error: el email ya esta en uso",
+        "validSurname": "Error: introduce un apellido/s válido",
+        "email": "Correo electrónico",
+        "validEmail": "Error: el correo electrónico debe tener la extensión @esei.uvigo.es",
+        "validEmail2": "Error: el correo electrónico ya está en uso",
         "password": "Contraseña",
         "passchar": "Min. 8 caracteres",
-        "validPassword": "Error: la contraseña debe contener al menos 8 caracteres y maximo 20",
+        "validPassword": "Error: la contraseña debe contener al menos 8 caracteres y como máximo 20",
         "idCard": "DNI",
-        "validId": "Error: introduce un DNI valido",
+        "validId": "Error: introduce un DNI válido",
         "role": "Rol",
         "user": "Usuario",
         "admin": "Administrador",
         "register": "Registrar",
-        "success": "Usuario registrado! Redirigiendo al login...",
+        "success": "Usuario registrado! Redirigiendo a la página de inicio de sesión...",
         "adminSuccess": "Usuario registrado!"
     },
     "login": {
-        "email": "Correo electronico",
+        "email": "Correo electrónico",
         "password": "Contraseña",
-        "signin": "Iniciar Sesion",
+        "signin": "Iniciar Sesión",
         "createAccount": "Para crear una cuenta haz click",
-        "here": "aqui",
-        "wronglogin": "Error al iniciar sesion! Intentalo de nuevo",
-        "contact": "No puedes acceder? Contactanos en"
+        "here": "aquí",
+        "wronglogin": "Error al iniciar sesión! Inténtalo de nuevo",
+        "contact": "No puedes acceder? Contáctanos en"
     },
     "pageNotFound": {
-        "text": "404 Pagina No Encontrada"
+        "text": "404 Página No Encontrada"
     },
     "info": {
-        "title": "Informacion",
-        "policy": "Politica",
-        "terms": "Terminos",
+        "title": "Información",
+        "policy": "Política",
+        "terms": "Términos",
         "support": "Soporte",
+        "contact": "Contacto",
         "textPolicy": "El presente Pol\u00EDtica de Privacidad establece los t\u00E9rminos en que ESEIMS usa y protege la informaci\u00F3n que es proporcionada por sus usuarios al momento de utilizar su sitio web. Esta compa\u00F1\u00EDa est\u00E1 comprometida con la seguridad de los datos de sus usuarios. Cuando le pedimos llenar los campos de informaci\u00F3n personal con la cual usted pueda ser identificado, lo hacemos asegurando que s\u00F3lo se emplear\u00E1 de acuerdo con los t\u00E9rminos de este documento. Sin embargo esta Pol\u00EDtica de Privacidad puede cambiar con el tiempo o ser actualizada por lo que le recomendamos y enfatizamos revisar continuamente esta p\u00E1gina para asegurarse que est\u00E1 de acuerdo con dichos cambios.\r\n        Nuestro sitio web podr\u00E1 recoger informaci\u00F3n personal por ejemplo: Nombre,  informaci\u00F3n de contacto como  su direcci\u00F3n de correo electr\u00F3nica e informaci\u00F3n demogr\u00E1fica. As\u00ED mismo cuando sea necesario podr\u00E1 ser requerida informaci\u00F3n espec\u00EDfica para procesar alg\u00FAn pedido o realizar una entrega o facturaci\u00F3n.\r\n        Uso de la informaci\u00F3n recogida\r\n        Nuestro sitio web emplea la informaci\u00F3n con el fin de proporcionar el mejor servicio posible, particularmente para mantener un registro de usuarios, de pedidos en caso que aplique, y mejorar nuestros productos y servicios.  Es posible que sean enviados correos electr\u00F3nicos peri\u00F3dicamente a trav\u00E9s de nuestro sitio con ofertas especiales, nuevos productos y otra informaci\u00F3n publicitaria que consideremos relevante para usted o que pueda brindarle alg\u00FAn beneficio, estos correos electr\u00F3nicos ser\u00E1n enviados a la direcci\u00F3n que usted proporcione y podr\u00E1n ser cancelados en cualquier momento.\r\n        ESEIMS est\u00E1 altamente comprometido para cumplir con el compromiso de mantener su informaci\u00F3n segura. Usamos los sistemas m\u00E1s avanzados y los actualizamos constantemente para asegurarnos que no exista ning\u00FAn acceso no autorizado.",
         "textTerms": "Este sitio web pudiera contener en laces a otros sitios que pudieran ser de su inter\u00E9s. Una vez que usted de clic en estos enlaces y abandone nuestra p\u00E1gina, ya no tenemos control sobre al sitio al que es redirigido y por lo tanto no somos responsables de los t\u00E9rminos o privacidad ni de la protecci\u00F3n de sus datos en esos otros sitios terceros. Dichos sitios est\u00E1n sujetos a sus propias pol\u00EDticas de privacidad por lo cual es recomendable que los consulte para confirmar que usted est\u00E1 de acuerdo con estas.\r\n        En cualquier momento usted puede restringir la recopilaci\u00F3n o el uso de la informaci\u00F3n personal que es proporcionada a nuestro sitio web.  Cada vez que se le solicite rellenar un formulario, como el de alta de usuario, puede marcar o desmarcar la opci\u00F3n de recibir informaci\u00F3n por correo electr\u00F3nico.  En caso de que haya marcado la opci\u00F3n de recibir nuestro bolet\u00EDn o publicidad usted puede cancelarla en cualquier momento.\r\n        Esta compa\u00F1\u00EDa no vender\u00E1, ceder\u00E1 ni distribuir\u00E1 la informaci\u00F3n personal que es recopilada sin su consentimiento, salvo que sea requerido por un juez con un orden judicial.\r\n  ESEIMS se reserva el derecho de cambiar los t\u00E9rminos de la presente Pol\u00EDtica de Privacidad en cualquier momento.",
         "textSupport": "Preguntas acerca de los Términos de Servicio deben ser enviadas a "
+    },
+    "pagination": {
+        "previous": "Anterior",
+        "next": "Siguiente"
     }
 }
