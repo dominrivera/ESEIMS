@@ -19,7 +19,7 @@
             </label>
             <label class="btn btn-secondary">
                 <input type="radio" name="options" id="option3" autocomplete="off"
-                    (click)="filterAlarm('in progress')"> {{ 'alarm.inProgress' | translate }}
+                    (click)="filterAlarm('progress')"> {{ 'alarm.inProgress' | translate }}
             </label>
             <label class="btn btn-secondary">
                 <input type="radio" name="options" id="option4" autocomplete="off" (click)="filterAlarm('closed')">
@@ -55,13 +55,13 @@
             </thead>
             <tbody>
                 <tr *ngFor="let alarm of alarms | paginate: { itemsPerPage: 10, currentPage: page }">
-                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.type }}</td>
-                    <td *ngIf="((alarm.status==selectedStatus || selectedStatus=='all') && alarm.level == 'WARNING')" id="warning">{{ alarm.level }}</td>
-                    <td *ngIf="((alarm.status==selectedStatus || selectedStatus=='all') && alarm.level == 'CRITICAL')" id="critical">{{ alarm.level }}</td>
+                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ ('alarm.name.' + alarm.type) | translate }}</td>
+                    <td *ngIf="((alarm.status==selectedStatus || selectedStatus=='all') && alarm.level == 'WARNING')" id="warning">{{ ('alarm.values.' + alarm.level) | translate }}</td>
+                    <td *ngIf="((alarm.status==selectedStatus || selectedStatus=='all') && alarm.level == 'CRITICAL')" id="critical">{{ ('alarm.values.' + alarm.level) | translate }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.value }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.host }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.laboratory }}</td>
-                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.status }}</td>
+                    <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ ('alarm.values_st.' + alarm.status) | translate }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.assignment }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.created | date:'short' }}</td>
                     <td *ngIf="(alarm.status==selectedStatus || selectedStatus=='all')">{{ alarm.modified | date:'short' }}</td>
@@ -90,15 +90,15 @@
         </table>
     </div>
     <div id="pagination">
-        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+        <pagination-controls (pageChange)="page = $event" previousLabel="{{ 'pagination.previous' | translate }}" nextLabel="{{ 'pagination.next' | translate }}"></pagination-controls>
     </div>
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2020 ESEIMS</p>
         <ul class="list-inline">
-            <li class="list-inline-item"><a routerLink="/info">Privacy</a></li>
-            <li class="list-inline-item"><a routerLink="/info">Terms</a></li>
-            <li class="list-inline-item"><a routerLink="/info">Support</a></li>
-            <li class="list-inline-item"><a href="mailto:eseims@outlook.com">Contact</a></li>
+            <li class="list-inline-item"><a routerLink="/info">{{ 'info.policy' | translate }}</a></li>
+            <li class="list-inline-item"><a routerLink="/info">{{ 'info.terms' | translate }}</a></li>
+            <li class="list-inline-item"><a routerLink="/info">{{ 'info.support' | translate }}</a></li>
+            <li class="list-inline-item"><a href="mailto:eseims@outlook.com">{{ 'info.contact' | translate }}</a></li>
         </ul>
     </footer>
 </div>

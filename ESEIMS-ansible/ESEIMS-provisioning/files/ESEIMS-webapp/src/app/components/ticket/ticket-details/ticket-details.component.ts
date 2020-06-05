@@ -102,7 +102,7 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   reOpenTicket(ticket) {
-    ticket.status = 'in progress';
+    ticket.status = 'progress';
     this.ticketService.editTicket(ticket)
       .subscribe(
         (data) => {

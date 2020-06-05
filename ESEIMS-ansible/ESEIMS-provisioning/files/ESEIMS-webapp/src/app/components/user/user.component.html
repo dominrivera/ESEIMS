@@ -1,109 +1,109 @@
 <div role="user" class="col-md-12 ml-sm-auto col-lg-20 px-4">
-        <div id="deleteAlert" *ngIf="this.deleteSuccess==true" class="alert alert-success" role="alert">
-                {{ 'user.deleteSuccess' | translate }}
+    <div id="deleteAlert" *ngIf="this.deleteSuccess==true" class="alert alert-success" role="alert">
+            {{ 'user.deleteSuccess' | translate }}
+        </div>
+        <div id="deleteAlert2" *ngIf="this.deleteSuccess==false" class="alert alert-danger" role="alert">
+                {{ 'user.deleteError' | translate }}
             </div>
-            <div id="deleteAlert2" *ngIf="this.deleteSuccess==false" class="alert alert-danger" role="alert">
-                    {{ 'user.deleteError' | translate }}
-                </div>
-    <div
-        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">{{ 'user.users' | translate }}</h1>
-        <form class="form-inline my-2 my-lg-0">
-            <button type="button" class="btn btn-success btn-md" routerLink="/register"><i id="addUserIcon"
-                    class="material-icons">person_add</i>{{ 'user.newUser' | translate }}</button>
-            <input class="form-control ml-sm-5 mr-sm-2" type="text" placeholder="{{ 'user.enterId' | translate}}"
-                aria-label="Search" name="dni" [(ngModel)]="dni">
-            <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0"
-                (click)="searchByDNI(dni)">{{ 'user.search' | translate }}</button>
-            <button *ngIf="search" class="btn btn-outline-success my-2 my-sm-0"
-                (click)="clearSearch()">{{ 'user.clear' | translate }}</button>
-        </form>
-    </div>
-    <div>
-        <table id="userTable" class="table table-hover table-dark">
-            <thead>
-                <tr>
-                    <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'user.name' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
-                    <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'user.surname' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
-                    <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'user.email' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
-                    <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'user.idCard' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
-                    <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'user.role' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
-                    <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'user.created' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
-                </tr>
-            </thead>
-            <tbody *ngIf="!search">
-                <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }">
-                    <td>{{ user.name }}</td>
-                    <td>{{ user.surname }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.dni }}</td>
-                    <td>{{ user.role }}</td>
-                    <td>{{ user.created | date:'short' }}</td>
-                    <td>
-                        <div *ngIf="(user.email!='admin@esei.uvigo.es') && (user.email!='user@esei.uvigo.es')">
-                            <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
-                                (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
-                            <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
-                                data-target="#deleteUserModal" title="delete" (click)="sendModalData(user.id)"><i
-                                    class="material-icons">delete</i></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <tbody *ngIf="search&&this.userByDNI">
-                <tr>
-                    <td>{{ userByDNI.name }}</td>
-                    <td>{{ userByDNI.surname }}</td>
-                    <td>{{ userByDNI.email }}</td>
-                    <td>{{ userByDNI.dni }}</td>
-                    <td>{{ userByDNI.role }}</td>
-                    <td>{{ userByDNI.created | date:'short' }}</td>
-                    <td>
-                        <div *ngIf="(userByDNI.email!='admin@esei.uvigo.es') && (userByDNI.email!='user@esei.uvigo.es')">
-                            <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
-                                (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
-                            <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
-                                data-target="#deleteUserModal" title="delete" (click)="sendModalData(user.id)"><i
-                                    class="material-icons">delete</i></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="!search" id="pagination">
-        <pagination-controls (pageChange)="page = $event"></pagination-controls>
-    </div>
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2020 ESEIMS</p>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a routerLink="/info">Privacy</a></li>
-            <li class="list-inline-item"><a routerLink="/info">Terms</a></li>
-            <li class="list-inline-item"><a routerLink="/info">Support</a></li>
-            <li class="list-inline-item"><a href="mailto:eseims@outlook.com">Contact</a></li>
-        </ul>
-    </footer>
+<div
+    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ 'user.users' | translate }}</h1>
+    <form class="form-inline my-2 my-lg-0">
+        <button type="button" class="btn btn-success btn-md" routerLink="/register"><i id="addUserIcon"
+                class="material-icons">person_add</i>{{ 'user.newUser' | translate }}</button>
+        <input class="form-control ml-sm-5 mr-sm-2" type="text" placeholder="{{ 'user.enterId' | translate}}"
+            aria-label="Search" name="dni" [(ngModel)]="dni">
+        <button *ngIf="!search" class="btn btn-outline-success my-2 my-sm-0"
+            (click)="searchByDNI(dni)">{{ 'user.search' | translate }}</button>
+        <button *ngIf="search" class="btn btn-outline-success my-2 my-sm-0"
+            (click)="clearSearch()">{{ 'user.clear' | translate }}</button>
+    </form>
+</div>
+<div>
+    <table id="userTable" class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th class="pointer" scope="col" (click)="sortTable(0)">{{ 'user.name' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                <th class="pointer" scope="col" (click)="sortTable(1)">{{ 'user.surname' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                <th class="pointer" scope="col" (click)="sortTable(2)">{{ 'user.email' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                <th class="pointer" scope="col" (click)="sortTable(3)">{{ 'user.idCard' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                <th class="pointer" scope="col" (click)="sortTable(4)">{{ 'user.role' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+                <th class="pointer" scope="col" (click)="sortTable(5)">{{ 'user.created' | translate }}<i class="material-icons sortIcon">unfold_more</i></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="!search">
+            <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page }">
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.dni }}</td>
+                <td>{{ ('user.values.' + user.role) | translate }}</td>
+                <td>{{ user.created | date:'short' }}</td>
+                <td>
+                    <div *ngIf="(user.email!='admin@esei.uvigo.es') && (user.email!='user@esei.uvigo.es')">
+                        <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
+                            (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
+                        <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
+                            data-target="#deleteUserModal" title="delete" (click)="sendModalData(user.id)"><i
+                                class="material-icons">delete</i></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="search&&this.userByDNI">
+            <tr>
+                <td>{{ userByDNI.name }}</td>
+                <td>{{ userByDNI.surname }}</td>
+                <td>{{ userByDNI.email }}</td>
+                <td>{{ userByDNI.dni }}</td>
+                <td>{{ ('user.values.' + userByDNI.role) | translate }}</td>
+                <td>{{ userByDNI.created | date:'short' }}</td>
+                <td>
+                    <div *ngIf="(userByDNI.email!='admin@esei.uvigo.es') && (userByDNI.email!='user@esei.uvigo.es')">
+                        <button type="button" id="editButton" class="btn btn-outline-warning" title="edit"
+                            (click)="editUser(user.id)"><i class="material-icons">edit</i></button>
+                        <button type="button" id="deleteButton" class="btn btn-outline-danger" data-toggle="modal"
+                            data-target="#deleteUserModal" title="delete" (click)="sendModalData(user.id)"><i
+                                class="material-icons">delete</i></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="!search" id="pagination">
+    <pagination-controls (pageChange)="page = $event" previousLabel="{{ 'pagination.previous' | translate }}" nextLabel="{{ 'pagination.next' | translate }}"></pagination-controls>
+</div>
+<footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2020 ESEIMS</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a routerLink="/info">{{ 'info.policy' | translate }}</a></li>
+        <li class="list-inline-item"><a routerLink="/info">{{ 'info.terms' | translate }}</a></li>
+        <li class="list-inline-item"><a routerLink="/info">{{ 'info.support' | translate }}</a></li>
+        <li class="list-inline-item"><a href="mailto:eseims@outlook.com">{{ 'info.contact' | translate }}</a></li>
+    </ul>
+</footer>
 </div>
 
 <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteUserModalLabel">{{ 'user.modalDeleteUser' | translate }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{ 'user.modalQuestion' | translate }}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">{{ 'user.modalClose' | translate }}</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal"
-                    (click)="deleteUser(modalData)">{{ 'user.modalDeleteUser' | translate }}</button>
-            </div>
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteUserModalLabel">{{ 'user.modalDeleteUser' | translate }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            {{ 'user.modalQuestion' | translate }}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">{{ 'user.modalClose' | translate }}</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="deleteUser(modalData)">{{ 'user.modalDeleteUser' | translate }}</button>
         </div>
     </div>
+</div>
 </div>

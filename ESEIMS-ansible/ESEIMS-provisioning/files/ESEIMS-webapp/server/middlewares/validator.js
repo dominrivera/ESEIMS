@@ -3,11 +3,11 @@ const { body } = require('express-validator');
 // validations of register data
 exports.checkDataRegister = [
     body('name')
-    .matches(/^[a-zA-Z ]+$/i)
+    .matches(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i)
     .notEmpty()
     .isLength({ max: 32 }),
     body('surname')
-    .matches(/^[a-zA-Z ]+$/i)
+    .matches(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i)
     .notEmpty()
     .isLength({ max: 50 }),
     body('email')
@@ -32,11 +32,11 @@ exports.checkDataLogin = [
 // validations of user data when modified
 exports.checkUserData = [
     body('name')
-    .matches(/^[a-zA-Z ]+$/i)
+    .matches(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i)
     .notEmpty()
     .isLength({ max: 32 }),
     body('surname')
-    .matches(/^[a-zA-Z ]+$/i)
+    .matches(/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i)
     .notEmpty()
     .isLength({ max: 50 }),
     body('email')

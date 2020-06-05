@@ -56,7 +56,7 @@ export class TicketComponent implements OnInit {
 
   assignTicket(ticket) {
     ticket.assignment = this.currentUserName;
-    ticket.status = 'in progress';
+    ticket.status = 'progress';
     this.ticketService.editTicket(ticket)
       .subscribe(
         (data) => {
