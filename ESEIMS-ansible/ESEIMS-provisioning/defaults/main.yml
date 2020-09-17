@@ -47,7 +47,7 @@ telegraf_params_win:
   - --config-directory {{ telegraf_agent_dir_win }}
 
 influxdb_telegraf_user: 'telegraf'
-influxdb_telegraf_password: 'password'
+influxdb_telegraf_password: # defined in a local file
 
 ### ESEIMS ###
 
@@ -66,7 +66,7 @@ influxdb_address_hosts: 'http://{{ server }}:{{ influxdb_port }}'
 ### Telegraf ###
 
 telegraf_username: 'telegraf'
-telegraf_password: 'password'
+telegraf_password: # defined in a local file
 
 ### Kapacitor ###
 
@@ -83,11 +83,6 @@ httppost_endpoint: 'eseims'
 httppost_address: 'http://localhost:3000/api/alarms'
 httppost_address_hosts: 'http://{{ server_ip }}:3000/api/alarms'
 
-smtp_username: 'eseims@outlook.es'
-smtp_password: 'Admin987alfa?'
-smtp_email_from: 'eseims@outlook.es'
-smtp_email_to: 'eseims@outlook.es'
-
 ### Grafana ###
 
 grafana_port: '3001'
@@ -95,7 +90,7 @@ grafana_auth_anonymous: true
 
 grafana_address: 'http://localhost:{{ grafana_port }}'
 grafana_admin_user: 'admin'
-grafana_admin_password: 'admin'
+grafana_admin_password: # defined in a local file
 grafana_dashboards_local: 'files/grafana-dashboards'
 grafana_dashboards_remote: '{{ files_remote_path }}/grafana-dashboards'
 grafana_public_dashboard: 'ESEIMS_infra_overview_es.json'
@@ -128,7 +123,7 @@ secret_key: 'OjDfr4sAQlrLGF1zCxTXYv21Bbxl2gyf'
 db_host: 'localhost'
 db_port: '3306'
 db_user: 'admin'
-db_password: 'admin'
+db_password: # defined in a local file
 db_database: 'eseims'
 
 web_address: 'http://{{ server_ip }}:{{ nodejs_port }}'
@@ -148,4 +143,4 @@ nodejs_source_repo: 'deb https://deb.nodesource.com/node_{{ nodejs_version }}.x 
 
 eseims_sql_path: '{{ web_full_remote_path }}/server/eseims.sql'
 mysql_user: 'admin'
-mysql_password: 'admin'
+mysql_password: # defined in a local file
